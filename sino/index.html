@@ -25,9 +25,6 @@
     -ms-user-select: none;
     user-select: none;
   }
-  html {
-    scroll-padding-top: 110px;
-  }
   h1 { background: linear-gradient(135deg, #1a73e8, #0d47a1); color:white; margin:0; padding:24px 32px; font-size:20px; font-weight:600; }
   .meta { padding:14px 32px; background:#e8f0fe; font-size:13px; color:#1a73e8; border-bottom:1px solid #c8daf5; }
   .tabs { display:flex; padding:10px 32px; background:white; border-bottom:1px solid #ddd; position:sticky; top:0; z-index:100; box-shadow:0 1px 3px rgba(0,0,0,0.08); }
@@ -147,6 +144,62 @@
     text-decoration: none;
   }
   .inst-official:hover { text-decoration: underline; }
+
+  /* 增加锚点顶部偏移，避免 sticky 标签栏+省份导航遮挡标题 */
+  html {
+    scroll-padding-top: 130px;
+  }
+
+  /* 回到顶部按钮 */
+  .back-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #1a73e8;
+    color: white;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s, background 0.2s;
+  }
+  .back-to-top:hover { background: #0d47a1; }
+  .back-to-top.visible { display: flex; }
+
+  /* 专业搜索框 */
+  .major-search-box {
+    margin-bottom: 20px;
+  }
+  .major-search-box input {
+    width: 100%;
+    max-width: 480px;
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
+  }
+  .major-search-box input:focus {
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 3px rgba(26,115,232,0.1);
+  }
+  .major-search-no-results {
+    display: none;
+    padding: 24px 0;
+    color: #999;
+    font-size: 14px;
+    text-align: center;
+  }
+  .major-search-no-results.active { display: block; }
 </style>
 </head>
 <body>
@@ -165,7 +218,6 @@
 </div>
 <div class="tab-content active" id="tab-region">
 <div class="nav">
-
 <a href="#北京">北京（27）</a><a href="#重庆">重庆（5）</a><a href="#福建">福建（11）</a><a href="#广东">广东（11）</a><a href="#广西">广西（3）</a><a href="#贵州">贵州（1）</a><a href="#海南">海南（15）</a><a href="#河北">河北（3）</a><a href="#黑龙江">黑龙江（7）</a><a href="#河南">河南（6）</a><a href="#湖北">湖北（16）</a><a href="#湖南">湖南（2）</a><a href="#江苏">江苏（79）</a><a href="#江西">江西（8）</a><a href="#吉林">吉林（9）</a><a href="#辽宁">辽宁（13）</a><a href="#山东">山东（13）</a><a href="#上海">上海（21）</a><a href="#山西">山西（1）</a><a href="#陕西">陕西（12）</a><a href="#四川">四川（9）</a><a href="#天津">天津（16）</a><a href="#云南">云南（6）</a><a href="#浙江">浙江（65）</a>
 </div><div class="province" id="北京">
 <h2>北京 <span class="cnt">27 个项目</span></h2>
@@ -591,32 +643,10 @@
 <li>温州大学与俄罗斯圣彼得堡国立工业技术与设计大学合作举办应用信息硕士学位教育项目<span class="inst-tag">｜温州大学中俄工业技术与设计学院</span> <span class="enrollment" title="招生人数">30人/年</span></li>
 <li>浙江外国语学院与加拿大皇家路大学合作举办教育领导力与管理硕士学位教育项目<span class="inst-tag">｜浙江外国语学院皇家路联合学院</span> <span class="enrollment" title="招生人数">30人/年</span></li></ul>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
 <div class="tab-content" id="tab-major">
+<div class="major-search-box"><input id="majorSearch" oninput="searchMajor(this.value)" placeholder="输入项目、学校或专业关键词搜索..." type="text"/></div><div class="major-search-no-results" id="majorSearchNoResults">未找到匹配的项目，换个关键词试试</div>
+
 <div class="major-section">
 <h3>学科门类统计</h3>
 <p style="font-size:12px;color:#666;margin:8px 0;">按教育部学科门类标准归类，无法明确归类的归入"其他/待确认"</p>
@@ -2252,6 +2282,33 @@ function switchTab(tab) {
 }
 </script>
 <script>
+function searchMajor(query) {
+  var q = query.trim().toLowerCase();
+  var titles = document.querySelectorAll('#tab-major .discipline-title');
+  var totalVisible = 0;
+  titles.forEach(function(title) {
+    var ul = title.nextElementSibling;
+    if (!ul || ul.tagName !== 'UL') return;
+    var titleMatch = q === '' || title.textContent.toLowerCase().includes(q);
+    var items = ul.querySelectorAll('.discipline-item');
+    var sectionVisible = 0;
+    items.forEach(function(item) {
+      var visible = titleMatch || item.textContent.toLowerCase().includes(q);
+      item.style.display = visible ? '' : 'none';
+      if (visible) sectionVisible++;
+    });
+    title.style.display = (q === '' || sectionVisible > 0) ? '' : 'none';
+    totalVisible += sectionVisible;
+  });
+  document.getElementById('majorSearchNoResults').classList.toggle('active', q !== '' && totalVisible === 0);
+}
+
+window.addEventListener('scroll', function() {
+  var btn = document.getElementById('backToTop');
+  if (btn) btn.classList.toggle('visible', window.scrollY > 300);
+});
+</script>
+<script>
 (function() {
   document.addEventListener('copy', function(e) { e.preventDefault(); return false; });
   document.addEventListener('cut', function(e) { e.preventDefault(); return false; });
@@ -2265,5 +2322,6 @@ function switchTab(tab) {
   });
 })();
 </script>
-</body>
+
+<button aria-label="回到顶部" class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到顶部">↑</button></body>
 </html>
