@@ -60,6 +60,7 @@ ul { list-style: none; }
     background: transparent;
     border-bottom-color: transparent;
     box-shadow: none;
+    backdrop-filter: none;
 }
 
 .nav.home-nav .nav-logo,
