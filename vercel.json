@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "name": "guoya-mba",
+  "builds": [
+    {
+      "src": "**/*.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/sino",
+      "dest": "/sino/index.html"
+    },
+    {
+      "src": "/sino/",
+      "dest": "/sino/index.html"
+    },
+    {
+      "src": "/about",
+      "dest": "/about.html"
+    },
+    {
+      "src": "/contact",
+      "dest": "/contact.html"
+    },
+    {
+      "src": "/programs",
+      "dest": "/programs.html"
+    }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
+}
