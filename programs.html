@@ -1,2636 +1,2639 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>院校查询 — 果芽MBA</title>
-  <meta content="果芽MBA院校查询，覆盖MBA、MPA、MEM、EMBA等管理类联考及中外合作办学硕士项目，快速筛选目标院校。" name="description"/>
-  <meta content="果芽MBA,院校查询,MBA院校,中外合作办学硕士,EMBA项目" name="keywords"/>
-  <link href="https://guoya.net.cn/programs.html" rel="canonical"/>
-  <meta content="院校查询 — 果芽MBA" property="og:title"/>
-  <meta content="覆盖MBA、MPA、MEM、EMBA及中外合作办学硕士项目，快速筛选目标院校。" property="og:description"/>
-  <meta content="website" property="og:type"/>
-  <meta content="https://guoya.net.cn/programs.html" property="og:url"/>
-  <meta content="果芽MBA" property="og:site_name"/>
-  <meta content="https://guoya.net.cn/images/og-image.png" property="og:image"/>
-  <meta content="summary_large_image" name="twitter:card"/>
-  <link href="style.css" rel="stylesheet"/>
-  <script defer="" src="main.js">
-  </script>
-  <script defer="" src="programs.js">
-  </script>
- </head>
- <body>
-  <!-- 导航 -->
-  <nav class="nav home-nav">
-   <div class="nav-inner">
-    <a class="nav-logo" href="index.html">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>院校查询 — 果芽MBA</title>
+<meta content="果芽MBA院校查询，覆盖MBA、MPA、MEM、EMBA等管理类联考及中外合作办学硕士项目，快速筛选目标院校。" name="description"/>
+<meta content="果芽MBA,院校查询,MBA院校,中外合作办学硕士,EMBA项目" name="keywords"/>
+<link href="https://guoya.net.cn/programs.html" rel="canonical"/>
+<meta content="院校查询 — 果芽MBA" property="og:title"/>
+<meta content="覆盖MBA、MPA、MEM、EMBA及中外合作办学硕士项目，快速筛选目标院校。" property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://guoya.net.cn/programs.html" property="og:url"/>
+<meta content="果芽MBA" property="og:site_name"/>
+<meta content="https://guoya.net.cn/images/og-image.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="main.js">
+</script>
+<script defer="" src="programs.js">
+</script>
+</head>
+<body>
+<!-- 导航 -->
+<nav class="nav home-nav">
+<div class="nav-inner">
+<a class="nav-logo" href="index.html">
      果芽MBA
     </a>
-    <ul class="nav-links">
-     <li>
-      <a href="programs.html">
+<ul class="nav-links">
+<li>
+<a href="programs.html">
        院校查询
       </a>
-     </li>
-     <li>
-      <a href="about.html">
+</li><li><a href="sino/">合作办学硕士</a></li>
+
+<li>
+<a href="about.html">
        关于我们
       </a>
-     </li>
-     <li>
-      <a href="contact.html">
+</li>
+<li>
+<a href="contact.html">
        联系我们
       </a>
-     </li>
-    </ul>
-   </div>
-  </nav>
-  <!-- 页面标题 -->
-  <section class="page-header">
-   <div class="section-inner">
-    <h1 class="reveal">
+</li>
+</ul>
+</div>
+</nav>
+<!-- 页面标题 -->
+<section class="page-header">
+<div class="section-inner">
+<h1 class="reveal">
      院校查询
     </h1>
-    <p class="reveal">
+<p class="reveal">
      精选优质院校，助您实现考研梦想
     </p>
-   </div>
-  </section>
-  <!-- 筛选与列表 -->
-  <section class="section section-list">
-   <div class="section-inner">
-    <div class="school-filter-bar">
-     <div class="school-filter-group school-filter-wide">
-      <label class="school-filter-label">
+</div>
+</section>
+<!-- 筛选与列表 -->
+<section class="section section-list">
+<div class="section-inner">
+<div class="school-filter-bar">
+<div class="school-filter-group school-filter-wide">
+<label class="school-filter-label">
        项目类型
       </label>
-      <div class="school-filter-chips" id="filterProjectType">
-       <button class="filter-chip active" data-value="all">
+<div class="school-filter-chips" id="filterProjectType">
+<button class="filter-chip active" data-value="all">
         全部
        </button>
-       <button class="filter-chip" data-value="domestic">
+<button class="filter-chip" data-value="domestic">
         管理类联考
        </button>
-       <button class="filter-chip" data-value="sino">
+<button class="filter-chip" data-value="sino">
         中外合作办学
        </button>
-      </div>
-     </div>
-     <div class="school-filter-group school-filter-wide">
-      <label class="school-filter-label">
+</div>
+</div>
+<div class="school-filter-group school-filter-wide">
+<label class="school-filter-label">
        专业方向
        <span class="school-filter-hint">
         （随项目类型联动）
        </span>
-      </label>
-      <div class="school-filter-chips" id="filterMajor">
-       <button class="filter-chip active" data-for="all" data-value="all">
+</label>
+<div class="school-filter-chips" id="filterMajor">
+<button class="filter-chip active" data-for="all" data-value="all">
         全部
        </button>
-       <button class="filter-chip" data-for="domestic" data-value="MBA">
+<button class="filter-chip" data-for="domestic" data-value="MBA">
         MBA
         <span class="chip-dot" style="background:#e65100">
-        </span>
-       </button>
-       <button class="filter-chip" data-for="domestic" data-value="MEM">
+</span>
+</button>
+<button class="filter-chip" data-for="domestic" data-value="MEM">
         MEM
         <span class="chip-dot" style="background:#1565c0">
-        </span>
-       </button>
-       <button class="filter-chip" data-for="domestic" data-value="MPA">
+</span>
+</button>
+<button class="filter-chip" data-for="domestic" data-value="MPA">
         MPA
         <span class="chip-dot" style="background:#2e7d32">
-        </span>
-       </button>
-       <button class="filter-chip" data-for="domestic" data-value="EMBA">
+</span>
+</button>
+<button class="filter-chip" data-for="domestic" data-value="EMBA">
         EMBA
         <span class="chip-dot" style="background:#c62828">
-        </span>
-       </button>
-       <button class="filter-chip" data-for="sino" data-value="金融">
+</span>
+</button>
+<button class="filter-chip" data-for="sino" data-value="金融">
         金融
        </button>
-       <button class="filter-chip" data-for="sino" data-value="项目管理">
+<button class="filter-chip" data-for="sino" data-value="项目管理">
         项目管理
        </button>
-       <button class="filter-chip" data-for="sino" data-value="数据科学">
+<button class="filter-chip" data-for="sino" data-value="数据科学">
         数据科学
        </button>
-       <button class="filter-chip" data-for="sino" data-value="国际贸易与金融">
+<button class="filter-chip" data-for="sino" data-value="国际贸易与金融">
         国际贸易与金融
        </button>
-       <button class="filter-chip" data-for="sino" data-value="金融科技">
+<button class="filter-chip" data-for="sino" data-value="金融科技">
         金融科技
        </button>
-       <button class="filter-chip" data-for="sino" data-value="企业管理">
+<button class="filter-chip" data-for="sino" data-value="企业管理">
         企业管理
        </button>
-       <button class="filter-chip" data-for="sino" data-value="职业教育与人力资源开发">
+<button class="filter-chip" data-for="sino" data-value="职业教育与人力资源开发">
         职业教育与人力资源开发
        </button>
-       <button class="filter-chip" data-for="sino" data-value="商业分析">
+<button class="filter-chip" data-for="sino" data-value="商业分析">
         商业分析
        </button>
-       <button class="filter-chip" data-for="sino" data-value="教育技术与人工智能">
+<button class="filter-chip" data-for="sino" data-value="教育技术与人工智能">
         教育技术与人工智能
        </button>
-       <button class="filter-chip" data-for="all" data-value="其他">
+<button class="filter-chip" data-for="all" data-value="其他">
         其他
        </button>
-      </div>
-     </div>
-     <div class="school-filter-row">
-      <div class="school-filter-group">
-       <label class="school-filter-label">
+</div>
+</div>
+<div class="school-filter-row">
+<div class="school-filter-group">
+<label class="school-filter-label">
         地区
        </label>
-       <select class="school-filter-select" id="filterRegion">
-        <option value="all">
+<select class="school-filter-select" id="filterRegion">
+<option value="all">
          全部地区
         </option>
-        <option value="全国">
+<option value="全国">
          全国
         </option>
-        <optgroup label="华北">
-         <option value="北京">
+<optgroup label="华北">
+<option value="北京">
           北京
          </option>
-         <option value="天津">
+<option value="天津">
           天津
          </option>
-         <option value="河北">
+<option value="河北">
           河北
          </option>
-         <option value="山西">
+<option value="山西">
           山西
          </option>
-         <option value="内蒙古">
+<option value="内蒙古">
           内蒙古
          </option>
-        </optgroup>
-        <optgroup label="东北">
-         <option value="辽宁">
+</optgroup>
+<optgroup label="东北">
+<option value="辽宁">
           辽宁
          </option>
-         <option value="吉林">
+<option value="吉林">
           吉林
          </option>
-         <option value="黑龙江">
+<option value="黑龙江">
           黑龙江
          </option>
-        </optgroup>
-        <optgroup label="华东">
-         <option value="上海">
+</optgroup>
+<optgroup label="华东">
+<option value="上海">
           上海
          </option>
-         <option value="江苏">
+<option value="江苏">
           江苏
          </option>
-         <option value="浙江">
+<option value="浙江">
           浙江
          </option>
-         <option value="安徽">
+<option value="安徽">
           安徽
          </option>
-         <option value="福建">
+<option value="福建">
           福建
          </option>
-         <option value="江西">
+<option value="江西">
           江西
          </option>
-         <option value="山东">
+<option value="山东">
           山东
          </option>
-        </optgroup>
-        <optgroup label="华中">
-         <option value="河南">
+</optgroup>
+<optgroup label="华中">
+<option value="河南">
           河南
          </option>
-         <option value="湖北">
+<option value="湖北">
           湖北
          </option>
-         <option value="湖南">
+<option value="湖南">
           湖南
          </option>
-        </optgroup>
-        <optgroup label="华南">
-         <option value="广东">
+</optgroup>
+<optgroup label="华南">
+<option value="广东">
           广东
          </option>
-         <option value="广西">
+<option value="广西">
           广西
          </option>
-         <option value="海南">
+<option value="海南">
           海南
          </option>
-        </optgroup>
-        <optgroup label="西南">
-         <option value="重庆">
+</optgroup>
+<optgroup label="西南">
+<option value="重庆">
           重庆
          </option>
-         <option value="四川">
+<option value="四川">
           四川
          </option>
-         <option value="贵州">
+<option value="贵州">
           贵州
          </option>
-         <option value="云南">
+<option value="云南">
           云南
          </option>
-         <option value="西藏">
+<option value="西藏">
           西藏
          </option>
-        </optgroup>
-        <optgroup label="西北">
-         <option value="陕西">
+</optgroup>
+<optgroup label="西北">
+<option value="陕西">
           陕西
          </option>
-         <option value="甘肃">
+<option value="甘肃">
           甘肃
          </option>
-         <option value="青海">
+<option value="青海">
           青海
          </option>
-         <option value="宁夏">
+<option value="宁夏">
           宁夏
          </option>
-         <option value="新疆">
+<option value="新疆">
           新疆
          </option>
-        </optgroup>
-       </select>
-      </div>
-      <div class="school-filter-group">
-       <label class="school-filter-label">
+</optgroup>
+</select>
+</div>
+<div class="school-filter-group">
+<label class="school-filter-label">
         学费预算
        </label>
-       <select class="school-filter-select" id="filterTuition">
-        <option value="all">
+<select class="school-filter-select" id="filterTuition">
+<option value="all">
          不限
         </option>
-        <option value="0-10">
+<option value="0-10">
          10万以下
         </option>
-        <option value="10-20">
+<option value="10-20">
          10-20万
         </option>
-        <option value="20-30">
+<option value="20-30">
          20-30万
         </option>
-        <option value="30-50">
+<option value="30-50">
          30-50万
         </option>
-        <option value="50-999">
+<option value="50-999">
          50万以上
         </option>
-       </select>
-      </div>
-      <div class="school-filter-group">
-       <label class="school-filter-label">
+</select>
+</div>
+<div class="school-filter-group">
+<label class="school-filter-label">
         搜索
        </label>
-       <input autocomplete="off" class="school-filter-search" id="filterSearch" placeholder="输入院校名称搜索…" type="text"/>
-      </div>
-      <div class="school-filter-group">
-       <button class="filter-chip reset-btn" id="filterReset">
+<input autocomplete="off" class="school-filter-search" id="filterSearch" placeholder="输入院校名称搜索…" type="text"/>
+</div>
+<div class="school-filter-group">
+<button class="filter-chip reset-btn" id="filterReset">
         重置筛选
        </button>
-      </div>
-      <div class="school-filter-result">
+</div>
+<div class="school-filter-result">
        共
        <span id="filterCount">
         0
        </span>
        个项目
       </div>
-     </div>
-    </div>
-    <div class="school-list" id="schoolList">
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="全国" data-study-mode="不限" data-title="清华大学MEM项目介绍" data-tuition-max="999" data-tuition-min="0" href="https://liankao.org.cn/schools/tsinghua-mem/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+</div>
+<div class="school-list" id="schoolList">
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="全国" data-study-mode="不限" data-title="清华大学MEM项目介绍" data-tuition-max="999" data-tuition-min="0" href="https://liankao.org.cn/schools/tsinghua-mem/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          不限
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          全国
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         清华大学MEM项目介绍
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         清华大学MEM项目介绍，学制及学费详情请咨询。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="sino" data-region="北京" data-study-mode="全日制/非全日制" data-title="北京大学-弗拉瑞克商学院/UCL MBA项目" data-tuition-max="999" data-tuition-min="0" href="https://liankao.org.cn/schools/sino-foreign-pku-vlerick-ucl-mba/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="sino" data-region="北京" data-study-mode="全日制/非全日制" data-title="北京大学-弗拉瑞克商学院/UCL MBA项目" data-tuition-max="999" data-tuition-min="0" href="https://liankao.org.cn/schools/sino-foreign-pku-vlerick-ucl-mba/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-badge">
+<span class="school-card-badge">
          合作办学
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          全日制/非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京大学-弗拉瑞克商学院/UCL MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京大学与比利时弗拉瑞克商学院、英国伦敦大学学院（UCL）合作举办工商管理硕士学位教育项目，教育部批准书编号MOE11BE1A20030415O，学制2年，每期 …
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="职业教育与人力资源开发" data-project-type="sino" data-region="北京" data-study-mode="非全日制" data-title="北京理工大学-德累斯顿工业大学职业教育与人力资源开发硕士项目" data-tuition-max="999" data-tuition-min="0" href="https://liankao.org.cn/schools/sino-foreign-bit-tud-hr-master/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="职业教育与人力资源开发">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="职业教育与人力资源开发" data-project-type="sino" data-region="北京" data-study-mode="非全日制" data-title="北京理工大学-德累斯顿工业大学职业教育与人力资源开发硕士项目" data-tuition-max="999" data-tuition-min="0" href="https://liankao.org.cn/schools/sino-foreign-bit-tud-hr-master/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="职业教育与人力资源开发">
          职业教育与人力资源开发
         </span>
-        <span class="school-card-badge">
+<span class="school-card-badge">
          合作办学
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京理工大学-德累斯顿工业大学职业教育与人力资源开发硕士项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京理工大学与德国德累斯顿工业大学合作举办职业教育与人力资源开发硕士学位教育项目，教育部批准书编号MOE11DE1A20020427O，学制2年，每期招生90 …
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="企业管理" data-project-type="sino" data-region="北京" data-study-mode="非全日制" data-title="对外经济贸易大学-巴黎第一大学企业管理硕士项目" data-tuition-max="999" data-tuition-min="0" href="https://liankao.org.cn/schools/sino-foreign-uibe-paris1-mba/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="企业管理">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="企业管理" data-project-type="sino" data-region="北京" data-study-mode="非全日制" data-title="对外经济贸易大学-巴黎第一大学企业管理硕士项目" data-tuition-max="999" data-tuition-min="0" href="https://liankao.org.cn/schools/sino-foreign-uibe-paris1-mba/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="企业管理">
          企业管理
         </span>
-        <span class="school-card-badge">
+<span class="school-card-badge">
          合作办学
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         对外经济贸易大学-巴黎第一大学企业管理硕士项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         对外经济贸易大学与法国巴黎第一大学合作举办企业管理硕士学位教育项目，教育部批准书编号MOE11FR1A19970424O，学制2年，每期招生90人，自主招生。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="项目管理" data-project-type="sino" data-region="浙江" data-study-mode="非全日制" data-title="浙江工商大学-魁北克大学席库提米分校项目管理硕士项目" data-tuition-max="999" data-tuition-min="0" href="https://liankao.org.cn/schools/sino-foreign-zjgsu-uqac-mpm/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="项目管理">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="项目管理" data-project-type="sino" data-region="浙江" data-study-mode="非全日制" data-title="浙江工商大学-魁北克大学席库提米分校项目管理硕士项目" data-tuition-max="999" data-tuition-min="0" href="https://liankao.org.cn/schools/sino-foreign-zjgsu-uqac-mpm/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="项目管理">
          项目管理
         </span>
-        <span class="school-card-badge">
+<span class="school-card-badge">
          合作办学
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          浙江
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         浙江工商大学-魁北克大学席库提米分校项目管理硕士项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         浙江工商大学与加拿大魁北克大学席库提米分校合作举办项目管理硕士学位教育项目，教育部批准书编号MOE33CA1A20030105O，学制2年，每期招生120人，自 …
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="国际贸易与金融" data-project-type="sino" data-region="浙江" data-study-mode="全日制/非全日制" data-title="浙江工业大学-利兹贝克特大学国际贸易与金融硕士项目" data-tuition-max="999" data-tuition-min="0" href="https://liankao.org.cn/schools/sino-foreign-zjut-leeds-beckett-msc/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="国际贸易与金融">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="国际贸易与金融" data-project-type="sino" data-region="浙江" data-study-mode="全日制/非全日制" data-title="浙江工业大学-利兹贝克特大学国际贸易与金融硕士项目" data-tuition-max="999" data-tuition-min="0" href="https://liankao.org.cn/schools/sino-foreign-zjut-leeds-beckett-msc/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="国际贸易与金融">
          国际贸易与金融
         </span>
-        <span class="school-card-badge">
+<span class="school-card-badge">
          合作办学
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          全日制/非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          浙江
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         浙江工业大学-利兹贝克特大学国际贸易与金融硕士项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         浙江工业大学与英国利兹贝克特大学合作举办国际贸易与金融硕士学位教育项目，教育部批准书编号MOE33GB1A20030104O，学制1年，每期招生90人，自主招 …
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="金融科技" data-project-type="sino" data-region="湖南" data-study-mode="全日制" data-title="湖南工商大学-英国西英格兰大学金融科技硕士" data-tuition-max="999" data-tuition-min="0" href="https://liankao.org.cn/schools/sino-hutb-uwe-fintech/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="金融科技">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="金融科技" data-project-type="sino" data-region="湖南" data-study-mode="全日制" data-title="湖南工商大学-英国西英格兰大学金融科技硕士" data-tuition-max="999" data-tuition-min="0" href="https://liankao.org.cn/schools/sino-hutb-uwe-fintech/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="金融科技">
          金融科技
         </span>
-        <span class="school-card-badge">
+<span class="school-card-badge">
          合作办学
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          湖南
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         湖南工商大学-英国西英格兰大学金融科技硕士
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         湖南工商大学与英国西英格兰大学合作举办金融科技专业硕士学位项目，教育部2026年5月批准，免统考申请制入学，学制2年，年招生80人，长沙授课，英方授予硕士学位可 …
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="安徽财经大学工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="2.4" href="https://liankao.org.cn/schools/mem-anhui-university-finance-economics/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="安徽财经大学工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="2.4" href="https://liankao.org.cn/schools/mem-anhui-university-finance-economics/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          安徽
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         安徽财经大学工程管理硕士（MEM）
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         安徽财经大学工程管理硕士，非全日制，学制2.5-3年，学费2.4-6.0万元。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="安徽大学工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="3.0" href="https://liankao.org.cn/schools/mem-anhui-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="安徽大学工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="3.0" href="https://liankao.org.cn/schools/mem-anhui-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          安徽
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         安徽大学工程管理硕士（MEM）
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         安徽大学工程管理硕士，非全日制，学制2.5-3年，学费3.0-6.0万元。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="安徽工程大学MBA项目" data-tuition-max="8.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-anhui-university-of-engineering/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="安徽工程大学MBA项目" data-tuition-max="8.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-anhui-university-of-engineering/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          安徽
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         安徽工程大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         安徽工程大学是安徽省市的知名院校，提供非全日制MBA项目，学费6-8万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制/全日制" data-title="安徽工程大学MPA项目" data-tuition-max="8.5" data-tuition-min="8.5" href="https://liankao.org.cn/schools/mpa-anhui-polytechnic-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MPA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制/全日制" data-title="安徽工程大学MPA项目" data-tuition-max="8.5" data-tuition-min="8.5" href="https://liankao.org.cn/schools/mpa-anhui-polytechnic-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MPA">
          MPA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制/全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          安徽
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         安徽工程大学MPA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         安徽工程大学是地区重要高校，MPA项目培养公共管理人才，学制3年，学费约8.5万。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="安徽工业大学MBA项目" data-tuition-max="9.0" data-tuition-min="7.0" href="https://liankao.org.cn/schools/mba-anhui-university-of-technology/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="安徽工业大学MBA项目" data-tuition-max="9.0" data-tuition-min="7.0" href="https://liankao.org.cn/schools/mba-anhui-university-of-technology/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          安徽
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         安徽工业大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         安徽工业大学是安徽省市的知名院校，提供非全日制MBA项目，学费7-9万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="安徽" data-study-mode="全日制" data-title="安徽工业大学MPA项目" data-tuition-max="5.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mpa-anhui-university-technology/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MPA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="安徽" data-study-mode="全日制" data-title="安徽工业大学MPA项目" data-tuition-max="5.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mpa-anhui-university-technology/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MPA">
          MPA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          安徽
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         安徽工业大学MPA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         安徽工业大学是地区重要高校，MPA项目培养公共管理人才，学制3年，学费约5.0万。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="安徽工业大学工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="2.4" href="https://liankao.org.cn/schools/mem-anhui-university-industry/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="安徽工业大学工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="2.4" href="https://liankao.org.cn/schools/mem-anhui-university-industry/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          安徽
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         安徽工业大学工程管理硕士（MEM）
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         安徽工业大学工程管理硕士，非全日制，学制2.5-3年，学费2.4-6.0万元。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="安徽理工大学MBA项目" data-tuition-max="8.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-anhui-university-of-science-and-technology/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="安徽理工大学MBA项目" data-tuition-max="8.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-anhui-university-of-science-and-technology/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          安徽
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         安徽理工大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         安徽理工大学是安徽省市的知名院校，提供非全日制MBA项目，学费6-8万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="安徽农业大学MBA项目" data-tuition-max="8.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-anhui-agricultural-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="安徽农业大学MBA项目" data-tuition-max="8.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-anhui-agricultural-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          安徽
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         安徽农业大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         安徽农业大学是安徽省市的知名院校，提供非全日制MBA项目，学费6-8万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="安徽师范大学MBA项目" data-tuition-max="9.0" data-tuition-min="7.0" href="https://liankao.org.cn/schools/mba-anhui-normal-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="安徽师范大学MBA项目" data-tuition-max="9.0" data-tuition-min="7.0" href="https://liankao.org.cn/schools/mba-anhui-normal-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          安徽
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         安徽师范大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         安徽师范大学是安徽省市的知名院校，提供非全日制MBA项目，学费7-9万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="安徽医科大学MPA项目" data-tuition-max="8.5" data-tuition-min="8.5" href="https://liankao.org.cn/schools/mpa-anhui-medical-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MPA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="安徽医科大学MPA项目" data-tuition-max="8.5" data-tuition-min="8.5" href="https://liankao.org.cn/schools/mpa-anhui-medical-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MPA">
          MPA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          安徽
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         安徽医科大学MPA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         安徽医科大学是地区重要高校，MPA项目培养公共管理人才，学制3年，学费约8.5万。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北方工业大学MBA项目" data-tuition-max="8.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-beifang-university-of-technology/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北方工业大学MBA项目" data-tuition-max="8.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-beifang-university-of-technology/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北方工业大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北方工业大学是北京省市的知名院校，提供非全日制MBA项目，学费6-8万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="宁夏" data-study-mode="非全日制" data-title="北方民族大学MBA项目" data-tuition-max="6.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-beifang-university-of-nationalities/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="宁夏" data-study-mode="非全日制" data-title="北方民族大学MBA项目" data-tuition-max="6.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-beifang-university-of-nationalities/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          宁夏
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北方民族大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北方民族大学是宁夏省市的知名院校，提供非全日制MBA项目，学费5-6万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="宁夏" data-study-mode="非全日制" data-title="北方民族大学MPA项目" data-tuition-max="9.6" data-tuition-min="9.6" href="https://liankao.org.cn/schools/mpa-beifang-minzu-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MPA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="宁夏" data-study-mode="非全日制" data-title="北方民族大学MPA项目" data-tuition-max="9.6" data-tuition-min="9.6" href="https://liankao.org.cn/schools/mpa-beifang-minzu-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MPA">
          MPA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          宁夏
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北方民族大学MPA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北方民族大学是地区重要高校，MPA项目培养公共管理人才，学制2.5年，学费约9.6万。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="河北" data-study-mode="非全日制" data-title="北华航天工业学院工程管理硕士（MEM）" data-tuition-max="5.0" data-tuition-min="3.0" href="https://liankao.org.cn/schools/mem-beihua-aerospace-industry-college/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="河北" data-study-mode="非全日制" data-title="北华航天工业学院工程管理硕士（MEM）" data-tuition-max="5.0" data-tuition-min="3.0" href="https://liankao.org.cn/schools/mem-beihua-aerospace-industry-college/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          河北
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北华航天工业学院工程管理硕士（MEM）
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北华航天工业学院工程管理硕士，非全日制，学制2.5-3年，学费3.0-5.0万元。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京城市学院MPA项目" data-tuition-max="4.5" data-tuition-min="4.5" href="https://liankao.org.cn/schools/mpa-beijing-city-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MPA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京城市学院MPA项目" data-tuition-max="4.5" data-tuition-min="4.5" href="https://liankao.org.cn/schools/mpa-beijing-city-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MPA">
          MPA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京城市学院MPA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京城市学院是地区重要高校，MPA项目培养公共管理人才，学制3年，学费约4.5万。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="北京" data-study-mode="全日制" data-title="北京电影学院MPA项目" data-tuition-max="6.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mpa-beijing-film-academy/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MPA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="北京" data-study-mode="全日制" data-title="北京电影学院MPA项目" data-tuition-max="6.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mpa-beijing-film-academy/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MPA">
          MPA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京电影学院MPA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京电影学院是地区重要高校，MPA项目培养公共管理人才，学制2年，学费约6.0万。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京工商大学工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="2.4" href="https://liankao.org.cn/schools/mem-beijing-technology-business-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京工商大学工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="2.4" href="https://liankao.org.cn/schools/mem-beijing-technology-business-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京工商大学工程管理硕士（MEM）
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京工商大学工程管理硕士，非全日制，学制2.5-3年，学费2.4-6.0万元。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="北京" data-study-mode="全日制" data-title="北京工业大学MPA项目" data-tuition-max="8.0" data-tuition-min="8.0" href="https://liankao.org.cn/schools/mpa-beijing-polytechnic-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MPA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="北京" data-study-mode="全日制" data-title="北京工业大学MPA项目" data-tuition-max="8.0" data-tuition-min="8.0" href="https://liankao.org.cn/schools/mpa-beijing-polytechnic-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MPA">
          MPA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京工业大学MPA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京工业大学是地区重要高校，MPA项目培养公共管理人才，学制2.5年，学费约8.0万。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="金融科技" data-project-type="sino" data-region="北京" data-study-mode="不限" data-title="北京国家会计学院-香港城市大学智能会计与金融科技应用" data-tuition-max="29.8" data-tuition-min="29.8" href="https://liankao.org.cn/schools/sino-foreign-bnai-cityu-%E6%99%BA%E8%83%BD%E4%BC%9A%E8%AE%A1%E4%B8%8E%E9%87%91/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="金融科技">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="金融科技" data-project-type="sino" data-region="北京" data-study-mode="不限" data-title="北京国家会计学院-香港城市大学智能会计与金融科技应用" data-tuition-max="29.8" data-tuition-min="29.8" href="https://liankao.org.cn/schools/sino-foreign-bnai-cityu-%E6%99%BA%E8%83%BD%E4%BC%9A%E8%AE%A1%E4%B8%8E%E9%87%91/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="金融科技">
          智能会计与金
         </span>
-        <span class="school-card-badge">
+<span class="school-card-badge">
          合作办学
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          不限
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京国家会计学院-香港城市大学智能会计与金融科技应用
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京国家会计学院与香港城市大学合作举办智能会计与金融科技应用（MOE11HK1N20192018N），学制2年，29.8万元，免联考申请制，可留服认证。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="EMBA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京航空航天大学EMBA项目" data-tuition-max="29.8" data-tuition-min="29.8" href="https://liankao.org.cn/schools/emba-beihang-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="EMBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="EMBA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京航空航天大学EMBA项目" data-tuition-max="29.8" data-tuition-min="29.8" href="https://liankao.org.cn/schools/emba-beihang-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="EMBA">
          EMBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京航空航天大学EMBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京航空航天大学EMBA项目，学制2年，学费29.8万元，领航MBA项目，培养科创企业家。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京建筑大学MBA项目" data-tuition-max="8.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-beijing-university-of-architecture/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京建筑大学MBA项目" data-tuition-max="8.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-beijing-university-of-architecture/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京建筑大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京建筑大学是北京省市的知名院校，提供非全日制MBA项目，学费6-8万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京建筑大学工程管理硕士（MEM）" data-tuition-max="7.8" data-tuition-min="2.8" href="https://liankao.org.cn/schools/mem-beijing-university-civil-engineering/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京建筑大学工程管理硕士（MEM）" data-tuition-max="7.8" data-tuition-min="2.8" href="https://liankao.org.cn/schools/mem-beijing-university-civil-engineering/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京建筑大学工程管理硕士（MEM）
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京建筑大学工程管理硕士，非全日制，学制2.5-3年，学费2.8-7.8万元。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="EMBA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京科技大学EMBA项目" data-tuition-max="30.0" data-tuition-min="20.0" href="https://liankao.org.cn/schools/emba-university-of-science-and-technology-beijing/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="EMBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="EMBA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京科技大学EMBA项目" data-tuition-max="30.0" data-tuition-min="20.0" href="https://liankao.org.cn/schools/emba-university-of-science-and-technology-beijing/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="EMBA">
          EMBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京科技大学EMBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京科技大学EMBA项目，学制2年，学费20-30万元，“技术+管理"双轮驱动，中美合作EMBA。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京联合大学MBA项目" data-tuition-max="7.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-beijing-union-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京联合大学MBA项目" data-tuition-max="7.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-beijing-union-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京联合大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京联合大学是北京省市的知名院校，提供非全日制MBA项目，学费5-7万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京林业大学MPA项目" data-tuition-max="3.0" data-tuition-min="3.0" href="https://liankao.org.cn/schools/mpa-beijing-forestry-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MPA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京林业大学MPA项目" data-tuition-max="3.0" data-tuition-min="3.0" href="https://liankao.org.cn/schools/mpa-beijing-forestry-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MPA">
          MPA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京林业大学MPA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京林业大学是地区重要高校，MPA项目培养公共管理人才，学制3年，学费约3.0万。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京体育大学MBA项目" data-tuition-max="14.0" data-tuition-min="10.0" href="https://liankao.org.cn/schools/mba-beijing-sport-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京体育大学MBA项目" data-tuition-max="14.0" data-tuition-min="10.0" href="https://liankao.org.cn/schools/mba-beijing-sport-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京体育大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京体育大学是北京省市的知名院校，提供非全日制MBA项目，学费10-14万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="商业分析" data-project-type="sino" data-region="北京" data-study-mode="不限" data-title="北京外国语大学-美国印第安纳大学商业分析" data-tuition-max="999" data-tuition-min="0" href="https://liankao.org.cn/schools/sino-foreign-bfsu-iu-%E5%95%86%E4%B8%9A%E5%88%86%E6%9E%90/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="商业分析">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="商业分析" data-project-type="sino" data-region="北京" data-study-mode="不限" data-title="北京外国语大学-美国印第安纳大学商业分析" data-tuition-max="999" data-tuition-min="0" href="https://liankao.org.cn/schools/sino-foreign-bfsu-iu-%E5%95%86%E4%B8%9A%E5%88%86%E6%9E%90/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="商业分析">
          商业分析
         </span>
-        <span class="school-card-badge">
+<span class="school-card-badge">
          合作办学
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          不限
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京外国语大学-美国印第安纳大学商业分析
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京外国语大学与美国印第安纳大学合作举办商业分析（MOE11US1A20262764N），学制1.5年，学费以官方公布为准，免联考申请制，可留服认证。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="教育技术与人工智能" data-project-type="sino" data-region="北京" data-study-mode="不限" data-title="北京外国语大学-英国基尔大学教育技术与人工智能硕士学位教育项目" data-tuition-max="12.8" data-tuition-min="12.8" href="https://liankao.org.cn/schools/sino-foreign-bfsu-keele-edutech/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="教育技术与人工智能">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="教育技术与人工智能" data-project-type="sino" data-region="北京" data-study-mode="不限" data-title="北京外国语大学-英国基尔大学教育技术与人工智能硕士学位教育项目" data-tuition-max="12.8" data-tuition-min="12.8" href="https://liankao.org.cn/schools/sino-foreign-bfsu-keele-edutech/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="教育技术与人工智能">
          教育技术与人
         </span>
-        <span class="school-card-badge">
+<span class="school-card-badge">
          合作办学
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          不限
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京外国语大学-英国基尔大学教育技术与人工智能硕士学位教育项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京外国语大学与英国基尔大学合作举办教育技术与人工智能硕士学位教育项目（MOE11UK1A20252398N），学制1.5年，12.8万元，免联考申请制，可留服 …
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京物资学院MBA项目" data-tuition-max="10.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-beijing-wuzi-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京物资学院MBA项目" data-tuition-max="10.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-beijing-wuzi-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京物资学院MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京物资学院是北京省市的知名院校，提供非全日制MBA项目，学费6-10万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京物资学院工程管理硕士（MEM）" data-tuition-max="8.0" data-tuition-min="2.4" href="https://liankao.org.cn/schools/mem-beijing-wuzhou-college/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京物资学院工程管理硕士（MEM）" data-tuition-max="8.0" data-tuition-min="2.4" href="https://liankao.org.cn/schools/mem-beijing-wuzhou-college/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京物资学院工程管理硕士（MEM）
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京物资学院工程管理硕士，非全日制，学制2.5-3年，学费2.4-8.0万元。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京信息科技大学MBA项目" data-tuition-max="8.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-beijing-information-science-and-technology/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京信息科技大学MBA项目" data-tuition-max="8.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-beijing-information-science-and-technology/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京信息科技大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京信息科技大学是北京省市的知名院校，提供非全日制MBA项目，学费6-8万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京信息科技大学工程管理硕士（MEM）" data-tuition-max="8.0" data-tuition-min="2.1" href="https://liankao.org.cn/schools/mem-beijing-information-science-technology/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京信息科技大学工程管理硕士（MEM）" data-tuition-max="8.0" data-tuition-min="2.1" href="https://liankao.org.cn/schools/mem-beijing-information-science-technology/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京信息科技大学工程管理硕士（MEM）
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京信息科技大学工程管理硕士，非全日制，学制2.5-3年，学费2.1-8.0万元。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="EMBA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京邮电大学EMBA项目" data-tuition-max="999" data-tuition-min="0" href="https://liankao.org.cn/schools/emba-beijing-university-of-posts-and-telecommunications/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="EMBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="EMBA" data-project-type="domestic" data-region="北京" data-study-mode="非全日制" data-title="北京邮电大学EMBA项目" data-tuition-max="999" data-tuition-min="0" href="https://liankao.org.cn/schools/emba-beijing-university-of-posts-and-telecommunications/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="EMBA">
          EMBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          北京
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         北京邮电大学EMBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         北京邮电大学EMBA项目，学制2年，信息技术与通信管理特色，培养数字化转型领导者。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="辽宁" data-study-mode="非全日制" data-title="渤海大学工程管理硕士（MEM）" data-tuition-max="5.0" data-tuition-min="2.4" href="https://liankao.org.cn/schools/mem-bohai-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="辽宁" data-study-mode="非全日制" data-title="渤海大学工程管理硕士（MEM）" data-tuition-max="5.0" data-tuition-min="2.4" href="https://liankao.org.cn/schools/mem-bohai-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          辽宁
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         渤海大学工程管理硕士（MEM）
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         渤海大学工程管理硕士，非全日制，学制2.5-3年，学费2.4-5.0万元。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="江苏" data-study-mode="非全日制" data-title="常州大学MBA项目" data-tuition-max="10.0" data-tuition-min="8.0" href="https://liankao.org.cn/schools/mba-changzhou-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="江苏" data-study-mode="非全日制" data-title="常州大学MBA项目" data-tuition-max="10.0" data-tuition-min="8.0" href="https://liankao.org.cn/schools/mba-changzhou-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          江苏
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         常州大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         常州大学是江苏省市的知名院校，提供非全日制MBA项目，学费8-10万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="辽宁" data-study-mode="非全日制" data-title="沈阳大学MBA项目" data-tuition-max="6.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-shenyang-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="辽宁" data-study-mode="非全日制" data-title="沈阳大学MBA项目" data-tuition-max="6.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-shenyang-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          辽宁
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         沈阳大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         沈阳大学是辽宁省市的知名院校，提供非全日制MBA项目，学费5-6万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="辽宁" data-study-mode="非全日制" data-title="沈阳工业大学MBA项目" data-tuition-max="8.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-shenyang-university-of-technology/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="辽宁" data-study-mode="非全日制" data-title="沈阳工业大学MBA项目" data-tuition-max="8.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-shenyang-university-of-technology/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          辽宁
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         沈阳工业大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         沈阳工业大学是辽宁省市的知名院校，提供非全日制MBA项目，学费6-8万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="辽宁" data-study-mode="非全日制" data-title="沈阳工业大学工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="3.0" href="https://liankao.org.cn/schools/mem-shenyang-university-technology/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="辽宁" data-study-mode="非全日制" data-title="沈阳工业大学工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="3.0" href="https://liankao.org.cn/schools/mem-shenyang-university-technology/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          辽宁
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         沈阳工业大学工程管理硕士（MEM）
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         沈阳工业大学工程管理硕士，非全日制，学制2.5-3年，学费3.0-6.0万元。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="辽宁" data-study-mode="非全日制" data-title="沈阳化工大学工程管理硕士（MEM）" data-tuition-max="5.0" data-tuition-min="3.0" href="https://liankao.org.cn/schools/mem-shenyang-university-chemical-technology/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="辽宁" data-study-mode="非全日制" data-title="沈阳化工大学工程管理硕士（MEM）" data-tuition-max="5.0" data-tuition-min="3.0" href="https://liankao.org.cn/schools/mem-shenyang-university-chemical-technology/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          辽宁
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         沈阳化工大学工程管理硕士（MEM）
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         沈阳化工大学工程管理硕士，非全日制，学制2.5-3年，学费3.0-5.0万元。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="辽宁" data-study-mode="非全日制" data-title="沈阳理工大学MBA项目" data-tuition-max="7.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-shenyang-university-of-science-and-technology/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="辽宁" data-study-mode="非全日制" data-title="沈阳理工大学MBA项目" data-tuition-max="7.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-shenyang-university-of-science-and-technology/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          辽宁
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         沈阳理工大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         沈阳理工大学是辽宁省市的知名院校，提供非全日制MBA项目，学费5-7万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="辽宁" data-study-mode="非全日制" data-title="沈阳农业大学MBA项目" data-tuition-max="7.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-shenyang-agricultural-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="辽宁" data-study-mode="非全日制" data-title="沈阳农业大学MBA项目" data-tuition-max="7.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-shenyang-agricultural-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          辽宁
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         沈阳农业大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         沈阳农业大学是辽宁省市的知名院校，提供非全日制MBA项目，学费5-7万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="辽宁" data-study-mode="全日制" data-title="沈阳师范大学MPA项目" data-tuition-max="3.6" data-tuition-min="3.6" href="https://liankao.org.cn/schools/mpa-shenyang-normal-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MPA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="辽宁" data-study-mode="全日制" data-title="沈阳师范大学MPA项目" data-tuition-max="3.6" data-tuition-min="3.6" href="https://liankao.org.cn/schools/mpa-shenyang-normal-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MPA">
          MPA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          辽宁
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         沈阳师范大学MPA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         沈阳师范大学是地区重要高校，MPA项目培养公共管理人才，学制2年，学费约3.6万。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="四川" data-study-mode="非全日制" data-title="成都大学MBA项目" data-tuition-max="7.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-chengdu-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="四川" data-study-mode="非全日制" data-title="成都大学MBA项目" data-tuition-max="7.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-chengdu-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          四川
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         成都大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         成都大学是四川省市的知名院校，提供非全日制MBA项目，学费5-7万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="四川" data-study-mode="非全日制" data-title="成都大学工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="3.0" href="https://liankao.org.cn/schools/mem-chengdu-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="四川" data-study-mode="非全日制" data-title="成都大学工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="3.0" href="https://liankao.org.cn/schools/mem-chengdu-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          四川
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         成都大学工程管理硕士（MEM）
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         成都大学工程管理硕士，非全日制，学制2.5-3年，学费3.0-6.0万元。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="四川" data-study-mode="非全日制" data-title="成都理工大学MBA项目" data-tuition-max="8.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-chengdu-university-of-technology/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="四川" data-study-mode="非全日制" data-title="成都理工大学MBA项目" data-tuition-max="8.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-chengdu-university-of-technology/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          四川
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         成都理工大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         成都理工大学是四川省市的知名院校，提供非全日制MBA项目，学费6-8万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="四川" data-study-mode="非全日制" data-title="成都信息工程大学MBA项目" data-tuition-max="7.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-chengdu-university-of-information-technology/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="四川" data-study-mode="非全日制" data-title="成都信息工程大学MBA项目" data-tuition-max="7.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-chengdu-university-of-information-technology/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          四川
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         成都信息工程大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         成都信息工程大学是四川省市的知名院校，提供非全日制MBA项目，学费5-7万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="上海" data-study-mode="非全日制/全日制" data-title="第二军医大学MPA项目" data-tuition-max="8.0" data-tuition-min="8.0" href="https://liankao.org.cn/schools/mpa-second-military-medical-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MPA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="上海" data-study-mode="非全日制/全日制" data-title="第二军医大学MPA项目" data-tuition-max="8.0" data-tuition-min="8.0" href="https://liankao.org.cn/schools/mpa-second-military-medical-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MPA">
          MPA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制/全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          上海
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         第二军医大学MPA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         第二军医大学是地区重要高校，MPA项目培养公共管理人才，学制2年，学费约8.0万。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="EMBA" data-project-type="domestic" data-region="辽宁" data-study-mode="非全日制" data-title="东北财经大学EMBA项目" data-tuition-max="21.8" data-tuition-min="21.8" href="https://liankao.org.cn/schools/emba-dongbei-university-of-finance-and-economics/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="EMBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="EMBA" data-project-type="domestic" data-region="辽宁" data-study-mode="非全日制" data-title="东北财经大学EMBA项目" data-tuition-max="21.8" data-tuition-min="21.8" href="https://liankao.org.cn/schools/emba-dongbei-university-of-finance-and-economics/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="EMBA">
          EMBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          辽宁
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         东北财经大学EMBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         东北财经大学EMBA项目，学制2年，学费21.8万元，风险投资管理方向，国内首创VC-EMBA项目。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="辽宁" data-study-mode="非全日制" data-title="东北财经大学工程管理硕士（MEM）" data-tuition-max="8.0" data-tuition-min="3.0" href="https://liankao.org.cn/schools/mem-dongbei-university-finance-economics/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="辽宁" data-study-mode="非全日制" data-title="东北财经大学工程管理硕士（MEM）" data-tuition-max="8.0" data-tuition-min="3.0" href="https://liankao.org.cn/schools/mem-dongbei-university-finance-economics/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          辽宁
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         东北财经大学工程管理硕士（MEM）
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         东北财经大学工程管理硕士，非全日制，学制2.5-3年，学费3.0-8.0万元。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="吉林" data-study-mode="非全日制" data-title="东北电力大学MBA项目" data-tuition-max="7.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-northeast-electric-power-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="吉林" data-study-mode="非全日制" data-title="东北电力大学MBA项目" data-tuition-max="7.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-northeast-electric-power-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          吉林
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         东北电力大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         东北电力大学是吉林省市的知名院校，提供非全日制MBA项目，学费5-7万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="黑龙江" data-study-mode="非全日制" data-title="东北林业大学工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="2.4" href="https://liankao.org.cn/schools/mem-northeast-forestry-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="黑龙江" data-study-mode="非全日制" data-title="东北林业大学工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="2.4" href="https://liankao.org.cn/schools/mem-northeast-forestry-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          黑龙江
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         东北林业大学工程管理硕士（MEM）
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         东北林业大学工程管理硕士，非全日制，学制2.5-3年，学费2.4-6.0万元。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="黑龙江" data-study-mode="非全日制" data-title="东北农业大学MBA项目" data-tuition-max="8.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-northeast-agricultural-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="黑龙江" data-study-mode="非全日制" data-title="东北农业大学MBA项目" data-tuition-max="8.0" data-tuition-min="6.0" href="https://liankao.org.cn/schools/mba-northeast-agricultural-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          黑龙江
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         东北农业大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         东北农业大学是黑龙江省市的知名院校，提供非全日制MBA项目，学费6-8万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="黑龙江" data-study-mode="非全日制/全日制" data-title="东北农业大学MPA项目" data-tuition-max="8.5" data-tuition-min="8.5" href="https://liankao.org.cn/schools/mpa-northeast-agricultural-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MPA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="黑龙江" data-study-mode="非全日制/全日制" data-title="东北农业大学MPA项目" data-tuition-max="8.5" data-tuition-min="8.5" href="https://liankao.org.cn/schools/mpa-northeast-agricultural-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MPA">
          MPA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制/全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          黑龙江
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         东北农业大学MPA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         东北农业大学是地区重要高校，MPA项目培养公共管理人才，学制3年，学费约8.5万。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="黑龙江" data-study-mode="非全日制" data-title="东北农业大学工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="2.4" href="https://liankao.org.cn/schools/mem-northeast-agricultural-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="黑龙江" data-study-mode="非全日制" data-title="东北农业大学工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="2.4" href="https://liankao.org.cn/schools/mem-northeast-agricultural-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          黑龙江
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         东北农业大学工程管理硕士（MEM）
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         东北农业大学工程管理硕士，非全日制，学制2.5-3年，学费2.4-6.0万元。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="黑龙江" data-study-mode="非全日制" data-title="东北石油大学MBA项目" data-tuition-max="6.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-northeast-petroleum-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="黑龙江" data-study-mode="非全日制" data-title="东北石油大学MBA项目" data-tuition-max="6.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-northeast-petroleum-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          黑龙江
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         东北石油大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         东北石油大学是黑龙江省市的知名院校，提供非全日制MBA项目，学费5-6万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="EMBA" data-project-type="domestic" data-region="上海" data-study-mode="非全日制" data-title="东华大学EMBA项目" data-tuition-max="29.8" data-tuition-min="29.8" href="https://liankao.org.cn/schools/emba-donghua-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="EMBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="EMBA" data-project-type="domestic" data-region="上海" data-study-mode="非全日制" data-title="东华大学EMBA项目" data-tuition-max="29.8" data-tuition-min="29.8" href="https://liankao.org.cn/schools/emba-donghua-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="EMBA">
          EMBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          上海
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         东华大学EMBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         东华大学EMBA项目，学制2.5年，学费29.8万元，纺织服装产业领导者培养，“纺织+“特色模块。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="上海" data-study-mode="非全日制/全日制" data-title="东华大学MPA项目" data-tuition-max="3.0" data-tuition-min="3.0" href="https://liankao.org.cn/schools/mpa-donghua-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MPA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="上海" data-study-mode="非全日制/全日制" data-title="东华大学MPA项目" data-tuition-max="3.0" data-tuition-min="3.0" href="https://liankao.org.cn/schools/mpa-donghua-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MPA">
          MPA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制/全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          上海
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         东华大学MPA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         东华大学是地区重要高校，MPA项目培养公共管理人才，学制2.5年，学费约3.0万。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="江西" data-study-mode="非全日制" data-title="东华理工大学MBA项目" data-tuition-max="7.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-donghua-university-of-technology/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="江西" data-study-mode="非全日制" data-title="东华理工大学MBA项目" data-tuition-max="7.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-donghua-university-of-technology/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          江西
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         东华理工大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         东华理工大学是江西省市的知名院校，提供非全日制MBA项目，学费5-7万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="江苏" data-study-mode="非全日制" data-title="东南大学MBA项目" data-tuition-max="25.0" data-tuition-min="21.0" href="https://liankao.org.cn/schools/mba-southeast-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="江苏" data-study-mode="非全日制" data-title="东南大学MBA项目" data-tuition-max="25.0" data-tuition-min="21.0" href="https://liankao.org.cn/schools/mba-southeast-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          江苏
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         东南大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         东南大学是江苏省市的知名院校，提供非全日制MBA项目，学费21-25万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="福建" data-study-mode="非全日制" data-title="福建工程学院MBA项目" data-tuition-max="7.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-fujian-university-of-engineering/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="福建" data-study-mode="非全日制" data-title="福建工程学院MBA项目" data-tuition-max="7.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-fujian-university-of-engineering/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          福建
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         福建工程学院MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         福建工程学院是福建省市的知名院校，提供非全日制MBA项目，学费5-7万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="福建" data-study-mode="非全日制" data-title="福建工程学院工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="3.0" href="https://liankao.org.cn/schools/mem-fujian-university-engineering/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="福建" data-study-mode="非全日制" data-title="福建工程学院工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="3.0" href="https://liankao.org.cn/schools/mem-fujian-university-engineering/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          福建
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         福建工程学院工程管理硕士（MEM）
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         福建工程学院工程管理硕士，非全日制，学制2.5-3年，学费3.0-6.0万元。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="福建" data-study-mode="非全日制" data-title="福建农林大学MBA项目" data-tuition-max="9.0" data-tuition-min="7.0" href="https://liankao.org.cn/schools/mba-fujian-agriculture-and-forestry-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="福建" data-study-mode="非全日制" data-title="福建农林大学MBA项目" data-tuition-max="9.0" data-tuition-min="7.0" href="https://liankao.org.cn/schools/mba-fujian-agriculture-and-forestry-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          福建
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         福建农林大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         福建农林大学是福建省市的知名院校，提供非全日制MBA项目，学费7-9万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="福建" data-study-mode="全日制" data-title="福建农林大学MPA项目" data-tuition-max="9.0" data-tuition-min="9.0" href="https://liankao.org.cn/schools/mpa-fujian-agriculture-forestry-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MPA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MPA" data-project-type="domestic" data-region="福建" data-study-mode="全日制" data-title="福建农林大学MPA项目" data-tuition-max="9.0" data-tuition-min="9.0" href="https://liankao.org.cn/schools/mpa-fujian-agriculture-forestry-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MPA">
          MPA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          福建
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         福建农林大学MPA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         福建农林大学是地区重要高校，MPA项目培养公共管理人才，学制2.5年，学费约9.0万。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="福建" data-study-mode="非全日制" data-title="福建师范大学MBA项目" data-tuition-max="9.0" data-tuition-min="7.0" href="https://liankao.org.cn/schools/mba-fujian-normal-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="福建" data-study-mode="非全日制" data-title="福建师范大学MBA项目" data-tuition-max="9.0" data-tuition-min="7.0" href="https://liankao.org.cn/schools/mba-fujian-normal-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          福建
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         福建师范大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         福建师范大学是福建省市的知名院校，提供非全日制MBA项目，学费7-9万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="阜阳师范大学工程管理硕士（MEM）" data-tuition-max="5.0" data-tuition-min="2.4" href="https://liankao.org.cn/schools/mem-fuyang-normal-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="安徽" data-study-mode="非全日制" data-title="阜阳师范大学工程管理硕士（MEM）" data-tuition-max="5.0" data-tuition-min="2.4" href="https://liankao.org.cn/schools/mem-fuyang-normal-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          安徽
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         阜阳师范大学工程管理硕士（MEM）
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         阜阳师范大学工程管理硕士，非全日制，学制2.5-3年，学费2.4-5.0万元。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="EMBA" data-project-type="sino" data-region="上海" data-study-mode="不限" data-title="复旦大学-美国圣路易斯华盛顿大学高级管理人员工商管理硕士" data-tuition-max="76.8" data-tuition-min="76.8" href="https://liankao.org.cn/schools/sino-foreign-fudan-washu-%E9%AB%98%E7%BA%A7%E7%AE%A1%E7%90%86%E4%BA%BA%E5%91%98/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="EMBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="EMBA" data-project-type="sino" data-region="上海" data-study-mode="不限" data-title="复旦大学-美国圣路易斯华盛顿大学高级管理人员工商管理硕士" data-tuition-max="76.8" data-tuition-min="76.8" href="https://liankao.org.cn/schools/sino-foreign-fudan-washu-%E9%AB%98%E7%BA%A7%E7%AE%A1%E7%90%86%E4%BA%BA%E5%91%98/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="EMBA">
          高级管理人员
         </span>
-        <span class="school-card-badge">
+<span class="school-card-badge">
          合作办学
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          不限
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          上海
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         复旦大学-美国圣路易斯华盛顿大学高级管理人员工商管理硕士
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         复旦大学与美国圣路易斯华盛顿大学合作举办高级管理人员工商管理硕士（MOE31US1A20020502O），学制2年，76.8万元，免联考申请制，可留服认证。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="sino" data-region="上海" data-study-mode="不限" data-title="复旦大学-挪威商学院工商管理" data-tuition-max="76.8" data-tuition-min="76.8" href="https://liankao.org.cn/schools/sino-foreign-fudan-bi-%E5%B7%A5%E5%95%86%E7%AE%A1%E7%90%86/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="sino" data-region="上海" data-study-mode="不限" data-title="复旦大学-挪威商学院工商管理" data-tuition-max="76.8" data-tuition-min="76.8" href="https://liankao.org.cn/schools/sino-foreign-fudan-bi-%E5%B7%A5%E5%95%86%E7%AE%A1%E7%90%86/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          工商管理
         </span>
-        <span class="school-card-badge">
+<span class="school-card-badge">
          合作办学
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          不限
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          上海
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         复旦大学-挪威商学院工商管理
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         复旦大学与挪威商学院合作举办工商管理（MOE31NO1A20030504O），学制2年，76.8万元，免联考申请制，可留服认证。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="上海" data-study-mode="非全日制" data-title="复旦大学国际金融学院MBA项目" data-tuition-max="60.0" data-tuition-min="50.0" href="https://liankao.org.cn/schools/mba-fudan-university-international-finance/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="上海" data-study-mode="非全日制" data-title="复旦大学国际金融学院MBA项目" data-tuition-max="60.0" data-tuition-min="50.0" href="https://liankao.org.cn/schools/mba-fudan-university-international-finance/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          上海
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         复旦大学国际金融学院MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         复旦大学国际金融学院是上海省市的知名院校，提供非全日制MBA项目，学费50-60万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="甘肃" data-study-mode="非全日制" data-title="甘肃农业大学MBA项目" data-tuition-max="6.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-gansu-agricultural-university/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="甘肃" data-study-mode="非全日制" data-title="甘肃农业大学MBA项目" data-tuition-max="6.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-gansu-agricultural-university/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          甘肃
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         甘肃农业大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         甘肃农业大学是甘肃省市的知名院校，提供非全日制MBA项目，学费5-6万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="甘肃" data-study-mode="非全日制" data-title="甘肃政法大学MBA项目" data-tuition-max="7.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-gansu-university-of-political-science-and-law/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="甘肃" data-study-mode="非全日制" data-title="甘肃政法大学MBA项目" data-tuition-max="7.0" data-tuition-min="5.0" href="https://liankao.org.cn/schools/mba-gansu-university-of-political-science-and-law/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          甘肃
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         甘肃政法大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         甘肃政法大学是甘肃省市的知名院校，提供非全日制MBA项目，学费5-7万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="广东" data-study-mode="非全日制" data-title="广东财经大学工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="2.4" href="https://liankao.org.cn/schools/mem-guangdong-university-finance-economics/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MEM">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MEM" data-project-type="domestic" data-region="广东" data-study-mode="非全日制" data-title="广东财经大学工程管理硕士（MEM）" data-tuition-max="6.0" data-tuition-min="2.4" href="https://liankao.org.cn/schools/mem-guangdong-university-finance-economics/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MEM">
          MEM
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          广东
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         广东财经大学工程管理硕士（MEM）
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         广东财经大学工程管理硕士，非全日制，学制2.5-3年，学费2.4-6.0万元。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-     <a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="广东" data-study-mode="非全日制" data-title="广东工业大学MBA项目" data-tuition-max="15.0" data-tuition-min="10.0" href="https://liankao.org.cn/schools/mba-guangdong-university-of-technology/" rel="noopener noreferrer" target="_blank">
-      <div class="school-card-main">
-       <div class="school-card-top">
-        <span class="school-card-major" data-major="MBA">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+<a class="school-card reveal" data-major="MBA" data-project-type="domestic" data-region="广东" data-study-mode="非全日制" data-title="广东工业大学MBA项目" data-tuition-max="15.0" data-tuition-min="10.0" href="https://liankao.org.cn/schools/mba-guangdong-university-of-technology/" rel="noopener noreferrer" target="_blank">
+<div class="school-card-main">
+<div class="school-card-top">
+<span class="school-card-major" data-major="MBA">
          MBA
         </span>
-        <span class="school-card-study-mode">
+<span class="school-card-study-mode">
          非全日制
         </span>
-        <span class="school-card-region">
+<span class="school-card-region">
          广东
         </span>
-       </div>
-       <h3 class="school-card-title">
+</div>
+<h3 class="school-card-title">
         广东工业大学MBA项目
        </h3>
-       <p class="school-card-summary">
+<p class="school-card-summary">
         广东工业大学是广东省市的知名院校，提供非全日制MBA项目，学费10-15万元，学制2-3年。
        </p>
-      </div>
-      <div class="school-card-arrow">
-       <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
-        <polyline points="9 18 15 12 9 6">
-        </polyline>
-       </svg>
-      </div>
-     </a>
-    </div>
-    <div class="school-empty" hidden="" id="schoolEmpty">
-     <div class="school-empty-icon">
-      <svg fill="none" height="48" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="48">
-       <circle cx="11" cy="11" r="8">
-       </circle>
-       <path d="m21 21-4.35-4.35">
-       </path>
-      </svg>
-     </div>
-     <p class="school-empty-title">
+</div>
+<div class="school-card-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<polyline points="9 18 15 12 9 6">
+</polyline>
+</svg>
+</div>
+</a>
+</div>
+<div class="school-empty" hidden="" id="schoolEmpty">
+<div class="school-empty-icon">
+<svg fill="none" height="48" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="48">
+<circle cx="11" cy="11" r="8">
+</circle>
+<path d="m21 21-4.35-4.35">
+</path>
+</svg>
+</div>
+<p class="school-empty-title">
       未找到符合条件的项目
      </p>
-     <p class="school-empty-desc">
+<p class="school-empty-desc">
       当前筛选条件下没有匹配结果，请尝试调整筛选条件。
      </p>
-     <button class="filter-chip reset-btn" id="emptyReset">
+<button class="filter-chip reset-btn" id="emptyReset">
       重置筛选
      </button>
-    </div>
-   </div>
-  </section>
-  <!-- 页脚 -->
-  <footer class="footer">
-   <div class="footer-inner">
-    <div class="footer-grid">
-     <div>
-      <div class="footer-heading">
+</div>
+</div>
+</section>
+<!-- 页脚 -->
+<footer class="footer">
+<div class="footer-inner">
+<div class="footer-grid">
+<div>
+<div class="footer-heading">
        关注我们
       </div>
-      <div class="qr-grid">
-       <div class="qr-item">
-        <img alt="微信公众号" class="qr-img" src="images/wechat-qr.jpg"/>
-        <p>
+<div class="qr-grid">
+<div class="qr-item">
+<img alt="微信公众号" class="qr-img" src="images/wechat-qr.jpg"/>
+<p>
          微信公众号
         </p>
-       </div>
-       <div class="qr-item">
-        <img alt="抖音" class="qr-img" src="images/douyin-qr.png"/>
-        <p>
+</div>
+<div class="qr-item">
+<img alt="抖音" class="qr-img" src="images/douyin-qr.png"/>
+<p>
          抖音号
         </p>
-       </div>
-       <div class="qr-item">
-        <img alt="小红书" class="qr-img" src="images/xiaohongshu-qr.png"/>
-        <p>
+</div>
+<div class="qr-item">
+<img alt="小红书" class="qr-img" src="images/xiaohongshu-qr.png"/>
+<p>
          小红书
         </p>
-       </div>
-      </div>
-     </div>
-     <div>
-      <div class="footer-heading">
+</div>
+</div>
+</div>
+<div>
+<div class="footer-heading">
        链接
       </div>
-      <ul class="footer-links">
-       <li>
-        <a href="index.html">
+<ul class="footer-links">
+<li>
+<a href="index.html">
          首页
         </a>
-       </li>
-       <li>
-        <a href="programs.html">
+</li>
+<li>
+<a href="programs.html">
          院校查询
         </a>
-       </li>
-       <li>
-        <a href="about.html">
+</li><li><a href="sino/">合作办学硕士</a></li>
+
+<li>
+<a href="about.html">
          关于我们
         </a>
-       </li>
-       <li>
-        <a href="contact.html">
+</li>
+<li>
+<a href="contact.html">
          联系我们
         </a>
-       </li>
-       <li>
-        <a href="sitemap.xml">
+</li>
+<li>
+<a href="sitemap.xml">
          网站地图
         </a>
-       </li>
-      </ul>
-     </div>
-     <div>
-      <div class="footer-heading">
+</li>
+</ul>
+</div>
+<div>
+<div class="footer-heading">
        常用官网导航
       </div>
-      <ul class="footer-links">
-       <li>
-        <a href="https://www.chsi.com.cn" rel="noopener noreferrer" target="_blank">
+<ul class="footer-links">
+<li>
+<a href="https://www.chsi.com.cn" rel="noopener noreferrer" target="_blank">
          中国高等教育学生信息网（学信网）
         </a>
-       </li>
-       <li>
-        <a href="https://yz.chsi.com.cn" rel="noopener noreferrer" target="_blank">
+</li>
+<li>
+<a href="https://yz.chsi.com.cn" rel="noopener noreferrer" target="_blank">
          中国研究生招生信息网
         </a>
-       </li>
-       <li>
-        <a href="https://jsj.moe.gov.cn" rel="noopener noreferrer" target="_blank">
+</li>
+<li>
+<a href="https://jsj.moe.gov.cn" rel="noopener noreferrer" target="_blank">
          教育部涉外监管信息网
         </a>
-       </li>
-       <li>
-        <a href="https://portal.cscse.edu.cn" rel="noopener noreferrer" target="_blank">
+</li>
+<li>
+<a href="https://portal.cscse.edu.cn" rel="noopener noreferrer" target="_blank">
          教育部留学服务中心
         </a>
-       </li>
-      </ul>
-     </div>
-     <div>
-      <div class="footer-heading">
+</li>
+</ul>
+</div>
+<div>
+<div class="footer-heading">
        联系
       </div>
-      <p class="footer-text">
+<p class="footer-text">
        电话：<a href="tel:19910720201">19910720201</a>
-      </p>
-      <p class="footer-text">
+</p>
+<p class="footer-text">
        邮箱：<a href="mailto:chanpinpm@126.com">chanpinpm@126.com</a>
-      </p>
-      <p class="footer-text">
+</p>
+<p class="footer-text">
        地址：北京市东城区王府井大街219号王府中心
       </p>
-     </div>
-    </div>
-    <div class="footer-bottom">
-     <p>© 2024 果芽（北京）信息咨询有限公司 <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" style="color:#999;text-decoration:none;">京ICP备2026031809号</a></p>
-    </div>
-   </div>
-  </footer>
-  <script>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2024 果芽（北京）信息咨询有限公司 <a href="https://beian.miit.gov.cn/" rel="noopener noreferrer" style="color:#999;text-decoration:none;" target="_blank">京ICP备2026031809号</a></p>
+</div>
+</div>
+</footer>
+<script>
    document.addEventListener('DOMContentLoaded', function() {
             const chips = document.querySelectorAll('.filter-chip');
             const selects = document.querySelectorAll('.school-filter-select');
@@ -2695,5 +2698,5 @@
             apply();
         });
   </script>
- </body>
+</body>
 </html>

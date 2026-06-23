@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /sino/
+
 
 Sitemap: https://guoya.net.cn/sitemap.xml
