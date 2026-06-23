@@ -18,6 +18,13 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <style>
   body { font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif; margin:0; background:#f7f9fb; color:#333; }
+
+  body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
   h1 { background: linear-gradient(135deg, #1a73e8, #0d47a1); color:white; margin:0; padding:24px 32px; font-size:20px; font-weight:600; }
   .meta { padding:14px 32px; background:#e8f0fe; font-size:13px; color:#1a73e8; border-bottom:1px solid #c8daf5; }
   .tabs { display:flex; padding:10px 32px; background:white; border-bottom:1px solid #ddd; position:sticky; top:0; z-index:100; box-shadow:0 1px 3px rgba(0,0,0,0.08); }
@@ -74,6 +81,19 @@
     line-height: 1.4;
     vertical-align: middle;
   }
+
+  .enrollment-info {
+    display: inline-block;
+    margin-left: 4px;
+    padding: 1px 5px;
+    background: #e8f5e9;
+    color: #2e7d32;
+    font-size: 12px;
+    border-radius: 4px;
+    line-height: 1.4;
+    vertical-align: middle;
+  }
+
   .inst-tag {
     display: inline;
     margin-left: 4px;
@@ -468,12 +488,12 @@
 <div class="province" id="云南">
 <h2>云南 <span class="cnt">6 个项目</span></h2>
 <ul>
-<li>云南财经大学与英国格林威治大学合作房地产硕士学位教育项目<span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span></li>
-<li>云南财经大学与英国格林威治大学合作项目管理硕士学位教育项目<span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span></li>
-<li>云南财经大学与英国龙比亚大学合作举办信息科学专业硕士学位教育项目</li>
-<li>云南财经大学与英国格林威治大学合作金融科技硕士学位教育项目 <span class="inst-tag">｜云南财经大学格林尼治学院</span></li>
-<li>云南农业大学与英国伍尔弗汉普顿大学合作项目管理硕士学位教育项目 <span class="inst-tag">｜云南农业大学伍尔弗汉普顿大学农业工程学院</span></li>
-<li>云南农业大学与英国伍尔弗汉普顿大学合作人工智能硕士学位教育项目 <span class="inst-tag">｜云南农业大学伍尔弗汉普顿大学农业工程学院</span></li>
+<li>云南财经大学与英国格林威治大学合作房地产硕士学位教育项目<span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span class="enrollment-info">招生人数：50人/期</span></li>
+<li>云南财经大学与英国格林威治大学合作项目管理硕士学位教育项目<span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span class="enrollment-info">招生人数：120人/期</span></li>
+<li>云南财经大学与英国龙比亚大学合作举办信息科学专业硕士学位教育项目<span class="enrollment-info">招生人数：100人/期</span></li>
+<li>云南财经大学与英国格林威治大学合作金融科技硕士学位教育项目 <span class="inst-tag">｜云南财经大学格林尼治学院</span><span class="enrollment-info">招生人数：60人/年</span></li>
+<li>云南农业大学与英国伍尔弗汉普顿大学合作项目管理硕士学位教育项目 <span class="inst-tag">｜云南农业大学伍尔弗汉普顿大学农业工程学院</span><span class="enrollment-info">招生人数：70人/年</span></li>
+<li>云南农业大学与英国伍尔弗汉普顿大学合作人工智能硕士学位教育项目 <span class="inst-tag">｜云南农业大学伍尔弗汉普顿大学农业工程学院</span><span class="enrollment-info">招生人数：70人/年</span></li>
 </ul>
 </div>
 <div class="province" id="河南">
@@ -593,7 +613,7 @@
 <li class="discipline-item">天津商业大学与法国Excelia商学院合作举办可持续金融专业硕士学位教育项目 <span class="discipline-meta">[天津｜可持续金融专业]</span></li>
 <li class="discipline-item">南开大学与澳大利亚弗林德斯大学合作举办科技金融专业硕士学位教育项目 <span class="discipline-meta">[天津｜科技金融专业]</span></li>
 <li class="discipline-item">浙江财经大学与新西兰奥克兰理工大学合作举办应用金融学专业硕士学位教育项目 <span class="discipline-meta">[浙江｜应用金融学专业]</span></li>
-<li class="discipline-item">云南财经大学与英国格林威治大学合作金融科技硕士学位教育项目 <span class="inst-tag">｜云南财经大学格林尼治学院</span><span class="discipline-meta">[云南｜金融科技]</span></li>
+<li class="discipline-item">云南财经大学与英国格林威治大学合作金融科技硕士学位教育项目 <span class="inst-tag">｜云南财经大学格林尼治学院</span><span class="discipline-meta">[云南｜金融科技]</span><span class="enrollment-info">招生人数：60人/年</span></li>
 </ul>
 <h3 class="discipline-title">法学（2 个）</h3>
 <ul class="discipline-list">
@@ -653,8 +673,8 @@
 <li class="discipline-item">西安石油大学与新西兰国立联合学院合作举办信息技术专业硕士学位教育项目 <span class="discipline-meta">[陕西｜信息技术专业]</span></li>
 <li class="discipline-item">北京理工大学与英国雷丁大学合作举办信息科学硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span class="discipline-meta">[北京｜信息科学]</span></li>
 <li class="discipline-item">河北工业大学与新西兰梅西大学合作举办信息科学专业硕士学位教育项目 <span class="discipline-meta">[河北｜信息科学专业]</span></li>
-<li class="discipline-item">云南财经大学与英国龙比亚大学合作举办信息科学专业硕士学位教育项目 <span class="discipline-meta">[云南｜信息科学专业]</span></li>
-<li class="discipline-item">云南农业大学与英国伍尔弗汉普顿大学合作人工智能硕士学位教育项目 <span class="inst-tag">｜云南农业大学伍尔弗汉普顿大学农业工程学院</span><span class="discipline-meta">[云南｜人工智能]</span></li>
+<li class="discipline-item">云南财经大学与英国龙比亚大学合作举办信息科学专业硕士学位教育项目 <span class="discipline-meta">[云南｜信息科学专业]</span><span class="enrollment-info">招生人数：100人/期</span></li>
+<li class="discipline-item">云南农业大学与英国伍尔弗汉普顿大学合作人工智能硕士学位教育项目 <span class="inst-tag">｜云南农业大学伍尔弗汉普顿大学农业工程学院</span><span class="discipline-meta">[云南｜人工智能]</span><span class="enrollment-info">招生人数：70人/年</span></li>
 <li class="discipline-item">南开大学与澳大利亚弗林德斯大学合作举办智慧城市管理专业硕士学位教育项目 <span class="discipline-meta">[天津｜智慧城市管理专业]</span></li>
 </ul>
 <h3 class="discipline-title">农学（1 个）</h3>
@@ -672,7 +692,7 @@
 <ul class="discipline-list">
 <li class="discipline-item">西安交通大学与法国SKEMA商业学校合作举办创业与创新（大数据与人工智能管理）硕士学位教育项目<span style="color:#22c55e;font-size:0.9em;margin-right:6px;">●</span><span class="yidi-info">上海</span><span class="discipline-meta">[陕西｜创业与创新大数据与人工智能管理]</span></li>
 <li class="discipline-item">厦门国家会计学院与香港理工大学合作举办大数据会计与金融专业硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span class="discipline-meta">[福建｜大数据会计与金融专业]</span></li>
-<li class="discipline-item">云南财经大学与英国格林威治大学合作房地产硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span class="discipline-meta">[云南｜房地产]</span></li>
+<li class="discipline-item">云南财经大学与英国格林威治大学合作房地产硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span class="discipline-meta">[云南｜房地产]</span><span class="enrollment-info">招生人数：50人/期</span></li>
 <li class="discipline-item">上海国家会计学院与香港中文大学合作举办高级财会人员专业会计学硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span class="discipline-meta">[上海｜高级财会人员专业会计学]</span></li>
 <li class="discipline-item">复旦大学与美国圣路易斯华盛顿大学合作举办高级管理人员工商管理硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span class="discipline-meta">[上海｜高级管理人员工商管理]</span></li>
 <li class="discipline-item">上海交通大学与新加坡南洋理工大学合作举办高级管理人员工商管理硕士学位教育项目 <span class="discipline-meta">[上海｜高级管理人员工商管理]</span></li>
@@ -731,8 +751,8 @@
 <li class="discipline-item">北京城市学院与英国华威大学合作举办项目管理硕士学位教育项目<span style="color:#22c55e;font-size:0.9em;margin-right:6px;">●</span><span class="yidi-info">北京</span><span class="discipline-meta">[北京｜项目管理]</span></li>
 <li class="discipline-item">贵州大学与加拿大魁北克大学席库提米分校合作举办项目管理硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span class="discipline-meta">[贵州｜项目管理]</span></li>
 <li class="discipline-item">天津理工大学与加拿大魁北克大学席库提米分校合作举办项目管理硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span class="discipline-meta">[天津｜项目管理]</span></li>
-<li class="discipline-item">云南财经大学与英国格林威治大学合作项目管理硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span class="discipline-meta">[云南｜项目管理]</span></li>
-<li class="discipline-item">云南农业大学与英国伍尔弗汉普顿大学合作项目管理硕士学位教育项目 <span class="inst-tag">｜云南农业大学伍尔弗汉普顿大学农业工程学院</span><span class="discipline-meta">[云南｜项目管理]</span></li>
+<li class="discipline-item">云南财经大学与英国格林威治大学合作项目管理硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span class="discipline-meta">[云南｜项目管理]</span><span class="enrollment-info">招生人数：120人/期</span></li>
+<li class="discipline-item">云南农业大学与英国伍尔弗汉普顿大学合作项目管理硕士学位教育项目 <span class="inst-tag">｜云南农业大学伍尔弗汉普顿大学农业工程学院</span><span class="discipline-meta">[云南｜项目管理]</span><span class="enrollment-info">招生人数：70人/年</span></li>
 <li class="discipline-item">浙江工商大学与加拿大魁北克大学席库提米分校合作举办项目管理硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span class="discipline-meta">[浙江｜项目管理]</span></li>
 <li class="discipline-item">沈阳建筑大学与美国班尼迪克大学合作举办信息管理硕士学位教育项目 <span class="discipline-meta">[辽宁｜信息管理]</span></li>
 <li class="discipline-item">西安交通大学与香港理工大学合作举办信息管理硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span class="discipline-meta">[陕西｜信息管理]</span></li>
@@ -875,8 +895,8 @@
 <li>北京城市学院与英国华威大学合作举办项目管理硕士学位教育项目<span style="color:#22c55e;font-size:0.9em;margin-right:6px;">●</span><span class="yidi-info">北京</span><span style="color:#999;font-size:11.5px;">[北京]</span></li>
 <li>贵州大学与加拿大魁北克大学席库提米分校合作举办项目管理硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span style="color:#999;font-size:11.5px;">[贵州]</span></li>
 <li>天津理工大学与加拿大魁北克大学席库提米分校合作举办项目管理硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span style="color:#999;font-size:11.5px;">[天津]</span></li>
-<li>云南财经大学与英国格林威治大学合作项目管理硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span style="color:#999;font-size:11.5px;">[云南]</span></li>
-<li>云南农业大学与英国伍尔弗汉普顿大学合作项目管理硕士学位教育项目 <span class="inst-tag">｜云南农业大学伍尔弗汉普顿大学农业工程学院</span><span style="color:#999;font-size:11.5px;">[云南]</span></li>
+<li>云南财经大学与英国格林威治大学合作项目管理硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span style="color:#999;font-size:11.5px;">[云南]</span><span class="enrollment-info">招生人数：120人/期</span></li>
+<li>云南农业大学与英国伍尔弗汉普顿大学合作项目管理硕士学位教育项目 <span class="inst-tag">｜云南农业大学伍尔弗汉普顿大学农业工程学院</span><span style="color:#999;font-size:11.5px;">[云南]</span><span class="enrollment-info">招生人数：70人/年</span></li>
 <li>浙江工商大学与加拿大魁北克大学席库提米分校合作举办项目管理硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span style="color:#999;font-size:11.5px;">[浙江]</span></li>
 
 <li class="discipline-item">西安交通大学与英国利物浦大学合作举办项目管理（MSc Project Management）硕士学位教育项目 <span class="discipline-meta">[江苏｜项目管理（MSc Project Management）]</span></li></ul>
@@ -903,7 +923,7 @@
 <ul style="list-style:none;padding:0;">
 <li>湖南工商大学与英国西英格兰大学-布里斯托合作举办金融科技专业硕士学位教育项目 <span style="color:#999;font-size:11.5px;">[湖南]</span></li>
 <li>江西财经大学与英国埃塞克斯大学合作举办金融科技专业硕士学位教育项目 <span style="color:#999;font-size:11.5px;">[江西]</span></li>
-<li>云南财经大学与英国格林威治大学合作金融科技硕士学位教育项目 <span class="inst-tag">｜云南财经大学格林尼治学院</span><span style="color:#999;font-size:11.5px;">[云南]</span></li>
+<li>云南财经大学与英国格林威治大学合作金融科技硕士学位教育项目 <span class="inst-tag">｜云南财经大学格林尼治学院</span><span style="color:#999;font-size:11.5px;">[云南]</span><span class="enrollment-info">招生人数：60人/年</span></li>
 
 <li class="discipline-item">浙江万里学院与英国诺丁汉大学合作举办金融科技硕士学位教育项目 <span class="discipline-meta">[浙江｜金融科技]</span></li>
 <li class="discipline-item">济南大学与英国格拉斯哥加利多尼亚大学合作举办金融科技硕士学位教育项目 <span class="discipline-meta">[山东｜金融科技]</span></li></ul>
@@ -925,7 +945,7 @@
 <h3 class="major-title">信息科学专业（2 个）</h3>
 <ul style="list-style:none;padding:0;">
 <li>河北工业大学与新西兰梅西大学合作举办信息科学专业硕士学位教育项目 <span style="color:#999;font-size:11.5px;">[河北]</span></li>
-<li>云南财经大学与英国龙比亚大学合作举办信息科学专业硕士学位教育项目 <span style="color:#999;font-size:11.5px;">[云南]</span></li>
+<li>云南财经大学与英国龙比亚大学合作举办信息科学专业硕士学位教育项目 <span style="color:#999;font-size:11.5px;">[云南]</span><span class="enrollment-info">招生人数：100人/期</span></li>
 </ul>
 <h3 class="major-title">英语教育专业（2 个）</h3>
 <ul style="list-style:none;padding:0;">
@@ -974,7 +994,7 @@
 </ul>
 <h3 class="major-title">房地产专业（1 个）</h3>
 <ul style="list-style:none;padding:0;">
-<li>云南财经大学与英国格林威治大学合作房地产硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span style="color:#999;font-size:11.5px;">[云南]</span></li>
+<li>云南财经大学与英国格林威治大学合作房地产硕士学位教育项目 <span style="color:#22c55e;font-size:0.9em;margin-left:2px;">●</span><span style="color:#999;font-size:11.5px;">[云南]</span><span class="enrollment-info">招生人数：50人/期</span></li>
 </ul>
 <h3 class="major-title">法学专业（3 个）</h3>
 <ul style="list-style:none;padding:0;">
@@ -1169,7 +1189,7 @@
 </ul>
 <h3 class="major-title">人工智能专业（4 个）</h3>
 <ul style="list-style:none;padding:0;">
-<li>云南农业大学与英国伍尔弗汉普顿大学合作人工智能硕士学位教育项目 <span class="inst-tag">｜云南农业大学伍尔弗汉普顿大学农业工程学院</span><span style="color:#999;font-size:11.5px;">[云南]</span></li>
+<li>云南农业大学与英国伍尔弗汉普顿大学合作人工智能硕士学位教育项目 <span class="inst-tag">｜云南农业大学伍尔弗汉普顿大学农业工程学院</span><span style="color:#999;font-size:11.5px;">[云南]</span><span class="enrollment-info">招生人数：70人/年</span></li>
 
 <li class="discipline-item">湖北大学与英国曼彻斯特城市大学合作举办人工智能硕士学位教育项目 <span class="discipline-meta">[湖北｜人工智能]</span></li>
 <li class="discipline-item">中国计量大学与英国安格利亚鲁斯金大学合作举办人工智能硕士学位教育项目 <span class="discipline-meta">[浙江｜人工智能]</span></li>
@@ -2201,6 +2221,21 @@ function switchTab(tab) {
   document.querySelectorAll('.tab')[tabMap[tab]].classList.add('active');
   document.getElementById('tab-' + tab).classList.add('active');
 }
+</script>
+
+<script>
+(function() {
+  document.addEventListener('copy', function(e) { e.preventDefault(); return false; });
+  document.addEventListener('cut', function(e) { e.preventDefault(); return false; });
+  document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
+  document.addEventListener('selectstart', function(e) { e.preventDefault(); return false; });
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'a' || e.key === 'x' || e.key === 'C' || e.key === 'A' || e.key === 'X')) {
+      e.preventDefault();
+      return false;
+    }
+  });
+})();
 </script>
 </body>
 </html>
