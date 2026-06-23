@@ -336,7 +336,7 @@
     background: white;
     border-radius: 18px;
     width: 100%;
-    max-width: 420px;
+    max-width: 520px;
     padding: 28px 28px 24px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
     transform: translateY(16px) scale(0.98);
@@ -502,6 +502,36 @@
   .consult-copy-tip.active {
     opacity: 1;
   }
+  .consult-wechat-options {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+  .consult-wechat-option {
+    flex: 1;
+    max-width: 210px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .consult-wechat-option .consult-qr {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 12px;
+  }
+  .consult-wechat-option .consult-wechat-id {
+    margin-bottom: 12px;
+  }
+  .consult-wechat-option .consult-submit {
+    width: 100%;
+  }
+  .consult-mobile-tip {
+    display: none;
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    margin-top: 8px;
+  }
 
   /* 移动端适配 */
   @media (max-width: 640px) {
@@ -537,6 +567,21 @@
   @media (max-width: 640px) {
     body {
       padding-bottom: 110px;
+    }
+  }
+  @media (max-width: 640px) {
+    .consult-wechat-options {
+      flex-direction: column;
+      gap: 24px;
+    }
+    .consult-wechat-option {
+      max-width: 100%;
+    }
+    .consult-wechat-option .consult-qr {
+      display: none;
+    }
+    .consult-mobile-tip {
+      display: block;
     }
   }
 </style>
@@ -2676,12 +2721,24 @@ function switchTab(tab) {
 <div class="consult-modal" onclick="event.stopPropagation()">
 <button class="consult-modal-close" onclick="closeConsultModalById('consultWechatModal')">×</button>
 <h3 class="consult-modal-title">添加微信，立即咨询</h3>
-<p class="consult-modal-subtitle">扫码添加顾问微信，获取招生简章、申请条件与学费详情</p>
+<p class="consult-modal-subtitle">选择一位顾问，微信扫码或复制微信号添加好友</p>
+<div class="consult-wechat-options">
+<div class="consult-wechat-option">
 <div class="consult-qr">
-<div class="consult-qr-placeholder">请替换为<br/>微信二维码图片</div>
+<img src="guoyamba666.png" alt="guoyamba666 微信二维码"/>
 </div>
-<div class="consult-wechat-id">微信号：<strong id="wechatId">guoyamba</strong></div>
-<button class="consult-submit" onclick="copyWechatId()">复制微信号</button>
+<div class="consult-wechat-id">微信号：<strong>guoyamba666</strong></div>
+<button class="consult-submit" onclick="copyWechatId('guoyamba666')">复制微信号</button>
+</div>
+<div class="consult-wechat-option">
+<div class="consult-qr">
+<img src="kaoyan9167.png" alt="kaoyan9167 微信二维码"/>
+</div>
+<div class="consult-wechat-id">微信号：<strong>kaoyan9167</strong></div>
+<button class="consult-submit" onclick="copyWechatId('kaoyan9167')">复制微信号</button>
+</div>
+</div>
+<div class="consult-mobile-tip">长按二维码识别或点击复制微信号，在微信中搜索添加</div>
 <div class="consult-copy-tip" id="copyTip">已复制到剪贴板</div>
 </div>
 </div>
@@ -2734,8 +2791,8 @@ function closeConsultModal(event) {
     document.body.style.overflow = '';
   }
 }
-function copyWechatId() {
-  var id = document.getElementById('wechatId').textContent;
+function copyWechatId(id) {
+  if (!id) return;
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(id).then(function() {
       showCopyTip();
