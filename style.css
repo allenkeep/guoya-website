@@ -64,11 +64,11 @@ ul { list-style: none; }
 
 .nav.home-nav .nav-logo,
 .nav.home-nav .nav-links a {
-    color: var(--heading);
+    color: #ffffff;
 }
 
 .nav.home-nav .nav-links a:hover {
-    color: #000000;
+    color: rgba(255,255,255,0.8);
 }
 
 .nav.home-nav.scrolled {
@@ -79,11 +79,11 @@ ul { list-style: none; }
 
 .nav.home-nav.scrolled .nav-logo,
 .nav.home-nav.scrolled .nav-links a {
-    color: var(--heading);
+    color: var(--accent);
 }
 
 .nav.home-nav.scrolled .nav-links a:hover {
-    color: #000000;
+    color: #1f8a6f;
 }
 
 .nav-inner {
