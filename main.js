@@ -107,4 +107,12 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('active');
         });
     });
+
+    // ===== Footer copyright year =====
+    const currentYear = new Date().getFullYear();
+    document.querySelectorAll('.footer-bottom p').forEach(p => {
+        if (p.textContent.includes('北京铄橙教育科技有限责任公司')) {
+            p.textContent = p.textContent.replace(/©\s*\d{4}/, `© ${currentYear}`);
+        }
+    });
 });
