@@ -13,6 +13,8 @@
     --heading: #4a4036;
     --muted: #999995;
     --accent: #a8443a;
+    --orange-light: #f4a261;
+    --orange-deep: #e07b39;
     --border: #e8e4df;
     --shadow: rgba(0,0,0,0.04);
 }
@@ -80,11 +82,11 @@ ul { list-style: none; }
 
 .nav.home-nav.scrolled .nav-logo,
 .nav.home-nav.scrolled .nav-links a {
-    color: var(--heading);
+    color: var(--orange-light);
 }
 
 .nav.home-nav.scrolled .nav-links a:hover {
-    color: var(--accent);
+    color: var(--orange-deep);
 }
 
 .nav-inner {
