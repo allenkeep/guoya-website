@@ -30,50 +30,10 @@ body {
     font-size: 16px;
     line-height: 1.7;
     color: var(--text);
-    background: linear-gradient(135deg, #fff8f3 0%, #ffefe5 25%, #ffe8d6 50%, #fff1e8 75%, #fff8f3 100%);
-    background-size: 400% 400%;
-    animation: bodyGradientShift 22s ease infinite;
+    background: #ffffff;
     -webkit-font-smoothing: antialiased;
     position: relative;
     min-height: 100vh;
-}
-
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    pointer-events: none;
-    background:
-        radial-gradient(ellipse at 15% 15%, rgba(255, 107, 53, 0.18) 0%, transparent 42%),
-        radial-gradient(ellipse at 85% 20%, rgba(255, 140, 66, 0.16) 0%, transparent 40%),
-        radial-gradient(ellipse at 50% 60%, rgba(255, 159, 107, 0.14) 0%, transparent 45%),
-        radial-gradient(ellipse at 30% 85%, rgba(255, 120, 70, 0.12) 0%, transparent 38%);
-    animation: ambientGlow 20s ease-in-out infinite alternate;
-}
-
-body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background-image:
-        linear-gradient(rgba(255, 140, 66, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 140, 66, 0.04) 1px, transparent 1px);
-    background-size: 70px 70px;
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.05) 100%);
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.05) 100%);
-}
-
-@keyframes bodyGradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
-
-@keyframes ambientGlow {
-    0% { opacity: 0.85; transform: scale(1) translate(0, 0); }
-    100% { opacity: 1; transform: scale(1.06) translate(-1%, 1%); }
 }
 
 a {
@@ -97,7 +57,7 @@ ul { list-style: none; }
 }
 
 .nav.scrolled {
-    background: rgba(255, 250, 246, 0.88);
+    background: #ffffff;
     border-bottom-color: var(--border);
     box-shadow: 0 1px 0 rgba(255, 140, 66, 0.08), 0 4px 20px rgba(160, 80, 40, 0.06);
 }
@@ -119,7 +79,7 @@ ul { list-style: none; }
 }
 
 .nav.home-nav.scrolled {
-    background: rgba(255, 250, 246, 0.88);
+    background: #ffffff;
     border-bottom-color: var(--border);
     box-shadow: 0 1px 0 rgba(255, 140, 66, 0.08), 0 4px 20px rgba(160, 80, 40, 0.06);
 }
@@ -332,7 +292,7 @@ ul { list-style: none; }
     height: 160px;
     z-index: 3;
     pointer-events: none;
-    background: linear-gradient(to top, #fff8f3 0%, transparent 100%);
+    background: linear-gradient(to top, #ffffff 0%, transparent 100%);
 }
 
 .hero-unit .hero,
@@ -352,17 +312,15 @@ ul { list-style: none; }
 }
 
 .hero-unit .card {
-    background: rgba(255, 255, 255, 0.72);
-    border-color: rgba(255, 255, 255, 0.55);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
-    box-shadow: 0 8px 32px rgba(160, 80, 40, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    background: #ffffff;
+    border-color: rgba(255, 140, 66, 0.18);
+    box-shadow: 0 8px 32px rgba(160, 80, 40, 0.10);
 }
 
 .hero-unit .card:hover {
-    background: rgba(255, 255, 255, 0.92);
+    background: #ffffff;
     border-color: rgba(255, 140, 66, 0.35);
-    box-shadow: 0 16px 48px rgba(160, 80, 40, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    box-shadow: 0 16px 48px rgba(160, 80, 40, 0.14);
 }
 
 .hero-unit .card h3 {
@@ -407,17 +365,15 @@ ul { list-style: none; }
 /* ========== Sections ========== */
 .section {
     padding: 100px 24px;
-    background: transparent;
+    background: #ffffff;
     position: relative;
     z-index: 1;
 }
 
 .section-alt {
-    background: rgba(255, 255, 255, 0.42);
+    background: #ffffff;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
 }
 
 .section-inner {
@@ -452,17 +408,15 @@ ul { list-style: none; }
     padding: 40px 32px;
     border: 1px solid var(--border);
     border-radius: 16px;
-    background: var(--surface);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
+    background: #ffffff;
     transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-    box-shadow: 0 8px 32px rgba(160, 80, 40, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(160, 80, 40, 0.08);
 }
 
 .card:hover {
     border-color: rgba(255, 140, 66, 0.35);
-    box-shadow: 0 16px 48px rgba(160, 80, 40, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 16px 48px rgba(160, 80, 40, 0.12);
+    background: #ffffff;
 }
 
 .card-icon {
@@ -529,12 +483,10 @@ ul { list-style: none; }
     justify-content: center;
     border: 1px dashed var(--border);
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.72);
+    background: #ffffff;
     color: var(--muted);
     font-size: 14px;
     text-align: center;
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
 }
 
 .ad-slot {
@@ -545,13 +497,11 @@ ul { list-style: none; }
     justify-content: center;
     border: 1px dashed var(--border);
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.72);
+    background: #ffffff;
     color: var(--muted);
     font-size: 14px;
     text-align: center;
     padding: 24px;
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
 }
 
 .ad-slots-row {
@@ -807,10 +757,8 @@ ul { list-style: none; }
 .filter-bar {
     padding: 40px 24px 40px;
     text-align: center;
-    background: rgba(255, 250, 246, 0.55);
+    background: #ffffff;
     border-bottom: 1px solid var(--border);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
 }
 
 .filter-btns {
@@ -843,17 +791,15 @@ ul { list-style: none; }
     padding: 40px 32px;
     border: 1px solid var(--border);
     border-radius: 16px;
-    background: var(--surface);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
+    background: #ffffff;
     transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-    box-shadow: 0 8px 32px rgba(160, 80, 40, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(160, 80, 40, 0.08);
 }
 
 .program-card:hover {
     border-color: rgba(255, 140, 66, 0.35);
-    box-shadow: 0 16px 48px rgba(160, 80, 40, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 16px 48px rgba(160, 80, 40, 0.12);
+    background: #ffffff;
 }
 
 .program-top {
@@ -890,7 +836,7 @@ ul { list-style: none; }
 /* ========== About ========== */
 .about-section {
     padding: 100px 24px;
-    background: var(--bg);
+    background: #ffffff;
 }
 
 .about-grid {
@@ -940,10 +886,8 @@ ul { list-style: none; }
     border: 1px solid var(--border);
     border-radius: 16px;
     margin-bottom: 16px;
-    background: var(--surface);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 8px 32px rgba(160, 80, 40, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    background: #ffffff;
+    box-shadow: 0 8px 32px rgba(160, 80, 40, 0.08);
 }
 
 .mission-card h3 {
@@ -973,10 +917,8 @@ ul { list-style: none; }
     border: 1px solid var(--border);
     border-radius: 16px;
     text-align: center;
-    background: var(--surface);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 8px 32px rgba(160, 80, 40, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    background: #ffffff;
+    box-shadow: 0 8px 32px rgba(160, 80, 40, 0.08);
 }
 
 .contact-card h3 {
@@ -1161,7 +1103,7 @@ ul { list-style: none; }
 }
 
 .school-filter-bar {
-    background: rgba(255, 255, 255, 0.72);
+    background: #ffffff;
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 24px;
@@ -1169,9 +1111,7 @@ ul { list-style: none; }
     display: flex;
     flex-direction: column;
     gap: 20px;
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 8px 32px rgba(160, 80, 40, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(160, 80, 40, 0.08);
 }
 
 .school-filter-group {
@@ -1308,11 +1248,9 @@ ul { list-style: none; }
 .school-empty {
     text-align: center;
     padding: 80px 24px;
-    background: rgba(255, 255, 255, 0.72);
+    background: #ffffff;
     border: 1px solid var(--border);
     border-radius: 16px;
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
 }
 
 .school-empty-icon {
@@ -1339,14 +1277,12 @@ ul { list-style: none; }
     align-items: center;
     gap: 16px;
     padding: 20px 24px;
-    background: rgba(255, 255, 255, 0.72);
+    background: #ffffff;
     border: 1px solid var(--border);
     border-radius: 16px;
     text-decoration: none;
     transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 8px 32px rgba(160, 80, 40, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(160, 80, 40, 0.08);
 }
 
 .school-card:hover {

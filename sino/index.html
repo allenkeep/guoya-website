@@ -21,45 +21,9 @@
     font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
     margin: 0;
     color: #4a3b32;
-    background: linear-gradient(135deg, #fff8f3 0%, #ffefe5 25%, #ffe8d6 50%, #fff1e8 75%, #fff8f3 100%);
-    background-size: 400% 400%;
-    animation: sinoBodyGradient 22s ease infinite;
+    background: #ffffff;
     position: relative;
     min-height: 100vh;
-  }
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    pointer-events: none;
-    background:
-      radial-gradient(ellipse at 12% 18%, rgba(255, 107, 53, 0.16) 0%, transparent 40%),
-      radial-gradient(ellipse at 88% 22%, rgba(255, 140, 66, 0.14) 0%, transparent 38%),
-      radial-gradient(ellipse at 50% 58%, rgba(255, 160, 100, 0.12) 0%, transparent 42%),
-      radial-gradient(ellipse at 35% 82%, rgba(255, 120, 70, 0.10) 0%, transparent 36%);
-    animation: sinoAmbientGlow 20s ease-in-out infinite alternate;
-  }
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background-image:
-      linear-gradient(rgba(255, 140, 66, 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 140, 66, 0.035) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.05) 100%);
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.05) 100%);
-  }
-  @keyframes sinoBodyGradient {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
-  @keyframes sinoAmbientGlow {
-    0% { opacity: 0.85; transform: scale(1) translate(0, 0); }
-    100% { opacity: 1; transform: scale(1.06) translate(-1%, 1%); }
   }
 
   body {
@@ -78,14 +42,14 @@
   .nav { padding:12px 16px; background:rgba(255, 252, 249, 0.92); border-bottom:1px solid rgba(255, 140, 66, 0.14); position:sticky; top:62px; z-index:99; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
   .nav a { display:inline-block; margin:4px 8px 4px 0; color:#e85a2b; text-decoration:none; font-size:12px; padding:4px 8px; background:rgba(255, 243, 235, 0.85); border-radius:4px; text-align:center; border:1px solid rgba(255, 140, 66, 0.15); }
   .nav a:hover { background:rgba(255, 220, 195, 0.6); }
-  .province { margin:16px 0; background:rgba(255, 255, 255, 0.78); border-radius:12px; box-shadow:0 8px 32px rgba(160, 80, 40, 0.08), inset 0 1px 0 rgba(255,255,255,0.6); overflow:hidden; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border:1px solid rgba(255, 140, 66, 0.12); }
+  .province { margin:16px 0; background:#ffffff; border-radius:12px; box-shadow:0 8px 32px rgba(160, 80, 40, 0.08); overflow:hidden; border:1px solid rgba(255, 140, 66, 0.12); }
   .province h2 { margin:0; padding:14px 20px; font-size:15px; background:rgba(255, 243, 235, 0.65); border-bottom:1px solid rgba(255, 140, 66, 0.12); font-weight:600; color:#3d2f2a; }
   .province h2 .cnt { float:right; font-weight:normal; color:#666; font-size:13px; }
   .province ul { margin:0; padding:12px 20px; list-style:none; }
   .province li { padding:8px 0; border-bottom:1px solid #f5f5f5; font-size:14px; display:flex; justify-content:space-between; align-items:center; gap:10px; line-height:1.5; }
   .province li .project-name { flex:1; min-width:0; }
   .province li:last-child { border-bottom:none; }
-  .major-section { background:rgba(255, 255, 255, 0.78); border-radius:12px; box-shadow:0 8px 32px rgba(160, 80, 40, 0.08), inset 0 1px 0 rgba(255,255,255,0.6); padding:20px; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border:1px solid rgba(255, 140, 66, 0.12); }
+  .major-section { background:#ffffff; border-radius:12px; box-shadow:0 8px 32px rgba(160, 80, 40, 0.08); padding:20px; border:1px solid rgba(255, 140, 66, 0.12); }
   .major-section table { width:100%; border-collapse:collapse; font-size:13px; margin-top:12px; }
   .major-section th { background:rgba(255, 243, 235, 0.65); padding:10px 12px; text-align:left; border-bottom:2px solid rgba(255, 140, 66, 0.18); font-size:12px; color:#5a4a42; }
   .major-section td { padding:8px 12px; border-bottom:1px solid #f0f0f0; }
@@ -108,7 +72,7 @@
     background-repeat: repeat;
     background-size: 320px 180px;
   }
-  .apply-tips { margin:16px 32px 20px; background:rgba(255, 255, 255, 0.82); border:1px solid rgba(255, 140, 66, 0.2); border-left:4px solid #e85a2b; border-radius:12px; padding:14px 18px; font-size:13px; line-height:1.8; color:#4a3b32; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+  .apply-tips { margin:16px 32px 20px; background:#ffffff; border:1px solid rgba(255, 140, 66, 0.2); border-left:4px solid #e85a2b; border-radius:12px; padding:14px 18px; font-size:13px; line-height:1.8; color:#4a3b32; }
   .apply-tips summary { font-weight:600; color:#e85a2b; cursor:pointer; font-size:14px; }
   .apply-tips p { margin:8px 0 0; }
   .apply-tips strong { color:#b71c1c; }
@@ -291,9 +255,7 @@
     right: 0;
     bottom: 0;
     z-index: 1001;
-    background: rgba(255, 252, 249, 0.92);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: #ffffff;
     border-top: 1px solid rgba(255, 140, 66, 0.14);
     box-shadow: 0 -4px 24px rgba(160, 80, 40, 0.10);
     padding: 12px 24px;
@@ -381,7 +343,7 @@
     opacity: 1;
   }
   .consult-modal {
-    background: rgba(255, 255, 255, 0.96);
+    background: #ffffff;
     border-radius: 18px;
     width: 100%;
     max-width: 520px;
