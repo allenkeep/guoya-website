@@ -17,7 +17,50 @@
 <meta content="https://guoya.net.cn/images/og-image.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <style>
-  body { font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif; margin:0; background:#f7f9fb; color:#333; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    margin: 0;
+    color: #4a3b32;
+    background: linear-gradient(135deg, #fff8f3 0%, #ffefe5 25%, #ffe8d6 50%, #fff1e8 75%, #fff8f3 100%);
+    background-size: 400% 400%;
+    animation: sinoBodyGradient 22s ease infinite;
+    position: relative;
+    min-height: 100vh;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 12% 18%, rgba(255, 107, 53, 0.16) 0%, transparent 40%),
+      radial-gradient(ellipse at 88% 22%, rgba(255, 140, 66, 0.14) 0%, transparent 38%),
+      radial-gradient(ellipse at 50% 58%, rgba(255, 160, 100, 0.12) 0%, transparent 42%),
+      radial-gradient(ellipse at 35% 82%, rgba(255, 120, 70, 0.10) 0%, transparent 36%);
+    animation: sinoAmbientGlow 20s ease-in-out infinite alternate;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255, 140, 66, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 140, 66, 0.035) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.05) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.05) 100%);
+  }
+  @keyframes sinoBodyGradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  @keyframes sinoAmbientGlow {
+    0% { opacity: 0.85; transform: scale(1) translate(0, 0); }
+    100% { opacity: 1; transform: scale(1.06) translate(-1%, 1%); }
+  }
 
   body {
     -webkit-user-select: none;
@@ -25,35 +68,35 @@
     -ms-user-select: none;
     user-select: none;
   }
-  h1 { background: linear-gradient(135deg, #1a73e8, #0d47a1); color:white; margin:0; padding:24px 32px; font-size:20px; font-weight:600; }
-  .meta { padding:14px 32px; background:#e8f0fe; font-size:13px; color:#1a73e8; border-bottom:1px solid #c8daf5; }
-  .tabs { display:flex; padding:10px 32px; background:white; border-bottom:1px solid #ddd; position:sticky; top:0; z-index:100; box-shadow:0 1px 3px rgba(0,0,0,0.08); }
-  .tab { padding:12px 24px; cursor:pointer; font-size:14px; color:#555; border-bottom:3px solid transparent; }
-  .tab.active { color:#1a73e8; border-bottom-color:#1a73e8; font-weight:600; }
+  h1 { background: linear-gradient(135deg, #ff6b35, #ff8c42); color:white; margin:0; padding:24px 32px; font-size:20px; font-weight:600; }
+  .meta { padding:14px 32px; background:rgba(255, 243, 235, 0.85); font-size:13px; color:#e85a2b; border-bottom:1px solid rgba(255, 140, 66, 0.18); }
+  .tabs { display:flex; padding:10px 32px; background:rgba(255, 252, 249, 0.92); border-bottom:1px solid rgba(255, 140, 66, 0.18); position:sticky; top:0; z-index:100; box-shadow:0 1px 3px rgba(160, 80, 40, 0.06); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+  .tab { padding:12px 24px; cursor:pointer; font-size:14px; color:#5a4a42; border-bottom:3px solid transparent; }
+  .tab.active { color:#e85a2b; border-bottom-color:#e85a2b; font-weight:600; }
   .tab-content { display:none; padding:24px 32px; }
   .tab-content.active { display:block; }
-  .nav { padding:12px 16px; background:white; border-bottom:1px solid #eee; position:sticky; top:62px; z-index:99; }
-  .nav a { display:inline-block; margin:4px 8px 4px 0; color:#1a73e8; text-decoration:none; font-size:12px; padding:4px 8px; background:#f1f6ff; border-radius:4px; text-align:center; }
-  .nav a:hover { background:#e1ecff; }
-  .province { margin:16px 0; background:white; border-radius:8px; box-shadow:0 1px 4px rgba(0,0,0,0.08); overflow:hidden; }
-  .province h2 { margin:0; padding:14px 20px; font-size:15px; background:#f8f9fa; border-bottom:1px solid #eee; font-weight:600; }
+  .nav { padding:12px 16px; background:rgba(255, 252, 249, 0.92); border-bottom:1px solid rgba(255, 140, 66, 0.14); position:sticky; top:62px; z-index:99; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+  .nav a { display:inline-block; margin:4px 8px 4px 0; color:#e85a2b; text-decoration:none; font-size:12px; padding:4px 8px; background:rgba(255, 243, 235, 0.85); border-radius:4px; text-align:center; border:1px solid rgba(255, 140, 66, 0.15); }
+  .nav a:hover { background:rgba(255, 220, 195, 0.6); }
+  .province { margin:16px 0; background:rgba(255, 255, 255, 0.78); border-radius:12px; box-shadow:0 8px 32px rgba(160, 80, 40, 0.08), inset 0 1px 0 rgba(255,255,255,0.6); overflow:hidden; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border:1px solid rgba(255, 140, 66, 0.12); }
+  .province h2 { margin:0; padding:14px 20px; font-size:15px; background:rgba(255, 243, 235, 0.65); border-bottom:1px solid rgba(255, 140, 66, 0.12); font-weight:600; color:#3d2f2a; }
   .province h2 .cnt { float:right; font-weight:normal; color:#666; font-size:13px; }
   .province ul { margin:0; padding:12px 20px; list-style:none; }
   .province li { padding:8px 0; border-bottom:1px solid #f5f5f5; font-size:14px; display:flex; justify-content:space-between; align-items:center; gap:10px; line-height:1.5; }
   .province li .project-name { flex:1; min-width:0; }
   .province li:last-child { border-bottom:none; }
-  .major-section { background:white; border-radius:8px; box-shadow:0 1px 4px rgba(0,0,0,0.08); padding:20px; }
+  .major-section { background:rgba(255, 255, 255, 0.78); border-radius:12px; box-shadow:0 8px 32px rgba(160, 80, 40, 0.08), inset 0 1px 0 rgba(255,255,255,0.6); padding:20px; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border:1px solid rgba(255, 140, 66, 0.12); }
   .major-section table { width:100%; border-collapse:collapse; font-size:13px; margin-top:12px; }
-  .major-section th { background:#f8f9fa; padding:10px 12px; text-align:left; border-bottom:2px solid #dadce0; font-size:12px; color:#555; }
+  .major-section th { background:rgba(255, 243, 235, 0.65); padding:10px 12px; text-align:left; border-bottom:2px solid rgba(255, 140, 66, 0.18); font-size:12px; color:#5a4a42; }
   .major-section td { padding:8px 12px; border-bottom:1px solid #f0f0f0; }
-  .major-title { margin:16px 0 8px; font-size:14px; color:#1a73e8; }
-  .discipline-title { margin:16px 0 8px; font-size:15px; color:#0d47a1; border-left:4px solid #1a73e8; padding-left:8px; }
+  .major-title { margin:16px 0 8px; font-size:14px; color:#e85a2b; }
+  .discipline-title { margin:16px 0 8px; font-size:15px; color:#3d2f2a; border-left:4px solid #e85a2b; padding-left:8px; }
   .discipline-list { margin:0; padding:0; list-style:none; }
   .discipline-item { padding:6px 0; font-size:12px; line-height:1.7; border-bottom:1px solid #f5f5f5; }
   .discipline-item:last-child { border-bottom:none; }
   .discipline-meta { color:#999; font-size:11px; margin-left:4px; }
-  .summary { padding:24px 32px; color:#555; font-size:13px; }
-  .footer { padding:20px 32px; color:#999; font-size:12px; text-align:center; border-top:1px solid #eee; }
+  .summary { padding:24px 32px; color:#5a4a42; font-size:13px; }
+  .footer { padding:20px 32px; color:#8b7a70; font-size:12px; text-align:center; border-top:1px solid rgba(255, 140, 66, 0.14); background:rgba(255, 248, 243, 0.6); }
   details summary { padding:8px 0; }
   body::after {
     content: '';
@@ -65,8 +108,8 @@
     background-repeat: repeat;
     background-size: 320px 180px;
   }
-  .apply-tips { margin:16px 32px 20px; background:#fff; border:1px solid #ffcdd2; border-left:4px solid #d32f2f; border-radius:8px; padding:14px 18px; font-size:13px; line-height:1.8; color:#444; }
-  .apply-tips summary { font-weight:600; color:#d32f2f; cursor:pointer; font-size:14px; }
+  .apply-tips { margin:16px 32px 20px; background:rgba(255, 255, 255, 0.82); border:1px solid rgba(255, 140, 66, 0.2); border-left:4px solid #e85a2b; border-radius:12px; padding:14px 18px; font-size:13px; line-height:1.8; color:#4a3b32; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+  .apply-tips summary { font-weight:600; color:#e85a2b; cursor:pointer; font-size:14px; }
   .apply-tips p { margin:8px 0 0; }
   .apply-tips strong { color:#b71c1c; }
 
@@ -120,7 +163,7 @@
     border-radius: 3px;
     transition: all 0.15s ease;
   }
-  .inst-item .inst-name:hover { color: #1a73e8; background: #f1f6ff; }
+  .inst-item .inst-name:hover { color: #e85a2b; background: rgba(255, 243, 235, 0.9); }
   .inst-meta { color: #666; font-size: 12px; margin-left: 4px; }
 
   /* 增加锚点顶部偏移，避免 sticky 标签栏+省份导航遮挡标题 */
@@ -139,10 +182,10 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: #1a73e8;
+    background: linear-gradient(135deg, #ff6b35, #ff8c42);
     color: white;
     border: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(232, 90, 43, 0.28);
     cursor: pointer;
     font-size: 20px;
     line-height: 1;
@@ -150,9 +193,9 @@
     display: none;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.2s, background 0.2s;
+    transition: opacity 0.2s, background 0.2s, transform 0.2s;
   }
-  .back-to-top:hover { background: #0d47a1; }
+  .back-to-top:hover { background: linear-gradient(135deg, #e85a2b, #ff6b35); transform: translateY(-2px); }
   .back-to-top.visible { display: flex; }
 
   /* 专业搜索框 */
@@ -163,15 +206,16 @@
     width: 100%;
     max-width: 480px;
     padding: 10px 14px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+    border: 1px solid rgba(255, 140, 66, 0.25);
+    border-radius: 8px;
     font-size: 14px;
     outline: none;
     box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.85);
   }
   .major-search-box input:focus {
-    border-color: #1a73e8;
-    box-shadow: 0 0 0 3px rgba(26,115,232,0.1);
+    border-color: #e85a2b;
+    box-shadow: 0 0 0 3px rgba(232, 90, 43, 0.12);
   }
   .major-search-no-results {
     display: none;
@@ -194,17 +238,17 @@
     align-items: center;
     gap: 4px;
     padding: 5px 10px;
-    background: #f1f6ff;
-    color: #1a73e8;
+    background: rgba(255, 243, 235, 0.9);
+    color: #e85a2b;
     border-radius: 16px;
     font-size: 13px;
     text-decoration: none;
     transition: background 0.15s, color 0.15s;
     cursor: pointer;
-    border: 1px solid #dbe9ff;
+    border: 1px solid rgba(255, 140, 66, 0.25);
   }
   .discipline-tag:hover {
-    background: #1a73e8;
+    background: #e85a2b;
     color: #fff;
   }
   .discipline-tag.other {
@@ -229,7 +273,7 @@
     margin-top: 0;
     margin-bottom: 8px;
     font-size: 15px;
-    color: #0d47a1;
+    color: #e85a2b;
   }
 
   /* 搜索结果计数 */
@@ -247,11 +291,11 @@
     right: 0;
     bottom: 0;
     z-index: 1001;
-    background: rgba(255, 255, 255, 0.86);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 252, 249, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255, 140, 66, 0.14);
+    box-shadow: 0 -4px 24px rgba(160, 80, 40, 0.10);
     padding: 12px 24px;
     box-sizing: border-box;
   }
@@ -265,11 +309,11 @@
   }
   .consult-bar-text {
     font-size: 14px;
-    color: #444;
+    color: #4a3b32;
     line-height: 1.5;
   }
   .consult-bar-text strong {
-    color: #0d47a1;
+    color: #e85a2b;
     font-weight: 600;
   }
   .consult-bar-text small {
@@ -297,21 +341,21 @@
     gap: 6px;
   }
   .consult-btn-primary {
-    background: linear-gradient(135deg, #1a73e8, #0d47a1);
+    background: linear-gradient(135deg, #ff6b35, #e85a2b);
     color: white;
-    box-shadow: 0 2px 8px rgba(26, 115, 232, 0.28);
+    box-shadow: 0 2px 8px rgba(232, 90, 43, 0.28);
   }
   .consult-btn-primary:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.36);
+    box-shadow: 0 4px 12px rgba(232, 90, 43, 0.36);
   }
   .consult-btn-secondary {
     background: white;
-    color: #1a73e8;
-    border: 1.5px solid #1a73e8;
+    color: #e85a2b;
+    border: 1.5px solid #e85a2b;
   }
   .consult-btn-secondary:hover {
-    background: #f1f6ff;
+    background: rgba(255, 243, 235, 0.9);
   }
   .consult-bar-icon {
     font-size: 16px;
@@ -337,17 +381,18 @@
     opacity: 1;
   }
   .consult-modal {
-    background: white;
+    background: rgba(255, 255, 255, 0.96);
     border-radius: 18px;
     width: 100%;
     max-width: 520px;
     padding: 28px 28px 24px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 20px 60px rgba(160, 80, 40, 0.20);
     transform: translateY(16px) scale(0.98);
     transition: transform 0.25s ease;
     position: relative;
     user-select: text;
     -webkit-user-select: text;
+    border: 1px solid rgba(255, 140, 66, 0.15);
   }
   .consult-overlay.active .consult-modal {
     transform: translateY(0) scale(1);
@@ -373,7 +418,7 @@
   .consult-modal-title {
     font-size: 18px;
     font-weight: 600;
-    color: #0d47a1;
+    color: #e85a2b;
     margin: 0 0 6px;
   }
   .consult-modal-subtitle {
@@ -386,13 +431,13 @@
     width: 180px;
     height: 180px;
     margin: 0 auto 16px;
-    background: #f8f9fa;
+    background: rgba(255, 243, 235, 0.6);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    border: 1px solid #e0e0e0;
+    border: 1px solid rgba(255, 140, 66, 0.15);
   }
   .consult-qr img {
     width: 100%;
@@ -412,7 +457,7 @@
     margin-bottom: 16px;
   }
   .consult-wechat-id strong {
-    color: #0d47a1;
+    color: #e85a2b;
     font-size: 16px;
     letter-spacing: 0.5px;
   }
@@ -437,8 +482,8 @@
     transition: border-color 0.2s, box-shadow 0.2s;
   }
   .consult-form-group input:focus {
-    border-color: #1a73e8;
-    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+    border-color: #e85a2b;
+    box-shadow: 0 0 0 3px rgba(232, 90, 43, 0.12);
   }
   .consult-form-hint {
     font-size: 12px;
@@ -457,7 +502,7 @@
   .consult-submit {
     width: 100%;
     padding: 12px;
-    background: linear-gradient(135deg, #1a73e8, #0d47a1);
+    background: linear-gradient(135deg, #ff6b35, #e85a2b);
     color: white;
     border: none;
     border-radius: 24px;
@@ -469,7 +514,7 @@
   }
   .consult-submit:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+    box-shadow: 0 4px 12px rgba(232, 90, 43, 0.3);
   }
   .consult-success {
     text-align: center;
@@ -481,12 +526,12 @@
   }
   .consult-success-icon {
     font-size: 48px;
-    color: #2e7d32;
+    color: #e85a2b;
     margin-bottom: 12px;
   }
   .consult-success h4 {
     margin: 0 0 8px;
-    color: #0d47a1;
+    color: #e85a2b;
     font-size: 17px;
   }
   .consult-success p {
@@ -498,7 +543,7 @@
   .consult-copy-tip {
     text-align: center;
     font-size: 12px;
-    color: #2e7d32;
+    color: #e85a2b;
     margin-top: 8px;
     opacity: 0;
     transition: opacity 0.2s;
@@ -545,7 +590,7 @@
     .meta { padding: 12px 16px; font-size: 12px; }
     .apply-tips { margin: 12px 16px 16px; padding: 12px 14px; }
     .nav { padding: 10px 16px; top: 48px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-    .nav a { margin: 0; padding: 6px 2px; font-size: 11px; border-radius: 4px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .nav a { margin: 0; padding: 6px 2px; font-size: 11px; border-radius: 4px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background:rgba(255, 243, 235, 0.85); border:1px solid rgba(255, 140, 66, 0.15); }
     .province { margin: 12px 0; }
     .province h2 { padding: 12px 16px; font-size: 14px; }
     .province ul { padding: 10px 16px; }
@@ -1226,7 +1271,7 @@
 <li class="discipline-item">浙江传媒学院与英国大曼彻斯特大学合作举办视觉传媒硕士学位教育项目 <span class="discipline-meta">[浙江｜视觉传媒]</span></li>
 </ul>
 <details style="margin-top:24px;">
-<summary style="cursor:pointer;font-size:14px;color:#1a73e8;font-weight:600;">专业类型明细统计（98 种）</summary>
+<summary style="cursor:pointer;font-size:14px;color:#e85a2b;font-weight:600;">专业类型明细统计（98 种）</summary>
 <div style="margin-top:12px;">
 <table><tr><th>专业类型</th><th>学科门类</th><th>项目数量</th><th>占比</th></tr>
 <tr><td>工商管理</td><td>管理学</td><td>17</td><td>12.8%</td></tr>
