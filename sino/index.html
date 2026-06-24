@@ -131,16 +131,18 @@
     gap: 16px;
   }
   .hot-project-card {
-    background: #ffffff;
-    border: 1px solid rgba(255, 140, 66, 0.18);
     border-radius: 12px;
     padding: 18px 16px;
-    box-shadow: 0 6px 24px rgba(160, 80, 40, 0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     cursor: pointer;
     position: relative;
     overflow: hidden;
   }
+  .hot-project-card:nth-child(1) { background: #fff5ef; border: 1px solid rgba(255, 107, 53, 0.22); }
+  .hot-project-card:nth-child(2) { background: #f0f7ff; border: 1px solid rgba(90, 140, 220, 0.22); }
+  .hot-project-card:nth-child(3) { background: #f0f9f4; border: 1px solid rgba(80, 170, 130, 0.22); }
+  .hot-project-card:nth-child(4) { background: #f7f3ff; border: 1px solid rgba(160, 110, 210, 0.22); }
   .hot-project-card::before {
     content: '';
     position: absolute;
@@ -148,13 +150,19 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #ff6b35, #ff8c42);
   }
+  .hot-project-card:nth-child(1)::before { background: linear-gradient(90deg, #ff6b35, #ff8c42); }
+  .hot-project-card:nth-child(2)::before { background: linear-gradient(90deg, #5a8cdc, #6fa8ff); }
+  .hot-project-card:nth-child(3)::before { background: linear-gradient(90deg, #50aa82, #6cc99e); }
+  .hot-project-card:nth-child(4)::before { background: linear-gradient(90deg, #a06ed2, #b892ff); }
   .hot-project-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 36px rgba(160, 80, 40, 0.14);
-    border-color: rgba(255, 140, 66, 0.35);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.10);
   }
+  .hot-project-card:nth-child(1):hover { border-color: rgba(255, 107, 53, 0.45); background: #ffeee6; }
+  .hot-project-card:nth-child(2):hover { border-color: rgba(90, 140, 220, 0.45); background: #e6f1ff; }
+  .hot-project-card:nth-child(3):hover { border-color: rgba(80, 170, 130, 0.45); background: #e3f5ec; }
+  .hot-project-card:nth-child(4):hover { border-color: rgba(160, 110, 210, 0.45); background: #f0e7ff; }
   .hot-project-tag {
     display: inline-block;
     font-size: 11px;
@@ -729,25 +737,25 @@
 <div class="hot-projects">
   <div class="hot-projects-title">热门项目推荐</div>
   <div class="hot-projects-grid">
-    <div class="hot-project-card" onclick="openConsultBooking()">
+    <div class="hot-project-card" onclick="openConsultModal('booking')">
       <span class="hot-project-tag">金融财务</span>
       <div class="hot-project-name">西交大阿尔伯塔</div>
       <div class="hot-project-desc">西安交通大学与加拿大阿尔伯塔大学合作，金融财务管理硕士。</div>
       <div class="hot-project-action">预约咨询</div>
     </div>
-    <div class="hot-project-card" onclick="openConsultBooking()">
+    <div class="hot-project-card" onclick="openConsultModal('booking')">
       <span class="hot-project-tag">工商管理</span>
       <div class="hot-project-name">对外西雅图</div>
       <div class="hot-project-desc">对外经济贸易大学与美国西雅图城市大学合作，工商管理硕士。</div>
       <div class="hot-project-action">预约咨询</div>
     </div>
-    <div class="hot-project-card" onclick="openConsultBooking()">
+    <div class="hot-project-card" onclick="openConsultModal('booking')">
       <span class="hot-project-tag">工商管理</span>
       <div class="hot-project-name">南大马斯特里赫特</div>
       <div class="hot-project-desc">南京大学与荷兰马斯特里赫特大学合作，工商管理硕士。</div>
       <div class="hot-project-action">预约咨询</div>
     </div>
-    <div class="hot-project-card" onclick="openConsultBooking()">
+    <div class="hot-project-card" onclick="openConsultModal('booking')">
       <span class="hot-project-tag">金融学</span>
       <div class="hot-project-name">人大加拿大女王</div>
       <div class="hot-project-desc">中国人民大学与加拿大女王大学合作，金融学硕士。</div>
