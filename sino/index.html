@@ -46,8 +46,8 @@
   .province h2 { margin:0; padding:14px 20px; font-size:15px; background:rgba(255, 243, 235, 0.65); border-bottom:1px solid rgba(255, 140, 66, 0.12); font-weight:600; color:#3d2f2a; }
   .province h2 .cnt { float:right; font-weight:normal; color:#666; font-size:13px; }
   .province ul { margin:0; padding:12px 20px; list-style:none; }
-  .province li { padding:8px 0; border-bottom:1px solid #f5f5f5; font-size:14px; display:flex; justify-content:space-between; align-items:center; gap:10px; line-height:1.5; }
-  .province li .project-name { flex:1; min-width:0; }
+  .province li { padding:10px 0; border-bottom:1px solid #f5f5f5; font-size:14px; display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; gap:6px 10px; line-height:1.5; }
+  .province li .project-name { }
   .province li:last-child { border-bottom:none; }
   .major-section { background:#ffffff; border-radius:12px; box-shadow:0 8px 32px rgba(160, 80, 40, 0.08); padding:20px; border:1px solid rgba(255, 140, 66, 0.12); }
   .major-section table { width:100%; border-collapse:collapse; font-size:13px; margin-top:12px; }
@@ -93,19 +93,114 @@
   .enrollment {
     display: inline-block;
     margin-left: 2px;
-    padding: 1px 5px;
-    background: #fce4ec;
-    color: #c2185b;
+    padding: 2px 6px;
+    background: #fff3e0;
+    color: #e65100;
     font-size: 12px;
     border-radius: 4px;
     line-height: 1.4;
     vertical-align: middle;
     white-space: nowrap;
-    flex-shrink: 0;
-    align-self: center;
   }
 
   .enrollment-info { display: none; }
+
+  /* 热门项目广告卡片 */
+  .hot-projects {
+    margin: 20px 32px;
+  }
+  .hot-projects-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #3d2f2a;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hot-projects-title::before {
+    content: '';
+    width: 4px;
+    height: 16px;
+    background: linear-gradient(180deg, #ff6b35, #ff8c42);
+    border-radius: 2px;
+  }
+  .hot-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .hot-project-card {
+    background: #ffffff;
+    border: 1px solid rgba(255, 140, 66, 0.18);
+    border-radius: 12px;
+    padding: 18px 16px;
+    box-shadow: 0 6px 24px rgba(160, 80, 40, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .hot-project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ff6b35, #ff8c42);
+  }
+  .hot-project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(160, 80, 40, 0.14);
+    border-color: rgba(255, 140, 66, 0.35);
+  }
+  .hot-project-tag {
+    display: inline-block;
+    font-size: 11px;
+    color: #e85a2b;
+    background: rgba(255, 107, 53, 0.08);
+    padding: 3px 8px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .hot-project-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #3d2f2a;
+    line-height: 1.5;
+    margin-bottom: 6px;
+  }
+  .hot-project-desc {
+    font-size: 12px;
+    color: #8b7a70;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .hot-project-action {
+    font-size: 13px;
+    color: #e85a2b;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .hot-project-action::after {
+    content: '→';
+    transition: transform 0.2s ease;
+  }
+  .hot-project-card:hover .hot-project-action::after {
+    transform: translateX(3px);
+  }
+  @media (max-width: 900px) {
+    .hot-projects-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .hot-projects { margin: 16px; }
+    .hot-projects-grid { grid-template-columns: 1fr; gap: 12px; }
+    .hot-project-card { padding: 16px; }
+  }
 
   .inst-tag {
     display: inline;
@@ -631,6 +726,35 @@
 <p><strong>2. 申请有难度，不是“花钱就能上”。</strong>自主招生≠无门槛。热门项目通常要求本科+工作年限+英语能力证明，部分还需推荐信、个人陈述和面试。985/211 及知名海外院校合办项目同样竞争激烈，对管理经验、职业成就、英语水平都有明确要求。</p>
 <p><strong>3. 与全国联考的区别。</strong>联考硕士需参加 12 月全国统考，择优录取，毕业获毕业证+学位证；合作办学硕士多为自主招生、申请制入学，无需联考，更看重综合背景与面试表现，毕业后获外方学位+留服认证。适合工作繁忙、希望灵活入学的考生，但学费通常更高，需结合职业规划与预算选择。</p>
 </details>
+<div class="hot-projects">
+  <div class="hot-projects-title">热门项目推荐</div>
+  <div class="hot-projects-grid">
+    <div class="hot-project-card" onclick="openConsultBooking()">
+      <span class="hot-project-tag">金融财务</span>
+      <div class="hot-project-name">西交大阿尔伯塔</div>
+      <div class="hot-project-desc">西安交通大学与加拿大阿尔伯塔大学合作，金融财务管理硕士。</div>
+      <div class="hot-project-action">预约咨询</div>
+    </div>
+    <div class="hot-project-card" onclick="openConsultBooking()">
+      <span class="hot-project-tag">工商管理</span>
+      <div class="hot-project-name">对外西雅图</div>
+      <div class="hot-project-desc">对外经济贸易大学与美国西雅图城市大学合作，工商管理硕士。</div>
+      <div class="hot-project-action">预约咨询</div>
+    </div>
+    <div class="hot-project-card" onclick="openConsultBooking()">
+      <span class="hot-project-tag">工商管理</span>
+      <div class="hot-project-name">南大马斯特里赫特</div>
+      <div class="hot-project-desc">南京大学与荷兰马斯特里赫特大学合作，工商管理硕士。</div>
+      <div class="hot-project-action">预约咨询</div>
+    </div>
+    <div class="hot-project-card" onclick="openConsultBooking()">
+      <span class="hot-project-tag">金融学</span>
+      <div class="hot-project-name">人大加拿大女王</div>
+      <div class="hot-project-desc">中国人民大学与加拿大女王大学合作，金融学硕士。</div>
+      <div class="hot-project-action">预约咨询</div>
+    </div>
+  </div>
+</div>
 <div class="tabs">
 <div class="tab active" onclick="switchTab('region')">按地区查看</div>
 <div class="tab" onclick="switchTab('major')">专业类型分析</div>

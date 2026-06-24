@@ -715,9 +715,10 @@ ul { list-style: none; }
     text-align: center;
     background: linear-gradient(180deg,
         #fff6ed 0%,
-        #ffead8 25%,
-        #ffdcc0 55%,
-        #fff8f3 100%);
+        #fff0e6 30%,
+        #ffe8d9 55%,
+        #fff4ef 78%,
+        #ffffff 100%);
     position: relative;
     overflow: hidden;
 }
@@ -729,10 +730,10 @@ ul { list-style: none; }
     z-index: 0;
     pointer-events: none;
     background:
-        radial-gradient(ellipse at 20% 25%, rgba(255, 107, 53, 0.18) 0%, transparent 45%),
-        radial-gradient(ellipse at 80% 25%, rgba(255, 140, 66, 0.16) 0%, transparent 45%),
-        radial-gradient(ellipse at 50% 55%, rgba(255, 160, 100, 0.12) 0%, transparent 40%);
-    animation: heroGlow 18s ease-in-out infinite;
+        radial-gradient(ellipse at 25% 20%, rgba(255, 107, 53, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 75% 25%, rgba(255, 140, 66, 0.10) 0%, transparent 48%),
+        radial-gradient(ellipse at 50% 55%, rgba(255, 160, 100, 0.08) 0%, transparent 45%);
+    opacity: 0.7;
 }
 
 .page-header .section-inner {
