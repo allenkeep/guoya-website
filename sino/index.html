@@ -91,6 +91,26 @@
     white-space: nowrap;
   }
 
+  /* 异地校区项目整行浅蓝色卡片背景 */
+  li:has(.yidi-info) {
+    background: #f8fdff;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin: 2px 12px;
+    border-left: 3px solid #64b5f6;
+    border-bottom: none !important;
+    box-shadow: 0 1px 4px rgba(21, 101, 192, 0.08);
+  }
+
+  .discipline-item:has(.yidi-info) {
+    background: #f8fdff;
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin: 2px 0;
+    border-left: 3px solid #64b5f6;
+    border-bottom: none !important;
+  }
+
   .enrollment {
     display: inline-block;
     margin-left: 2px;
@@ -663,6 +683,8 @@
     .province li { font-size: 13px; gap: 8px; }
     .enrollment { font-size: 11px; padding: 1px 4px; }
     .yidi-info { font-size: 10px; padding: 1px 5px; margin-left: 2px; border-radius: 4px; }
+    li:has(.yidi-info) { padding: 8px 10px; margin: 2px 8px; }
+    .discipline-item:has(.yidi-info) { padding: 6px 8px; margin: 1px 0; }
     .province li .inst-tag { display: block; margin-left: 0; margin-top: 3px; font-size: 11px; color: #888; }
     .summary { padding: 16px; }
     .footer { padding: 16px; }
