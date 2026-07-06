@@ -1,0 +1,4177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>合办硕士雷达 — 报名要求 · 学费查询</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: #f0f4f8; color: #1a202c; line-height: 1.6; -webkit-user-select: none; user-select: none; }
+input, textarea, select, [contenteditable] { -webkit-user-select: text; user-select: text; }
+
+:root {
+  --c1: #FF6B6B; --c1l: #fff5f5;
+  --c2: #F59F00; --c2l: #fff9f0;
+  --c3: #51CF66; --c3l: #f4fdf5;
+  --c4: #20C997; --c4l: #f2fdf9;
+  --c5: #339AF0; --c5l: #f3f9fe;
+  --c6: #9775FA; --c6l: #f8f6ff;
+  --c7: #E64980; --c7l: #fef4f7;
+  --c8: #0CA678; --c8l: #f2faf7;
+}
+
+.header { background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%); padding: 16px 24px; box-shadow: 0 2px 12px rgba(0,0,0,.15); }
+.sticky-top { position: sticky; top: 0; z-index: 100; background: #f0f4f8; }
+.header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.header h1 { color: #fff; font-size: 22px; font-weight: 700; white-space: nowrap; }
+.header .subtitle { color: rgba(255,255,255,.7); font-size: 13px; }
+.province-select { display: flex; gap: 8px; flex-wrap: wrap; margin-left: auto; }
+.province-btn { padding: 6px 16px; border: 1px solid rgba(255,255,255,.3); border-radius: 20px; background: transparent; color: #fff; cursor: pointer; font-size: 14px; transition: all .2s; }
+.province-btn:hover, .province-btn.active { background: #fff; color: #1a365d; border-color: #fff; }
+
+.search-bar { max-width: 1400px; margin: 20px auto 0; padding: 0 24px; }
+.search-input { width: 100%; padding: 12px 20px 12px 44px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; outline: none; transition: border .2s; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23a0aec0' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") 14px center no-repeat; }
+.search-input:focus { border-color: #2b6cb0; }
+
+.filter-bar { max-width: 1400px; margin: 12px auto 0; padding: 0 24px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.filter-label { font-size: 13px; color: #718096; font-weight: 500; flex-shrink: 0; }
+.tier-chips { display: flex; gap: 6px; flex-wrap: wrap; flex: 1; }
+.tier-chip { padding: 5px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; border: 2px solid #e2e8f0; background: #fff; color: #718096; transition: all .15s; }
+.tier-chip:hover { background: #f7fafc; }
+.tier-chip.active { color: #fff; border-color: transparent; }
+.tier-chip[data-tier="A+"] { color:#b8860b; border-color:#f9d849; }
+.tier-chip[data-tier="A+"]:hover,.tier-chip[data-tier="A+"].active { background:#E6A817; color:#fff; border-color:#E6A817; }
+.tier-chip[data-tier="A"] { color:#2563EB; border-color:#93c5fd; }
+.tier-chip[data-tier="A"]:hover,.tier-chip[data-tier="A"].active { background:#2563EB; color:#fff; border-color:#2563EB; }
+.tier-chip[data-tier="B"] { color:#16A34A; border-color:#86efac; }
+.tier-chip[data-tier="B"]:hover,.tier-chip[data-tier="B"].active { background:#16A34A; color:#fff; border-color:#16A34A; }
+.tier-chip[data-tier="C"] { color:#EA580C; border-color:#fdba74; }
+.tier-chip[data-tier="C"]:hover,.tier-chip[data-tier="C"].active { background:#EA580C; color:#fff; border-color:#EA580C; }
+.tier-chip[data-tier="D"] { color:#6B7280; border-color:#d1d5db; }
+.tier-chip[data-tier="D"]:hover,.tier-chip[data-tier="D"].active { background:#6B7280; color:#fff; border-color:#6B7280; }
+.tier-chip[data-tier="暂未分级"] { color:#94A3B8; border-color:#e2e8f0; }
+.tier-chip[data-tier="暂未分级"]:hover,.tier-chip[data-tier="暂未分级"].active { background:#94A3B8; color:#fff; border-color:#94A3B8; }
+
+.school-filter-wrap { flex-shrink: 0; }
+.school-filter { padding: 7px 32px 7px 12px; border: 2px solid #e2e8f0; border-radius: 20px; font-size: 13px; outline: none; color: #2d3748; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23718096' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") right 12px center no-repeat; appearance: none; -webkit-appearance: none; cursor: pointer; min-width: 160px; max-width: 220px; transition: border .2s; }
+.school-filter:focus { border-color: #2b6cb0; }
+
+.stats { max-width: 1400px; margin: 12px auto 0; padding: 0 24px; color: #718096; font-size: 13px; }
+.stats span { color: #2b6cb0; font-weight: 600; }
+
+.main { max-width: 1400px; margin: 24px auto 40px; padding: 0 24px; }
+
+.school-group { margin-bottom: 16px; border-radius: 12px; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.06); overflow: hidden; }
+.school-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; cursor: default; border-bottom: 1px solid #e2e8f0; transition: background .15s; gap: 10px; }
+.school-header:hover { background: var(--hover-bg, #f7fafc); }
+.school-name { font-size: 17px; font-weight: 600; color: #2d3748; }
+.school-meta { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.school-count { font-size: 13px; color: #718096; }
+
+.school-body { display: block; padding: 4px 0 8px; }
+.card-list { display: flex; flex-direction: column; gap: 2px; padding: 0 20px; }
+
+.card { display: flex; align-items: center; gap: 12px; padding: 10px 16px; transition: background .12s; position: relative; }
+.card:nth-child(even) { background: #fafbfc; }
+.card:hover { background: #f0f3f7; }
+.tier-badge { flex: 0 0 36px; text-align: center; font-size: 13px; font-weight: 700; padding: 3px 6px; border-radius: 6px; white-space: nowrap; letter-spacing: .5px; }
+.tier-badge.t-ap { background: #E6A817; color: #fff; }
+.tier-badge.t-a { background: #2563EB; color: #fff; }
+.tier-badge.t-b { background: #16A34A; color: #fff; }
+.tier-badge.t-c { background: #EA580C; color: #fff; }
+.tier-badge.t-d { background: #6B7280; color: #fff; }
+.tier-badge.t-unk { background: #f1f5f9; color: #94A3B8; font-weight: 500; }
+
+.card-major { font-size: 14px; font-weight: 600; color: #1a202c; line-height: 1.4; margin-bottom: 3px; }
+.card-foreign { font-size: 14px; font-weight: 400; color: #718096; margin-top: 3px; line-height: 1.4; }
+.card-major-block { flex: 0 0 195px; min-width: 155px; overflow: hidden; }
+
+.card-field { flex: 1; min-width: 65px; font-size: 13px; }
+.card-field-label { font-size: 10px; color: #a0aec0; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 2px; }
+.card-field-value { color: #2d3748; line-height: 1.4; }
+
+/* Fee field — amber accent */
+.card-field-fee { flex: 0 0 80px; min-width: 70px; text-align: right; }
+.card-fee-value { font-size: 14px; font-weight: 600; color: #C05621; background: #FFFAF0; padding: 3px 10px; border-radius: 6px; display: inline-block; }
+.card-fee-value.fee-new { font-size: 12px; font-weight: 400; color: #a0aec0; background: #f7fafc; }
+
+.card-note { flex: 0 0 auto; font-size: 11px; color: #2b6cb0; background: #ebf8ff; padding: 2px 8px; border-radius: 6px; white-space: nowrap; max-width: 80px; overflow: hidden; text-overflow: ellipsis; cursor: default; }
+
+.card-edit { flex: 0 0 28px; width: 28px; height: 28px; border: none; background: transparent; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #a0aec0; transition: all .15s; opacity: 0; }
+.card:hover .card-edit { opacity: 1; }
+.card-edit:hover { background: #e2e8f0; color: #2b6cb0; }
+
+.s-header-1 { --hover-bg: var(--c1l); }
+.s-header-2 { --hover-bg: var(--c2l); }
+.s-header-3 { --hover-bg: var(--c3l); }
+.s-header-4 { --hover-bg: var(--c4l); }
+.s-header-5 { --hover-bg: var(--c5l); }
+.s-header-6 { --hover-bg: var(--c6l); }
+.s-header-7 { --hover-bg: var(--c7l); }
+.s-header-8 { --hover-bg: var(--c8l); }
+
+/* Modal */
+.modal-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.5); display: none; align-items: center; justify-content: center; }
+.modal-overlay.active { display: flex; }
+.modal { background: #fff; border-radius: 16px; padding: 24px; width: 90%; max-width: 520px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,.15); position: relative; }
+.modal h3 { font-size: 18px; margin-bottom: 4px; color: #1a202c; }
+.modal-subtitle { font-size: 13px; color: #718096; margin-bottom: 16px; }
+.modal-field { margin-bottom: 14px; }
+.modal-field label { display: block; font-size: 13px; color: #718096; margin-bottom: 4px; font-weight: 500; }
+.modal-field input, .modal-field textarea, .modal-field select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; outline: none; font-family: inherit; transition: border .2s; background: #fff; }
+.modal-field input:focus, .modal-field textarea:focus, .modal-field select:focus { border-color: #2b6cb0; }
+.modal-field textarea { min-height: 60px; resize: vertical; }
+.modal-password { margin-top: 16px; border-top: 1px solid #e2e8f0; padding-top: 14px; }
+.modal-password label { font-size: 13px; color: #e53e3e; margin-bottom: 4px; display: block; font-weight: 500; }
+.modal-password input { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; outline: none; transition: border .2s; }
+.modal-password input:focus { border-color: #e53e3e; }
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px; }
+.modal-btn { padding: 8px 18px; border-radius: 8px; font-size: 14px; cursor: pointer; border: none; transition: all .15s; font-weight: 500; }
+.modal-btn.cancel { background: #f0f3f7; color: #718096; }
+.modal-btn.cancel:hover { background: #e2e8f0; }
+.modal-btn.submit { background: #2b6cb0; color: #fff; }
+.modal-btn.submit:hover { background: #1a365d; }
+.modal-error { color: #e53e3e; font-size: 13px; margin-top: 8px; min-height: 20px; }
+
+@media (max-width: 768px) {
+  .card { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .card-major-block { flex: auto; min-width: 0; }
+  .card-field { flex: auto; width: 100%; }
+  .card-edit { opacity: 1; }
+  .header-inner { flex-direction: column; align-items: flex-start; }
+  .province-select { margin-left: 0; }
+  .filter-bar { flex-direction: column; align-items: flex-start; }
+  .school-filter { min-width: 100%; }
+}
+
+.empty-state { text-align: center; padding: 60px 20px; color: #a0aec0; }
+.footer-note { max-width: 1400px; margin: 0 auto 40px; padding: 0 24px; font-size: 12px; color: #a0aec0; text-align: center; }
+.footer-note a { color: #2b6cb0; }
+.not-available { color: #cbd5e0; font-style: italic; }
+</style>
+</head>
+<body>
+
+<div class="sticky-top">
+<div class="header">
+  <div class="header-inner">
+    <div>
+      <h1>合办硕士雷达</h1>
+      <div class="subtitle">报名要求查询 · 学历要求 · 语言要求 · 学费</div>
+    </div>
+    <div class="province-select" id="provinceSelect"></div>
+  </div>
+</div>
+
+<div class="search-bar">
+  <input type="text" class="search-input" id="searchInput" placeholder="搜索院校、专业、学费...">
+</div>
+
+<div class="filter-bar">
+  <span class="filter-label">分级：</span>
+  <div class="tier-chips" id="tierChips"></div>
+  <div class="school-filter-wrap">
+    <select class="school-filter" id="schoolFilter">
+      <option value="">全部院校</option>
+    </select>
+  </div>
+</div>
+
+<div class="stats" id="stats"></div>
+</div>
+
+<div class="main" id="mainContent"></div>
+
+<!-- Edit Modal -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal">
+    <h3>更新项目信息</h3>
+    <div class="modal-subtitle" id="modalSubtitle"></div>
+    <div class="modal-field">
+      <label>学历要求</label>
+      <textarea id="modalEdu" rows="2"></textarea>
+    </div>
+    <div class="modal-field">
+      <label>语言要求</label>
+      <textarea id="modalLang" rows="2"></textarea>
+    </div>
+    <div class="modal-field">
+      <label>工作经验</label>
+      <input type="text" id="modalExp">
+    </div>
+    <div class="modal-field">
+      <label>招生人数</label>
+      <input type="text" id="modalQuota">
+    </div>
+    <div class="modal-field">
+      <label>学制</label>
+      <input type="text" id="modalDur">
+    </div>
+    <div class="modal-field">
+      <label>学费</label>
+      <input type="text" id="modalFee" placeholder="如：¥19.8万">
+    </div>
+    <div class="modal-field">
+      <label>分级</label>
+      <select id="modalTier">
+        <option value="A+">A+</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
+        <option value="暂未分级">暂未分级</option>
+      </select>
+    </div>
+    <div class="modal-password">
+      <label>请输入密码以确认更新</label>
+      <input type="password" id="modalPassword" placeholder="密码">
+    </div>
+    <div class="modal-error" id="modalError"></div>
+    <div class="modal-actions">
+      <button class="modal-btn cancel" onclick="closeModal()">取消</button>
+      <button class="modal-btn submit" onclick="submitEdit()">确认更新</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer-note">
+  数据来源：各院校官网招生简章、涉外监管网 · 最后更新：2026年7月6日 · 
+  <a href="https://guoya.net.cn/sino/" target="_blank">guoya.net.cn/sino</a>
+</div>
+
+<script>
+// ════════════════════════════════════════════
+// DATA with tuition fees added
+// ════════════════════════════════════════════
+const DATA = {
+  "北京": [
+    {
+      "school": "北京大学",
+      "projects": [
+        {
+          "major": "工商管理硕士(MBA)",
+          "foreign": "比利时弗拉瑞克商学院 / 英国伦敦大学学院",
+          "edu": "学士学位，专业不限",
+          "lang": "GMAT600+GRE / 托福100 / 雅思6.5 / CET-6 / TEM-8 或校园考试",
+          "exp": "3年全职工作经验",
+          "quota": "200人/年",
+          "dur": "2年",
+          "fee": "¥41.8万",
+          "note": "弗拉瑞克/UCL双学位可选",
+          "tier": "A+"
+        }
+      ]
+    },
+    {
+      "school": "中国人民大学",
+      "projects": [
+        {
+          "major": "金融学硕士",
+          "foreign": "加拿大女王大学",
+          "edu": "经济/金融/统计/会计本科+学士学位",
+          "lang": "面试考核英语能力",
+          "exp": "0-5年工作经验(国际班)",
+          "quota": "90人",
+          "dur": "1年",
+          "fee": "¥45.8万",
+          "tier": "A"
+        },
+        {
+          "major": "ESG与可持续金融理学硕士",
+          "foreign": "法国诺曼底经济管理学院",
+          "edu": "本科+学士+5年经验(金融3年); 专科+7年",
+          "lang": "无硬性分数",
+          "exp": "3-7年(按学历)",
+          "quota": "240人",
+          "dur": "1年",
+          "fee": "¥24.8万",
+          "tier": "A"
+        }
+      ]
+    },
+    {
+      "school": "清华大学",
+      "projects": [
+        {
+          "major": "应用金融硕士",
+          "foreign": "澳大利亚麦考瑞大学",
+          "edu": "本科+学士学位",
+          "lang": "英文面试+笔试",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "管理硕士",
+          "foreign": "澳大利亚国立大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课，需英语成绩",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "法学硕士",
+          "foreign": "美国天普大学",
+          "edu": "法学本科+学位",
+          "lang": "托福/雅思",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "1年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "工商管理硕士(MBA)",
+          "foreign": "香港中文大学",
+          "edu": "本科+学士学位",
+          "lang": "面试考核英语",
+          "exp": "3年+工作经验",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥43.8万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "高级管理人员工商管理硕士(EMBA)",
+          "foreign": "INSEAD欧洲工商管理学院",
+          "edu": "本科+学士学位",
+          "lang": "全英文授课",
+          "exp": "8年+管理经验",
+          "quota": "详询招办",
+          "dur": "1.5年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "航空管理硕士",
+          "foreign": "法国国立民航大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "高级管理人员工商管理硕士(航空管理)",
+          "foreign": "法国国立路桥大学、法国国立民航大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "管理经验",
+          "quota": "详询招办",
+          "dur": "1.5年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "会计专业硕士",
+          "foreign": "新加坡管理大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "对外经济贸易大学",
+      "projects": [
+        {
+          "major": "企业管理硕士",
+          "foreign": "法国巴黎第一大学",
+          "edu": "本科+毕业证书+学士学位",
+          "lang": "全英文笔试+面试",
+          "exp": "无硬性要求",
+          "quota": "90人/年",
+          "dur": "2年",
+          "fee": "¥18.96万",
+          "tier": "A+"
+        },
+        {
+          "major": "零售管理理学硕士",
+          "foreign": "法国诺欧商学院",
+          "edu": "本科+学士学位(无学位者不可)",
+          "lang": "一定英文水平+通过笔试面试",
+          "exp": "3年+零售/管理岗",
+          "quota": "110人/年",
+          "dur": "2年",
+          "fee": "¥20.96万",
+          "tier": "A+"
+        },
+        {
+          "major": "保险(精算)硕士",
+          "foreign": "美国天普大学",
+          "edu": "本科+学士学位，GPA≥3.0(75%)",
+          "lang": "托福90 / 雅思6.5 / 多邻国110",
+          "exp": "无硬性",
+          "quota": "自主招生40人",
+          "dur": "2年",
+          "fee": "¥27.8万",
+          "tier": "A+"
+        },
+        {
+          "major": "工商管理硕士(MBA)",
+          "foreign": "美国西雅图城市大学",
+          "edu": "本科+学位 / 专科+3年经验 / 本科无学位+3年",
+          "lang": "六级425/专业四八级60/托福87/雅思6.5(免笔试)",
+          "exp": "0-3年(按学历)",
+          "quota": "90人",
+          "dur": "1.5年",
+          "fee": "¥17.96万",
+          "tier": "A+"
+        }
+      ]
+    },
+    {
+      "school": "北京理工大学",
+      "projects": [
+        {
+          "major": "职业教育与人力资源开发硕士",
+          "foreign": "德国德累斯顿工业大学",
+          "edu": "本科+学士学位",
+          "lang": "CET-4及以上 或 雅思/托福",
+          "exp": "1年及以上",
+          "quota": "90人",
+          "dur": "2年",
+          "fee": "¥19.8万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "信息科学硕士",
+          "foreign": "英国雷丁大学",
+          "edu": "本科+学士学位",
+          "lang": "CET-4/6 或 雅思5.5",
+          "exp": "无硬性要求",
+          "quota": "50人",
+          "dur": "2年",
+          "fee": "¥19.6万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "北京外国语大学",
+      "projects": [
+        {
+          "major": "应用数学与信息学硕士",
+          "foreign": "俄罗斯人民友谊大学",
+          "edu": "本科+学士学位",
+          "lang": "较好英语沟通写作能力(中英文授课+英文面试笔试)",
+          "exp": "2年+(优秀者可放宽)",
+          "quota": "36人",
+          "dur": "2年",
+          "fee": "¥18.8万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "商业分析硕士(MBA)",
+          "foreign": "美国宾夕法尼亚州印第安纳大学",
+          "edu": "本科+学士学位，专业不限",
+          "lang": "全英文笔试+面试(全英文授课)",
+          "exp": "无硬性要求",
+          "quota": "120人",
+          "dur": "1.5年",
+          "fee": "¥16.8万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "教育技术与人工智能硕士",
+          "foreign": "英国基尔大学",
+          "edu": "本科+学士学位",
+          "lang": "全英文授课(需提供英语成绩证明)",
+          "exp": "无硬性要求",
+          "quota": "100人",
+          "dur": "1.5年",
+          "fee": "¥12.8万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "全媒体国际新闻硕士",
+          "foreign": "英国博尔顿大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "1年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "北京邮电大学",
+      "projects": [
+        {
+          "major": "高级管理人员工商管理硕士(EMBA)",
+          "foreign": "法国里昂商学院",
+          "edu": "本科+8年经验(管理5年) / 专科+10年(管理7年)",
+          "lang": "无硬性要求(中文授课)",
+          "exp": "8-10年+(按学历)",
+          "quota": "100人",
+          "dur": "2年",
+          "fee": "¥45.8万",
+          "tier": "A+"
+        },
+        {
+          "major": "智能科技创新与创业硕士",
+          "foreign": "英国伦敦玛丽女王大学",
+          "edu": "本科+学士学位(2026年新批项目)",
+          "lang": "英文授课(需提供英语成绩，详询招办)",
+          "exp": "详询招办",
+          "quota": "90人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "北京科技大学",
+      "projects": [
+        {
+          "major": "高级管理人员工商管理硕士(EMBA)",
+          "foreign": "美国德克萨斯大学阿灵顿分校",
+          "edu": "本科+学士学位(特别优秀者可免学位)",
+          "lang": "无硬性要求",
+          "exp": "5年+全职(实际录取平均10年+)",
+          "quota": "150人",
+          "dur": "2年",
+          "fee": "¥30万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "中央财经大学",
+      "projects": [
+        {
+          "major": "经济学数据科学硕士",
+          "foreign": "新加坡管理大学",
+          "edu": "本科+学士学位",
+          "lang": "雅思或托福(全英文授课本科可豁免)",
+          "exp": "无硬性(应届往届不限)",
+          "quota": "120人",
+          "dur": "2年",
+          "fee": "¥15万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "企业项目管理理学硕士",
+          "foreign": "美国史蒂文斯理工学院",
+          "edu": "本科+学士学位",
+          "lang": "雅思/托福",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "1.5年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "中国政法大学",
+      "projects": [
+        {
+          "major": "法学硕士(欧洲-国际法学)",
+          "foreign": "德国汉堡大学(中欧法学院)",
+          "edu": "法学学位 / 通过司法考试",
+          "lang": "全英文面试(法律分析+英语听说)",
+          "exp": "无硬性要求",
+          "quota": "待查",
+          "dur": "1年",
+          "fee": "¥14万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "国际法硕士",
+          "foreign": "美国圣路易斯华盛顿大学",
+          "edu": "法学本科+学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "1年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "中国社会科学院大学",
+      "projects": [
+        {
+          "major": "金融管理硕士",
+          "foreign": "美国杜兰大学",
+          "edu": "本科+学士学位",
+          "lang": "面试考核英语能力",
+          "exp": "待查",
+          "quota": "60人",
+          "dur": "1.5年",
+          "fee": "¥32.8万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "能源管理硕士",
+          "foreign": "美国杜兰大学",
+          "edu": "本科+学士学位",
+          "lang": "CET-4/6≥425 / 托福95 / 雅思6.5 / 多邻国115",
+          "exp": "2年+(优秀者可放宽)",
+          "quota": "30人",
+          "dur": "1.5年",
+          "fee": "¥25.8万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "北京国家会计学院",
+      "projects": [
+        {
+          "major": "IT审计与网络安全硕士",
+          "foreign": "美国天普大学",
+          "edu": "本科+学士学位，GPA≥2.5(均分≥75)",
+          "lang": "需提供英语成绩证明(PTE/IELTS/TOEFL/多邻国)，全英文学位可免",
+          "exp": "无硬性",
+          "quota": "40人",
+          "dur": "2年",
+          "fee": "¥26.8万",
+          "tier": "A+"
+        },
+        {
+          "major": "智能会计与金融科技应用硕士",
+          "foreign": "香港城市大学",
+          "edu": "会计/金融相关学士学位及以上",
+          "lang": "无硬性英语分数，面试综合考察英语能力",
+          "exp": "6年相关经验(含2年管理)",
+          "quota": "50人",
+          "dur": "2年",
+          "fee": "¥29.8万",
+          "tier": "A+"
+        }
+      ]
+    },
+    {
+      "school": "北京城市学院",
+      "projects": [
+        {
+          "major": "项目管理硕士",
+          "foreign": "英国华威大学",
+          "edu": "学术类: 985/211/双一流本科+学位，其他需预科≥70分; 实践类: 本科+学位+4年经验",
+          "lang": "学术类: 雅思6.5/托福92/PTE62/多邻国120/六级495; 实践类: 企业出具英语水平证明",
+          "exp": "学术类无要求; 实践类4年+",
+          "quota": "35人/班",
+          "dur": "1.5-4年",
+          "fee": "¥20万",
+          "note": "全日制和非全日制",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "北京语言大学",
+      "projects": [
+        {
+          "major": "商业智能与分析理学硕士",
+          "foreign": "法国克莱蒙高等商学院",
+          "edu": "本科+学士学位，GPA≥2.7",
+          "lang": "雅思6 / 托福78 / 托业605，全英文授课本科可豁免",
+          "exp": "全日制: 应届/≤2年; 学工制: 3年+",
+          "quota": "50人/期",
+          "dur": "1.5年",
+          "fee": "¥14.8万",
+          "note": "全日制14.8万; 学工制详询",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "外国语言学及应用语言学硕士",
+          "foreign": "英国诺丁汉特伦特大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "北京交通大学",
+      "projects": [
+        {
+          "major": "企业管理(技术创新管理与创业)硕士",
+          "foreign": "美国罗切斯特理工学院",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "北京中医药大学",
+      "projects": [
+        {
+          "major": "医疗健康领导力与管理硕士",
+          "foreign": "美国史蒂文斯理工学院",
+          "edu": "全日制本科+学士学位，GPA≥2.5(75%)",
+          "lang": "CET-4以上 / 雅思5.5 / 托福80; 仅CET-4需加修英语课",
+          "exp": "无硬性(5年+经验可放松GPA)",
+          "quota": "30人",
+          "dur": "1.5年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "首都师范大学",
+      "projects": [
+        {
+          "major": "教育硕士",
+          "foreign": "澳大利亚弗林德斯大学",
+          "edu": "本科+学士(教育/师范+教学岗; 非师范+4年教学)",
+          "lang": "托福72(口语18写作21) / 雅思6.0(口语写作6.0) / 多邻国105",
+          "exp": "应届(师范)~4年(非师范,按背景)",
+          "quota": "80人",
+          "dur": "2年",
+          "fee": "¥9.6万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "首都经济贸易大学",
+      "projects": [
+        {
+          "major": "人工智能与大数据工学硕士",
+          "foreign": "韩国首尔科学综合大学院大学",
+          "edu": "本科+学士学位",
+          "lang": "中文+英文授课,无硬性语言分数",
+          "exp": "无硬性要求",
+          "quota": "50人",
+          "dur": "1.5年",
+          "fee": "¥14.7万",
+          "tier": "A"
+        }
+      ]
+    },
+    {
+      "school": "中国传媒大学",
+      "projects": [
+        {
+          "major": "国际媒体商务硕士",
+          "foreign": "英国威斯敏斯特大学",
+          "edu": "本科+学士学位(详询招办)",
+          "lang": "英文面试+笔试",
+          "exp": "详询招办",
+          "quota": "60人",
+          "dur": "2年",
+          "fee": "¥21.5万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "北京信息科技大学",
+      "projects": [
+        {
+          "major": "电子信息硕士",
+          "foreign": "美国奥克兰大学",
+          "edu": "本科+学士学位(理工科)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "北京化工大学",
+      "projects": [
+        {
+          "major": "生物工程(生物制造与生物加工)硕士",
+          "foreign": "美国佐治亚大学",
+          "edu": "本科+学士学位(生物/化工等)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "上海": [
+    {
+      "school": "复旦大学",
+      "projects": [
+        {
+          "major": "高级管理人员工商管理硕士(EMBA)",
+          "foreign": "美国圣路易斯华盛顿大学",
+          "edu": "本科+学士+8年经验(含5年管理层)",
+          "lang": "英文面试+授课",
+          "exp": "8年+管理经验",
+          "quota": "详询招办",
+          "dur": "1.5年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "工商管理硕士(MBA)",
+          "foreign": "挪威商学院",
+          "edu": "本科+学士+3年经验",
+          "lang": "英文授课+面试",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥43.6万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "工商管理硕士(MBA)",
+          "foreign": "香港大学",
+          "edu": "本科+学士学位",
+          "lang": "英文面试",
+          "exp": "3年+工作经验",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥54.98万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "上海交通大学",
+      "projects": [
+        {
+          "major": "国际工商管理硕士(IMBA)",
+          "foreign": "加拿大不列颠哥伦比亚大学(UBC)",
+          "edu": "本科+学士+5年经验; 大专+8年经验",
+          "lang": "全英文授课，托福/雅思",
+          "exp": "2年+工作经验",
+          "quota": "详询招办",
+          "dur": "1.5年",
+          "fee": "约¥56万(＄77,565)",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "高级管理人员工商管理硕士(EMBA)",
+          "foreign": "新加坡南洋理工大学",
+          "edu": "本科+学士+8年经验(含5年管理层)",
+          "lang": "中文授课为主",
+          "exp": "8年+管理经验",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥77万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "工商管理硕士(MBA)",
+          "foreign": "法国KEDGE商学院",
+          "edu": "本科+学士+3年经验; 大专+6年经验",
+          "lang": "英文授课+面试",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "数量金融硕士",
+          "foreign": "新加坡国立大学",
+          "edu": "本科+学士学位(数学/金融/工程等)",
+          "lang": "英文授课，托福/雅思",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "1.5年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "航空航天工程硕士",
+          "foreign": "俄罗斯莫斯科航空学院",
+          "edu": "本科+学士学位(工程类)",
+          "lang": "中英双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "同济大学",
+      "projects": [
+        {
+          "major": "高级管理人员工商管理硕士(EMBA)",
+          "foreign": "美国德克萨斯大学阿灵顿分校",
+          "edu": "本科+学士+5年经验(含2年管理层)",
+          "lang": "中文授课",
+          "exp": "5年+管理经验",
+          "quota": "详询招办",
+          "dur": "1.5年",
+          "fee": "¥40万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "商业分析硕士",
+          "foreign": "加拿大阿尔伯塔大学",
+          "edu": "本科+学士学位(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "华东理工大学",
+      "projects": [
+        {
+          "major": "工商管理硕士(MBA)",
+          "foreign": "澳大利亚堪培拉大学",
+          "edu": "本科+学士+3年; 3年制大专+4年; 2年制大专+8年",
+          "lang": "英文授课+面试",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥25.8万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "东华大学",
+      "projects": [
+        {
+          "major": "工商管理硕士(MBA)",
+          "foreign": "加拿大卡尔顿大学",
+          "edu": "本科+学士+3年经验; 大专+5年经验",
+          "lang": "英文授课+面试",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "上海财经大学",
+      "projects": [
+        {
+          "major": "工商管理硕士(MBA)",
+          "foreign": "美国韦伯斯特大学",
+          "edu": "本科+学士+3年经验; 大专+5年经验",
+          "lang": "英文面试",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥29.8万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "华东政法大学",
+      "projects": [
+        {
+          "major": "法学硕士",
+          "foreign": "新加坡国立大学",
+          "edu": "法学本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "1年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "高级法律硕士",
+          "foreign": "美国威斯康星大学麦迪逊分校",
+          "edu": "法学本科+学士学位+法律工作经验",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "1年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "上海海事大学",
+      "projects": [
+        {
+          "major": "国际运输与物流硕士",
+          "foreign": "瑞典世界海事大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "上海外国语大学",
+      "projects": [
+        {
+          "major": "韩国社会与文化硕士",
+          "foreign": "韩国梨花女子大学",
+          "edu": "本科+学士学位",
+          "lang": "韩语/英语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "上海国家会计学院",
+      "projects": [
+        {
+          "major": "金融EMBA(金融财务方向)",
+          "foreign": "美国亚利桑那州立大学",
+          "edu": "本科+学士+7年经验(含管理经验)",
+          "lang": "英文面试",
+          "exp": "管理经验",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥46.8万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "会计学硕士(高级财会)",
+          "foreign": "香港中文大学",
+          "edu": "本科+学士学位(会计/财务)",
+          "lang": "英文授课+面试",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "会计(数据分析)硕士",
+          "foreign": "美国亚利桑那州立大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "上海大学",
+      "projects": [
+        {
+          "major": "社会学硕士",
+          "foreign": "法国让穆兰里昂第三大学",
+          "edu": "本科+学士学位",
+          "lang": "中法双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "华东师范大学",
+      "projects": [
+        {
+          "major": "市场营销(精品品牌管理)硕士",
+          "foreign": "法国里昂商学院",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥28.8万",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "天津": [
+    {
+      "school": "南开大学",
+      "projects": [
+        {
+          "major": "医院管理硕士",
+          "foreign": "澳大利亚弗林德斯大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课+面试",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥14万",
+          "tier": "A"
+        },
+        {
+          "major": "国际经贸关系硕士",
+          "foreign": "澳大利亚弗林德斯大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课+面试",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥14万",
+          "tier": "A"
+        },
+        {
+          "major": "教育领导与管理硕士",
+          "foreign": "澳大利亚弗林德斯大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课+面试",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥14万",
+          "tier": "A"
+        },
+        {
+          "major": "国际商务和战略贸易控制硕士",
+          "foreign": "哈萨克斯坦欧亚国立大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "A"
+        },
+        {
+          "major": "经济学硕士",
+          "foreign": "哈萨克斯坦欧亚国立大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "A"
+        },
+        {
+          "major": "科技金融硕士",
+          "foreign": "澳大利亚弗林德斯大学",
+          "edu": "本科+学士学位(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "A"
+        },
+        {
+          "major": "智慧城市管理硕士",
+          "foreign": "澳大利亚弗林德斯大学",
+          "edu": "本科+学士学位(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "A"
+        }
+      ]
+    },
+    {
+      "school": "天津商业大学",
+      "projects": [
+        {
+          "major": "人力资源管理硕士",
+          "foreign": "美国东密西根大学",
+          "edu": "本科毕业(含应届); 三年制专科+2年工作经历",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "可持续金融硕士",
+          "foreign": "法国Excelia商学院",
+          "edu": "本科+学士学位(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "A+"
+        }
+      ]
+    },
+    {
+      "school": "天津师范大学",
+      "projects": [
+        {
+          "major": "教育行政学硕士",
+          "foreign": "韩国世翰大学",
+          "edu": "本科+学士学位",
+          "lang": "中韩双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "情报学硕士",
+          "foreign": "韩国世翰大学",
+          "edu": "本科+学士学位",
+          "lang": "中韩双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "天津财经大学",
+      "projects": [
+        {
+          "major": "工商管理硕士(MBA)",
+          "foreign": "加拿大西三一大学",
+          "edu": "本科+学士; 条件优秀者可放宽至大专(新批)",
+          "lang": "英文面试",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥18.8万",
+          "tier": "A+"
+        },
+        {
+          "major": "工商管理硕士(MBA)",
+          "foreign": "法国诺曼底经济管理学院",
+          "edu": "本科+学士学位(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "A+"
+        }
+      ]
+    },
+    {
+      "school": "天津理工大学",
+      "projects": [
+        {
+          "major": "项目管理硕士",
+          "foreign": "加拿大魁北克大学席库提米分校",
+          "edu": "本科及以上+3年工作经验",
+          "lang": "英文面试",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "A+"
+        }
+      ]
+    },
+    {
+      "school": "中国民航大学",
+      "projects": [
+        {
+          "major": "航空安全管理硕士",
+          "foreign": "法国国立民航大学、法国航空航天大学",
+          "edu": "本科+学士学位",
+          "lang": "英文/法文",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "天津工业大学",
+      "projects": [
+        {
+          "major": "数字智能视觉设计硕士",
+          "foreign": "意大利领克大学",
+          "edu": "本科+学士学位(设计类)",
+          "lang": "中英/中意双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "天津外国语大学",
+      "projects": [
+        {
+          "major": "高级翻译与智能语言技术硕士",
+          "foreign": "英国阿伯丁大学",
+          "edu": "本科+学士学位(新批)",
+          "lang": "中英双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "重庆": [
+    {
+      "school": "西南政法大学",
+      "projects": [
+        {
+          "major": "法律硕士",
+          "foreign": "美国凯斯西储大学",
+          "edu": "法学本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "重庆科技大学",
+      "projects": [
+        {
+          "major": "材料与化工硕士",
+          "foreign": "俄罗斯国家研究型托姆斯克国立大学",
+          "edu": "本科+学士学位(材料/化工类)",
+          "lang": "中俄双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "重庆大学",
+      "projects": [
+        {
+          "major": "土木水利硕士",
+          "foreign": "新加坡理工大学",
+          "edu": "本科+学士学位(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "河北": [
+    {
+      "school": "河北科技大学",
+      "projects": [
+        {
+          "major": "工业设计工程硕士",
+          "foreign": "韩国祥明大学",
+          "edu": "本科+学士学位(设计/工程类)",
+          "lang": "中韩双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "燕山大学",
+      "projects": [
+        {
+          "major": "电气工程硕士",
+          "foreign": "澳大利亚科廷大学",
+          "edu": "本科+学士学位(电气/电子类)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "河北医科大学",
+      "projects": [
+        {
+          "major": "基础医学(再生医学)硕士",
+          "foreign": "爱尔兰国立戈尔韦大学",
+          "edu": "医学/生物本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "河北大学",
+      "projects": [
+        {
+          "major": "护理学(健康管理)硕士",
+          "foreign": "美国新奥尔良大学",
+          "edu": "本科+学士学位(护理/健康类)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "河北工业大学",
+      "projects": [
+        {
+          "major": "信息科学硕士",
+          "foreign": "新西兰梅西大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "河北中医药大学",
+      "projects": [
+        {
+          "major": "护理硕士",
+          "foreign": "巴西戈亚斯联邦大学",
+          "edu": "护理学本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "山西": [
+    {
+      "school": "太原理工大学",
+      "projects": [
+        {
+          "major": "电气工程硕士",
+          "foreign": "俄罗斯乌拉尔联邦大学",
+          "edu": "本科+学士学位(电气/电子类)",
+          "lang": "中俄双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "辽宁": [
+    {
+      "school": "大连海事大学",
+      "projects": [
+        {
+          "major": "海事管理硕士",
+          "foreign": "瑞典世界海事大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "东北大学",
+      "projects": [
+        {
+          "major": "软件工程硕士",
+          "foreign": "美国德克萨斯大学阿灵顿分校",
+          "edu": "本科+学士学位(计算机/软件类)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "沈阳工业大学",
+      "projects": [
+        {
+          "major": "企业管理硕士",
+          "foreign": "美国班尼迪克大学",
+          "edu": "本科+学士学位",
+          "lang": "中英双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥8万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "沈阳建筑大学",
+      "projects": [
+        {
+          "major": "信息管理硕士",
+          "foreign": "美国班尼迪克大学",
+          "edu": "本科+学士学位",
+          "lang": "中英双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥8万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "大连医科大学",
+      "projects": [
+        {
+          "major": "公共卫生硕士",
+          "foreign": "美国班尼迪克大学",
+          "edu": "医学/公共卫生本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥9万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "沈阳农业大学",
+      "projects": [
+        {
+          "major": "农村发展硕士",
+          "foreign": "匈牙利塞格德大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "吉林": [
+    {
+      "school": "长春理工大学",
+      "projects": [
+        {
+          "major": "光学工程硕士",
+          "foreign": "俄罗斯圣彼得堡国立ITMO大学",
+          "edu": "本科+学士学位(光电/物理类)",
+          "lang": "中俄双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "北华大学",
+      "projects": [
+        {
+          "major": "电气工程硕士",
+          "foreign": "俄罗斯新西伯利亚国立技术大学",
+          "edu": "本科+学士学位(电气/电子类)",
+          "lang": "中俄双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "黑龙江": [
+    {
+      "school": "哈尔滨医科大学",
+      "projects": [
+        {
+          "major": "社会医学与卫生事业管理硕士",
+          "foreign": "澳大利亚乐卓博大学",
+          "edu": "医学/卫生本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "江苏": [
+    {
+      "school": "南京大学",
+      "projects": [
+        {
+          "major": "国际EMBA(商业创新/医疗健康管理)",
+          "foreign": "荷兰马斯特里赫特大学",
+          "edu": "本科+学士",
+          "lang": "面试(英文)",
+          "exp": "3年+管理",
+          "quota": "130人",
+          "dur": "2年",
+          "fee": "¥36万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "中国矿业大学",
+      "projects": [
+        {
+          "major": "国际MBA",
+          "foreign": "加拿大魁北克大学蒙特利尔校区",
+          "edu": "本科+学士,GPA>2.8",
+          "lang": "英文授课,英语口语+写作",
+          "exp": "4-7年管理层",
+          "quota": "120人",
+          "dur": "2年",
+          "fee": "¥24万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "南京信息工程大学",
+      "projects": [
+        {
+          "major": "数据与决策分析",
+          "foreign": "英国雷丁大学",
+          "edu": "本科+学士,理工科背景",
+          "lang": "英文授课,需英语证明",
+          "exp": "无硬性",
+          "quota": "60人",
+          "dur": "2年",
+          "fee": "¥5.9万/年",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "南京审计大学",
+      "projects": [
+        {
+          "major": "计算机科学与技术",
+          "foreign": "法国SKEMA商学院",
+          "edu": "本科+学士(新批硕士)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "45人/年",
+          "dur": "2年",
+          "fee": "¥6.2万/年",
+          "note": "国际联合审计学院,新批",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "审计",
+          "foreign": "法国SKEMA商学院",
+          "edu": "本科+学士(新批硕士)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "45人/年",
+          "dur": "2年",
+          "fee": "¥6.2万/年",
+          "note": "国际联合审计学院,新批",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "金融",
+          "foreign": "法国SKEMA商学院",
+          "edu": "本科+学士(新批硕士)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "45人/年",
+          "dur": "2年",
+          "fee": "¥6.2万/年",
+          "note": "国际联合审计学院,新批",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "南京师范大学",
+      "projects": [
+        {
+          "major": "信息技术(信息系统)",
+          "foreign": "澳大利亚麦考瑞大学",
+          "edu": "本科+学士(新批联合学院)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "40人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "2025新批联合学院",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "教育学",
+          "foreign": "澳大利亚麦考瑞大学",
+          "edu": "本科+学士(新批联合学院)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "20人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "2025新批联合学院",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "刑事司法学硕士",
+          "foreign": "美国马里兰大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "地理空间信息科学硕士",
+          "foreign": "美国马里兰大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "南京航空航天大学",
+      "projects": [
+        {
+          "major": "管理科学与工程",
+          "foreign": "英国伦敦大学伯贝克学院",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "20人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "计算机科学与技术",
+          "foreign": "英国伦敦大学伯贝克学院",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "20人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "法学(网络与人工智能法)",
+          "foreign": "英国伦敦大学伯贝克学院",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "70人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "机械(航空工程)硕士",
+          "foreign": "英国克兰菲尔德大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "软件工程硕士",
+          "foreign": "法国巴黎高等电子学院",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "南京邮电大学",
+      "projects": [
+        {
+          "major": "电子信息(机器人)",
+          "foreign": "俄罗斯ITMO大学",
+          "edu": "本科+学士,理工科(新批)",
+          "lang": "中俄双语",
+          "exp": "详询招办",
+          "quota": "45+35人",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "含外国硕士学位35人",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "南京中医药大学",
+      "projects": [
+        {
+          "major": "公共管理学",
+          "foreign": "新西兰奥塔哥大学",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "20人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "智能科学与技术",
+          "foreign": "新西兰奥塔哥大学",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "20人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "南京艺术学院",
+      "projects": [
+        {
+          "major": "文化遗产保护与修复硕士",
+          "foreign": "意大利博罗尼亚大学",
+          "edu": "本科+学士学位",
+          "lang": "中意双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "南京工业大学",
+      "projects": [
+        {
+          "major": "控制科学与工程(机器视觉)硕士",
+          "foreign": "法国勃艮第大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "江苏师范大学",
+      "projects": [
+        {
+          "major": "国际贸易学",
+          "foreign": "俄罗斯普列汉诺夫经济大学",
+          "edu": "本科+学士",
+          "lang": "中俄双语",
+          "exp": "详询招办",
+          "quota": "30人",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "机械工程",
+          "foreign": "俄罗斯圣彼得堡彼得大帝理工大学",
+          "edu": "本科+学士(新批)",
+          "lang": "中俄双语",
+          "exp": "详询招办",
+          "quota": "60人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "信息与通信工程",
+          "foreign": "俄罗斯圣彼得堡彼得大帝理工大学",
+          "edu": "本科+学士(新批)",
+          "lang": "中俄双语",
+          "exp": "详询招办",
+          "quota": "60人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "江苏科技大学",
+      "projects": [
+        {
+          "major": "能源动力硕士",
+          "foreign": "俄罗斯奥加辽夫莫尔多瓦国立大学",
+          "edu": "本科+学士学位",
+          "lang": "中俄双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "常州大学",
+      "projects": [
+        {
+          "major": "艺术设计硕士",
+          "foreign": "乌克兰哈尔科夫工艺美术大学",
+          "edu": "本科+学士学位",
+          "lang": "中乌双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "苏州科技大学",
+      "projects": [
+        {
+          "major": "建筑学",
+          "foreign": "意大利那不勒斯费德里克二世大学",
+          "edu": "本科+学士,建筑/设计(新批)",
+          "lang": "中英双语",
+          "exp": "详询招办",
+          "quota": "40人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "淮阴工学院",
+      "projects": [
+        {
+          "major": "应用化学",
+          "foreign": "美国特拉华州立大学",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "40人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "浙江": [
+    {
+      "school": "浙江大学",
+      "projects": [
+        {
+          "major": "品质管理硕士",
+          "foreign": "香港理工大学",
+          "edu": "本科及以上",
+          "lang": "笔试(英语+管理综合)+面试,中文教学",
+          "exp": "详询招办",
+          "quota": "100人",
+          "dur": "2-3年",
+          "fee": "¥33.6万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "酒店及旅游业管理硕士",
+          "foreign": "香港理工大学",
+          "edu": "本科+学位+1年经验 / 大专+6年管理",
+          "lang": "英文笔试+面试,托福/雅思/CET6可免",
+          "exp": "学士+1年 / 大专+6年",
+          "quota": "80人",
+          "dur": "2-3年",
+          "fee": "¥25万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "国际房地产硕士",
+          "foreign": "香港理工大学",
+          "edu": "本科+学士学位",
+          "lang": "英文面试",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "数字化转型与创业硕士",
+          "foreign": "澳大利亚国立大学",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "100人",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "2026.6新获批",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "浙江工业大学",
+      "projects": [
+        {
+          "major": "国际贸易与金融",
+          "foreign": "英国利兹贝克特大学",
+          "edu": "本科 / 全日制大专+3年经验",
+          "lang": "雅思/托福/多邻国等英语成绩",
+          "exp": "专科3年+",
+          "quota": "90人",
+          "dur": "1年",
+          "fee": "¥10万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "能源动力",
+          "foreign": "英国埃克塞特大学",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "15人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "电子信息",
+          "foreign": "英国埃克塞特大学",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "15人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "浙江工商大学",
+      "projects": [
+        {
+          "major": "项目管理(MPM)",
+          "foreign": "加拿大魁北克大学席库提米分校",
+          "edu": "本科+学士",
+          "lang": "面试考核+英文授课",
+          "exp": "详询招办",
+          "quota": "120人",
+          "dur": "2年",
+          "fee": "¥19.8万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "浙江财经大学",
+      "projects": [
+        {
+          "major": "应用金融学",
+          "foreign": "新西兰奥克兰理工大学",
+          "edu": "本科+学士,不限专业,均分≥75%",
+          "lang": "雅思6.5(6.0) / 托福90(20) / PTE58(50)",
+          "exp": "无硬性",
+          "quota": "30人",
+          "dur": "1.5年",
+          "fee": "¥19.8万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "数据科学",
+          "foreign": "马来西亚国立大学",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "40人",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "2026新批",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "浙江师范大学",
+      "projects": [
+        {
+          "major": "教育管理(教育领导学)",
+          "foreign": "澳大利亚伊迪斯科文大学",
+          "edu": "师范本科+学位+3年教育经验 / 非师范+教师证+3年",
+          "lang": "笔试(英语+教育综合)+面试",
+          "exp": "3年+教育/管理",
+          "quota": "60人",
+          "dur": "2年",
+          "fee": "¥9.88万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "杭州师范大学",
+      "projects": [
+        {
+          "major": "教育领导与管理",
+          "foreign": "澳大利亚堪培拉大学",
+          "edu": "本科双证+教育/行政/管理3年+经验",
+          "lang": "英文授课+全英文作业考核",
+          "exp": "3年+教育/管理",
+          "quota": "40人",
+          "dur": "2年",
+          "fee": "¥12万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "宁波大学",
+      "projects": [
+        {
+          "major": "工商管理(MBA)",
+          "foreign": "澳大利亚堪培拉大学",
+          "edu": "本科+学士",
+          "lang": "英文面试+授课",
+          "exp": "3年+经验",
+          "quota": "60人",
+          "dur": "2年",
+          "fee": "¥18万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "交通运输硕士",
+          "foreign": "西班牙加泰罗尼亚理工大学",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "中国计量大学",
+      "projects": [
+        {
+          "major": "数据分析学",
+          "foreign": "新西兰奥克兰理工大学",
+          "edu": "本科+学士",
+          "lang": "英文授课,需英语证明",
+          "exp": "无硬性",
+          "quota": "40人",
+          "dur": "2年",
+          "fee": "¥18万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "人工智能",
+          "foreign": "英国安格利亚鲁斯金大学",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "40人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "资源与环境硕士",
+          "foreign": "意大利卡梅里诺大学",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "温州医科大学",
+      "projects": [
+        {
+          "major": "护理学",
+          "foreign": "泰国东方大学",
+          "edu": "本科+学士,护理/医学",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "45人",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "丽水学院",
+      "projects": [
+        {
+          "major": "护理",
+          "foreign": "瑞典耶夫勒大学学院",
+          "edu": "本科+学士(护理/医学,新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "30人",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "浙江传媒学院",
+      "projects": [
+        {
+          "major": "视觉传媒",
+          "foreign": "英国大曼彻斯特大学",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "30人",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "浙江科技大学",
+      "projects": [
+        {
+          "major": "土木工程",
+          "foreign": "法国塞吉巴黎大学",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "45人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "应用统计",
+          "foreign": "法国塞吉巴黎大学",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "45人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "温州大学",
+      "projects": [
+        {
+          "major": "轻工业产品工艺",
+          "foreign": "俄罗斯圣彼得堡国立工业技术与设计大学",
+          "edu": "本科+学士(新批)",
+          "lang": "中俄双语",
+          "exp": "详询招办",
+          "quota": "30人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "化学技术",
+          "foreign": "俄罗斯圣彼得堡国立工业技术与设计大学",
+          "edu": "本科+学士(新批)",
+          "lang": "中俄双语",
+          "exp": "详询招办",
+          "quota": "30人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "应用信息",
+          "foreign": "俄罗斯圣彼得堡国立工业技术与设计大学",
+          "edu": "本科+学士(新批)",
+          "lang": "中俄双语",
+          "exp": "详询招办",
+          "quota": "30人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "浙江外国语学院",
+      "projects": [
+        {
+          "major": "教育领导力与管理",
+          "foreign": "加拿大皇家路大学",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "30人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "中国美术学院",
+      "projects": [
+        {
+          "major": "艺术学(国际品牌传播)硕士",
+          "foreign": "德国品牌应用技术大学",
+          "edu": "本科+学士学位",
+          "lang": "中德双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "艺术学(建筑遗产保护)硕士",
+          "foreign": "德国安哈尔特应用技术大学",
+          "edu": "本科+学士学位",
+          "lang": "中德双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "艺术硕士(设计)",
+          "foreign": "法国南特大西洋设计学校",
+          "edu": "本科+学士学位",
+          "lang": "中法双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "浙江理工大学",
+      "projects": [
+        {
+          "major": "服装设计与工程硕士",
+          "foreign": "美国北卡罗莱纳州立大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "杭州电子科技大学",
+      "projects": [
+        {
+          "major": "生物医学工程硕士",
+          "foreign": "法国巴黎大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "计算机科学与技术硕士",
+          "foreign": "日本山梨大学",
+          "edu": "本科+学士学位",
+          "lang": "英文/日文",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "电子科学与技术硕士",
+          "foreign": "塞浦路斯理工大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "电子信息硕士",
+          "foreign": "日本山梨大学",
+          "edu": "本科+学士学位",
+          "lang": "英文/日文",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "浙江音乐学院",
+      "projects": [
+        {
+          "major": "音乐硕士",
+          "foreign": "匈牙利罗兰大学",
+          "edu": "本科+学士学位",
+          "lang": "英文/匈语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "安徽": [
+    {
+      "school": "安徽师范大学",
+      "projects": [
+        {
+          "major": "现代教育技术硕士",
+          "foreign": "美国约翰逊大学",
+          "edu": "本科+学士学位(教育/技术类)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "安徽工业大学",
+      "projects": [
+        {
+          "major": "工业设计工程硕士",
+          "foreign": "韩国韩瑞大学",
+          "edu": "本科+学士学位(工程/设计类)",
+          "lang": "中韩双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "福建": [
+    {
+      "school": "厦门大学",
+      "projects": [
+        {
+          "major": "戏剧与影视硕士",
+          "foreign": "美国纽约电影学院",
+          "edu": "本科+学士学位; 专科+2年同等学力+加试",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "福建师范大学",
+      "projects": [
+        {
+          "major": "美术硕士",
+          "foreign": "意大利那不勒斯美术学院",
+          "edu": "本科+学士学位(美术学类,不接受同等学力)",
+          "lang": "中意双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "集美大学",
+      "projects": [
+        {
+          "major": "机械硕士",
+          "foreign": "波兰罗兹工业大学",
+          "edu": "本科+学士学位(机械类,不接受专科)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "厦门国家会计学院",
+      "projects": [
+        {
+          "major": "大数据会计与金融硕士",
+          "foreign": "香港理工大学",
+          "edu": "本科+学士学位(会计/金融类,新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "闽南师范大学",
+      "projects": [
+        {
+          "major": "应用心理硕士",
+          "foreign": "意大利圣心天主教大学",
+          "edu": "本科+学士学位(心理学相关,不接受专科)",
+          "lang": "中意双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "江西": [
+    {
+      "school": "江西财经大学",
+      "projects": [
+        {
+          "major": "工商管理硕士(MBA)",
+          "foreign": "美国纽约理工学院",
+          "edu": "本科+学士+3年经验; 全国统招大专+5年管理经验",
+          "lang": "英文授课+面试",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥16.8万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "经济学与数据科学硕士",
+          "foreign": "英国埃塞克斯大学",
+          "edu": "本科+学士学位(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "金融科技硕士",
+          "foreign": "英国埃塞克斯大学",
+          "edu": "本科+学士学位(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "南昌大学",
+      "projects": [
+        {
+          "major": "国际企业管理硕士",
+          "foreign": "法国普瓦提埃大学",
+          "edu": "三年制大专+5年管理经验(需法方VAP认可); 本科+学士",
+          "lang": "中法双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "江西师范大学",
+      "projects": [
+        {
+          "major": "计算机科学硕士",
+          "foreign": "英国莱斯特大学",
+          "edu": "本科+学士学位(计算机/软件类); 优秀专科毕业生可报",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "山东": [
+    {
+      "school": "山东建筑大学",
+      "projects": [
+        {
+          "major": "管理科学",
+          "foreign": "马来西亚管理与科学大学",
+          "edu": "本科+学士学位，GPA≥2.75",
+          "lang": "英文授课及考核(中方课程中文授课)",
+          "exp": "无硬性要求",
+          "quota": "100人",
+          "dur": "2年",
+          "fee": "¥6.4万/年",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "数据科学与人工智能工程",
+          "foreign": "西班牙萨拉曼卡大学",
+          "edu": "本科+学士学位(2026年新批项目)",
+          "lang": "全英文授课，需提供英语成绩",
+          "exp": "详询招办",
+          "quota": "30人",
+          "dur": "待查",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "济南大学",
+      "projects": [
+        {
+          "major": "环境管理",
+          "foreign": "英国格拉斯哥加利多尼亚大学",
+          "edu": "本科+学士学位，均分≥65%",
+          "lang": "雅思6.0(5.5) / 托福78 / PTE 60(59)",
+          "exp": "无硬性要求",
+          "quota": "30人",
+          "dur": "2年",
+          "fee": "¥8万/年",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "金融科技",
+          "foreign": "英国格拉斯哥加利多尼亚大学",
+          "edu": "本科+学士学位，均分≥65%",
+          "lang": "雅思6.0(5.5) / 托福78 / PTE 60(59)",
+          "exp": "无硬性要求",
+          "quota": "30人",
+          "dur": "2年",
+          "fee": "¥8万/年",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "曲阜师范大学",
+      "projects": [
+        {
+          "major": "环境管理与可持续发展",
+          "foreign": "澳大利亚纽卡斯尔大学",
+          "edu": "本科+学士学位(相关专业)",
+          "lang": "雅思6.5(6.0) 或通过DEP测试",
+          "exp": "无硬性要求",
+          "quota": "30人",
+          "dur": "2年(1+1)",
+          "fee": "¥6.5万/年+澳方",
+          "note": "国内1年6.5万+国外约5万澳元",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "工程学",
+          "foreign": "澳大利亚纽卡斯尔大学",
+          "edu": "本科+学士学位(工程/自动化/电气等)",
+          "lang": "雅思6.5(6.0) 或通过DEP测试",
+          "exp": "无硬性要求",
+          "quota": "30人",
+          "dur": "2年(1+1)",
+          "fee": "¥6.5万/年+澳方",
+          "note": "国内1年6.5万+国外约5万澳元",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "材料科学与工程",
+          "foreign": "澳大利亚纽卡斯尔大学",
+          "edu": "本科+学士学位(材料/物理/化学等)",
+          "lang": "雅思6.5(6.0) 或通过DEP测试",
+          "exp": "无硬性要求",
+          "quota": "30人",
+          "dur": "2年(1+1)",
+          "fee": "¥6.5万/年+澳方",
+          "note": "国内1年6.5万+国外约5万澳元",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "山东科技大学",
+      "projects": [
+        {
+          "major": "管理工程",
+          "foreign": "意大利巴里理工大学",
+          "edu": "本科+学士学位(2026年新批项目)",
+          "lang": "英文授课，需提供英语成绩",
+          "exp": "详询招办",
+          "quota": "待查",
+          "dur": "待查",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "电气工程",
+          "foreign": "意大利巴里理工大学",
+          "edu": "本科+学士学位，理工科背景(2026年新批项目)",
+          "lang": "英文授课，需提供英语成绩",
+          "exp": "详询招办",
+          "quota": "待查",
+          "dur": "待查",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "中国石油大学（华东）",
+      "projects": [
+        {
+          "major": "工程管理",
+          "foreign": "英国布拉德福德大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课，需提供英语能力证明",
+          "exp": "待查",
+          "quota": "待查",
+          "dur": "2年",
+          "fee": "¥19.6万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "青岛理工大学",
+      "projects": [
+        {
+          "major": "电气电子工学",
+          "foreign": "韩国又石大学",
+          "edu": "本科+学士学位",
+          "lang": "中英双语授课,需一定英语能力",
+          "exp": "无硬性要求",
+          "quota": "40人",
+          "dur": "2年",
+          "fee": "¥9万/年",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "山东师范大学",
+      "projects": [
+        {
+          "major": "通信与信息系统",
+          "foreign": "美国肯塔基大学",
+          "edu": "本科+学士学位，通信/电子/计算机相关专业",
+          "lang": "托福79 / 雅思6.5 或同等水平",
+          "exp": "无硬性要求",
+          "quota": "50人",
+          "dur": "2年",
+          "fee": "¥5.5万/年(国内)",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "青岛科技大学",
+      "projects": [
+        {
+          "major": "软件工程",
+          "foreign": "哈萨克国立技术大学",
+          "edu": "本科+学士学位(2026年新批项目)",
+          "lang": "英文授课，需提供英语成绩",
+          "exp": "详询招办",
+          "quota": "待查",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "影视与动画艺术硕士",
+          "foreign": "韩国中央大学",
+          "edu": "本科+学士学位",
+          "lang": "中韩双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "河南": [
+    {
+      "school": "河南师范大学",
+      "projects": [
+        {
+          "major": "旅游管理硕士",
+          "foreign": "法国佩皮尼昂大学",
+          "edu": "本科+学士学位(不接受专科)",
+          "lang": "中法双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "中原工学院",
+      "projects": [
+        {
+          "major": "电子信息硕士",
+          "foreign": "巴西圣保罗大学",
+          "edu": "本科+学士学位(电子/信息类); 专科+2年同等学力+加试",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "河南大学",
+      "projects": [
+        {
+          "major": "体育教学(运动训练与营养方向)硕士",
+          "foreign": "西班牙马德里欧洲大学",
+          "edu": "本科+学士学位; 专科+2年同等学力+加试",
+          "lang": "英文/西班牙语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "安阳师范学院",
+      "projects": [
+        {
+          "major": "体育指导硕士",
+          "foreign": "韩国庆一大学",
+          "edu": "本科+学士学位(体育类,新批)",
+          "lang": "中韩双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "湖北": [
+    {
+      "school": "中南民族大学",
+      "projects": [
+        {
+          "major": "英语教育硕士",
+          "foreign": "美国威斯康星大学普拉特维尔分校",
+          "edu": "本科+学士学位(英语相关专业)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "华中师范大学",
+      "projects": [
+        {
+          "major": "区域旅游与环境硕士",
+          "foreign": "美国科罗拉多州立大学",
+          "edu": "本科+学士学位(不接受专科)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "自然旅游与生态保护硕士",
+          "foreign": "美国科罗拉多州立大学",
+          "edu": "本科+学士学位(不接受专科)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "武汉大学",
+      "projects": [
+        {
+          "major": "软件工程硕士",
+          "foreign": "爱尔兰都柏林城市大学",
+          "edu": "本科+学士学位(计算机/软件类); 专科+2年同等学力+加试",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "中南财经政法大学",
+      "projects": [
+        {
+          "major": "欧洲学:比较法与欧洲法硕士",
+          "foreign": "意大利罗马第一大学",
+          "edu": "本科+学士学位(法学相关专业,不接受专科)",
+          "lang": "英文/意大利语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "武汉科技大学",
+      "projects": [
+        {
+          "major": "计算机科学与技术硕士",
+          "foreign": "荷兰阿姆斯特丹自由大学",
+          "edu": "本科+学士学位(计算机类); 专科+2年同等学力+加试",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "武汉理工大学",
+      "projects": [
+        {
+          "major": "数据、人工智能和云硕士",
+          "foreign": "法国EFREI",
+          "edu": "本科+学士学位(计算机/通信/电子类,不接受专科)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "商业分析硕士",
+          "foreign": "澳大利亚伍伦贡大学",
+          "edu": "本科+学士学位(不接受专科,新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "湖南": [
+    {
+      "school": "中南大学",
+      "projects": [
+        {
+          "major": "护理学硕士",
+          "foreign": "美国加州大学旧金山分校",
+          "edu": "护理学本科+学士学位(不接受同等学力)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "湖南师范大学",
+      "projects": [
+        {
+          "major": "学科教学硕士",
+          "foreign": "美国特拉华大学",
+          "edu": "本科+学士学位(不接受专科)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "学前教育硕士",
+          "foreign": "美国圣约瑟夫大学",
+          "edu": "本科+学士学位(不接受专科)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "护理硕士",
+          "foreign": "澳门镜湖护理学院",
+          "edu": "护理学本科+学士学位+注册护士执业资格(不接受专科)",
+          "lang": "中英双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "广东": [
+    {
+      "school": "广东外语外贸大学",
+      "projects": [
+        {
+          "major": "英语教育",
+          "foreign": "英国雷丁大学",
+          "edu": "本科毕业生",
+          "lang": "雅思6.5(5.5) / 入学英语考试≥60",
+          "exp": "无硬性要求",
+          "quota": "80人",
+          "dur": "1年",
+          "fee": "¥15.9万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "英语教学",
+          "foreign": "英国利兹大学",
+          "edu": "本科+学士,英语/教育相关",
+          "lang": "雅思6.5(6.0) / 托福92(21)",
+          "exp": "无硬性要求",
+          "quota": "30人",
+          "dur": "1年",
+          "fee": "¥16万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "中山大学",
+      "projects": [
+        {
+          "major": "高级管理人员工商管理硕士(EMBA)",
+          "foreign": "美国明尼苏达大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课+面试",
+          "exp": "管理经验",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "南方科技大学",
+      "projects": [
+        {
+          "major": "科技与创新工商管理",
+          "foreign": "香港中文大学",
+          "edu": "本科+学士,GPA≥2.5",
+          "lang": "面试考核英语",
+          "exp": "3年+优先",
+          "quota": "50人",
+          "dur": "2年",
+          "fee": "¥40万+",
+          "note": "2026年新批首届",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "华南师范大学",
+      "projects": [
+        {
+          "major": "金融数据智能",
+          "foreign": "法国雷恩商学院",
+          "edu": "本科+学士,不限专业",
+          "lang": "英语授课,需提供英语证明",
+          "exp": "无硬性",
+          "quota": "60人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "雷恩数智商学院,新批",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "商务数据分析",
+          "foreign": "法国雷恩商学院",
+          "edu": "本科+学士,不限专业",
+          "lang": "英语授课,需提供英语证明",
+          "exp": "无硬性",
+          "quota": "60人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "雷恩数智商学院,新批",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "华南理工大学",
+      "projects": [
+        {
+          "major": "建筑学(城市设计方向)硕士",
+          "foreign": "意大利都灵理工大学",
+          "edu": "本科+学士学位(建筑/规划)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "生物医学工程硕士",
+          "foreign": "法国巴黎西岱大学",
+          "edu": "本科+学士学位(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "暨南大学",
+      "projects": [
+        {
+          "major": "领导力(旅游管理)",
+          "foreign": "瑞士恺撒里兹学院",
+          "edu": "本科+学士",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "50人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "深圳数智文旅学院,新批",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "广东财经大学",
+      "projects": [
+        {
+          "major": "大数据分析与信息技术",
+          "foreign": "美国中密苏里大学",
+          "edu": "本科+学士,理工科优先",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "100人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "中密苏里大学联合学院,新批",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "深圳大学",
+      "projects": [
+        {
+          "major": "金融科技与风险控制硕士",
+          "foreign": "法国南特高等商学院",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "佛山大学",
+      "projects": [
+        {
+          "major": "人工智能商业应用",
+          "foreign": "爱尔兰香农理工大学",
+          "edu": "本科+学士",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "50人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "香农理工智能制造学院,新批",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "北京理工大学",
+      "projects": [
+        {
+          "major": "材料科学",
+          "foreign": "匈牙利德布勒森大学",
+          "edu": "本科+学士(理工科)",
+          "lang": "英文授课",
+          "exp": "无硬性",
+          "quota": "120人",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "2026新批项目",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "东莞理工学院",
+      "projects": [
+        {
+          "major": "人工智能与数据科学",
+          "foreign": "英国龙比亚大学",
+          "edu": "本科+学士(理工科)",
+          "lang": "英文授课",
+          "exp": "无硬性",
+          "quota": "100人",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "2026新批项目",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "商业信息技术",
+          "foreign": "英国龙比亚大学",
+          "edu": "本科+学士",
+          "lang": "英文授课",
+          "exp": "无硬性",
+          "quota": "100人",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "2026新批项目",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "海南": [
+    {
+      "school": "中国传媒大学",
+      "projects": [
+        {
+          "major": "新媒体硕士",
+          "foreign": "美国密西根州立大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "中国政法大学",
+      "projects": [
+        {
+          "major": "诉讼法学硕士",
+          "foreign": "加拿大渥太华大学",
+          "edu": "法学本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "四川": [
+    {
+      "school": "电子科技大学",
+      "projects": [
+        {
+          "major": "工商管理硕士(MBA)",
+          "foreign": "美国韦伯斯特大学",
+          "edu": "本科+学士+3年经验; 专科(108学分以上)+5年经验",
+          "lang": "英文面试",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥15.8万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "集成电路工程硕士",
+          "foreign": "瑞典皇家理工学院",
+          "edu": "本科+学士学位(电子/微电子类)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "电子嵌入式系统硕士",
+          "foreign": "法国鲁昂高等电子工程工程师学院",
+          "edu": "本科+学士学位(电子/计算机类)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "软件工程与数字化转型硕士",
+          "foreign": "法国高等电子工程工程师学院",
+          "edu": "本科+学士学位(计算机/软件类)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "数据与人工智能管理硕士",
+          "foreign": "法国格勒诺布尔经济管理学院",
+          "edu": "本科+学士学位(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "材料科学与技术硕士",
+          "foreign": "俄罗斯国家研究型科技大学密西斯",
+          "edu": "本科+学士学位(材料类,新批)",
+          "lang": "英文/俄语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "四川大学",
+      "projects": [
+        {
+          "major": "灾害护理学硕士",
+          "foreign": "香港理工大学",
+          "edu": "护理学本科+学士学位",
+          "lang": "中英双语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "西南财经大学",
+      "projects": [
+        {
+          "major": "国际贸易学硕士",
+          "foreign": "岭南大学(香港)",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "西南交通大学",
+      "projects": [
+        {
+          "major": "终身学习、可持续发展与工作硕士",
+          "foreign": "瑞典延雪平大学",
+          "edu": "本科+学士学位(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "贵州": [
+    {
+      "school": "贵州大学",
+      "projects": [
+        {
+          "major": "项目管理硕士",
+          "foreign": "加拿大魁北克大学席库提米分校",
+          "edu": "本科及以上+3年工作经验",
+          "lang": "英文面试",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "植物病理学硕士",
+          "foreign": "泰国皇太后大学",
+          "edu": "本科+学士学位(植物/农学类)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "云南": [
+    {
+      "school": "云南财经大学",
+      "projects": [
+        {
+          "major": "房地产硕士",
+          "foreign": "英国格林威治大学",
+          "edu": "本科+学士学位; 大专+3年经验(优秀者可放宽)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥15.9万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "项目管理硕士",
+          "foreign": "英国格林威治大学",
+          "edu": "本科+学士学位; 大专+3年经验(优秀者可放宽)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "¥15.9万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "信息科学硕士",
+          "foreign": "英国爱丁堡龙比亚大学",
+          "edu": "本科+学士学位(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "新批详询",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "云南民族大学",
+      "projects": [
+        {
+          "major": "体育硕士(瑜伽)",
+          "foreign": "印度辨喜瑜伽大学",
+          "edu": "本科+学士学位(体育类)",
+          "lang": "英文/印地语",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "云南农业大学",
+      "projects": [
+        {
+          "major": "农业硕士",
+          "foreign": "新西兰林肯大学",
+          "edu": "本科+学士学位(农学/生物类)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ],
+  "陕西": [
+    {
+      "school": "西安交通大学",
+      "projects": [
+        {
+          "major": "创业与创新(大数据与AI管理)",
+          "foreign": "法国SKEMA商学院",
+          "edu": "本科+学士",
+          "lang": "面试入学,无笔试,英文授课",
+          "exp": "无硬性",
+          "quota": "120人(上海)",
+          "dur": "2年",
+          "fee": "¥28.8万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "金融财务管理(MFM)",
+          "foreign": "加拿大阿尔伯塔大学",
+          "edu": "本科+学士",
+          "lang": "面试考核,英文授课",
+          "exp": "详询招办",
+          "quota": "90人(上海/深圳)",
+          "dur": "2年",
+          "fee": "¥31.8万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "高级管理人员工商管理硕士(EMBA)",
+          "foreign": "美国德克萨斯大学阿灵顿分校",
+          "edu": "本科+学士",
+          "lang": "英文授课+面试",
+          "exp": "5年+管理",
+          "quota": "90人",
+          "dur": "2年",
+          "fee": "¥33.8万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "工商管理硕士(MBA)",
+          "foreign": "香港理工大学",
+          "edu": "本科+学士",
+          "lang": "面试考核(英语)",
+          "exp": "详询招办",
+          "quota": "150人(上海/深圳)",
+          "dur": "2年",
+          "fee": "¥38.8万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "信息管理(MIS)硕士",
+          "foreign": "香港理工大学",
+          "edu": "本科+学士",
+          "lang": "面试考核,英文授课",
+          "exp": "详询招办",
+          "quota": "120人",
+          "dur": "2年",
+          "fee": "¥15.9万",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "建筑学(古迹与遗址保护)硕士",
+          "foreign": "意大利米兰理工大学",
+          "edu": "本科+学士学位(建筑/规划)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "西安电子科技大学",
+      "projects": [
+        {
+          "major": "数理金融",
+          "foreign": "英国赫瑞-瓦特大学",
+          "edu": "数学相关本科,均分≥68%~72%",
+          "lang": "第1年CET4≥450/雅思5.5; 第2年雅思6.5(6.0)",
+          "exp": "无硬性",
+          "quota": "60人",
+          "dur": "2年(1+1)",
+          "fee": "详询招办",
+          "note": "1+1模式,第2年英国",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "西北工业大学",
+      "projects": [
+        {
+          "major": "工业设计",
+          "foreign": "德国品牌应用科学大学",
+          "edu": "本科+学士,设计/工程相关",
+          "lang": "中英双语",
+          "exp": "无硬性",
+          "quota": "45人",
+          "dur": "2年",
+          "fee": "¥15万",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "西安工程大学",
+      "projects": [
+        {
+          "major": "服装及纺织品硕士",
+          "foreign": "香港理工大学",
+          "edu": "本科+学士学位",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "详询招办",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "西安石油大学",
+      "projects": [
+        {
+          "major": "信息技术",
+          "foreign": "新西兰国立联合学院",
+          "edu": "本科+学士",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "120人",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "西安邮电大学",
+      "projects": [
+        {
+          "major": "商业信息技术",
+          "foreign": "英国伦敦城市大学",
+          "edu": "本科+学士",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "60人",
+          "dur": "2年",
+          "fee": "详询招办",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "陕西师范大学",
+      "projects": [
+        {
+          "major": "计算机科学",
+          "foreign": "匈牙利塞格德大学",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "30人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        },
+        {
+          "major": "计算机科学工程",
+          "foreign": "匈牙利塞格德大学",
+          "edu": "本科+学士(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "30人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        }
+      ]
+    },
+    {
+      "school": "西安医学院",
+      "projects": [
+        {
+          "major": "肿瘤免疫治疗",
+          "foreign": "英国伦敦城市大学",
+          "edu": "本科+学士,医学/生物学(新批)",
+          "lang": "英文授课",
+          "exp": "详询招办",
+          "quota": "60人/年",
+          "dur": "2年",
+          "fee": "新批详询",
+          "note": "新批项目",
+          "tier": "暂未分级"
+        }
+      ]
+    }
+  ]
+};;
+
+const ALL_TIERS = ["A+", "A", "B", "C", "D", "暂未分级"];
+
+// Password verification
+const EXPECTED_HASH = '4b646bdc7157d75613bf0687b246227f039b74e48623a7ec1387461b493ba36a';
+
+async function verifyPassword(input) {
+  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input));
+  const hashHex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+  return hashHex === EXPECTED_HASH;
+}
+
+// Local overrides
+let overrides = {};
+const STORAGE_KEY = 'sino_overrides_v2';
+
+function loadOverrides() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) overrides = JSON.parse(saved);
+  } catch (e) { overrides = {}; }
+}
+
+function saveOverrides() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(overrides));
+}
+
+function applyOverrides() {
+  Object.keys(overrides).forEach(key => {
+    const parts = key.split('::');
+    if (parts.length !== 3) return;
+    const [prov, school, idx] = parts;
+    const provData = DATA[prov];
+    if (!provData) return;
+    const schoolData = provData.find(s => s.school === school);
+    if (schoolData && schoolData.projects[idx]) {
+      Object.assign(schoolData.projects[idx], overrides[key]);
+    }
+  });
+}
+
+// Edit modal
+let currentEditKey = null;
+
+function openEditModal(prov, school, idx) {
+  const schoolData = DATA[prov] && DATA[prov].find(s => s.school === school);
+  if (!schoolData) return;
+  const p = schoolData.projects[idx];
+  if (!p) return;
+
+  currentEditKey = `${prov}::${school}::${idx}`;
+  document.getElementById('modalSubtitle').textContent = `${school} · ${p.major}`;
+  document.getElementById('modalEdu').value = p.edu || '';
+  document.getElementById('modalLang').value = p.lang || '';
+  document.getElementById('modalExp').value = p.exp || '';
+  document.getElementById('modalQuota').value = p.quota || '';
+  document.getElementById('modalDur').value = p.dur || '';
+  document.getElementById('modalFee').value = p.fee || '';
+  document.getElementById('modalTier').value = p.tier || '暂未分级';
+  document.getElementById('modalPassword').value = '';
+  document.getElementById('modalError').textContent = '';
+  document.getElementById('editModal').classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('editModal').classList.remove('active');
+  currentEditKey = null;
+}
+
+async function submitEdit() {
+  if (!currentEditKey) return;
+
+  const password = document.getElementById('modalPassword').value.trim();
+  if (!password) {
+    document.getElementById('modalError').textContent = '请输入密码';
+    return;
+  }
+
+  const valid = await verifyPassword(password);
+  if (!valid) {
+    document.getElementById('modalError').textContent = '密码错误';
+    return;
+  }
+
+  const parts = currentEditKey.split('::');
+  if (parts.length !== 3) return;
+  const [prov, school, idx] = parts;
+  const schoolData = DATA[prov] && DATA[prov].find(s => s.school === school);
+  if (!schoolData) return;
+
+  const p = schoolData.projects[idx];
+  p.edu = document.getElementById('modalEdu').value.trim();
+  p.lang = document.getElementById('modalLang').value.trim();
+  p.exp = document.getElementById('modalExp').value.trim();
+  p.quota = document.getElementById('modalQuota').value.trim();
+  p.dur = document.getElementById('modalDur').value.trim();
+  p.fee = document.getElementById('modalFee').value.trim();
+  p.tier = document.getElementById('modalTier').value;
+
+  overrides[currentEditKey] = { edu: p.edu, lang: p.lang, exp: p.exp, quota: p.quota, dur: p.dur, fee: p.fee, tier: p.tier };
+  saveOverrides();
+
+  renderContent();
+  closeModal();
+}
+
+// State
+const ACCENT_COLORS = 8;
+const provinces = Object.keys(DATA);
+let activeProvince = '北京';
+let activeTier = '';
+let activeSchool = '';
+
+function renderTierChips() {
+  const el = document.getElementById('tierChips');
+  el.innerHTML = [
+    `<button class="tier-chip ${activeTier === '' ? 'active' : ''}" data-tier="" style="background:${activeTier === '' ? '#2b6cb0' : ''};color:${activeTier === '' ? '#fff' : ''};border-color:${activeTier === '' ? '#2b6cb0' : ''}">全部</button>`,
+    ...ALL_TIERS.map(t => `<button class="tier-chip ${activeTier === t ? 'active' : ''}" data-tier="${t}">${t}</button>`)
+  ].join('');
+}
+
+function renderSchoolFilter() {
+  const schools = DATA[activeProvince] || [];
+  const el = document.getElementById('schoolFilter');
+  el.innerHTML = `<option value="">全部院校</option>` +
+    schools.map(s => `<option value="${s.school}" ${activeSchool === s.school ? 'selected' : ''}>${s.school}</option>`).join('');
+}
+
+function renderProvinceSelect() {
+  const el = document.getElementById('provinceSelect');
+  el.innerHTML = provinces.map(p => 
+    `<button class="province-btn ${p === activeProvince ? 'active' : ''}" data-prov="${p}">${p}</button>`
+  ).join('');
+}
+
+function renderContent() {
+  const main = document.getElementById('mainContent');
+  const schools = DATA[activeProvince] || [];
+  const stats = document.getElementById('stats');
+  const searchVal = document.getElementById('searchInput').value.toLowerCase().trim();
+  
+  let totalProjects = 0;
+  let visibleSchools = 0;
+  let html = '';
+  
+  schools.forEach((school, schoolIdx) => {
+    if (activeSchool && school.school !== activeSchool) return;
+    
+    const filtered = school.projects.filter(p => {
+      if (activeTier && (p.tier || '暂未分级') !== activeTier) return false;
+      if (searchVal) {
+        const searchStr = [p.major, p.foreign, p.edu, p.lang, p.exp, school.school, p.tier, p.fee]
+          .filter(Boolean).join(' ').toLowerCase();
+        if (!searchStr.includes(searchVal)) return false;
+      }
+      return true;
+    });
+    
+    if (filtered.length === 0) return;
+    visibleSchools++;
+    totalProjects += filtered.length;
+    
+    const accentIdx = (schoolIdx % ACCENT_COLORS) + 1;
+    
+    html += `
+    <div class="school-group" data-school="${school.school}">
+      <div class="school-header s-header-${accentIdx}">
+        <div class="school-name">${school.school}</div>
+        <div class="school-meta">
+          <span class="school-count">${filtered.length}个项目</span>
+        </div>
+      </div>
+      <div class="school-body">
+        <div class="card-list">
+          ${filtered.map((p, idx) => renderCard(p, accentIdx, school.school, school.projects.indexOf(p), activeProvince)).join('')}
+        </div>
+      </div>
+    </div>`;
+  });
+  
+  if (totalProjects === 0) {
+    html = `<div class="empty-state">
+      <svg viewBox="0 0 64 64" fill="none" stroke="#a0aec0" stroke-width="2"><circle cx="27" cy="27" r="12"/><path d="m36 36 10 10"/></svg>
+      <p>${searchVal || activeTier || activeSchool ? '未找到匹配项目，换个筛选条件试试' : '暂无项目数据'}</p>
+    </div>`;
+  }
+  
+  main.innerHTML = html;
+
+  let statsParts = [activeProvince];
+  if (activeTier) statsParts.push(`分级: ${activeTier}`);
+  if (activeSchool) statsParts.push(activeSchool);
+  statsParts.push(`<span>${visibleSchools}</span> 所院校 · <span>${totalProjects}</span> 个项目`);
+  stats.innerHTML = statsParts.join(' · ');
+}
+
+function getTierClass(tier) {
+  const map = { 'A+': 't-ap', 'A': 't-a', 'B': 't-b', 'C': 't-c', 'D': 't-d', '暂未分级': 't-unk' };
+  return map[tier] || 't-unk';
+}
+
+function renderCard(p, accentIdx, schoolName, projectIdx, province) {
+  const tier = p.tier || '暂未分级';
+  const tierCls = getTierClass(tier);
+  const isNew = !p.fee || p.fee === '新批详询';
+  const feeCls = isNew ? ' fee-new' : '';
+  return `
+    <div class="card c-accent-${accentIdx}">
+      <span class="tier-badge ${tierCls}" title="分级: ${tier}">${tier}</span>
+      <div class="card-major-block">
+        <div class="card-major">${p.major}</div>
+        <div class="card-foreign">${p.foreign}</div>
+      </div>
+      <div class="card-field">
+        <div class="card-field-label">学历要求</div>
+        <div class="card-field-value">${p.edu || '<span class="not-available">待查</span>'}</div>
+      </div>
+      <div class="card-field">
+        <div class="card-field-label">语言要求</div>
+        <div class="card-field-value">${p.lang || '<span class="not-available">待查</span>'}</div>
+      </div>
+      <div class="card-field" style="flex:0 0 90px;">
+        <div class="card-field-label">工作经验</div>
+        <div class="card-field-value">${p.exp || '<span class="not-available">-</span>'}</div>
+      </div>
+      <div class="card-field" style="flex:0 0 64px;">
+        <div class="card-field-label">人数</div>
+        <div class="card-field-value">${p.quota || '-'}</div>
+      </div>
+      <div class="card-field" style="flex:0 0 48px;">
+        <div class="card-field-label">学制</div>
+        <div class="card-field-value">${p.dur || '-'}</div>
+      </div>
+      <div class="card-field-fee" title="${p.fee || ''}">
+        <div class="card-field-label">学费</div>
+        <span class="card-fee-value${feeCls}">${p.fee || '<span class="not-available">待查</span>'}</span>
+      </div>
+      ${p.note ? `<span class="card-note" title="${p.note}">${p.note}</span>` : ''}
+      <button class="card-edit" onclick="event.stopPropagation();openEditModal('${province}', '${schoolName}', ${projectIdx})" title="更新信息">✎</button>
+    </div>`;
+}
+
+// Events
+document.getElementById('searchInput').addEventListener('input', () => { renderContent(); });
+
+document.getElementById('provinceSelect').addEventListener('click', (e) => {
+  if (e.target.classList.contains('province-btn')) {
+    activeProvince = e.target.dataset.prov;
+    activeSchool = '';
+    activeTier = '';
+    renderProvinceSelect();
+    renderTierChips();
+    renderSchoolFilter();
+    document.getElementById('searchInput').value = '';
+    renderContent();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+});
+
+document.getElementById('tierChips').addEventListener('click', (e) => {
+  if (e.target.classList.contains('tier-chip')) {
+    activeTier = e.target.dataset.tier;
+    renderTierChips();
+    renderContent();
+  }
+});
+
+document.getElementById('schoolFilter').addEventListener('change', (e) => {
+  activeSchool = e.target.value;
+  renderContent();
+});
+
+document.getElementById('editModal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('editModal')) closeModal();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.getElementById('editModal').classList.contains('active')) {
+    closeModal();
+  }
+  if (e.key === 'Enter' && document.activeElement === document.getElementById('modalPassword')) {
+    e.preventDefault();
+    submitEdit();
+  }
+});
+
+// 禁止复制 & 禁止右键
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('dragstart', e => e.preventDefault());
+document.addEventListener('selectstart', e => { if (!/input|textarea|select/i.test(e.target.tagName)) e.preventDefault(); });
+document.addEventListener('keydown', e => {
+  const t = e.target.tagName.toLowerCase();
+  if (t === 'input' || t === 'textarea' || t === 'select') return true;
+  if ((e.ctrlKey || e.metaKey) && ['c','a','s','u','p','x','v'].includes(e.key.toLowerCase())) {
+    e.preventDefault(); return false;
+  }
+  if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+    e.preventDefault(); return false;
+  }
+});
+
+// Init
+loadOverrides();
+applyOverrides();
+renderProvinceSelect();
+renderTierChips();
+renderSchoolFilter();
+renderContent();
+</script>
+
+</body>
+</html>
