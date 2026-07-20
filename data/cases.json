@@ -1,0 +1,478 @@
+[
+  {
+    "school": "云南财经大学",
+    "partner": "英国格林尼治大学",
+    "program": "项目管理硕士",
+    "quota": "120人",
+    "tag": "合作办学"
+  },
+  {
+    "school": "南昌大学",
+    "partner": "法国普瓦提埃大学",
+    "program": "企业管理硕士（碳中和方向）",
+    "quota": "60人",
+    "tag": "合作办学"
+  },
+  {
+    "school": "河南财经政法大学",
+    "partner": "美国西崖大学",
+    "program": "工商管理硕士（数字与战略营销）",
+    "quota": "85人/年",
+    "tag": "合作办学"
+  },
+  {
+    "school": "贵州大学",
+    "partner": "加拿大魁北克大学",
+    "program": "项目管理硕士",
+    "quota": "110人",
+    "tag": "合作办学"
+  },
+  {
+    "school": "西安交通大学",
+    "partner": "加拿大阿尔伯塔大学",
+    "program": "金融财务管理硕士",
+    "quota": "90人",
+    "tag": "合作办学"
+  },
+  {
+    "school": "北京大学",
+    "partner": "英国UCL",
+    "program": "工商管理硕士（MBA）",
+    "quota": "200人/年",
+    "tag": "合作办学"
+  },
+  {
+    "school": "天津商业大学",
+    "partner": "法国Excelia商学院",
+    "program": "可持续金融硕士",
+    "quota": "120人",
+    "tag": "合作办学"
+  },
+  {
+    "school": "北京国家会计学院",
+    "partner": "香港城市大学",
+    "program": "智能会计与金融科技应用硕士",
+    "quota": "50人",
+    "tag": "合作办学"
+  },
+  {
+    "school": "天津理工大学",
+    "partner": "加拿大魁北克大学",
+    "program": "项目管理硕士",
+    "quota": "105人",
+    "tag": "合作办学"
+  },
+  {
+    "school": "对外经济贸易大学",
+    "partner": "法国诺欧商学院",
+    "program": "零售管理理学硕士",
+    "quota": "110人/年",
+    "tag": "合作办学"
+  },
+  {
+    "school": "对外经济贸易大学",
+    "partner": "法国巴黎第一大学",
+    "program": "企业管理硕士",
+    "quota": "90人/年",
+    "tag": "合作办学"
+  },
+  {
+    "school": "北京邮电大学",
+    "partner": "法国里昂商学院",
+    "program": "高级管理人员工商管理硕士（EMBA）",
+    "quota": "100人",
+    "tag": "合作办学"
+  },
+  {
+    "school": "北京国家会计学院",
+    "partner": "美国天普大学",
+    "program": "IT审计与网络安全硕士",
+    "quota": "40人",
+    "tag": "合作办学"
+  },
+  {
+    "school": "中国社会科学院大学",
+    "partner": "美国杜兰大学",
+    "program": "金融管理硕士",
+    "quota": "60人",
+    "tag": "合作办学"
+  },
+  {
+    "school": "南京大学",
+    "partner": "荷兰马斯特里赫特大学",
+    "program": "国际EMBA",
+    "quota": "130人",
+    "tag": "合作办学"
+  },
+  {
+    "school": "上海财经大学",
+    "partner": "美国韦伯斯特大学",
+    "program": "工商管理硕士（MBA）",
+    "quota": "150人",
+    "tag": "合作办学"
+  },
+  {
+    "school": "南昌大学",
+    "partner": "法国普瓦提埃大学",
+    "program": "国际企业管理硕士",
+    "quota": "60人",
+    "tag": "合作办学"
+  },
+  {
+    "school": "北京大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "中国人民大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "清华大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "北京航空航天大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "北京理工大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "中国农业大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "北京师范大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "南开大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "天津大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "大连理工大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "东北大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "吉林大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "哈尔滨工业大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "复旦大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "同济大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "上海交通大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "华东师范大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "南京大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "东南大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "浙江大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "中国科学技术大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "厦门大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "山东大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "武汉大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "华中科技大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "湖南大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "中南大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "中山大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "华南理工大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "四川大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "重庆大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "电子科技大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "西安交通大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "西北工业大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "北京大学",
+    "partner": "",
+    "program": "公共管理硕士（MPA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "长江商学院",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "中国传媒大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "北京交通大学",
+    "partner": "",
+    "program": "工程管理硕士（MEM）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "北京交通大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "暨南大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "华东理工大学",
+    "partner": "",
+    "program": "工程管理硕士（MEM）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "云南财经大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "宁夏大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "中国矿业大学（北京）",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "中国科学院大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "广西师范大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "北京林业大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "上海财经大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "重庆大学",
+    "partner": "",
+    "program": "公共管理硕士（MPA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "河北工业大学",
+    "partner": "",
+    "program": "工商管理硕士（MBA）",
+    "quota": "",
+    "tag": "管理类联考"
+  },
+  {
+    "school": "同济大学",
+    "partner": "",
+    "program": "工程管理硕士（MEM）",
+    "quota": "",
+    "tag": "管理类联考"
+  }
+]

@@ -15,7 +15,7 @@
 <meta content="果芽MBA" property="og:site_name"/>
 <meta content="https://guoya.net.cn/images/og-image.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<link href="style.css" rel="stylesheet"/>
+<link href="style.css?v=6" rel="stylesheet"/>
 <script defer="" src="main.js"></script>
 <script type="application/ld+json">
     {
@@ -24,7 +24,7 @@
             {
                 "@type": "Organization",
                 "name": "果芽MBA",
-                "alternateName": "果芽（北京）信息咨询有限公司",
+                "alternateName": "北京铄橙教育科技有限责任公司",
                 "url": "https://guoya.net.cn/",
                 "logo": "https://guoya.net.cn/images/og-image.png",
                 "description": "果芽MBA专注在职考研，提供MBA、MPA、MEM、EMBA等管理类联考培训、中外合作办学硕士辅导及商学院品牌运营服务。",
@@ -80,13 +80,25 @@
 <p class="reveal">了解果芽MBA，专注在职考研的成长伙伴</p>
 </div>
 </section>
+<!-- 页面内锚点导航 -->
+<div class="page-subnav" id="pageSubnav">
+  <div class="page-subnav-inner">
+    <a href="#brand" class="subnav-item active">品牌故事</a>
+    <a href="#stats" class="subnav-item">实力与口碑</a>
+    <a href="#services" class="subnav-item">核心业务</a>
+    <a href="#lives" class="subnav-item">直播记录</a>
+    <a href="#cases" class="subnav-item">录取案例</a>
+    <a href="#courses" class="subnav-item">课程体系</a>
+    <a href="#testimonials" class="subnav-item">口碑见证</a>
+  </div>
+</div>
 <!-- 关于 -->
-<section class="about-section">
+<section class="about-section" id="brand">
 <div class="about-grid">
 <div class="about-left reveal">
 <h2>果芽MBA</h2>
 <p class="lead">选果芽，就过呀。自2018年3月运营至今，我们始终陪伴在职考生走好考研每一步。</p>
-<p>果芽MBA是果芽（北京）信息咨询有限公司旗下的在职考研辅导品牌。2025年，结合考生需求与市场发展趋势，我们完成业务升级，持续为在职人士提供管理类联考培训、中外合作办学硕士辅导及商学院品牌运营服务。</p>
+<p>果芽MBA是北京铄橙教育科技有限责任公司旗下的在职考研辅导品牌。2025年，结合考生需求与市场发展趋势，我们完成业务升级，持续为在职人士提供管理类联考培训、中外合作办学硕士辅导及商学院品牌运营服务。</p>
 <p>创立至今，累计免费服务考生超 <strong>15 万</strong>，各类付费产品考生超 <strong>10 万</strong>。在择校服务上，我们首创<strong>大数据量化择校评估系统</strong>，为考生量身定制择校方案；在内容输出上累计原创图文、视频超过 <strong>3300 篇（条）</strong>，全渠道内容累计流量超过 <strong>500 万</strong>，始终坚持为学员提供有价值的原创内容。</p>
 </div>
 <div class="about-right reveal">
@@ -95,10 +107,10 @@
 </div>
 </section>
 <!-- 数据背书 -->
-<section class="section section-alt">
+<section class="section section-alt" id="stats">
 <div class="section-inner">
 <h2 class="section-title reveal">实力与口碑</h2>
-<div class="grid-3">
+<div class="grid-3 stats-grid">
 <div class="card reveal">
 <h3>15万+</h3>
 <p>累计免费服务考生</p>
@@ -127,7 +139,7 @@
 </div>
 </section>
 <!-- 核心业务 -->
-<section class="section">
+<section class="section" id="services">
 <div class="section-inner">
 <h2 class="section-title reveal">核心业务</h2>
 <div class="grid-3">
@@ -156,7 +168,7 @@
 </div>
 </section>
 <!-- 院校合作 -->
-<section class="section section-alt">
+<section class="section section-alt cooperation-section">
 <div class="section-inner">
 <h2 class="section-title reveal">院校合作</h2>
 <div class="about-grid" style="margin-top:0">
@@ -166,7 +178,212 @@
 <p><strong>招生政策宣讲：</strong>联合院校在官方账号进行招生政策宣讲，确保果芽MBA考生及其他潜在考生及时了解最新、最权威的招生政策。</p>
 </div>
 <div class="about-right reveal">
-<img alt="院校合作" loading="lazy" src="images/about-cooperation.svg"/>
+<img alt="院校合作" class="cooperation-img" loading="lazy" src="images/about-cooperation.svg"/>
+</div>
+</div>
+</div>
+</section>
+<!-- 直播记录 -->
+<section class="section" id="lives">
+<div class="section-inner">
+<h2 class="section-title reveal">官方直播记录</h2>
+<p class="reveal" style="color:var(--muted);font-size:14px;margin:-36px 0 20px">果芽MBA定期举办线上直播分享，邀请院校官方老师宣讲，为考生提供最新政策解读与备考指导。以下为历史直播记录：</p>
+<div class="live-month-tabs reveal" id="liveMonthTabs"></div>
+<div class="timeline reveal" id="liveTimeline">
+<div class="timeline-empty">加载中...</div>
+</div>
+</div>
+</section>
+<!-- 录取案例 -->
+<section class="section section-alt" id="cases">
+<div class="section-inner">
+<h2 class="section-title reveal">录取案例</h2>
+<div class="cases-tabs reveal">
+<button class="cases-tab active" data-tab="合作办学">合作办学</button>
+<button class="cases-tab" data-tab="管理类联考">管理类联考</button>
+</div>
+<p class="reveal cases-desc" id="casesDesc" style="color:var(--muted);font-size:14px;margin:0 0 40px">以下为近期部分合作办学硕士录取案例，持续更新中：</p>
+<div class="cases-grid reveal" id="casesGrid">
+</div>
+<a id="casesLink" class="cases-db-link reveal" href="https://guoya.net.cn/sino" target="_blank" rel="noopener">访问合作办学硕士院校库 →</a>
+</div>
+</section>
+<!-- 课程体系 -->
+<section class="section" id="courses">
+<div class="section-inner">
+<h2 class="section-title reveal">课程体系</h2>
+<p class="reveal" style="color:var(--muted);font-size:14px;margin:-36px 0 48px">果芽MBA围绕在职考生需求，打造三大课程体系，覆盖笔试、体验营、中外合作办学全场景辅导：</p>
+<div class="course-tracks reveal">
+<!-- 笔试辅导 -->
+<div class="course-track">
+<div class="course-track-header">
+<div class="course-track-icon exam">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 3L4 9v8l8 4 8-4V9l-8-6z" fill="#e85a2b" opacity="0.3" stroke="#e85a2b" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 13v8" stroke="#e85a2b" stroke-width="1.5" stroke-linejoin="round"/><path d="M20 9l-8 4-8-4" stroke="#e85a2b" stroke-width="1.5" stroke-linejoin="round"/></svg>
+</div>
+<div class="course-track-title">管理类联考笔试辅导</div>
+<div class="course-track-subtitle">六阶目标学习法 · 10人小班督学</div>
+</div>
+<div class="course-phases">
+<div class="course-phase">
+<div class="course-phase-num">1</div>
+<div class="course-phase-info">
+<h4>负基础唤醒</h4>
+<p>针对多年未接触数学/英语的在职考生，从最基础的概念唤醒，建立学习信心</p>
+</div>
+</div>
+<div class="course-phase">
+<div class="course-phase-num">2</div>
+<div class="course-phase-info">
+<h4>系统精讲</h4>
+<p>数学/逻辑/写作/英语四科全覆盖，逐知识点讲解，构建完整知识框架</p>
+</div>
+</div>
+<div class="course-phase">
+<div class="course-phase-num">3</div>
+<div class="course-phase-info">
+<h4>真题集训</h4>
+<p>近10年真题拆解训练，从命题人视角反推考点，掌握真题出题规律</p>
+</div>
+</div>
+<div class="course-phase">
+<div class="course-phase-num">4</div>
+<div class="course-phase-info">
+<h4>模考冲刺</h4>
+<p>全真模考+逐题讲评，实战演练考试节奏，查漏补缺精准提分</p>
+</div>
+</div>
+<div class="course-phase">
+<div class="course-phase-num">5</div>
+<div class="course-phase-info">
+<h4>考前密训</h4>
+<p>考前最后阶段押题密训，高频考点串讲，稳定心态迎考</p>
+</div>
+</div>
+<div class="course-phase">
+<div class="course-phase-num">6</div>
+<div class="course-phase-info">
+<h4>全程督学服务</h4>
+<p>每周规划 + 阶段模考 + 学姐答疑 + 报名提醒 + 心理指导 + 动态调整</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 体验营辅导 -->
+<div class="course-track">
+<div class="course-track-header">
+<div class="course-track-icon interview">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#28b894" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4" stroke="#28b894" stroke-width="1.5"/><path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="#28b894" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="#28b894" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+<div class="course-track-title">体验营辅导</div>
+<div class="course-track-subtitle">提前锁定优秀成绩 · 获取专项奖学金</div>
+</div>
+<div class="course-phases">
+<div class="course-phase">
+<div class="course-phase-num">1</div>
+<div class="course-phase-info">
+<h4>背景评估与定位</h4>
+<p>基于大数据量化择校系统，为考生匹配目标院校，制定体验营策略</p>
+</div>
+</div>
+<div class="course-phase">
+<div class="course-phase-num">2</div>
+<div class="course-phase-info">
+<h4>申请材料精修</h4>
+<p>简历优化、申请短文多轮打磨，突出个人亮点与院校匹配度</p>
+</div>
+</div>
+<div class="course-phase">
+<div class="course-phase-num">3</div>
+<div class="course-phase-info">
+<h4>模拟面试训练</h4>
+<p>多对一全真模拟，覆盖个人面试、小组面试、英语面试等全部形式</p>
+</div>
+</div>
+<div class="course-phase">
+<div class="course-phase-num">4</div>
+<div class="course-phase-info">
+<h4>院校活动指导</h4>
+<p>校园开放日、宣讲会、体验营活动的参与策略与注意事项</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 中外合作办学辅导 -->
+<div class="course-track">
+<div class="course-track-header">
+<div class="course-track-icon sino">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#534ab7" stroke-width="1.5"/><path d="M2 12h20" stroke="#534ab7" stroke-width="1.5"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="#534ab7" stroke-width="1.5"/></svg>
+</div>
+<div class="course-track-title">中外合作办学硕士辅导</div>
+<div class="course-track-subtitle">多对一辅导 · 院校关系辅助</div>
+</div>
+<div class="course-phases">
+<div class="course-phase">
+<div class="course-phase-num">1</div>
+<div class="course-phase-info">
+<h4>项目匹配与定位</h4>
+<p>根据考生学历背景、工作经验、语言水平，精准匹配适合的中外合作办学硕士项目</p>
+</div>
+</div>
+<div class="course-phase">
+<div class="course-phase-num">2</div>
+<div class="course-phase-info">
+<h4>笔试针对性辅导</h4>
+<p>因各院校自主命题差异大，根据目标院校考试特点定制笔试辅导方案</p>
+</div>
+</div>
+<div class="course-phase">
+<div class="course-phase-num">3</div>
+<div class="course-phase-info">
+<h4>面试专项训练</h4>
+<p>中外合作办学注重综合面试，提供中英文双语面试模拟与反馈</p>
+</div>
+</div>
+<div class="course-phase">
+<div class="course-phase-num">4</div>
+<div class="course-phase-info">
+<h4>院校关系辅助</h4>
+<p>必要时与招生院校沟通考生背景情况，确保申请材料能准确触达招生决策者</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 口碑见证 -->
+<section class="section section-alt" id="testimonials">
+<div class="section-inner">
+<h2 class="section-title reveal">口碑见证</h2>
+<p class="reveal" style="color:var(--muted);font-size:14px;margin:-36px 0 48px">多年辅导积累的真实录取、高分与学员反馈：</p>
+<div class="testimonials-grid reveal">
+<div class="testimonial-card">
+<img alt="果芽MBA辅导资料" loading="lazy" src="images/testimonials/books.jpg"/>
+<div class="testimonial-label">辅导资料</div>
+</div>
+<div class="testimonial-card">
+<img alt="北京大学录取" loading="lazy" src="images/testimonials/peking.jpg"/>
+<div class="testimonial-label">北大录取</div>
+</div>
+<div class="testimonial-card">
+<img alt="清华大学、中国人民大学录取" loading="lazy" src="images/testimonials/tsinghua-renmin.png"/>
+<div class="testimonial-label">清华人大录取</div>
+</div>
+<div class="testimonial-card">
+<img alt="上海交大、中山大学录取" loading="lazy" src="images/testimonials/sjtu-sun.png"/>
+<div class="testimonial-label">上交中山录取</div>
+</div>
+<div class="testimonial-card">
+<img alt="多所名校录取" loading="lazy" src="images/testimonials/multi-school.png"/>
+<div class="testimonial-label">多校录取</div>
+</div>
+<div class="testimonial-card">
+<img alt="高分喜报" loading="lazy" src="images/testimonials/high-scores.jpg"/>
+<div class="testimonial-label">高分喜报</div>
+</div>
+<div class="testimonial-card">
+<img alt="学员真实反馈" loading="lazy" src="images/testimonials/chat-reviews.jpg"/>
+<div class="testimonial-label">学员反馈</div>
 </div>
 </div>
 </div>
@@ -239,9 +456,221 @@
 </div>
 </div>
 <div class="footer-bottom">
-<p>© 2024 果芽（北京）信息咨询有限公司 <a href="https://beian.miit.gov.cn/" rel="noopener noreferrer" style="color:#999;text-decoration:none;" target="_blank">京ICP备2026031809号</a></p>
+<p>© 2024 北京铄橙教育科技有限责任公司 <a href="https://beian.miit.gov.cn/" rel="noopener noreferrer" style="color:#999;text-decoration:none;" target="_blank">京ICP备2026031809号</a></p>
 </div>
 </div>
 </footer>
+<script>
+// ===== 加载直播记录（按月切换）=====
+(function() {
+    var container = document.getElementById('liveTimeline');
+    var tabsContainer = document.getElementById('liveMonthTabs');
+    if (!container) return;
+
+    var allLives = [];
+    var activeMonth = null;
+
+    fetch('data/lives.json')
+        .then(function(r) { return r.json(); })
+        .then(function(lives) {
+            if (!lives.length) {
+                container.innerHTML = '<div class="timeline-empty">暂无直播记录，敬请期待</div>';
+                return;
+            }
+            allLives = lives;
+            allLives.sort(function(a, b) { return b.date.localeCompare(a.date); });
+
+            // 按月分组
+            var months = {};
+            allLives.forEach(function(l) {
+                var m = l.date.substring(0, 7); // "2026-07"
+                if (!months[m]) months[m] = [];
+                months[m].push(l);
+            });
+            var monthKeys = Object.keys(months).sort().reverse();
+
+            // 渲染月份切换按钮
+            var monthNames = {1:'1月',2:'2月',3:'3月',4:'4月',5:'5月',6:'6月',7:'7月',8:'8月',9:'9月',10:'10月',11:'11月',12:'12月'};
+            tabsContainer.innerHTML = monthKeys.map(function(mk) {
+                var parts = mk.split('-');
+                var label = parts[0] + '年' + (monthNames[parseInt(parts[1])] || parts[1]+'月');
+                var count = months[mk].length;
+                return '<button class="live-month-btn" data-month="' + mk + '">' + label + '<i>' + count + '场</i></button>';
+            }).join('');
+
+            // 默认选中最新月份
+            activeMonth = monthKeys[0];
+            renderMonth(months[activeMonth]);
+            tabsContainer.querySelector('[data-month="' + activeMonth + '"]').classList.add('active');
+
+            // 点击切换
+            tabsContainer.addEventListener('click', function(e) {
+                var btn = e.target.closest('.live-month-btn');
+                if (!btn) return;
+                var mk = btn.getAttribute('data-month');
+                if (mk === activeMonth) return;
+                activeMonth = mk;
+                tabsContainer.querySelectorAll('.live-month-btn').forEach(function(b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                renderMonth(months[mk]);
+            });
+
+            function renderMonth(monthLives) {
+                container.style.opacity = '0';
+                setTimeout(function() {
+                    container.innerHTML = monthLives.map(function(live) {
+                        var date = new Date(live.date);
+                        var month = date.getMonth() + 1;
+                        var day = date.getDate();
+                        var wd = '周' + ['日','一','二','三','四','五','六'][date.getDay()];
+                        return '<div class="live-card">'
+                            + '<div class="live-card-date">'
+                            + '<span class="live-card-day">' + month + '.' + day + '</span>'
+                            + '<span class="live-card-weekday">' + wd + '</span>'
+                            + '</div>'
+                            + '<div class="live-card-topic">' + live.topic + '</div>'
+                            + '</div>';
+                    }).join('');
+                    container.style.opacity = '1';
+                }, 80);
+            }
+        })
+        .catch(function() {
+            container.innerHTML = '<div class="timeline-empty">直播记录加载失败，请刷新重试</div>';
+        });
+})();
+
+// ===== 加载录取案例（支持标签切换）=====
+(function() {
+    var grid = document.getElementById('casesGrid');
+    var desc = document.getElementById('casesDesc');
+    var tabs = document.querySelectorAll('.cases-tab');
+    if (!grid) return;
+
+    var allCases = [];
+    var activeTab = '合作办学';
+
+    var descMap = {
+        '合作办学': '以下为近期部分合作办学硕士录取案例，持续更新中：',
+        '管理类联考': '以下为部分管理类联考录取案例，34所985自主划线MBA及重点院校专业全覆盖：'
+    };
+
+    var linkMap = {
+        '合作办学': 'https://guoya.net.cn/sino',
+        '管理类联考': 'https://liankao.org.cn/schools/'
+    };
+
+    var linkLabelMap = {
+        '合作办学': '访问合作办学硕士院校库 →',
+        '管理类联考': '访问管理类联考院校库 →'
+    };
+
+    function renderCases() {
+        var filtered = allCases.filter(function(c) { return c.tag === activeTab; });
+        filtered.sort(function(a, b) { return a.school.localeCompare(b.school, 'zh'); });
+
+        if (!filtered.length) {
+            grid.innerHTML = '<div class="cases-empty">暂无录取案例，敬请期待</div>';
+            return;
+        }
+
+        if (desc) desc.textContent = descMap[activeTab] || descMap['合作办学'];
+
+            grid.innerHTML = filtered.map(function(c) {
+                var tagClass = c.tag === '合作办学' ? 'tag-sino' : 'tag-exam';
+                var partnerHtml = c.partner ? '<div class="case-partner-line">' + c.partner + '</div>' : '';
+
+                return '<div class="case-card reveal">'
+                    + '<div class="case-tag-row"><span class="case-tag ' + tagClass + '">' + c.tag + '</span></div>'
+                    + '<div class="case-program-name">' + c.program + '</div>'
+                    + '<div class="case-school-pair">'
+                    + '<div class="case-school-line">' + c.school + '</div>'
+                    + partnerHtml
+                    + '</div>'
+                    + '</div>';
+            }).join('');
+
+            // 院校库入口链接
+            var linkEl = document.getElementById('casesLink');
+            if (linkEl) {
+                linkEl.href = linkMap[activeTab];
+                linkEl.textContent = linkLabelMap[activeTab];
+            }
+
+        // 触发滚动动画
+        setTimeout(function() {
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            grid.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+        }, 100);
+    }
+
+    // 标签切换
+    tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            if (this.classList.contains('active')) return;
+            tabs.forEach(function(t) { t.classList.remove('active'); });
+            this.classList.add('active');
+            activeTab = this.getAttribute('data-tab');
+            renderCases();
+        });
+    });
+
+    // 加载数据
+    fetch('data/cases.json')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            allCases = data;
+            renderCases();
+        })
+        .catch(function() {
+            grid.innerHTML = '<div class="cases-empty">案例数据加载失败，请刷新重试</div>';
+        });
+})();
+</script>
+<!-- 锚点导航滚动高亮 -->
+<script>
+(function() {
+    var items = document.querySelectorAll('.subnav-item');
+    if (!items.length) return;
+
+    var sections = [];
+    items.forEach(function(item) {
+        var id = item.getAttribute('href').replace('#', '');
+        var el = document.getElementById(id);
+        if (el) sections.push({ id: id, el: el, item: item });
+    });
+
+    function update() {
+        var scrollY = window.scrollY + 130;
+        var active = sections[0];
+        for (var i = 0; i < sections.length; i++) {
+            if (scrollY >= sections[i].el.offsetTop) {
+                active = sections[i];
+            }
+        }
+        items.forEach(function(item) { item.classList.remove('active'); });
+        if (active) active.item.classList.add('active');
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+
+    items.forEach(function(item) {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            var id = this.getAttribute('href').replace('#', '');
+            var el = document.getElementById(id);
+            if (!el) return;
+            items.forEach(function(i) { i.classList.remove('active'); });
+            this.classList.add('active');
+            var top = el.offsetTop - 120;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+        });
+    });
+})();
+</script>
 </body>
 </html>

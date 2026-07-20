@@ -709,7 +709,66 @@ ul { list-style: none; }
     color: var(--text);
 }
 
-/* ========== Page Header ========== */
+/* ========== Page Sub Navigation ========== */
+.page-subnav {
+    position: sticky;
+    top: 64px;
+    z-index: 99;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.page-subnav::-webkit-scrollbar { display: none; }
+
+.page-subnav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    gap: 6px;
+    height: 48px;
+    align-items: center;
+}
+
+.subnav-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 18px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.2s;
+    scroll-margin-top: 120px;
+}
+
+.subnav-item:hover {
+    color: var(--accent);
+    background: rgba(232, 90, 43, 0.06);
+}
+
+.subnav-item.active {
+    color: #ffffff;
+    background: var(--accent);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .page-subnav-inner {
+        gap: 4px;
+        padding: 0 16px;
+    }
+    .subnav-item {
+        padding: 5px 14px;
+        font-size: 12px;
+    }
+}
 .page-header {
     padding: 160px 24px 80px;
     text-align: center;
@@ -882,6 +941,30 @@ ul { list-style: none; }
     display: block;
 }
 
+/* 院校合作：减少因图片过高导致的左侧留白 */
+.cooperation-section {
+    padding: 60px 24px;
+}
+
+.cooperation-section .about-grid {
+    gap: 48px;
+    align-items: center;
+}
+
+.cooperation-section .about-right {
+    padding-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cooperation-section .cooperation-img {
+    max-height: 180px;
+    width: auto;
+    max-width: 100%;
+    border-radius: 16px;
+}
+
 .mission-card {
     padding: 32px;
     border: 1px solid var(--border);
@@ -944,23 +1027,83 @@ ul { list-style: none; }
     .hero h1 { font-size: 36px; }
     .hero-slogan { font-size: 12px; }
     
-    .grid-3 { grid-template-columns: 1fr; }
+    .grid-3 { grid-template-columns: 1fr; gap: 12px; }
     .grid-4 { grid-template-columns: repeat(2, 1fr); }
     
-    .section { padding: 64px 24px; }
-    .section-title { font-size: 28px; margin-bottom: 40px; }
+    .section { padding: 48px 20px; }
+    .section-title { font-size: 26px; margin-bottom: 28px; }
+    
+    .about-section { padding: 48px 20px; }
+    
+    .cooperation-section {
+        padding: 40px 20px;
+    }
+    .cooperation-section .about-grid {
+        gap: 24px;
+    }
+    .cooperation-section .cooperation-img {
+        max-height: 160px;
+    }
+    
+    /* 移动端禁用 reveal 动画，避免首屏和大段空白 */
+    .reveal,
+    .reveal.visible {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    
+    /* 移动端压缩卡片留白 */
+    .card { padding: 24px 20px; }
+    .grid-3 .card { padding: 22px 18px; }
+    .grid-3 .card h3 { font-size: 20px; margin-bottom: 6px; }
+    .grid-3 .card p { font-size: 13px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .stats-grid .card { padding: 18px 14px; }
+    .stats-grid .card h3 { font-size: 20px; }
+    .stats-grid .card p { font-size: 12px; }
+    .program-card { padding: 22px 18px; }
+    .program-card p { font-size: 13px; line-height: 1.7; }
+    .case-card { padding: 18px 16px; }
+    .course-track-header { padding: 20px 16px 14px; }
+    .course-phases { padding: 14px 16px; }
+    .course-track-icon { width: 40px; height: 40px; font-size: 20px; margin-bottom: 10px; }
+    .course-track-title { font-size: 15px; }
+    
+    .cases-grid { gap: 12px; }
+    .course-tracks { gap: 14px; }
     
     .footer-grid { grid-template-columns: 1fr; gap: 32px; }
     
-    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    .about-right { text-align: center; }
+    .about-right img { max-width: 72%; margin: 0 auto; }
     
     .contact-grid { grid-template-columns: 1fr; }
     
-    .page-header { padding: 120px 24px 48px; }
+    .page-header { padding: 100px 20px 36px; }
     .page-header h1 { font-size: 32px; }
     
-    .nav-links { gap: 20px; }
-    .nav-links a { font-size: 13px; }
+    .nav-links { 
+        gap: 14px; 
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        flex: 1;
+        justify-content: flex-end;
+        padding: 0 4px;
+    }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links li { display: inline-block; }
+    .nav-links a { 
+        font-size: 12px; 
+        white-space: nowrap;
+    }
+    .nav-inner { padding: 0 16px; }
+    .nav-logo { font-size: 16px; }
+    
+    .hero { padding: 140px 20px 80px; }
+    .hero h1 { font-size: 40px; letter-spacing: 2px; }
 
     .banner-ad { margin: 40px 0; }
     .ad-slots-row { grid-template-columns: 1fr; }
@@ -1377,6 +1520,492 @@ ul { list-style: none; }
 
 .school-card:hover .school-card-arrow {
     opacity: 1;
+}
+
+/* ========== 口碑见证 ========== */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.testimonial-card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(160,80,40,0.1);
+}
+
+.testimonial-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-bottom: 1px solid var(--border);
+}
+
+.testimonial-label {
+    padding: 14px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--heading);
+    background: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .testimonial-label {
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+}
+
+/* ========== 直播记录卡片网格 ========== */
+.timeline {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    transition: opacity 0.2s;
+}
+
+.live-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px 24px;
+    box-shadow: 0 8px 32px rgba(160, 80, 40, 0.08);
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.live-card:hover {
+    border-color: rgba(255, 140, 66, 0.35);
+    box-shadow: 0 16px 48px rgba(160, 80, 40, 0.12);
+    transform: translateY(-4px);
+}
+
+.live-card-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    background: rgba(232, 90, 43, 0.08);
+    padding: 5px 12px;
+    border-radius: 20px;
+    width: fit-content;
+}
+
+.live-card-day {
+    font-weight: 600;
+}
+
+.live-card-weekday {
+    font-weight: 400;
+    opacity: 0.85;
+}
+
+.live-card-topic {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--heading);
+    line-height: 1.5;
+}
+
+/* ========== 直播月份切换 ========== */
+.live-month-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 36px;
+    justify-content: center;
+}
+
+.live-month-btn {
+    padding: 8px 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 22px;
+    background: #ffffff;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.live-month-btn i {
+    font-style: normal;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 400;
+}
+
+.live-month-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.live-month-btn.active {
+    background: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+}
+
+.live-month-btn.active i {
+    color: rgba(255,255,255,0.8);
+}
+
+.timeline {
+    transition: opacity 0.2s;
+}
+
+@media (max-width: 768px) {
+    .live-month-tabs {
+        gap: 6px;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 4px;
+    }
+    .live-month-btn {
+        padding: 6px 14px;
+        font-size: 13px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+}
+
+.timeline-empty {
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* ========== 录取案例卡片 ========== */
+.cases-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.cases-tab {
+    padding: 10px 28px;
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    background: #ffffff;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: inherit;
+}
+
+.cases-tab:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.cases-tab.active {
+    background: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+}
+
+.cases-tab.active[data-tab="管理类联考"] {
+    background: #28b894;
+    border-color: #28b894;
+    color: #ffffff;
+}
+
+.cases-tab[data-tab="管理类联考"]:hover {
+    border-color: #28b894;
+    color: #28b894;
+}
+
+.cases-desc {
+    transition: opacity 0.3s;
+}
+
+.cases-db-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 28px;
+    padding: 12px 28px;
+    border: 1px solid var(--accent);
+    border-radius: 50px;
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s;
+}
+
+.cases-db-link:hover {
+    background: var(--accent);
+    color: #ffffff;
+}
+.cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.case-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px 24px;
+    box-shadow: 0 8px 32px rgba(160, 80, 40, 0.08);
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+    display: flex;
+    flex-direction: column;
+}
+
+.case-card:hover {
+    border-color: rgba(255, 140, 66, 0.35);
+    box-shadow: 0 16px 48px rgba(160, 80, 40, 0.12);
+    transform: translateY(-4px);
+}
+
+.case-program-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--heading);
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.case-school-pair {
+    margin-bottom: 14px;
+}
+
+.case-school-line,
+.case-partner-line {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.6;
+}
+
+.case-tag-row {
+    margin-bottom: 12px;
+}
+
+.case-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+}
+
+.case-tag.tag-sino {
+    color: #534ab7;
+    background: rgba(83, 74, 183, 0.08);
+}
+
+.case-tag.tag-exam {
+    color: #28b894;
+    background: rgba(40, 184, 148, 0.08);
+}
+
+.case-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+
+.case-meta-label {
+    font-size: 12px;
+    color: #999;
+}
+
+.case-meta-label.exam {
+    color: #28b894;
+    font-weight: 500;
+}
+
+.case-meta-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--heading);
+}
+
+.cases-empty {
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* ========== 课程体系 ========== */
+.course-tracks {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.course-track {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(160, 80, 40, 0.08);
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+.course-track:hover {
+    border-color: rgba(255, 140, 66, 0.35);
+    box-shadow: 0 16px 48px rgba(160, 80, 40, 0.12);
+    transform: translateY(-4px);
+}
+
+.course-track-header {
+    padding: 32px 24px 24px;
+    text-align: center;
+    position: relative;
+}
+
+.course-track-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 24px;
+    right: 24px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--orange-light), transparent);
+}
+
+.course-track-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 16px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.course-track-icon.exam {
+    background: rgba(232, 90, 43, 0.1);
+}
+
+.course-track-icon.interview {
+    background: rgba(40, 183, 148, 0.1);
+}
+
+.course-track-icon.sino {
+    background: rgba(83, 74, 183, 0.1);
+}
+
+.course-track-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--heading);
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+}
+
+.course-track-subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.course-phases {
+    padding: 24px;
+}
+
+.course-phase {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255, 140, 66, 0.08);
+}
+
+.course-phase:last-child {
+    border-bottom: none;
+}
+
+.course-phase-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(232, 90, 43, 0.08);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.course-phase-info h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--heading);
+    margin-bottom: 4px;
+}
+
+.course-phase-info p {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* 课程体系响应式 */
+@media (max-width: 900px) {
+    .course-tracks {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 直播记录卡片响应式 */
+@media (max-width: 768px) {
+    .timeline {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .live-card {
+        padding: 16px 18px;
+        gap: 10px;
+    }
+
+    .live-card-topic {
+        font-size: 15px;
+    }
+
+    .cases-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 768px) {
