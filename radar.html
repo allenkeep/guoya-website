@@ -11,13 +11,16 @@ body {
   background: #f5f6f8;
   color: #1a1a2e;
   line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
 }
 .header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #fff;
   padding: 20px 24px;
-  position: sticky;
-  top: 0;
+  flex-shrink: 0;
   z-index: 100;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
@@ -31,7 +34,10 @@ body {
   gap: 0;
   max-width: 1400px;
   margin: 0 auto;
-  align-items: flex-start;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  width: 100%;
 }
 .filters {
   width: 300px;
@@ -39,16 +45,13 @@ body {
   background: #fff;
   border-right: 1px solid #e8e8ec;
   padding: 20px;
-  position: sticky;
-  top: 72px;
-  height: calc(100vh - 72px);
   overflow-y: auto;
-  align-self: flex-start;
 }
 .results {
   flex: 1;
   padding: 20px 24px;
   min-width: 0;
+  overflow-y: auto;
 }
 .filter-group {
   margin-bottom: 22px;
@@ -297,8 +300,10 @@ body {
 }
 .modal-table td:last-child { color: #333; }
 @media (max-width: 768px) {
-  .layout { flex-direction: column; }
-  .filters { width: 100%; position: relative; top: 0; height: auto; border-right: none; border-bottom: 1px solid #e8e8ec; }
+  body { display: block; height: auto; overflow: auto; }
+  .layout { flex-direction: column; overflow: visible; }
+  .filters { width: 100%; overflow: visible; border-right: none; border-bottom: 1px solid #e8e8ec; }
+  .results { overflow: visible; }
   .card-grid { grid-template-columns: 1fr; }
 }
 
