@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>中外合作办学硕士 · 字段筛选</title>
+<title>中外合作办学硕士招生数据库（免费版）</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -28,6 +28,60 @@ body {
 .header .sub { font-size: 15px; opacity: 0.85; margin-top: 4px; }
 .header .stats { font-size: 15px; margin-top: 8px; opacity: 0.9; }
 .header .stats b { font-size: 18px; }
+
+.notice {
+  background: #fff;
+  border-bottom: 1px solid #e8e8ec;
+  padding: 18px 32px;
+  flex-shrink: 0;
+}
+.notice-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #c62828;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.notice-title::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 16px;
+  background: #c62828;
+  border-radius: 2px;
+}
+.notice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.notice-item {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: #444;
+  padding-left: 18px;
+  position: relative;
+}
+.notice-item .num {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #667eea;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.notice-item b { color: #1a1a2e; font-weight: 700; }
+.notice-item a { color: #667eea; text-decoration: none; }
+.notice-item a:hover { text-decoration: underline; }
 
 .layout {
   display: flex;
@@ -307,6 +361,10 @@ body {
   .card-grid { grid-template-columns: 1fr; }
   .header { padding: 18px 20px; }
   .header h1 { font-size: 20px; }
+  .notice { padding: 14px 20px; }
+  .notice-title { font-size: 14px; }
+  .notice-item { font-size: 12.5px; padding-left: 20px; }
+  .notice-item .num { top: 1px; }
 }
 @media (min-width: 1920px) {
   .card-grid { grid-template-columns: repeat(auto-fill, minmax(430px, 1fr)); }
@@ -388,9 +446,18 @@ body {
 <div class="watermark" id="watermark"><div class="watermark-grid" id="watermarkGrid"></div></div>
 
 <div class="header">
-  <h1>中外合作办学硕士 · 字段筛选</h1>
+  <h1>中外合作办学硕士招生数据库（免费版）</h1>
   <div class="sub">数据来源：guoya.net.cn/radar · 更新于 <span id="dataUpdated" style="font-weight:600">—</span></div>
   <div class="stats">符合条件：<b id="resultCount">—</b> / 共 <span id="totalCount">—</span> 个</div>
+</div>
+
+<div class="notice">
+  <div class="notice-title">申请前必看：正规性、申请难度与联考区别</div>
+  <div class="notice-list">
+    <div class="notice-item"><span class="num">1</span><b>如何判断正规性与含金量？</b>务必在教育部中外合作办学监管工作信息平台（<a href="https://crs.jsj.edu.cn" target="_blank">crs.jsj.edu.cn</a>）核实项目，确认获批书、办学地址、招生方式与证书样式。正规项目毕业后可获外方学位证书，经留服认证后等同于国内双证效力，含金量取决于合作双方的院校声誉、专业排名和行业认可度。</div>
+    <div class="notice-item"><span class="num">2</span><b>申请有难度，不是"花钱就能上"。</b>自主招生≠无门槛，热门项目通常要求本科+工作年限+英语能力证明，部分还需推荐信、个人陈述和面试。985/211及知名海外院校合办项目同样竞争激烈，对管理经验、职业成就、英语水平都有明确要求。</div>
+    <div class="notice-item"><span class="num">3</span><b>与全国联考的区别。</b>联考硕士需参加12月全国统考，择优录取，毕业获毕业证+学位证；合作办学硕士多为自主招生、申请制入学，无需联考，更看重综合背景与面试表现，毕业后获外方学位+留服认证。适合工作繁忙、希望灵活入学的考生，但学费通常更高，需结合职业规划与预算选择。</div>
+  </div>
 </div>
 
 <div class="layout">
