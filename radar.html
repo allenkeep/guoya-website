@@ -354,9 +354,38 @@ body {
 .edit-btn.submit { background: #667eea; color: #fff; }
 .edit-btn.submit:hover { background: #5a6fd6; }
 .edit-error { color: #e53e3e; font-size: 13px; margin-top: 8px; min-height: 20px; }
+
+/* Watermark */
+.watermark {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 50;
+  overflow: hidden;
+}
+.watermark-grid {
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  transform: rotate(-22deg);
+}
+.watermark-item {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(102, 126, 234, 0.07);
+  white-space: nowrap;
+  padding: 0 28px;
+  line-height: 90px;
+  letter-spacing: 2px;
+}
 </style>
 </head>
 <body>
+
+<div class="watermark" id="watermark"><div class="watermark-grid" id="watermarkGrid"></div></div>
 
 <div class="header">
   <h1>中外合作办学硕士 · 字段筛选</h1>
@@ -853,6 +882,17 @@ document.getElementById('totalCount').textContent = PROJECTS.length;
 if (typeof DATA_UPDATED !== 'undefined') {
   document.getElementById('dataUpdated').textContent = DATA_UPDATED;
 }
+
+// Watermark generation
+(function() {
+  const grid = document.getElementById('watermarkGrid');
+  const text = '选果芽 就过呀';
+  const items = [];
+  for (let i = 0; i < 280; i++) {
+    items.push('<span class="watermark-item">' + text + '</span>');
+  }
+  grid.innerHTML = items.join('');
+})();
 
 loadOverrides();
 applyOverrides();
