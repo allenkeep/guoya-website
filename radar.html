@@ -922,10 +922,10 @@ function showWechat() {
 function formatVal(val) {
   if (!val) return '—';
   if (val === '详询招办' || val === '详询招办。') {
-    return '<span class="consult-link" onclick="showWechat()">待更新，详细果芽老师</span>';
+    return '<span class="consult-link" onclick="showWechat()">待更新，详询果芽老师</span>';
   }
   if (val.indexOf('详询招办') >= 0) {
-    return val.replace(/详询招办/g, '<span class="consult-link" onclick="event.stopPropagation();showWechat()">待更新，详细果芽老师</span>');
+    return val.replace(/详询招办/g, '<span class="consult-link" onclick="event.stopPropagation();showWechat()">待更新，详询果芽老师</span>');
   }
   return val;
 }
