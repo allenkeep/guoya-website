@@ -928,7 +928,7 @@ function showDetail(p) {
   const tier = p.tier || '暂未分级';
   const isNewItem = isNew(p);
   let html = '<h2>' + p.major + '</h2>';
-  html += '<div class="modal-sub">' + p.school + ' · ' + p.province + '</div>';
+  html += '<div class="modal-sub">' + p.school + ' × ' + (p.foreign || '外方院校') + ' · ' + p.province + '</div>';
   html += '<table class="modal-table">';
   html += '<tr><td>外方院校</td><td>' + (p.foreign||'—') + '</td></tr>';
   html += '<tr><td>学历要求</td><td>' + formatVal(p.edu) + '</td></tr>';
@@ -984,7 +984,7 @@ function formatVal(val) {
 
 // === Edit functionality (ported from original radar.html) ===
 const EXPECTED_HASH = '4b646bdc7157d75613bf0687b246227f039b74e48623a7ec1387461b493ba36a';
-const EDIT_STORAGE_KEY = 'sino_overrides_v2';
+const EDIT_STORAGE_KEY = 'sino_overrides_v3';
 let overrides = {};
 let currentEditKey = null;
 
@@ -1001,8 +1001,8 @@ function saveOverrides() {
 
 function applyOverrides() {
   Object.keys(overrides).forEach(key => {
-    const [school, major] = key.split('::');
-    const p = PROJECTS.find(p => p.school === school && p.major === major);
+    const [school, major, foreign] = key.split('::');
+    const p = PROJECTS.find(p => p.school === school && p.major === major && p.foreign === foreign);
     if (p) {
       Object.assign(p, overrides[key]);
       recalcProject(p);
@@ -1019,7 +1019,7 @@ async function verifyPassword(input) {
 function openEditModal() {
   const p = currentDetailProject;
   if (!p) return;
-  currentEditKey = p.school + '::' + p.major;
+  currentEditKey = p.school + '::' + p.major + '::' + (p.foreign || '');
   document.getElementById('editSubtitle').textContent = p.school + ' × ' + (p.foreign || '外方院校') + ' · ' + p.major;
   document.getElementById('editEdu').value = p.edu || '';
   document.getElementById('editLang').value = p.lang || '';
@@ -1050,8 +1050,8 @@ async function submitEdit() {
     document.getElementById('editError').textContent = '密码错误';
     return;
   }
-  const [school, major] = currentEditKey.split('::');
-  const p = PROJECTS.find(p => p.school === school && p.major === major);
+  const [school, major, foreign] = currentEditKey.split('::');
+  const p = PROJECTS.find(p => p.school === school && p.major === major && p.foreign === foreign);
   if (!p) return;
   p.edu = document.getElementById('editEdu').value.trim();
   p.lang = document.getElementById('editLang').value.trim();
@@ -1067,7 +1067,7 @@ async function submitEdit() {
   };
   saveOverrides();
   // 同步更新当前详情对象
-  if (currentDetailProject && currentDetailProject.school === school && currentDetailProject.major === major) {
+  if (currentDetailProject && currentDetailProject.school === school && currentDetailProject.major === major && currentDetailProject.foreign === foreign) {
     Object.assign(currentDetailProject, overrides[currentEditKey]);
   }
   buildChips();
