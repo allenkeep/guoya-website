@@ -548,7 +548,7 @@ input, textarea, select {
     <span class="modal-close" onclick="closeWechat()">&times;</span>
     <h3 style="margin-bottom:6px">详询果芽老师</h3>
     <p style="font-size:14px;color:#888;margin-bottom:16px">扫码添加微信咨询</p>
-    <img src="https://guoya.net.cn/images/wechat-qr-v2.png" alt="果芽老师微信二维码" style="width:240px;height:240px;border-radius:12px;border:1px solid #eee" />
+    <img id="wechatImg" src="https://guoya.net.cn/images/wechat-qr-v2.png" alt="果芽老师微信二维码" style="width:240px;height:240px;border-radius:12px;border:1px solid #eee" />
     <p style="font-size:14px;color:#e65100;margin-top:14px;font-weight:600">备注：合作办学辅导</p>
   </div>
 </div>
@@ -914,6 +914,12 @@ function closeWechat() {
 }
 
 function showWechat() {
+  const qrList = [
+    'https://guoya.net.cn/images/wechat-qr-v2.png',
+    'https://guoya.net.cn/images/wechat-qr-v3.png'
+  ];
+  const img = document.getElementById('wechatImg');
+  img.src = qrList[Math.floor(Math.random() * qrList.length)];
   document.getElementById('wechatOverlay').classList.add('show');
 }
 
