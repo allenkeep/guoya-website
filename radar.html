@@ -1003,7 +1003,10 @@ function applyOverrides() {
   Object.keys(overrides).forEach(key => {
     const [school, major] = key.split('::');
     const p = PROJECTS.find(p => p.school === school && p.major === major);
-    if (p) Object.assign(p, overrides[key]);
+    if (p) {
+      Object.assign(p, overrides[key]);
+      recalcProject(p);
+    }
   });
 }
 
@@ -1063,12 +1066,15 @@ async function submitEdit() {
     fee_num: p.fee_num, fee_per_year: p.fee_per_year, has_fee: p.has_fee, total_fee: p.total_fee, dur_cat: p.dur_cat
   };
   saveOverrides();
-  // 同步更新当前详情对象，避免重新打开前显示旧数据
+  // 同步更新当前详情对象
   if (currentDetailProject && currentDetailProject.school === school && currentDetailProject.major === major) {
     Object.assign(currentDetailProject, overrides[currentEditKey]);
   }
+  buildChips();
   render();
   closeEditModal();
+  // 保存后自动重新打开详情弹窗，显示更新后的数据
+  showDetail(p);
 }
 
 // Events
