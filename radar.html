@@ -289,6 +289,14 @@ body {
 .tag-new { background: #ffd700; color: #b8860b; font-weight: 600; }
 .tag-quota { background: #f3e5f5; color: #6a1b9a; }
 .tag-mode { background: #e0f2f1; color: #00695c; }
+.consult-link {
+  color: #667eea;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+}
+.consult-link:hover { color: #5a67d8; }
 .card-fee-row {
   display: flex;
   justify-content: space-between;
@@ -533,6 +541,17 @@ input, textarea, select {
       <h3>没有符合条件的项目</h3>
       <p>尝试放宽筛选条件或清空筛选</p>
     </div>
+  </div>
+</div>
+
+<!-- WeChat QR Popup -->
+<div class="modal-overlay" id="wechatOverlay" onclick="if(event.target===this)closeWechat()" style="z-index:250">
+  <div class="modal" style="max-width:360px;text-align:center">
+    <span class="modal-close" onclick="closeWechat()">&times;</span>
+    <h3 style="margin-bottom:6px">详细果芽老师</h3>
+    <p style="font-size:14px;color:#888;margin-bottom:16px">扫码添加微信咨询</p>
+    <img src="https://guoya.net.cn/images/wechat-qr.jpg" alt="果芽老师微信二维码" style="width:240px;height:240px;border-radius:12px;border:1px solid #eee" />
+    <p style="font-size:13px;color:#667eea;margin-top:14px;font-weight:500">选果芽，就过呀</p>
   </div>
 </div>
 
@@ -801,7 +820,7 @@ function renderCard(p) {
   const isNewItem = isNew(p);
   const tier = p.tier || '暂未分级';
   const tierClass = tier === '暂未分级' ? 'tag-tier-na' : 'tag-tier-a';
-  const feeDisplay = p.fee || '—';
+  const feeDisplay = formatVal(p.fee);
   const feeClass = p.has_fee ? 'tag-fee' : 'tag-tier-na';
 
   let tags = '';
@@ -866,14 +885,14 @@ function showDetail(p) {
   html += '<div class="modal-sub">' + p.school + ' · ' + p.province + '</div>';
   html += '<table class="modal-table">';
   html += '<tr><td>外方院校</td><td>' + (p.foreign||'—') + '</td></tr>';
-  html += '<tr><td>学历要求</td><td>' + (p.edu||'—') + '</td></tr>';
+  html += '<tr><td>学历要求</td><td>' + formatVal(p.edu) + '</td></tr>';
   html += '<tr><td>学制</td><td>' + (p.dur||'—') + '</td></tr>';
-  html += '<tr><td>学费</td><td>' + (p.fee||'—') + '</td></tr>';
+  html += '<tr><td>学费</td><td>' + formatVal(p.fee) + '</td></tr>';
   if (p.total_fee !== null && p.total_fee !== undefined) {
     html += '<tr><td>学费总价</td><td style="color:#e65100;font-weight:600">' + p.total_fee + '万' + (p.fee_per_year ? '（按年×最短学制计算）' : '') + '</td></tr>';
   }
-  html += '<tr><td>语言要求</td><td>' + (p.lang||'—') + '</td></tr>';
-  html += '<tr><td>工作经验</td><td>' + (p.exp||'—') + '</td></tr>';
+  html += '<tr><td>语言要求</td><td>' + formatVal(p.lang) + '</td></tr>';
+  html += '<tr><td>工作经验</td><td>' + formatVal(p.exp) + '</td></tr>';
   html += '<tr><td>招生人数</td><td>' + (p.quota||'—') + '</td></tr>';
   html += '<tr><td>上课方式</td><td>' + (p.class_mode && p.class_mode !== '未找到' ? p.class_mode : '<span style="color:#bbb">暂未收录</span>') + '</td></tr>';
   html += '<tr><td>分级</td><td>' + tier + '</td></tr>';
@@ -890,6 +909,25 @@ function showDetail(p) {
 
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('show');
+}
+
+function closeWechat() {
+  document.getElementById('wechatOverlay').classList.remove('show');
+}
+
+function showWechat() {
+  document.getElementById('wechatOverlay').classList.add('show');
+}
+
+function formatVal(val) {
+  if (!val) return '—';
+  if (val === '详询招办' || val === '详询招办。') {
+    return '<span class="consult-link" onclick="showWechat()">待更新，详细果芽老师</span>';
+  }
+  if (val.indexOf('详询招办') >= 0) {
+    return val.replace(/详询招办/g, '<span class="consult-link" onclick="event.stopPropagation();showWechat()">待更新，详细果芽老师</span>');
+  }
+  return val;
 }
 
 // === Edit functionality (ported from original radar.html) ===
