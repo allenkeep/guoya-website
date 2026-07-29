@@ -654,6 +654,54 @@ function getFeeRangeLabel(p) {
   return '40万以上';
 }
 
+function parseFee(fee) {
+  if (!fee || /详询|暂未|待/.test(fee)) return { fee_num: null, fee_per_year: false, has_fee: false };
+  const feeClean = fee.replace(/,/g, '').replace(/，/g, '');
+  const perYearMatch = feeClean.match(/([\d.]+)\s*万\s*\/\s*年/);
+  if (perYearMatch) return { fee_num: parseFloat(perYearMatch[1]), fee_per_year: true, has_fee: true };
+  const totalMatch = feeClean.match(/([\d.]+)\s*万/);
+  if (totalMatch) return { fee_num: parseFloat(totalMatch[1]), fee_per_year: false, has_fee: true };
+  return { fee_num: null, fee_per_year: false, has_fee: false };
+}
+
+function normalizeDur(dur) {
+  if (!dur || dur.includes('待查')) return '待查';
+  if (dur.includes('1.5')) return '1.5年';
+  if (/^1年/.test(dur) || dur === '1年') return '1年';
+  if (dur.includes('2.5')) return '2.5年';
+  if (dur.startsWith('2') && !dur.includes('3')) return '2年';
+  if (dur.includes('3年') && !dur.startsWith('2')) return '3年';
+  return '其他/灵活';
+}
+
+function minDurYears(dur) {
+  if (!dur) return null;
+  const clean = dur.replace(/（[^）]*）/g, '').replace(/\([^)]*\)/g, '');
+  const matches = clean.match(/[\d.]+/g);
+  if (!matches) return null;
+  const years = matches.map(parseFloat).filter(n => n > 0);
+  if (!years.length) return null;
+  return Math.min(...years);
+}
+
+function recalcProject(p) {
+  const feeInfo = parseFee(p.fee);
+  p.fee_num = feeInfo.fee_num;
+  p.fee_per_year = feeInfo.fee_per_year;
+  p.has_fee = feeInfo.has_fee;
+  p.dur_cat = normalizeDur(p.dur);
+  if (p.has_fee && p.fee_num !== null) {
+    if (p.fee_per_year) {
+      const years = minDurYears(p.dur);
+      p.total_fee = years ? Math.round(p.fee_num * years * 100) / 100 : p.fee_num;
+    } else {
+      p.total_fee = p.fee_num;
+    }
+  } else {
+    p.total_fee = null;
+  }
+}
+
 function buildChips() {
   // Provinces
   const provinces = {};
@@ -969,7 +1017,7 @@ function openEditModal() {
   const p = currentDetailProject;
   if (!p) return;
   currentEditKey = p.school + '::' + p.major;
-  document.getElementById('editSubtitle').textContent = p.school + ' · ' + p.major;
+  document.getElementById('editSubtitle').textContent = p.school + ' × ' + (p.foreign || '外方院校') + ' · ' + p.major;
   document.getElementById('editEdu').value = p.edu || '';
   document.getElementById('editLang').value = p.lang || '';
   document.getElementById('editExp').value = p.exp || '';
@@ -1009,8 +1057,16 @@ async function submitEdit() {
   p.dur = document.getElementById('editDur').value.trim();
   p.fee = document.getElementById('editFee').value.trim();
   p.tier = document.getElementById('editTier').value;
-  overrides[currentEditKey] = { edu: p.edu, lang: p.lang, exp: p.exp, quota: p.quota, dur: p.dur, fee: p.fee, tier: p.tier };
+  recalcProject(p);
+  overrides[currentEditKey] = {
+    edu: p.edu, lang: p.lang, exp: p.exp, quota: p.quota, dur: p.dur, fee: p.fee, tier: p.tier,
+    fee_num: p.fee_num, fee_per_year: p.fee_per_year, has_fee: p.has_fee, total_fee: p.total_fee, dur_cat: p.dur_cat
+  };
   saveOverrides();
+  // 同步更新当前详情对象，避免重新打开前显示旧数据
+  if (currentDetailProject && currentDetailProject.school === school && currentDetailProject.major === major) {
+    Object.assign(currentDetailProject, overrides[currentEditKey]);
+  }
   render();
   closeEditModal();
 }
