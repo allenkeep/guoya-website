@@ -23,7 +23,7 @@
   .search-box input:focus{border-color:var(--primary);background:#fff}
 
   .filter-section{max-width:1200px;margin:14px auto 0}
-  .filter-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+  .filter-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}
   .filter-label{font-size:13px;color:var(--text3);white-space:nowrap;font-weight:500;min-width:36px}
   .fchip{font-size:13px;padding:5px 14px;border-radius:16px;border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:all .12s;user-select:none;flex-shrink:0;font-weight:500}
   .fchip.all{background:#f0f0f7;color:#5a56a6}
@@ -58,9 +58,9 @@
 
   .project-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:12px}
   .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:10px}
-  .card-info{flex:1;min-width:0}
+  .card-info{flex:1;min-width:0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
   .card-name{font-size:17px;font-weight:600;line-height:1.4}
-  .card-school{font-size:13px;color:var(--text2);margin-top:3px}
+  .card-school{font-size:13px;color:var(--text2)}
   .card-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0}
   .card-tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
   .chip{font-size:12px;padding:3px 9px;border-radius:10px;white-space:nowrap;line-height:1.5}
@@ -103,9 +103,8 @@
   .poster-sbtn{width:22px;height:22px;border-radius:50%;border:none;background:#fff;color:var(--text2);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.15)}
   .poster-sbtn:hover{color:var(--primary)}
   .poster-sbtn.danger:hover{color:var(--danger)}
-  .poster-empty{border:2px dashed var(--border);border-radius:8px;padding:16px 20px;cursor:pointer;color:var(--text3);font-size:14px;text-align:center;transition:border-color .15s;min-width:68px}
-  .poster-empty:hover{border-color:var(--primary);color:var(--primary)}
-  .poster-empty small{display:block;font-size:12px;margin-top:4px}
+  .poster-grid.empty-grid{display:none}
+  .poster-empty{display:none}
 
   .empty{text-align:center;padding:70px 20px;color:var(--text3);font-size:15px}
   .footer{text-align:center;font-size:12px;color:var(--text3);padding:24px;max-width:1200px;margin:0 auto}
@@ -502,6 +501,7 @@ async function render() {
     const schoolLine = p.foreign
       ? `${esc(p.school)} × ${esc(p.foreign)} · ${esc(p.province)}`
       : `${esc(p.school)} · ${esc(p.province)}`;
+    const indexes = posterMap[p.id] || [];
     return `
       <div class="project-card" data-pid="${p.id}">
         <div class="card-top">
@@ -535,12 +535,7 @@ async function render() {
             <span class="poster-label">海报</span>
             <button class="poster-add-btn" onclick="triggerPosterUpload(${p.id})">+ 上传海报</button>
           </div>
-          <div class="poster-grid" id="poster-grid-${p.id}">
-            <div class="poster-empty" onclick="triggerPosterUpload(${p.id})">
-              <span>+ 添加海报</span>
-              <small>支持 3:4 或 9:16</small>
-            </div>
-          </div>
+          <div class="poster-grid${indexes.length?'':' empty-grid'}" id="poster-grid-${p.id}"></div>
         </div>
       </div>`;
   }).join('');
