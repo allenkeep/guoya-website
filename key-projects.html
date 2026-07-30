@@ -323,10 +323,15 @@ function unlock() {
     await refreshAll();
     // After unlock, check if migration is needed
     if (projects.length === 0) await checkMigration();
-  }).catch(() => {
+  }).catch((err) => {
     adminKey = '';
     sessionStorage.removeItem('kp_admin_key');
-    alert('密码错误');
+    const msg = err && err.message ? err.message : String(err);
+    if (msg.includes('401') || msg.includes('需要管理密码')) {
+      alert('密码错误');
+    } else {
+      alert('解锁失败：' + msg + '\n\n如果持续失败，请检查网络或联系管理员。');
+    }
   });
 }
 function lock() {
