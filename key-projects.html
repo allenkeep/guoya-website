@@ -172,9 +172,11 @@
       <div class="count" id="countText"></div>
     </div>
     <div class="header-actions">
-      <button class="btn-secondary" onclick="exportData()">导出</button>
-      <button class="btn-secondary" onclick="document.getElementById('importFile').click()">导入</button>
-      <button class="btn-primary" onclick="openProjectModal()">+ 新增项目</button>
+      <button class="btn-secondary" id="btnExport" onclick="exportData()">导出</button>
+      <button class="btn-secondary" id="btnImport" onclick="document.getElementById('importFile').click()" style="display:none">导入</button>
+      <button class="btn-secondary" id="btnRefresh" onclick="refreshAll()">刷新</button>
+      <button class="btn-primary" id="btnAdd" onclick="openProjectModal()" style="display:none">+ 新增项目</button>
+      <button class="btn-primary" id="btnUnlock" onclick="unlock()">解锁编辑</button>
       <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(this.files[0])">
     </div>
   </div>
@@ -199,7 +201,7 @@
 
 <div class="container" id="list"></div>
 <div class="footer">
-  <div>果芽MBA · 内部使用 · 数据保存在本地浏览器</div>
+  <div>果芽MBA · 内部使用 · 云端同步</div>
 </div>
 
 <input type="file" id="posterFileInput" accept="image/*" style="display:none" multiple>
@@ -276,7 +278,7 @@ const RADAR_PROJECTS = [{"province":"北京","school":"北京大学","name":"工
 
 const DEFAULT_PROJECTS = [];
 
-const STORAGE_KEY = 'kp_data_v4';
+const API_BASE = 'https://kp-api.zy57ry2hj5.workers.dev/api';
 let projects = [];
 let activeTag = 'all';
 let activeProvince = 'all';
@@ -284,81 +286,117 @@ let activeType = 'all';
 let searchTerm = '';
 let editingId = null;
 let currentPosterId = null;
-let posterDB = null;
 let posterMap = {};
 let posterCache = {};
+let adminKey = sessionStorage.getItem('kp_admin_key') || '';
+let isUnlocked = !!adminKey;
+let autoRefreshTimer = null;
 
-function initDB() {
-  return new Promise((resolve, reject) => {
-    const req = indexedDB.open('kp-posters', 1);
-    req.onupgradeneeded = (e) => {
-      const db = e.target.result;
-      if (!db.objectStoreNames.contains('posters')) db.createObjectStore('posters', {keyPath:'id'});
-    };
-    req.onsuccess = (e) => { posterDB = e.target.result; resolve(); };
-    req.onerror = () => reject(req.error);
-  });
+// ---- API helpers ----
+function apiHeaders(extra) {
+  const h = { 'Content-Type': 'application/json' };
+  if (adminKey) h['X-Admin-Key'] = adminKey;
+  return { ...h, ...(extra || {}) };
 }
-
-function dbPut(id, blob) {
-  return new Promise((resolve, reject) => {
-    const tx = posterDB.transaction('posters', 'readwrite');
-    tx.objectStore('posters').put({id, blob});
-    tx.oncomplete = () => resolve();
-    tx.onerror = () => reject(tx.error);
+async function apiFetch(path, options = {}) {
+  const res = await fetch(API_BASE + path, {
+    ...options,
+    headers: apiHeaders(options.headers),
   });
-}
-function dbGet(id) {
-  return new Promise((resolve, reject) => {
-    const tx = posterDB.transaction('posters', 'readonly');
-    const req = tx.objectStore('posters').get(id);
-    req.onsuccess = () => resolve(req.result ? req.result.blob : null);
-    req.onerror = () => reject(req.error);
-  });
-}
-function dbDelete(id) {
-  return new Promise((resolve, reject) => {
-    const tx = posterDB.transaction('posters', 'readwrite');
-    tx.objectStore('posters').delete(id);
-    tx.oncomplete = () => resolve();
-    tx.onerror = () => reject(tx.error);
-  });
-}
-function dbGetAllKeys() {
-  return new Promise((resolve, reject) => {
-    const tx = posterDB.transaction('posters', 'readonly');
-    const req = tx.objectStore('posters').getAllKeys();
-    req.onsuccess = () => resolve(req.result);
-    req.onerror = () => reject(req.error);
-  });
-}
-
-function loadData() {
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) {
-    try { projects = migrate(JSON.parse(saved)); saveData(); } catch(e) { projects = migrate(JSON.parse(JSON.stringify(DEFAULT_PROJECTS))); }
-  } else {
-    projects = migrate(JSON.parse(JSON.stringify(DEFAULT_PROJECTS)));
-    saveData();
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    throw new Error(data.error || 'API error ' + res.status);
   }
+  return res;
 }
+
+// ---- Auth ----
+function unlock() {
+  const pwd = prompt('请输入管理密码：');
+  if (!pwd) return;
+  adminKey = pwd;
+  sessionStorage.setItem('kp_admin_key', pwd);
+  // Test the key by trying to export
+  apiFetch('/export').then(async () => {
+    isUnlocked = true;
+    updateLockUI();
+    await refreshAll();
+    // After unlock, check if migration is needed
+    if (projects.length === 0) await checkMigration();
+  }).catch(() => {
+    adminKey = '';
+    sessionStorage.removeItem('kp_admin_key');
+    alert('密码错误');
+  });
+}
+function lock() {
+  adminKey = '';
+  sessionStorage.removeItem('kp_admin_key');
+  isUnlocked = false;
+  updateLockUI();
+  render();
+}
+function updateLockUI() {
+  const show = isUnlocked;
+  document.getElementById('btnUnlock').style.display = show ? 'none' : '';
+  document.getElementById('btnUnlock').textContent = '解锁编辑';
+  document.getElementById('btnAdd').style.display = show ? '' : 'none';
+  document.getElementById('btnImport').style.display = show ? '' : 'none';
+  if (show) {
+    document.getElementById('btnUnlock').textContent = '锁定';
+    document.getElementById('btnUnlock').onclick = lock;
+    document.getElementById('btnUnlock').style.display = '';
+    document.getElementById('btnUnlock').classList.remove('btn-primary');
+    document.getElementById('btnUnlock').classList.add('btn-secondary');
+  } else {
+    document.getElementById('btnUnlock').onclick = unlock;
+    document.getElementById('btnUnlock').classList.add('btn-primary');
+    document.getElementById('btnUnlock').classList.remove('btn-secondary');
+  }
+  render();
+}
+
+// ---- Data loading ----
 function normalizeProvinces(prov) {
   const arr = Array.isArray(prov) ? prov : (prov ? [prov] : []);
   return arr.flatMap(s => String(s).split(/[,，、\s]+/)).map(s => s.trim()).filter(Boolean);
 }
-function migrate(list) {
-  list.forEach(p => {
-    if (!p.updated_at) p.updated_at = new Date().toISOString();
-    if (!p.type) p.type = p.foreign ? '合作办学' : '管理类联考';
-    if (p.type === '国内项目' || p.type === '其他') p.type = '管理类联考';
-    delete p.exam;
-    p.province = normalizeProvinces(p.province);
-  });
-  return list;
+function migrate(p) {
+  if (!p.updated_at) p.updated_at = new Date().toISOString();
+  if (!p.type) p.type = p.foreign ? '合作办学' : '管理类联考';
+  if (p.type === '国内项目' || p.type === '其他') p.type = '管理类联考';
+  delete p.exam;
+  p.province = normalizeProvinces(p.province);
+  return p;
 }
-function saveData() { localStorage.setItem(STORAGE_KEY, JSON.stringify(projects)); }
-function nextId() { return projects.length ? Math.max(...projects.map(p=>p.id)) + 1 : 1; }
-function nowISO() { return new Date().toISOString(); }
+
+async function loadProjects() {
+  const res = await apiFetch('/projects');
+  const data = await res.json();
+  projects = (data.projects || []).map(p => migrate(p));
+  // Load poster keys
+  posterMap = {};
+  await Promise.all(projects.map(async p => {
+    try {
+      const r = await apiFetch('/posters/' + p.id);
+      const d = await r.json();
+      posterMap[p.id] = d.indexes || [];
+    } catch(e) { posterMap[p.id] = []; }
+  }));
+}
+
+async function refreshAll() {
+  try {
+    await loadProjects();
+    buildTypes(); buildTags(); buildProvinces(); render();
+  } catch(e) {
+    document.getElementById('countText').textContent = '加载失败: ' + e.message;
+  }
+}
+
+function posterUrl(pid, idx) {
+  return `${API_BASE}/poster/p${pid}_${idx}`;
+}
 
 function compressImage(file, maxDim, quality) {
   return new Promise((resolve, reject) => {
@@ -382,29 +420,6 @@ function compressImage(file, maxDim, quality) {
   });
 }
 
-async function loadPosterKeys() {
-  const keys = await dbGetAllKeys();
-  posterMap = {};
-  keys.forEach(key => {
-    const m = String(key).match(/^p(\d+)_(\d+)$/);
-    if (m) {
-      const pid = parseInt(m[1]), idx = parseInt(m[2]);
-      if (!posterMap[pid]) posterMap[pid] = [];
-      posterMap[pid].push(idx);
-    }
-  });
-  Object.values(posterMap).forEach(arr => arr.sort((a,b)=>a-b));
-}
-
-async function getPosterUrl(pid, idx) {
-  const key = `p${pid}_${idx}`;
-  if (!posterCache[key]) {
-    const blob = await dbGet(key);
-    if (blob) posterCache[key] = URL.createObjectURL(blob);
-  }
-  return posterCache[key] || '';
-}
-
 function daysAgo(s) {
   const d = new Date(s);
   const diff = Math.floor((new Date() - d) / 86400000);
@@ -415,16 +430,6 @@ function daysAgo(s) {
   return Math.floor(diff/30) + '月前';
 }
 function isNew(s) { const da = daysAgo(s); return da === '今天' || da === '昨天'; }
-function timeAgo(iso) {
-  if (!iso) return '';
-  const diff = Math.floor((new Date() - new Date(iso)) / 1000);
-  if (diff < 60) return '刚刚';
-  if (diff < 3600) return Math.floor(diff/60) + '分钟前';
-  if (diff < 86400) return Math.floor(diff/3600) + '小时前';
-  if (diff < 604800) return Math.floor(diff/86400) + '天前';
-  if (diff < 2592000) return Math.floor(diff/604800) + '周前';
-  return Math.floor(diff/2592000) + '月前';
-}
 function formatDateTime(iso) {
   const d = new Date(iso);
   const pad = n => String(n).padStart(2, '0');
@@ -485,22 +490,22 @@ function getFiltered() {
   return list;
 }
 
-async function renderPosters(pid) {
+function renderPosters(pid) {
   const indexes = posterMap[pid] || [];
   if (!indexes.length) return '';
-  let html = '';
-  for (const idx of indexes) {
-    const url = await getPosterUrl(pid, idx);
-    html += `
-      <div class="poster-item">
-        <img class="poster-thumb" src="${esc(url)}" onclick="viewPoster(${pid},${idx})">
-        <div class="poster-overlay">
-          <button class="poster-sbtn" title="下载" onclick="downloadPoster(${pid},${idx})">↓</button>
-          <button class="poster-sbtn danger" title="删除" onclick="removePoster(${pid},${idx})">×</button>
-        </div>
-      </div>`;
-  }
-  return html;
+  const editBtns = isUnlocked ? `
+    <div class="poster-overlay">
+      <button class="poster-sbtn" title="下载" onclick="downloadPoster(${pid},IDX)">↓</button>
+      <button class="poster-sbtn danger" title="删除" onclick="removePoster(${pid},IDX)">×</button>
+    </div>` : `
+    <div class="poster-overlay">
+      <button class="poster-sbtn" title="下载" onclick="downloadPoster(${pid},IDX)">↓</button>
+    </div>`;
+  return indexes.map(idx => `
+    <div class="poster-item">
+      <img class="poster-thumb" src="${posterUrl(pid, idx)}" onclick="viewPoster(${pid},${idx})">
+      ${editBtns.replaceAll('IDX', idx)}
+    </div>`).join('');
 }
 
 async function render() {
@@ -509,7 +514,7 @@ async function render() {
   const el = document.getElementById('list');
   if (list.length === 0) {
     const isEmpty = projects.length === 0;
-    el.innerHTML = `<div class="empty">${isEmpty ? '暂无项目，点击右上角「新增项目」添加' : '没有匹配的项目'}</div>`;
+    el.innerHTML = `<div class="empty">${isEmpty ? '暂无项目' : '没有匹配的项目'}</div>`;
     return;
   }
 
@@ -528,6 +533,13 @@ async function render() {
     const provArr = Array.isArray(p.province) ? p.province : [p.province].filter(Boolean);
     const locationLine = provArr.join(' · ');
     const indexes = posterMap[p.id] || [];
+    const actions = isUnlocked ? `
+      <div class="card-actions">
+        <button class="act-btn" onclick="openProjectModal(${p.id})">编辑</button>
+        <button class="act-btn danger" onclick="deleteProject(${p.id})">删除</button>
+      </div>` : '';
+    const editDynamics = isUnlocked ? `<button class="update-edit-btn" onclick="editUpdate(${p.id})">编辑动态</button>` : '';
+    const uploadBtn = isUnlocked ? `<button class="poster-add-btn" onclick="triggerPosterUpload(${p.id})">+ 上传海报</button>` : '';
     return `
       <div class="project-card" data-pid="${p.id}">
         <div class="card-top">
@@ -540,10 +552,7 @@ async function render() {
           </div>
           <div class="card-right">
             <div class="card-tags">${typeChip}${chips}</div>
-            <div class="card-actions">
-              <button class="act-btn" onclick="openProjectModal(${p.id})">编辑</button>
-              <button class="act-btn danger" onclick="deleteProject(${p.id})">删除</button>
-            </div>
+            ${actions}
           </div>
         </div>
         <div id="update-area-${p.id}">
@@ -555,7 +564,7 @@ async function render() {
                 <span class="update-date-left">
                   ${updated}
                 </span>
-                <button class="update-edit-btn" onclick="editUpdate(${p.id})">编辑动态</button>
+                ${editDynamics}
               </div>
             </div>
           </div>
@@ -563,24 +572,16 @@ async function render() {
         <div class="poster-section">
           <div class="poster-header">
             <span class="poster-label">海报</span>
-            <button class="poster-add-btn" onclick="triggerPosterUpload(${p.id})">+ 上传海报</button>
+            ${uploadBtn}
           </div>
-          <div class="poster-grid${indexes.length?'':' empty-grid'}" id="poster-grid-${p.id}"></div>
+          <div class="poster-grid${indexes.length?'':' empty-grid'}" id="poster-grid-${p.id}">${renderPosters(p.id)}</div>
         </div>
       </div>`;
   }).join('');
-
-  // Async load poster thumbnails
-  for (const p of list) {
-    const indexes = posterMap[p.id] || [];
-    if (indexes.length) {
-      const grid = document.getElementById(`poster-grid-${p.id}`);
-      if (grid) grid.innerHTML = await renderPosters(p.id);
-    }
-  }
 }
 
 function openProjectModal(id) {
+  if (!isUnlocked) { unlock(); return; }
   editingId = id || null;
   const p = id ? projects.find(x => x.id === id) : null;
   document.getElementById('modalTitle').textContent = id ? '编辑项目' : '新增项目';
@@ -643,7 +644,7 @@ function closeModal() {
   editingId = null;
 }
 
-function saveProjectFromModal() {
+async function saveProjectFromModal() {
   const name = document.getElementById('mName').value.trim();
   if (!name) { alert('请填写项目名称'); return; }
   const data = {
@@ -655,32 +656,27 @@ function saveProjectFromModal() {
     tags: Array.from(document.querySelectorAll('#mTags .tag-option.selected')).map(el => el.dataset.value),
     update: document.getElementById('mUpdate').value.trim(),
     date: document.getElementById('mDate').value || new Date().toISOString().slice(0,10),
-    updated_at: nowISO(),
+    updated_at: new Date().toISOString(),
   };
-  if (editingId) {
-    Object.assign(projects.find(x => x.id === editingId), data);
-  } else {
-    data.id = nextId();
-    projects.push(data);
-  }
-  saveData();
-  closeModal();
-  buildTypes(); buildTags(); buildProvinces(); render();
+  try {
+    if (editingId) {
+      await apiFetch('/projects/' + editingId, { method: 'PUT', body: JSON.stringify(data) });
+    } else {
+      await apiFetch('/projects', { method: 'POST', body: JSON.stringify(data) });
+    }
+    closeModal();
+    await refreshAll();
+  } catch(e) { alert('保存失败：' + e.message); }
 }
 
-function deleteProject(id) {
+async function deleteProject(id) {
   const p = projects.find(x => x.id === id);
   if (!p || !confirm(`确定删除「${p.name} - ${p.school}${p.foreign ? ' × ' + p.foreign : ''}」？`)) return;
-  projects = projects.filter(x => x.id !== id);
-  saveData();
-  const indexes = posterMap[id] || [];
-  indexes.forEach(idx => {
-    const key = `p${id}_${idx}`;
-    dbDelete(key);
-    if (posterCache[key]) { URL.revokeObjectURL(posterCache[key]); delete posterCache[key]; }
-  });
-  delete posterMap[id];
-  buildTypes(); buildTags(); buildProvinces(); render();
+  try {
+    await apiFetch('/projects/' + id, { method: 'DELETE' });
+    delete posterMap[id];
+    await refreshAll();
+  } catch(e) { alert('删除失败：' + e.message); }
 }
 
 function editUpdate(id) {
@@ -699,16 +695,17 @@ function editUpdate(id) {
     </div>`;
   setTimeout(() => document.getElementById(`eu-text-${id}`)?.focus(), 50);
 }
-function saveUpdate(id) {
-  const p = projects.find(x => x.id === id);
-  p.update = document.getElementById(`eu-text-${id}`).value.trim();
-  p.date = document.getElementById(`eu-date-${id}`).value || new Date().toISOString().slice(0,10);
-  p.updated_at = nowISO();
-  saveData();
-  render();
+async function saveUpdate(id) {
+  const update = document.getElementById(`eu-text-${id}`).value.trim();
+  const date = document.getElementById(`eu-date-${id}`).value || new Date().toISOString().slice(0,10);
+  try {
+    await apiFetch('/projects/' + id + '/dynamics', { method: 'PUT', body: JSON.stringify({ update, date }) });
+    await refreshAll();
+  } catch(e) { alert('保存失败：' + e.message); }
 }
 
 function triggerPosterUpload(id) {
+  if (!isUnlocked) return;
   currentPosterId = id;
   document.getElementById('posterFileInput').click();
 }
@@ -719,44 +716,38 @@ document.getElementById('posterFileInput').addEventListener('change', async func
   for (const file of files) {
     try {
       const blob = await compressImage(file, 1080, 0.85);
-      const indexes = posterMap[currentPosterId] || [];
-      const nextIndex = indexes.length ? Math.max(...indexes) + 1 : 0;
-      const key = `p${currentPosterId}_${nextIndex}`;
-      await dbPut(key, blob);
-      if (!posterMap[currentPosterId]) posterMap[currentPosterId] = [];
-      posterMap[currentPosterId].push(nextIndex);
-      posterMap[currentPosterId].sort((a,b)=>a-b);
-      posterCache[key] = URL.createObjectURL(blob);
+      await apiFetch('/posters/' + currentPosterId, { method: 'POST', body: blob, headers: { 'Content-Type': 'image/jpeg' } });
     } catch(err) { alert('上传失败：' + err.message); }
   }
   currentPosterId = null;
   this.value = '';
-  render();
+  await refreshAll();
 });
 
 function viewPoster(pid, idx) {
-  const key = `p${pid}_${idx}`;
-  if (!posterCache[key]) return;
-  document.getElementById('posterFullImg').src = posterCache[key];
+  document.getElementById('posterFullImg').src = posterUrl(pid, idx);
   document.getElementById('posterViewer').style.display = 'flex';
 }
-function downloadPoster(pid, idx) {
-  const key = `p${pid}_${idx}`;
-  if (!posterCache[key]) return;
+async function downloadPoster(pid, idx) {
   const p = projects.find(x => x.id === pid);
-  const a = document.createElement('a');
-  a.href = posterCache[key];
-  a.download = `${p.school}_${p.name}_${idx+1}.jpg`;
-  a.click();
+  try {
+    const res = await fetch(posterUrl(pid, idx));
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${p.school}_${p.name}_${idx+1}.jpg`;
+    a.click();
+    URL.revokeObjectURL(url);
+  } catch(e) { alert('下载失败：' + e.message); }
 }
 async function removePoster(pid, idx) {
   if (!confirm('确定删除这张海报？')) return;
-  const key = `p${pid}_${idx}`;
-  await dbDelete(key);
-  if (posterCache[key]) { URL.revokeObjectURL(posterCache[key]); delete posterCache[key]; }
-  posterMap[pid] = posterMap[pid].filter(i => i !== idx);
-  if (!posterMap[pid].length) delete posterMap[pid];
-  render();
+  try {
+    await apiFetch('/poster/p' + pid + '_' + idx, { method: 'DELETE' });
+    posterMap[pid] = (posterMap[pid]||[]).filter(i => i !== idx);
+    render();
+  } catch(e) { alert('删除失败：' + e.message); }
 }
 
 function filterRadar() {
@@ -801,18 +792,16 @@ function exportData() {
   a.click();
   URL.revokeObjectURL(url);
 }
-function importData(file) {
+async function importData(file) {
   if (!file) return;
   const reader = new FileReader();
-  reader.onload = (e) => {
+  reader.onload = async (e) => {
     try {
       const data = JSON.parse(e.target.result);
       if (Array.isArray(data)) {
-        if (confirm(`导入 ${data.length} 个项目，将替换当前数据。继续？`)) {
-          projects = migrate(data);
-          saveData();
-          buildTypes(); buildTags(); buildProvinces(); render();
-        }
+        if (!confirm(`导入 ${data.length} 个项目，将替换当前数据。继续？`)) return;
+        await apiFetch('/import', { method: 'POST', body: JSON.stringify({ projects: data }) });
+        await refreshAll();
       } else alert('文件格式错误');
     } catch(err) { alert('导入失败：' + err.message); }
   };
@@ -820,17 +809,124 @@ function importData(file) {
   document.getElementById('importFile').value = '';
 }
 
-
 document.getElementById('searchInput').addEventListener('input', function(e) {
   searchTerm = e.target.value.trim();
   render();
 });
 
+// Auto-refresh every 30s (skip if modal open)
+autoRefreshTimer = setInterval(() => {
+  const modalOpen = document.getElementById('projectModal').style.display === 'flex';
+  if (!modalOpen) refreshAll();
+}, 30000);
+
+// ---- Migration from localStorage/IndexedDB to cloud ----
+async function checkMigration() {
+  if (projects.length > 0) return;
+  if (localStorage.getItem('kp_migrated') === 'done') return;
+  const oldData = localStorage.getItem('kp_data_v4');
+  if (!oldData) return;
+  let oldProjects;
+  try { oldProjects = JSON.parse(oldData); } catch(e) { return; }
+  if (!Array.isArray(oldProjects) || !oldProjects.length) return;
+
+  if (!confirm(`检测到本地有 ${oldProjects.length} 个旧项目数据。\n\n云数据库目前为空，是否将本地数据迁移到云端？\n（迁移后数据将在所有设备间共享，需输入管理密码）`)) return;
+  await migrateOldData(oldProjects);
+}
+
+async function migrateOldData(oldProjects) {
+  if (!isUnlocked) {
+    const pwd = prompt('请输入管理密码：');
+    if (!pwd) return;
+    adminKey = pwd;
+    sessionStorage.setItem('kp_admin_key', pwd);
+    try {
+      await apiFetch('/export');
+    } catch(e) {
+      adminKey = '';
+      sessionStorage.removeItem('kp_admin_key');
+      alert('密码错误');
+      return;
+    }
+    isUnlocked = true;
+    updateLockUI();
+  }
+
+  document.getElementById('countText').textContent = `正在迁移 ${oldProjects.length} 个项目...`;
+  const idMap = {};
+  for (const p of oldProjects) {
+    const data = {
+      name: p.name || '',
+      school: p.school || '',
+      foreign: p.foreign || '',
+      province: normalizeProvinces(p.province),
+      type: p.type || (p.foreign ? '合作办学' : '管理类联考'),
+      tags: p.tags || [],
+      update: p.update || '',
+      date: p.date || '',
+    };
+    try {
+      const res = await apiFetch('/projects', { method: 'POST', body: JSON.stringify(data) });
+      const result = await res.json();
+      if (p.id && result.id) idMap[p.id] = result.id;
+    } catch(e) { console.error('迁移项目失败:', p.name, e); }
+  }
+
+  // Migrate posters from old IndexedDB
+  try {
+    await migratePosters(idMap);
+  } catch(e) { console.error('海报迁移失败:', e); }
+
+  localStorage.setItem('kp_migrated', 'done');
+  await refreshAll();
+  alert(`迁移完成！${oldProjects.length} 个项目已上传到云端。`);
+}
+
+async function migratePosters(idMap) {
+  const posterDB = await new Promise((resolve, reject) => {
+    const req = indexedDB.open('kp-posters', 1);
+    req.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains('posters')) db.createObjectStore('posters', {keyPath:'id'});
+    };
+    req.onsuccess = (e) => resolve(e.target.result);
+    req.onerror = () => reject(req.error);
+  });
+
+  const keys = await new Promise((resolve, reject) => {
+    const tx = posterDB.transaction('posters', 'readonly');
+    const req = tx.objectStore('posters').getAllKeys();
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+
+  for (const key of keys) {
+    const m = String(key).match(/^p(\d+)_(\d+)$/);
+    if (!m) continue;
+    const oldPid = parseInt(m[1]);
+    const newPid = idMap[oldPid];
+    if (!newPid) continue;
+
+    const blob = await new Promise((resolve, reject) => {
+      const tx = posterDB.transaction('posters', 'readonly');
+      const req = tx.objectStore('posters').get(key);
+      req.onsuccess = () => resolve(req.result ? req.result.blob : null);
+      req.onerror = () => reject(req.error);
+    });
+
+    if (blob) {
+      try {
+        await apiFetch('/posters/' + newPid, { method: 'POST', body: blob, headers: { 'Content-Type': 'image/jpeg' } });
+      } catch(e) { console.error('海报上传失败:', key, e); }
+    }
+  }
+  posterDB.close();
+}
+
 async function init() {
-  await initDB();
-  loadData();
-  await loadPosterKeys();
-  buildTypes(); buildTags(); buildProvinces(); render();
+  updateLockUI();
+  await refreshAll();
+  await checkMigration();
 }
 init();
 </script>
