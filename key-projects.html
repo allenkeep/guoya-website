@@ -230,8 +230,8 @@
       <input type="text" id="mForeign" placeholder="如：加拿大西三一大学">
     </div>
     <div class="form-group">
-      <label>省份/城市</label>
-      <input type="text" id="mProvince" placeholder="如：天津">
+      <label>省份/城市（多个用逗号分隔）</label>
+      <input type="text" id="mProvince" placeholder="如：北京, 上海, 深圳">
     </div>
     <div class="form-group">
       <label>标签（可多选）</label>
@@ -344,6 +344,9 @@ function migrate(list) {
     if (!p.type) p.type = p.foreign ? '合作办学' : '管理类联考';
     if (p.type === '国内项目' || p.type === '其他') p.type = '管理类联考';
     delete p.exam;
+    if (!Array.isArray(p.province)) {
+      p.province = p.province ? [p.province] : [];
+    }
   });
   return list;
 }
@@ -435,10 +438,13 @@ function buildTags() {
   document.getElementById('tagsBar').innerHTML = html;
 }
 function buildProvinces() {
-  const provinces = [...new Set(projects.map(p => p.province).filter(Boolean))].sort();
+  const provinces = [...new Set(projects.flatMap(p => Array.isArray(p.province) ? p.province : [p.province].filter(Boolean)))].sort();
   let html = `<span class="fchip prov ${activeProvince==='all'?'active':''}" onclick="setProvince('all')">全部</span>`;
   provinces.forEach(pv => {
-    const cnt = projects.filter(p => p.province === pv).length;
+    const cnt = projects.filter(p => {
+      const arr = Array.isArray(p.province) ? p.province : [p.province].filter(Boolean);
+      return arr.includes(pv);
+    }).length;
     html += `<span class="fchip prov ${activeProvince===pv?'active':''}" onclick="setProvince('${esc(pv)}')">${esc(pv)} ${cnt}</span>`;
   });
   document.getElementById('provincesBar').innerHTML = html;
@@ -451,14 +457,17 @@ function getFiltered() {
   let list = projects;
   if (activeType !== 'all') list = list.filter(p => p.type === activeType);
   if (activeTag !== 'all') list = list.filter(p => p.tags.includes(activeTag));
-  if (activeProvince !== 'all') list = list.filter(p => p.province === activeProvince);
+  if (activeProvince !== 'all') list = list.filter(p => {
+    const arr = Array.isArray(p.province) ? p.province : [p.province].filter(Boolean);
+    return arr.includes(activeProvince);
+  });
   if (searchTerm) {
     const s = searchTerm.toLowerCase();
     list = list.filter(p =>
       (p.name||'').toLowerCase().includes(s) ||
       (p.school||'').toLowerCase().includes(s) ||
       (p.foreign||'').toLowerCase().includes(s) ||
-      (p.province||'').toLowerCase().includes(s)
+      (Array.isArray(p.province) ? p.province : [p.province]).join(' ').toLowerCase().includes(s)
     );
   }
   return list;
@@ -503,7 +512,8 @@ async function render() {
     const schoolLine = p.foreign
       ? `${esc(p.school)} × ${esc(p.foreign)}`
       : `${esc(p.school)}`;
-    const locationLine = `${esc(p.province)}`;
+    const provArr = Array.isArray(p.province) ? p.province : [p.province].filter(Boolean);
+    const locationLine = provArr.join(' · ');
     const indexes = posterMap[p.id] || [];
     return `
       <div class="project-card" data-pid="${p.id}">
@@ -568,7 +578,8 @@ function openProjectModal(id) {
   document.getElementById('mName').value = p?.name || '';
   document.getElementById('mSchool').value = p?.school || '';
   document.getElementById('mForeign').value = p?.foreign || '';
-  document.getElementById('mProvince').value = p?.province || '';
+  const provVal = p?.province;
+  document.getElementById('mProvince').value = Array.isArray(provVal) ? provVal.join(', ') : (provVal || '');
   document.getElementById('mUpdate').value = p?.update || '';
   document.getElementById('mDate').value = p?.date || new Date().toISOString().slice(0,10);
   buildModalTags(p?.tags || []);
@@ -625,7 +636,7 @@ function saveProjectFromModal() {
     name,
     school: document.getElementById('mSchool').value.trim(),
     foreign: document.getElementById('mForeign').value.trim(),
-    province: document.getElementById('mProvince').value.trim(),
+    province: document.getElementById('mProvince').value.split(/[,，、\s]+/).map(s => s.trim()).filter(Boolean),
     type: document.getElementById('mType').value || '合作办学',
     tags: Array.from(document.querySelectorAll('#mTags .tag-option.selected')).map(el => el.dataset.value),
     update: document.getElementById('mUpdate').value.trim(),
