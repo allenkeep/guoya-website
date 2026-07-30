@@ -58,9 +58,11 @@
 
   .project-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:12px}
   .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:10px}
-  .card-info{flex:1;min-width:0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-  .card-name{font-size:17px;font-weight:600;line-height:1.4}
-  .card-school{font-size:13px;color:var(--text2)}
+  .card-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+  .card-title{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:17px;font-weight:600;line-height:1.4}
+  .card-name{color:var(--text)}
+  .card-school{color:var(--text2);font-weight:600}
+  .card-location{font-size:13px;color:var(--text3)}
   .card-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0}
   .card-tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
   .chip{font-size:12px;padding:3px 9px;border-radius:10px;white-space:nowrap;line-height:1.5}
@@ -499,15 +501,19 @@ async function render() {
     const dot = isNew(p.date) ? ' new' : '';
     const updated = p.updated_at ? `<span class="updated-at">更新于 ${timeAgo(p.updated_at)}</span>` : '';
     const schoolLine = p.foreign
-      ? `${esc(p.school)} × ${esc(p.foreign)} · ${esc(p.province)}`
-      : `${esc(p.school)} · ${esc(p.province)}`;
+      ? `${esc(p.school)} × ${esc(p.foreign)}`
+      : `${esc(p.school)}`;
+    const locationLine = `${esc(p.province)}`;
     const indexes = posterMap[p.id] || [];
     return `
       <div class="project-card" data-pid="${p.id}">
         <div class="card-top">
           <div class="card-info">
-            <div class="card-name">${esc(p.name)}</div>
-            <div class="card-school">${schoolLine}</div>
+            <div class="card-title">
+              <span class="card-name">${esc(p.name)}</span>
+              <span class="card-school">${schoolLine}</span>
+            </div>
+            <div class="card-location">${locationLine}</div>
           </div>
           <div class="card-right">
             <div class="card-tags">${typeChip}${chips}</div>
