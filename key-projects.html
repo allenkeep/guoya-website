@@ -47,9 +47,12 @@
   .fchip.prov{background:#e6f7f8;color:#0d7a7e}
   .fchip.prov:hover{background:#d3f1f3}
   .fchip.prov.active{background:#0d7a7e;color:#fff}
-  .fchip.type{background:#fff0f5;color:#9d3f6e}
-  .fchip.type:hover{background:#ffe3ed}
-  .fchip.type.active{background:#9d3f6e;color:#fff}
+  .fchip.type-coop{background:#e6f7f8;color:#0d7a7e}
+  .fchip.type-coop:hover{background:#d3f1f3}
+  .fchip.type-coop.active{background:#0d7a7e;color:#fff}
+  .fchip.type-exam{background:#e8edff;color:#3d4fb5}
+  .fchip.type-exam:hover{background:#d4dcff}
+  .fchip.type-exam.active{background:#3d4fb5;color:#fff}
   .fchip.admit{background:#fff0f5;color:#9d3f6e}
   .fchip.admit:hover{background:#ffe3ed}
   .fchip.admit.active{background:#9d3f6e;color:#fff}
@@ -71,7 +74,8 @@
   .chip-case{background:#fef5e7;color:#8a5a0a}
   .chip-hot{background:#fceae5;color:#a04020}
   .chip-potential{background:#f0eefe;color:#534ab7}
-  .chip-type{background:#e6f7f8;color:#0d7a7e}
+  .chip-type-coop{background:#e6f7f8;color:#0d7a7e}
+  .chip-type-exam{background:#e8edff;color:#3d4fb5}
   .chip-admit{background:#fff0f5;color:#9d3f6e}
   .card-actions{display:flex;gap:8px}
   .act-btn{font-size:13px;color:var(--text3);background:none;border:none;cursor:pointer;padding:2px 4px}
@@ -333,11 +337,15 @@ function dbGetAllKeys() {
 function loadData() {
   const saved = localStorage.getItem(STORAGE_KEY);
   if (saved) {
-    try { projects = JSON.parse(saved); } catch(e) { projects = migrate(JSON.parse(JSON.stringify(DEFAULT_PROJECTS))); }
+    try { projects = migrate(JSON.parse(saved)); saveData(); } catch(e) { projects = migrate(JSON.parse(JSON.stringify(DEFAULT_PROJECTS))); }
   } else {
     projects = migrate(JSON.parse(JSON.stringify(DEFAULT_PROJECTS)));
     saveData();
   }
+}
+function normalizeProvinces(prov) {
+  const arr = Array.isArray(prov) ? prov : (prov ? [prov] : []);
+  return arr.flatMap(s => String(s).split(/[,，、\s]+/)).map(s => s.trim()).filter(Boolean);
 }
 function migrate(list) {
   list.forEach(p => {
@@ -345,9 +353,7 @@ function migrate(list) {
     if (!p.type) p.type = p.foreign ? '合作办学' : '管理类联考';
     if (p.type === '国内项目' || p.type === '其他') p.type = '管理类联考';
     delete p.exam;
-    if (!Array.isArray(p.province)) {
-      p.province = p.province ? [p.province] : [];
-    }
+    p.province = normalizeProvinces(p.province);
   });
   return list;
 }
@@ -431,7 +437,8 @@ function buildTypes() {
   let html = `<span class="fchip all ${activeType==='all'?'active':''}" onclick="setType('all')">全部 ${projects.length}</span>`;
   TYPES.forEach(tp => {
     const cnt = projects.filter(p => p.type === tp).length;
-    html += `<span class="fchip type ${activeType===tp?'active':''}" onclick="setType('${esc(tp)}')">${esc(tp)} ${cnt}</span>`;
+    const cls = tp === '合作办学' ? 'type-coop' : 'type-exam';
+    html += `<span class="fchip ${cls} ${activeType===tp?'active':''}" onclick="setType('${esc(tp)}')">${esc(tp)} ${cnt}</span>`;
   });
   document.getElementById('typesBar').innerHTML = html;
 }
@@ -512,7 +519,8 @@ async function render() {
       const td = TAGS.find(x => x.key === t);
       return td ? `<span class="chip ${td.cls}">${t}</span>` : '';
     }).join('');
-    const typeChip = p.type ? `<span class="chip chip-type">${esc(p.type)}</span>` : '';
+    const typeCls = p.type === '合作办学' ? 'chip-type-coop' : 'chip-type-exam';
+    const typeChip = p.type ? `<span class="chip ${typeCls}">${esc(p.type)}</span>` : '';
     const dot = isNew(p.date) ? ' new' : '';
     const updated = p.updated_at ? `<span class="updated-at">编辑于 ${formatDateTime(p.updated_at)}</span>` : '';
     const schoolLine = p.foreign
@@ -546,7 +554,6 @@ async function render() {
               <div class="update-text">${esc(p.update||'暂无动态')}</div>
               <div class="update-date">
                 <span class="update-date-left">
-                  <span>${esc(p.date||'')} · ${daysAgo(p.date||'')}</span>
                   ${updated}
                 </span>
                 <button class="update-edit-btn" onclick="editUpdate(${p.id})">编辑动态</button>
