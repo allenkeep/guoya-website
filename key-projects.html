@@ -200,7 +200,6 @@
 <div class="container" id="list"></div>
 <div class="footer">
   <div>果芽MBA · 内部使用 · 数据保存在本地浏览器</div>
-  <div style="margin-top:4px"><a href="javascript:resetData()">清空所有数据</a></div>
 </div>
 
 <input type="file" id="posterFileInput" accept="image/*" style="display:none" multiple>
@@ -820,12 +819,7 @@ function importData(file) {
   reader.readAsText(file);
   document.getElementById('importFile').value = '';
 }
-function resetData() {
-  if (!confirm('确定清空所有项目数据？此操作不可撤销。')) return;
-  projects = migrate(JSON.parse(JSON.stringify(DEFAULT_PROJECTS)));
-  saveData();
-  buildTypes(); buildTags(); buildProvinces(); render();
-}
+
 
 document.getElementById('searchInput').addEventListener('input', function(e) {
   searchTerm = e.target.value.trim();
