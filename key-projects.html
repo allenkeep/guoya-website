@@ -305,6 +305,14 @@ async function apiFetch(path, options = {}) {
   });
   if (!res.ok) {
     const data = await res.json().catch(() => ({}));
+    // 401 = 密码错误，自动退出编辑模式
+    if (res.status === 401 && isUnlocked) {
+      adminKey = '';
+      localStorage.removeItem('kp_admin_key');
+      isUnlocked = false;
+      updateLockUI();
+      throw new Error('密码错误，请重新输入');
+    }
     throw new Error(data.error || 'API error ' + res.status);
   }
   return res;
@@ -315,36 +323,17 @@ async function autoUnlock() {
   const savedKey = localStorage.getItem('kp_admin_key');
   if (!savedKey) return;
   adminKey = savedKey;
-  try {
-    await apiFetch('/export');
-    isUnlocked = true;
-    updateLockUI();
-  } catch(e) {
-    adminKey = '';
-    localStorage.removeItem('kp_admin_key');
-  }
+  isUnlocked = true;
+  updateLockUI();
 }
 function unlock() {
   const pwd = prompt('请输入管理密码：');
   if (!pwd) return;
   adminKey = pwd;
-  // Test the key by trying to export
-  apiFetch('/export').then(async () => {
-    localStorage.setItem('kp_admin_key', pwd);
-    isUnlocked = true;
-    updateLockUI();
-    await refreshAll();
-    // After unlock, check if migration is needed
-    if (projects.length === 0) await checkMigration();
-  }).catch((err) => {
-    adminKey = '';
-    const msg = err && err.message ? err.message : String(err);
-    if (msg.includes('401') || msg.includes('需要管理密码')) {
-      alert('密码错误');
-    } else {
-      alert('解锁失败：' + msg + '\n\n如果持续失败，请检查网络或联系管理员。');
-    }
-  });
+  localStorage.setItem('kp_admin_key', pwd);
+  isUnlocked = true;
+  updateLockUI();
+  refreshAll();
 }
 function lock() {
   adminKey = '';
