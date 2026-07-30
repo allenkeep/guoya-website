@@ -50,6 +50,9 @@
   .fchip.type{background:#fff0f5;color:#9d3f6e}
   .fchip.type:hover{background:#ffe3ed}
   .fchip.type.active{background:#9d3f6e;color:#fff}
+  .fchip.admit{background:#fff0f5;color:#9d3f6e}
+  .fchip.admit:hover{background:#ffe3ed}
+  .fchip.admit.active{background:#9d3f6e;color:#fff}
 
   .container{max-width:960px;margin:14px auto 0;padding:0 20px}
 
@@ -67,7 +70,7 @@
   .chip-hot{background:#fceae5;color:#a04020}
   .chip-potential{background:#f0eefe;color:#534ab7}
   .chip-type{background:#e6f7f8;color:#0d7a7e}
-  .chip-exam{background:#f5f0ff;color:#6b4fc4}
+  .chip-admit{background:#fff0f5;color:#9d3f6e}
   .card-actions{display:flex;gap:8px}
   .act-btn{font-size:12px;color:var(--text3);background:none;border:none;cursor:pointer;padding:2px 4px}
   .act-btn:hover{color:var(--primary)}
@@ -229,10 +232,6 @@
       <label>省份/城市</label>
       <input type="text" id="mProvince" placeholder="如：天津">
     </div>
-    <div id="examGroup" class="form-group" style="display:none">
-      <label>联考科目</label>
-      <input type="text" id="mExam" placeholder="如：199管理类联考">
-    </div>
     <div class="form-group">
       <label>标签（可多选）</label>
       <div class="tag-select" id="mTags"></div>
@@ -263,6 +262,7 @@ const TAGS = [
   {key:'有录取案例',  cls:'chip-case',     fcls:'case',     color:'#b07d12'},
   {key:'高关注度',    cls:'chip-hot',      fcls:'hot',      color:'#c24b2d'},
   {key:'高潜力',      cls:'chip-potential', fcls:'potential', color:'#5a4fc4'},
+  {key:'招生合作',    cls:'chip-admit',    fcls:'admit',    color:'#9d3f6e'},
 ];
 
 const TYPES = ['合作办学','管理类联考'];
@@ -342,7 +342,7 @@ function migrate(list) {
     if (!p.updated_at) p.updated_at = new Date().toISOString();
     if (!p.type) p.type = p.foreign ? '合作办学' : '管理类联考';
     if (p.type === '国内项目' || p.type === '其他') p.type = '管理类联考';
-    if (!p.exam) p.exam = '';
+    delete p.exam;
   });
   return list;
 }
@@ -497,7 +497,6 @@ async function render() {
       return td ? `<span class="chip ${td.cls}">${t}</span>` : '';
     }).join('');
     const typeChip = p.type ? `<span class="chip chip-type">${esc(p.type)}</span>` : '';
-    const examChip = p.exam ? `<span class="chip chip-exam">${esc(p.exam)}</span>` : '';
     const dot = isNew(p.date) ? ' new' : '';
     const updated = p.updated_at ? `<span class="updated-at">更新于 ${timeAgo(p.updated_at)}</span>` : '';
     const schoolLine = p.foreign
@@ -511,7 +510,7 @@ async function render() {
             <div class="card-school">${schoolLine}</div>
           </div>
           <div class="card-right">
-            <div class="card-tags">${typeChip}${examChip}${chips}</div>
+            <div class="card-tags">${typeChip}${chips}</div>
             <div class="card-actions">
               <button class="act-btn" onclick="openProjectModal(${p.id})">编辑</button>
               <button class="act-btn danger" onclick="deleteProject(${p.id})">删除</button>
@@ -569,7 +568,6 @@ function openProjectModal(id) {
   document.getElementById('mSchool').value = p?.school || '';
   document.getElementById('mForeign').value = p?.foreign || '';
   document.getElementById('mProvince').value = p?.province || '';
-  document.getElementById('mExam').value = p?.exam || '';
   document.getElementById('mUpdate').value = p?.update || '';
   document.getElementById('mDate').value = p?.date || new Date().toISOString().slice(0,10);
   buildModalTags(p?.tags || []);
@@ -581,7 +579,6 @@ function onTypeChange() {
   const isCoop = type === '合作办学';
   document.getElementById('radarSearchBox').style.display = (isCoop && !editingId) ? 'block' : 'none';
   document.getElementById('foreignGroup').style.display = isCoop ? 'block' : 'none';
-  document.getElementById('examGroup').style.display = isCoop ? 'none' : 'block';
   if (!isCoop) {
     document.getElementById('mForeign').value = '';
     document.getElementById('radarInput').value = '';
@@ -629,7 +626,6 @@ function saveProjectFromModal() {
     foreign: document.getElementById('mForeign').value.trim(),
     province: document.getElementById('mProvince').value.trim(),
     type: document.getElementById('mType').value || '合作办学',
-    exam: document.getElementById('mExam').value.trim(),
     tags: Array.from(document.querySelectorAll('#mTags .tag-option.selected')).map(el => el.dataset.value),
     update: document.getElementById('mUpdate').value.trim(),
     date: document.getElementById('mDate').value || new Date().toISOString().slice(0,10),
