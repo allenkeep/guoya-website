@@ -84,6 +84,7 @@
   .update-content{flex:1;min-width:0}
   .update-text{font-size:14px;color:var(--text);line-height:1.6;word-break:break-word}
   .update-date{font-size:12px;color:var(--text3);margin-top:5px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+  .update-date-left{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .update-edit-btn{font-size:12px;color:var(--primary);background:none;border:none;cursor:pointer}
   .updated-at{color:var(--text3)}
 
@@ -419,6 +420,11 @@ function timeAgo(iso) {
   if (diff < 2592000) return Math.floor(diff/604800) + '周前';
   return Math.floor(diff/2592000) + '月前';
 }
+function formatDateTime(iso) {
+  const d = new Date(iso);
+  const pad = n => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
 function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
 function buildTypes() {
@@ -508,7 +514,7 @@ async function render() {
     }).join('');
     const typeChip = p.type ? `<span class="chip chip-type">${esc(p.type)}</span>` : '';
     const dot = isNew(p.date) ? ' new' : '';
-    const updated = p.updated_at ? `<span class="updated-at">更新于 ${timeAgo(p.updated_at)}</span>` : '';
+    const updated = p.updated_at ? `<span class="updated-at">编辑于 ${formatDateTime(p.updated_at)}</span>` : '';
     const schoolLine = p.foreign
       ? `${esc(p.school)} × ${esc(p.foreign)}`
       : `${esc(p.school)}`;
@@ -520,8 +526,8 @@ async function render() {
         <div class="card-top">
           <div class="card-info">
             <div class="card-title">
-              <span class="card-name">${esc(p.name)}</span>
               <span class="card-school">${schoolLine}</span>
+              <span class="card-name">${esc(p.name)}</span>
             </div>
             <div class="card-location">${locationLine}</div>
           </div>
@@ -539,8 +545,10 @@ async function render() {
             <div class="update-content">
               <div class="update-text">${esc(p.update||'暂无动态')}</div>
               <div class="update-date">
-                <span>${esc(p.date||'')} · ${daysAgo(p.date||'')}</span>
-                ${updated}
+                <span class="update-date-left">
+                  <span>${esc(p.date||'')} · ${daysAgo(p.date||'')}</span>
+                  ${updated}
+                </span>
                 <button class="update-edit-btn" onclick="editUpdate(${p.id})">编辑动态</button>
               </div>
             </div>
