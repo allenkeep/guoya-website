@@ -387,7 +387,7 @@ async function loadPosterKeys() {
   const keys = await dbGetAllKeys();
   posterMap = {};
   keys.forEach(key => {
-    const m = String(key).match(/^p(\\d+)_(\\d+)$/);
+    const m = String(key).match(/^p(\d+)_(\d+)$/);
     if (m) {
       const pid = parseInt(m[1]), idx = parseInt(m[2]);
       if (!posterMap[pid]) posterMap[pid] = [];
