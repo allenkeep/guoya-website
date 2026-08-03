@@ -470,7 +470,7 @@
     var allLives = [];
     var activeMonth = null;
 
-    fetch('data/lives.json')
+    fetch('data/lives.json?v=' + Date.now())
         .then(function(r) { return r.json(); })
         .then(function(lives) {
             if (!lives.length) {
@@ -620,7 +620,7 @@
     });
 
     // 加载数据
-    fetch('data/cases.json')
+    fetch('data/cases.json?v=' + Date.now())
         .then(function(r) { return r.json(); })
         .then(function(data) {
             allCases = data;
