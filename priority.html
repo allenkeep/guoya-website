@@ -591,6 +591,8 @@ tr:hover td { background: #fafbff; }
   </div>
   <input type="search" class="search-box" id="searchInput" placeholder="搜索学校 / 专业 / 外方院校...">
   <button class="btn" id="exportBtn">导出 CSV</button>
+  <button class="btn" id="exportDataBtn">导出数据</button>
+  <button class="btn" id="importDataBtn">导入数据</button>
   <button class="btn admin-only" id="restoreBtn" style="display:none;">↩ 恢复已隐藏</button>
   <button class="btn-primary" id="addProjBtn">+ 新增项目</button>
 </div>
@@ -736,6 +738,24 @@ tr:hover td { background: #fafbff; }
     <div class="form-actions">
       <button class="btn" id="editCancelBtn">取消</button>
       <button class="btn-primary" id="editSaveBtn">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- 数据导入弹窗 -->
+<div class="add-modal" id="importModal">
+  <div class="add-modal-content" style="max-width: 560px;">
+    <div class="add-modal-header">
+      <span>导入数据</span>
+      <button class="add-close" id="importCloseBtn">&times;</button>
+    </div>
+    <div class="add-modal-body" style="padding: 20px;">
+      <p style="font-size: 13px; color: #888; margin-bottom: 12px;">将从其他版本导出的数据粘贴到下方文本框，点击导入即可恢复备注、海报、标签等数据。<br>导入会与当前数据合并，不会清除已有内容。</p>
+      <textarea id="importTextarea" style="width:100%; height: 240px; font-size: 12px; border: 1px solid #ddd; border-radius: 6px; padding: 10px; font-family: monospace;" placeholder='粘贴导出的数据 JSON...'></textarea>
+      <div style="margin-top: 12px; display: flex; gap: 10px; justify-content: flex-end;">
+        <button class="btn" id="importCancelBtn">取消</button>
+        <button class="btn-primary" id="importConfirmBtn">导入</button>
+      </div>
     </div>
   </div>
 </div>
@@ -2317,6 +2337,75 @@ initEditModal();
 initAddModal();
 render();
 updateHiddenBtn();
+
+// ====== 数据导入/导出 ======
+const DATA_KEYS = [STORAGE_NOTES_KEY, STORAGE_POSTERS_KEY, STORAGE_CUSTOM_KEY, STORAGE_HIDDEN_KEY, STORAGE_OVERRIDE_KEY];
+
+document.getElementById("exportDataBtn").addEventListener("click", () => {
+  const data = {};
+  DATA_KEYS.forEach(k => { data[k] = localStorage.getItem(k); });
+  const json = JSON.stringify(data);
+  // 复制到剪贴板
+  navigator.clipboard.writeText(json).then(() => {
+    alert("数据已复制到剪贴板！\n请到另一个版本的页面点击「导入数据」粘贴。");
+  }).catch(() => {
+    // 降级：弹窗显示
+  prompt("请复制以下数据（Ctrl+A 全选 → Ctrl+C 复制）：", json);
+  });
+});
+
+document.getElementById("importDataBtn").addEventListener("click", () => {
+  document.getElementById("importTextarea").value = "";
+  document.getElementById("importModal").classList.add("show");
+});
+document.getElementById("importCloseBtn").addEventListener("click", () => {
+  document.getElementById("importModal").classList.remove("show");
+});
+document.getElementById("importCancelBtn").addEventListener("click", () => {
+  document.getElementById("importModal").classList.remove("show");
+});
+document.getElementById("importModal").addEventListener("click", (e) => {
+  if (e.target.id === "importModal") document.getElementById("importModal").classList.remove("show");
+});
+document.getElementById("importConfirmBtn").addEventListener("click", () => {
+  const text = document.getElementById("importTextarea").value.trim();
+  if (!text) { alert("请粘贴数据"); return; }
+  try {
+    const data = JSON.parse(text);
+    let count = 0;
+    DATA_KEYS.forEach(k => {
+      if (data[k] !== undefined && data[k] !== null) {
+        // 合并：如果已有数据，合并而非覆盖
+        if (k === STORAGE_NOTES_KEY || k === STORAGE_POSTERS_KEY || k === STORAGE_OVERRIDE_KEY) {
+          try {
+            const existing = JSON.parse(localStorage.getItem(k) || "{}");
+            const incoming = JSON.parse(data[k]);
+            const merged = { ...existing, ...incoming };
+            localStorage.setItem(k, JSON.stringify(merged));
+          } catch(e) {
+            localStorage.setItem(k, data[k]);
+          }
+        } else if (k === STORAGE_CUSTOM_KEY || k === STORAGE_HIDDEN_KEY) {
+          try {
+            const existing = JSON.parse(localStorage.getItem(k) || "[]");
+            const incoming = JSON.parse(data[k]);
+            const merged = [...existing, ...incoming];
+            localStorage.setItem(k, JSON.stringify(merged));
+          } catch(e) {
+            localStorage.setItem(k, data[k]);
+          }
+        }
+        count++;
+      }
+    });
+    document.getElementById("importModal").classList.remove("show");
+    alert("导入成功！共恢复 " + count + " 项数据。");
+    render();
+    updateHiddenBtn();
+  } catch(e) {
+    alert("数据格式错误，请检查后重试：" + e.message);
+  }
+});
 </script>
 </body>
 </html>
