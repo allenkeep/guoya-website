@@ -174,9 +174,9 @@ tr:hover td { background: #fafbff; }
 .note-cell {
   color: #5F5E5A;
   font-size: 13px;
-  width: 360px;
-  max-width: 360px;
-  min-width: 260px;
+  width: 520px;
+  max-width: 520px;
+  min-width: 360px;
 }
 .note-view {
   display: flex;
@@ -191,6 +191,16 @@ tr:hover td { background: #fafbff; }
   white-space: normal;
 }
 .note-text.empty { color: #bbb; font-style: italic; }
+.updated-at-cell {
+  color: #5F5E5A;
+  font-size: 12px;
+  white-space: nowrap;
+  text-align: center;
+  width: 90px;
+  min-width: 90px;
+}
+.updated-at { color: #5F5E5A; }
+.updated-at.empty { color: #bbb; }
 .note-edit-btn {
   font-size: 12px;
   color: #378ADD;
@@ -570,7 +580,7 @@ tr:hover td { background: #fafbff; }
 <div class="header">
   <h1>重点项目清单<span class="badge-internal">内部使用</span><span class="role-badge" id="roleBadge"></span></h1>
   <div class="sub">联考 & 合作办学硕士 · 手动维护 · 标签聚焦运营与销售资源</div>
-  <div class="stats">符合条件 <b id="resultCount">—</b> / 共 <span id="totalCount">—</span> 个项目</div>
+  <div class="stats">符合条件 <b id="resultCount">—</b> / 共 <span id="totalCount">—</span> 个项目 · 最后更新 <span id="lastUpdated">—</span></div>
 </div>
 
 <div class="toolbar">
@@ -606,6 +616,7 @@ tr:hover td { background: #fafbff; }
         <th>专业</th>
         <th>标签</th>
         <th>备注</th>
+        <th>更新日期</th>
         <th>海报</th>
       </tr>
     </thead>
@@ -760,11 +771,16 @@ tr:hover td { background: #fafbff; }
 </div>
 
 <script>
-// ====== 密码门验证（双角色） ======
-const GATE_HASH_ADMIN  = "c1a778c2ab5983060ae17c50e0cd9041c4e4fa872bbd8da01a6e79b23df09566"; // 管理员
-const GATE_HASH_EDITOR = "a9d7d7b7171e93dad71ec6b5627d3448b0ac24812ee2451415d83ebdd7d4cea8"; // 编辑者
+// ====== 密码门验证（管理员 + 多编辑者） ======
+const GATE_HASH_ADMIN = "c1a778c2ab5983060ae17c50e0cd9041c4e4fa872bbd8da01a6e79b23df09566"; // 管理员
+const GATE_HASH_EDITORS = {
+  "d6f7a5a7fe20208f90553f3d9cab297f7b564c623cdeeaed58aaca5f67aed3c4": "xingzhu",
+  "6744970e1db4da133f3c43c366fe60265b0aa24a22d1a71adb5bf31b24f9214b": "xiaonan",
+  "b9c5a058d4db85df2176c0e5a55f561a65e626178386a3dae7caa79618c864ce": "lixiang"
+};
 function getRole() { return sessionStorage.getItem("priority_role") || ""; }
 function isAdmin() { return getRole() === "admin"; }
+function isEditor() { return !!GATE_HASH_EDITORS[getRole()]; }
 async function sha256(text) {
   const buf = new TextEncoder().encode(text);
   const hash = await crypto.subtle.digest("SHA-256", buf);
@@ -779,9 +795,9 @@ async function checkGate() {
     sessionStorage.setItem("priority_role", "admin");
     document.getElementById("gateOverlay").style.display = "none";
     onGatePassed();
-  } else if (hashed === GATE_HASH_EDITOR) {
+  } else if (GATE_HASH_EDITORS[hashed]) {
     sessionStorage.setItem("priority_authed", "1");
-    sessionStorage.setItem("priority_role", "editor");
+    sessionStorage.setItem("priority_role", hashed);
     document.getElementById("gateOverlay").style.display = "none";
     onGatePassed();
   } else {
@@ -797,7 +813,8 @@ function onGatePassed() {
   // 更新角色标识
   const badge = document.getElementById("roleBadge");
   if (badge) {
-    badge.textContent = isAdmin() ? "管理员" : "编辑者";
+    const roleName = isAdmin() ? "管理员" : (GATE_HASH_EDITORS[getRole()] || "编辑者");
+    badge.textContent = roleName;
     badge.className = "role-badge " + (isAdmin() ? "role-admin" : "role-editor");
   }
   // 延迟渲染和导入到当前脚本执行完毕后，避免 const 变量 TDZ 报错
@@ -847,6 +864,7 @@ const STORAGE_POSTERS_KEY = "priority_posters";
 const STORAGE_CUSTOM_KEY = "priority_custom";
 const STORAGE_HIDDEN_KEY = "priority_hidden"; // 被隐藏的内置项目 key 列表
 const STORAGE_OVERRIDE_KEY = "priority_proj_overrides"; // 内置项目字段覆盖 { "school|major": { type, foreign, major, tags } }
+const STORAGE_UPDATED_KEY = "priority_updated_at"; // 每个项目的更新日期 { "school|major": "YYYY-MM-DD" }
 
 function projKey(p) {
   return (p.school || "") + "|" + (p.major || "");
@@ -872,6 +890,23 @@ function saveHidden(arr) {
   localStorage.setItem(STORAGE_HIDDEN_KEY, JSON.stringify(arr));
 }
 
+function loadUpdatedAt() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_UPDATED_KEY) || "{}");
+  } catch(e) { return {}; }
+}
+
+function saveUpdatedAt(key, date) {
+  const map = loadUpdatedAt();
+  map[key] = date;
+  localStorage.setItem(STORAGE_UPDATED_KEY, JSON.stringify(map));
+}
+
+function touchUpdatedAt(key) {
+  const today = new Date().toISOString().slice(0, 10);
+  saveUpdatedAt(key, today);
+}
+
 function loadProjOverrides() {
   try { return JSON.parse(localStorage.getItem(STORAGE_OVERRIDE_KEY) || "{}"); }
   catch(e) { return {}; }
@@ -880,6 +915,7 @@ function saveProjOverride(key, data) {
   const all = loadProjOverrides();
   all[key] = data;
   localStorage.setItem(STORAGE_OVERRIDE_KEY, JSON.stringify(all));
+  touchUpdatedAt(key);
 }
 function deleteProjOverride(key) {
   const all = loadProjOverrides();
@@ -907,12 +943,14 @@ function saveNote(key, text) {
   const overrides = loadOverrides();
   overrides.notes[key] = text;
   localStorage.setItem(STORAGE_NOTES_KEY, JSON.stringify(overrides.notes));
+  touchUpdatedAt(key);
 }
 
 function savePosters(key, arr) {
   const overrides = loadOverrides();
   overrides.posters[key] = arr;
   localStorage.setItem(STORAGE_POSTERS_KEY, JSON.stringify(overrides.posters));
+  touchUpdatedAt(key);
 }
 
 // 合并：内置 PROJECTS + 自建项目 + overrides/notes/posters 覆盖，排除已隐藏
@@ -921,6 +959,7 @@ function getMergedProjects() {
   const projOverrides = loadProjOverrides();
   const custom = loadCustomProjects();
   const hidden = new Set(loadHidden());
+  const updatedAt = loadUpdatedAt();
   // hidden 只过滤内置项目，不影响自建项目
   const baseProjects = PROJECTS.filter(p => !hidden.has(projKey(p)));
   const customProjects = custom.map(p => ({ ...p, _custom: true }));
@@ -933,7 +972,8 @@ function getMergedProjects() {
         ...p,
         _origKey: k,
         note: notes[k] !== undefined ? notes[k] : (p.note || ""),
-        posters: posters[k] ? [...posters[k]] : []
+        posters: posters[k] ? [...posters[k]] : [],
+        updatedAt: updatedAt[k] || ""
       };
       if (ov) {
         merged._overridden = true;
@@ -980,8 +1020,14 @@ function render() {
   document.getElementById("resultCount").textContent = list.length;
   document.getElementById("totalCount").textContent = allProjects.length;
 
+  // 计算最后更新日期
+  const updatedAtMap = loadUpdatedAt();
+  const dates = Object.values(updatedAtMap).filter(d => d);
+  const lastUpdated = dates.length > 0 ? dates.sort().reverse()[0] : "—";
+  document.getElementById("lastUpdated").textContent = lastUpdated;
+
   if (list.length === 0) {
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="7">没有符合条件的项目</td></tr>';
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="8">没有符合条件的项目</td></tr>';
     return;
   }
 
@@ -1022,6 +1068,10 @@ function render() {
       <button class="delete-proj-btn admin-only" data-key="${k}" data-custom="${isCustom ? "1" : "0"}" title="删除${isCustom ? "自建项目" : "内置项目（隐藏，可恢复）"}">删除</button>
     </div>`;
 
+    const updatedAtHtml = p.updatedAt
+      ? `<span class="updated-at">${p.updatedAt}</span>`
+      : '<span class="updated-at empty">—</span>';
+
     return `<tr>
       <td>${typeHtml}</td>
       <td class="school-cell">${schoolHtml}</td>
@@ -1029,6 +1079,7 @@ function render() {
       <td class="major-cell">${p.major}</td>
       <td><div class="tag-list">${tagHtml}</div></td>
       <td class="note-cell" data-key="${k}">${noteHtml}</td>
+      <td class="updated-at-cell">${updatedAtHtml}</td>
       <td class="poster-cell">${posterHtml}</td>
     </tr>`;
   }).join("");
@@ -2137,6 +2188,7 @@ function initAddModal() {
     const custom = loadCustomProjects();
     custom.push({ type, school, major, foreign, tags, note });
     saveCustomProjects(custom);
+    touchUpdatedAt(k);
     closeAddModal();
     render();
   });
@@ -2307,6 +2359,16 @@ function initEditModal() {
         localStorage.setItem(STORAGE_NOTES_KEY, JSON.stringify(overrides.notes));
         localStorage.setItem(STORAGE_POSTERS_KEY, JSON.stringify(overrides.posters));
       }
+      // major 改了则迁移更新日期
+      if (newKey !== _editKey) {
+        const updatedAtMap = loadUpdatedAt();
+        if (updatedAtMap[_editKey]) {
+          updatedAtMap[newKey] = updatedAtMap[_editKey];
+          delete updatedAtMap[_editKey];
+          localStorage.setItem(STORAGE_UPDATED_KEY, JSON.stringify(updatedAtMap));
+        }
+      }
+      touchUpdatedAt(newKey);
     } else {
       saveProjOverride(_editKey, { type, foreign, major, tags });
       saveNote(_editKey, note);
@@ -2323,7 +2385,7 @@ initAddModal();
 render();
 
 // ====== 数据导入/导出 ======
-const DATA_KEYS = [STORAGE_NOTES_KEY, STORAGE_POSTERS_KEY, STORAGE_CUSTOM_KEY, STORAGE_HIDDEN_KEY, STORAGE_OVERRIDE_KEY];
+const DATA_KEYS = [STORAGE_NOTES_KEY, STORAGE_POSTERS_KEY, STORAGE_CUSTOM_KEY, STORAGE_HIDDEN_KEY, STORAGE_OVERRIDE_KEY, STORAGE_UPDATED_KEY];
 
 document.getElementById("exportDataBtn").addEventListener("click", () => {
   const data = {};
