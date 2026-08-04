@@ -2323,3 +2323,29 @@ ul { list-style: none; }
     .related-list { grid-template-columns: 1fr; }
     .info-table th { width: 100px; }
 }
+
+/* ========== AI 整理声明 ========== */
+.ai-notice {
+    margin-top: 40px;
+    padding: 14px 18px;
+    background: var(--bg-alt);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent);
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+.ai-notice-icon {
+    flex-shrink: 0;
+    font-size: 14px;
+    line-height: 1.7;
+}
+.ai-notice a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+}
+.ai-notice a:hover { text-decoration: underline; }
