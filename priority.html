@@ -593,7 +593,6 @@ tr:hover td { background: #fafbff; }
   <button class="btn" id="exportBtn">导出 CSV</button>
   <button class="btn" id="exportDataBtn">导出数据</button>
   <button class="btn" id="importDataBtn">导入数据</button>
-  <button class="btn admin-only" id="restoreBtn" style="display:none;">↩ 恢复已隐藏</button>
   <button class="btn-primary" id="addProjBtn">+ 新增项目</button>
 </div>
 
@@ -805,7 +804,6 @@ function onGatePassed() {
   // （onGatePassed 可能在脚本早期被 gate 检查调用，此时 PROJECTS 等尚未初始化）
   setTimeout(function() {
     if (typeof render === 'function') render();
-    if (typeof updateHiddenBtn === 'function') updateHiddenBtn();
     if (typeof processPendingImport === 'function') processPendingImport();
   }, 0);
 }
@@ -1038,17 +1036,6 @@ function render() {
   bindRowEvents();
 }
 
-function updateHiddenBtn() {
-  const hidden = loadHidden();
-  const btn = document.getElementById("restoreBtn");
-  if (hidden.length > 0 && isAdmin()) {
-    btn.style.display = "";
-    btn.textContent = "↩ 恢复已隐藏(" + hidden.length + ")";
-  } else {
-    btn.style.display = "none";
-  }
-}
-
 function bindRowEvents() {
   // 编辑项目按钮（打开编辑弹窗）
   document.querySelectorAll(".edit-proj-btn").forEach(btn => {
@@ -1065,7 +1052,7 @@ function bindRowEvents() {
       const [school, major] = key.split("|");
       const msg = isCustom
         ? "确认删除「" + school + " - " + major + "」？\n该自建项目的备注和海报数据也会一并清除。"
-        : "确认隐藏内置项目「" + school + " - " + major + "」？\n隐藏后可通过工具栏「恢复」按钮找回。";
+        : "确认删除内置项目「" + school + " - " + major + "」？\n删除后不再显示，无法恢复。";
       if (!confirm(msg)) return;
 
       if (isCustom) {
@@ -1080,7 +1067,7 @@ function bindRowEvents() {
         localStorage.setItem(STORAGE_POSTERS_KEY, JSON.stringify(overrides.posters));
         deleteProjOverride(key);
       } else {
-        // 内置项目：仅加入隐藏列表，保留 override/notes/posters 以便恢复
+        // 内置项目：加入隐藏列表，从视图中移除
         const hidden = loadHidden();
         if (!hidden.includes(key)) {
           hidden.push(key);
@@ -1088,7 +1075,6 @@ function bindRowEvents() {
         }
       }
       render();
-      updateHiddenBtn();
     });
   });
 
@@ -1214,16 +1200,6 @@ document.getElementById("exportBtn").addEventListener("click", () => {
   a.download = "重点项目清单_" + new Date().toISOString().slice(0,10) + ".csv";
   a.click();
   URL.revokeObjectURL(a.href);
-});
-
-// 恢复已隐藏的内置项目
-document.getElementById("restoreBtn").addEventListener("click", () => {
-  const hidden = loadHidden();
-  if (hidden.length === 0) return;
-  if (!confirm("确认恢复 " + hidden.length + " 个已隐藏项目？")) return;
-  saveHidden([]);
-  render();
-  updateHiddenBtn();
 });
 
 // ====== 合作办学数据自动补全 ======
@@ -2345,7 +2321,6 @@ initEditModal();
 
 initAddModal();
 render();
-updateHiddenBtn();
 
 // ====== 数据导入/导出 ======
 const DATA_KEYS = [STORAGE_NOTES_KEY, STORAGE_POSTERS_KEY, STORAGE_CUSTOM_KEY, STORAGE_HIDDEN_KEY, STORAGE_OVERRIDE_KEY];
@@ -2410,7 +2385,6 @@ document.getElementById("importConfirmBtn").addEventListener("click", () => {
     document.getElementById("importModal").classList.remove("show");
     alert("导入成功！共恢复 " + count + " 项数据。");
     render();
-    updateHiddenBtn();
   } catch(e) {
     alert("数据格式错误，请检查后重试：" + e.message);
   }
@@ -2464,7 +2438,6 @@ function processPendingImport() {
       }
     });
     render();
-    updateHiddenBtn();
     setTimeout(() => alert("数据已自动恢复！共导入 " + count + " 项。"), 300);
   } catch(e) {
     console.error("自动导入失败:", e);
