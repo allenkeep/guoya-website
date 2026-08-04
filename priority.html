@@ -801,9 +801,13 @@ function onGatePassed() {
     badge.textContent = isAdmin() ? "管理员" : "编辑者";
     badge.className = "role-badge " + (isAdmin() ? "role-admin" : "role-editor");
   }
-  // 密码门通过后重新渲染，确保 autoImport 写入的数据可见
-  if (typeof render === 'function') render();
-  if (typeof updateHiddenBtn === 'function') updateHiddenBtn();
+  // 延迟渲染和导入到当前脚本执行完毕后，避免 const 变量 TDZ 报错
+  // （onGatePassed 可能在脚本早期被 gate 检查调用，此时 PROJECTS 等尚未初始化）
+  setTimeout(function() {
+    if (typeof render === 'function') render();
+    if (typeof updateHiddenBtn === 'function') updateHiddenBtn();
+    if (typeof processPendingImport === 'function') processPendingImport();
+  }, 0);
 }
 document.getElementById("gateInput").addEventListener("keydown", function(e) {
   if (e.key === "Enter") checkGate();
@@ -2410,14 +2414,27 @@ document.getElementById("importConfirmBtn").addEventListener("click", () => {
   }
 });
 
-// ====== URL Hash 自动导入 ======
-(function autoImport() {
+// ====== URL Hash 自动导入（延迟到密码门通过后执行）======
+var PENDING_IMPORT = null;
+(function() {
   const hash = window.location.hash;
   if (!hash || !hash.startsWith('#import=')) return;
-  const b64 = hash.substring(8);
+  // 页面加载时只提取数据，不执行导入；等密码门通过后在 onGatePassed 中处理
+  PENDING_IMPORT = hash.substring(8);
+  // 立即清除 hash，避免刷新重复
+  history.replaceState(null, '', window.location.pathname + (window.location.search || ''));
+})();
+
+function processPendingImport() {
+  if (!PENDING_IMPORT) return;
+  const b64 = PENDING_IMPORT;
+  PENDING_IMPORT = null; // 防止重复处理
   try {
     const json = atob(b64);
-    const text = decodeURIComponent(escape(json));
+    // 用 TextDecoder 解码 UTF-8（比 escape+decodeURIComponent 更可靠）
+    const bytes = new Uint8Array(json.length);
+    for (let i = 0; i < json.length; i++) bytes[i] = json.charCodeAt(i);
+    const text = new TextDecoder('utf-8').decode(bytes);
     const data = JSON.parse(text);
     let count = 0;
     DATA_KEYS.forEach(k => {
@@ -2444,16 +2461,14 @@ document.getElementById("importConfirmBtn").addEventListener("click", () => {
         count++;
       }
     });
-    // 清除hash，避免刷新时重复导入
-    history.replaceState(null, '', window.location.pathname);
     render();
     updateHiddenBtn();
-    setTimeout(() => alert("数据已自动恢复！共导入 " + count + " 项。"), 500);
+    setTimeout(() => alert("数据已自动恢复！共导入 " + count + " 项。"), 300);
   } catch(e) {
     console.error("自动导入失败:", e);
-    setTimeout(() => alert("自动导入失败: " + e.message), 500);
+    setTimeout(() => alert("自动导入失败: " + e.message), 300);
   }
-})();
+}
 </script>
 </body>
 </html>
