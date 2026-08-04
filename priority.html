@@ -180,16 +180,26 @@ tr:hover td { background: #fafbff; }
 }
 .note-view {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
+  flex-wrap: wrap;
+}
+.note-text-wrap {
+  flex: 1;
+  min-width: 0;
 }
 .note-text {
-  flex: 1;
   word-break: break-word;
   overflow-wrap: break-word;
   line-height: 1.5;
   white-space: normal;
 }
+.note-meta {
+  font-size: 11px;
+  color: #999;
+  margin-top: 4px;
+}
+.note-meta.empty { display: none; }
 .note-text.empty { color: #bbb; font-style: italic; }
 .note-edit-btn {
   font-size: 12px;
@@ -838,9 +848,9 @@ const TAGS = ["关系稳定","业务合作","录取率高","关注度高","录�
 const MAX_POSTERS = 2;
 
 // ====== localStorage 持久化 ======
-// key: "priority_notes" -> { "school|major": "备注文本" }
+// key: "priority_notes" -> { "school|major": { text: "备注文本", updatedAt: "ISO", updatedBy: "用户名" } }
 // key: "priority_posters" -> { "school|major": ["base64data", ...] }
-// key: "priority_custom" -> [ { type, school, major, foreign, tags, note } ]  页面新增的项目
+// key: "priority_custom" -> [ { type, school, major, foreign, tags, note, noteUpdatedAt, noteUpdatedBy } ]  页面新增的项目
 const STORAGE_NOTES_KEY = "priority_notes";
 const STORAGE_POSTERS_KEY = "priority_posters";
 const STORAGE_CUSTOM_KEY = "priority_custom";
@@ -984,7 +994,7 @@ async function syncDataToOSS() {
     hidden: localStorage.getItem(STORAGE_HIDDEN_KEY) || "[]",
     overrides: localStorage.getItem(STORAGE_OVERRIDE_KEY) || "{}",
     syncedAt: new Date().toISOString(),
-    syncedBy: getRole() || "unknown"
+    syncedBy: getEditorName() || getRole() || "unknown"
   };
   await ossPut("priority-data.json", JSON.stringify(data), "application/json; charset=utf-8");
   _ossLastSyncedAt = data.syncedAt;
@@ -1068,6 +1078,14 @@ function startAutoRefresh() {
 
 function projKey(p) {
   return (p.school || "") + "|" + (p.major || "");
+}
+
+function formatDateTime(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return iso;
+  const pad = n => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
 function loadCustomProjects() {
@@ -1230,7 +1248,15 @@ async function importPosters(posterData) {
 function loadOverrides() {
   let notes = {};
   try {
-    notes = JSON.parse(localStorage.getItem(STORAGE_NOTES_KEY) || "{}");
+    const raw = JSON.parse(localStorage.getItem(STORAGE_NOTES_KEY) || "{}");
+    // 兼容旧格式：notes[key] 为字符串；新格式：notes[key] = { text, updatedAt, updatedBy }
+    for (const k in raw) {
+      if (typeof raw[k] === "string") {
+        notes[k] = { text: raw[k] };
+      } else if (raw[k] && typeof raw[k] === "object") {
+        notes[k] = raw[k];
+      }
+    }
   } catch(e) {}
   return { notes, posters: POSTER_CACHE };
 }
@@ -1244,7 +1270,12 @@ function findProjectByKey(key) {
 
 function saveNote(key, text) {
   const overrides = loadOverrides();
-  overrides.notes[key] = text;
+  const editor = getEditorName() || getRole() || "unknown";
+  overrides.notes[key] = {
+    text: text,
+    updatedAt: new Date().toISOString(),
+    updatedBy: editor
+  };
   localStorage.setItem(STORAGE_NOTES_KEY, JSON.stringify(overrides.notes));
   scheduleSyncData();
 }
@@ -1300,10 +1331,25 @@ function getMergedProjects() {
     .map(p => {
       const k = projKey(p);
       const ov = projOverrides[k];
+      const noteObj = notes[k];
+      let noteText = p.note || "";
+      let noteUpdatedAt = null;
+      let noteUpdatedBy = null;
+      if (noteObj !== undefined) {
+        noteText = noteObj.text || "";
+        noteUpdatedAt = noteObj.updatedAt || null;
+        noteUpdatedBy = noteObj.updatedBy || null;
+      } else if (p._custom) {
+        noteText = p.note || "";
+        noteUpdatedAt = p.noteUpdatedAt || null;
+        noteUpdatedBy = p.noteUpdatedBy || null;
+      }
       const merged = {
         ...p,
         _origKey: k,
-        note: notes[k] !== undefined ? notes[k] : (p.note || ""),
+        note: noteText,
+        noteUpdatedAt,
+        noteUpdatedBy,
         posters: posters[k] ? [...posters[k]] : []
       };
       if (ov) {
@@ -1387,8 +1433,14 @@ function render() {
     posterHtml += '</div>';
 
     const noteText = p.note || "";
+    const noteMeta = p.noteUpdatedAt
+      ? `${formatDateTime(p.noteUpdatedAt)} · ${p.noteUpdatedBy || "未知用户"}`
+      : "";
     const noteHtml = `<div class="note-view">
-      <span class="note-text${noteText ? "" : " empty"}">${noteText || "暂无备注"}</span>
+      <div class="note-text-wrap">
+        <div class="note-text${noteText ? "" : " empty"}">${noteText || "暂无备注"}</div>
+        <div class="note-meta${noteMeta ? "" : " empty"}">${noteMeta}</div>
+      </div>
       <button class="note-edit-btn edit-proj-btn" data-key="${k}" data-custom="${isCustom ? "1" : "0"}">编辑</button>
       <button class="delete-proj-btn admin-only" data-key="${k}" data-custom="${isCustom ? "1" : "0"}" title="删除${isCustom ? "自建项目" : "内置项目（隐藏，可恢复）"}">删除</button>
     </div>`;
@@ -2530,7 +2582,12 @@ function initAddModal() {
     }
 
     const custom = loadCustomProjects();
-    custom.push({ type, school, major, foreign, tags, note });
+    const newProject = { type, school, major, foreign, tags, note };
+    if (note) {
+      newProject.noteUpdatedAt = new Date().toISOString();
+      newProject.noteUpdatedBy = getEditorName() || getRole() || "unknown";
+    }
+    custom.push(newProject);
     saveCustomProjects(custom);
     closeAddModal();
     render();
@@ -2682,7 +2739,14 @@ function initEditModal() {
       const custom = loadCustomProjects();
       const idx = custom.findIndex(p => (p.school + "|" + p.major) === _editKey);
       if (idx >= 0) {
-        custom[idx] = { ...custom[idx], type, school, major, foreign, tags, note };
+        const oldNote = custom[idx].note || "";
+        const updates = { type, school, major, foreign, tags, note };
+        // 只有备注内容变化时才更新备注编辑时间和编辑人
+        if (note !== oldNote) {
+          updates.noteUpdatedAt = new Date().toISOString();
+          updates.noteUpdatedBy = getEditorName() || getRole() || "unknown";
+        }
+        custom[idx] = { ...custom[idx], ...updates };
         saveCustomProjects(custom);
       }
       // 清除可能存在的旧 notes 覆盖（自建项目以 custom 记录的 note 为准）
@@ -2698,7 +2762,13 @@ function initEditModal() {
       }
     } else {
       saveProjOverride(_editKey, { type, foreign, major, tags });
-      saveNote(_editKey, note);
+      // 只有备注内容变化时才更新备注编辑时间和编辑人
+      const allProjects = getMergedProjects();
+      const oldProj = allProjects.find(p => (p._origKey || projKey(p)) === _editKey);
+      const oldNote = oldProj ? (oldProj.note || "") : "";
+      if (note !== oldNote) {
+        saveNote(_editKey, note);
+      }
     }
 
     closeEditModal();
@@ -2803,6 +2873,14 @@ document.getElementById("importConfirmBtn").addEventListener("click", async () =
             const existing = JSON.parse(localStorage.getItem(k) || "{}");
             const incoming = JSON.parse(data[k]);
             const merged = { ...existing, ...incoming };
+            if (k === STORAGE_NOTES_KEY) {
+              // 兼容旧格式：备注文本字符串转为对象
+              for (const mk in merged) {
+                if (typeof merged[mk] === "string") {
+                  merged[mk] = { text: merged[mk] };
+                }
+              }
+            }
             localStorage.setItem(k, JSON.stringify(merged));
           } catch(e) {
             localStorage.setItem(k, data[k]);
@@ -2855,6 +2933,14 @@ document.getElementById("importConfirmBtn").addEventListener("click", async () =
             const existing = JSON.parse(localStorage.getItem(k) || "{}");
             const incoming = JSON.parse(data[k]);
             const merged = { ...existing, ...incoming };
+            if (k === STORAGE_NOTES_KEY) {
+              // 兼容旧格式：备注文本字符串转为对象
+              for (const mk in merged) {
+                if (typeof merged[mk] === "string") {
+                  merged[mk] = { text: merged[mk] };
+                }
+              }
+            }
             localStorage.setItem(k, JSON.stringify(merged));
           } catch(e) {
             localStorage.setItem(k, data[k]);
