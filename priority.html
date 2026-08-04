@@ -512,9 +512,46 @@ tr:hover td { background: #fafbff; }
   color: #888780;
   margin-top: 4px;
 }
+/* 密码门样式 */
+.gate-overlay {
+  position: fixed; inset: 0; z-index: 999999;
+  background: linear-gradient(135deg, #0C447C 0%, #378ADD 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.gate-box {
+  background: #fff; border-radius: 16px; padding: 40px 36px;
+  width: 360px; max-width: 90vw; text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.gate-box h2 { font-size: 20px; color: #0C447C; margin-bottom: 6px; }
+.gate-box p { font-size: 13px; color: #888; margin-bottom: 24px; }
+.gate-box input {
+  width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0;
+  border-radius: 8px; font-size: 16px; outline: none; transition: border 0.2s;
+}
+.gate-box input:focus { border-color: #378ADD; }
+.gate-box button {
+  width: 100%; margin-top: 16px; padding: 12px;
+  background: linear-gradient(135deg, #0C447C 0%, #378ADD 100%);
+  color: #fff; border: none; border-radius: 8px;
+  font-size: 16px; cursor: pointer; transition: opacity 0.2s;
+}
+.gate-box button:hover { opacity: 0.9; }
+.gate-error { color: #c62828; font-size: 13px; margin-top: 10px; display: none; }
 </style>
 </head>
 <body>
+
+<!-- 密码门 -->
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <h2>重点项目清单</h2>
+    <p>内部使用 · 请输入访问密码</p>
+    <input type="password" id="gateInput" placeholder="请输入密码" autofocus>
+    <button id="gateBtn" onclick="checkGate()">进 入</button>
+    <div class="gate-error" id="gateError">密码错误，请重试</div>
+  </div>
+</div>
 
 <div class="header">
   <h1>重点项目清单<span class="badge-internal">内部使用</span></h1>
@@ -690,6 +727,33 @@ tr:hover td { background: #fafbff; }
 </div>
 
 <script>
+// ====== 密码门验证 ======
+const GATE_HASH = "c1a778c2ab5983060ae17c50e0cd9041c4e4fa872bbd8da01a6e79b23df09566";
+async function sha256(text) {
+  const buf = new TextEncoder().encode(text);
+  const hash = await crypto.subtle.digest("SHA-256", buf);
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
+async function checkGate() {
+  const input = document.getElementById("gateInput").value.trim();
+  if (!input) return;
+  const hashed = await sha256(input);
+  if (hashed === GATE_HASH) {
+    sessionStorage.setItem("priority_authed", "1");
+    document.getElementById("gateOverlay").style.display = "none";
+  } else {
+    document.getElementById("gateError").style.display = "block";
+    document.getElementById("gateInput").value = "";
+    document.getElementById("gateInput").focus();
+  }
+}
+document.getElementById("gateInput").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") checkGate();
+});
+// 页面加载时检查是否已验证
+if (sessionStorage.getItem("priority_authed") === "1") {
+  document.getElementById("gateOverlay").style.display = "none";
+}
 // ====== 数据区：手动维护，直接在此增删改 ======
 // type: "合作办学" | "管理类联考"
 // tags: 从 [关系稳定, 业务合作, 录取率高, 关注度高, 录取案例, 潜力项目] 中选填
