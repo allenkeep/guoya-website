@@ -156,7 +156,7 @@ tr:hover td { background: #fafbff; }
   font-weight: 600;
 }
 .type-badge.合作办学 { background: #E6F1FB; color: #0C447C; }
-.type-badge.管理类联考 { background: #FAEEDA; color: #633806; }
+.type-badge.联考 { background: #FAEEDA; color: #633806; }
 .tag-list { display: flex; flex-wrap: wrap; gap: 4px; }
 .tag {
   font-size: 12px;
@@ -569,7 +569,7 @@ tr:hover td { background: #fafbff; }
 
 <div class="header">
   <h1>重点项目清单<span class="badge-internal">内部使用</span><span class="role-badge" id="roleBadge"></span></h1>
-  <div class="sub">管理类联考 & 合作办学硕士 · 手动维护 · 标签聚焦运营与销售资源</div>
+  <div class="sub">联考 & 合作办学硕士 · 手动维护 · 标签聚焦运营与销售资源</div>
   <div class="stats">符合条件 <b id="resultCount">—</b> / 共 <span id="totalCount">—</span> 个项目</div>
 </div>
 
@@ -577,7 +577,7 @@ tr:hover td { background: #fafbff; }
   <div class="tabs">
     <button class="tab active" data-type="all">全部</button>
     <button class="tab" data-type="合作办学">合作办学</button>
-    <button class="tab" data-type="管理类联考">管理类联考</button>
+    <button class="tab" data-type="联考">联考</button>
   </div>
   <div class="tag-filter">
     <span class="label">标签</span>
@@ -624,7 +624,7 @@ tr:hover td { background: #fafbff; }
       <span class="form-label">类型 <span class="required">*</span></span>
       <div class="radio-group">
         <label class="radio-item"><input type="radio" name="addType" value="合作办学" checked> 合作办学</label>
-        <label class="radio-item"><input type="radio" name="addType" value="管理类联考"> 管理类联考</label>
+        <label class="radio-item"><input type="radio" name="addType" value="联考"> 联考</label>
       </div>
     </div>
     <div class="form-row" id="projectSearchRow">
@@ -691,7 +691,7 @@ tr:hover td { background: #fafbff; }
       <span class="form-label">类型 <span class="required">*</span></span>
       <div class="radio-group">
         <label class="radio-item"><input type="radio" name="editType" value="合作办学" checked> 合作办学</label>
-        <label class="radio-item"><input type="radio" name="editType" value="管理类联考"> 管理类联考</label>
+        <label class="radio-item"><input type="radio" name="editType" value="联考"> 联考</label>
       </div>
     </div>
     <div class="form-row">
@@ -791,7 +791,7 @@ if (sessionStorage.getItem("priority_authed") === "1") {
   onGatePassed();
 }
 // ====== 数据区：手动维护，直接在此增删改 ======
-// type: "合作办学" | "管理类联考"
+// type: "合作办学" | "联考"
 // tags: 从 [关系稳定, 业务合作, 录取率高, 关注度高, 录取案例, 潜力项目] 中选填
 // note 支持页面内点击编辑按钮修改，保存后持久化到 localStorage
 // posters（海报）支持页面上传，base64 存 localStorage
@@ -803,10 +803,10 @@ const PROJECTS = [
   { type: "合作办学", school: "广西民族大学", major: "人工智能战略管理博士", foreign: "韩国首尔科学综合大学院大学", tags: ["潜力项目","录取案例"], note: "广西首个研究生层次中外合作办学机构，年招60人" },
   { type: "合作办学", school: "中央财经大学", major: "经济学与数据科学硕士", foreign: "新加坡管理大学", tags: ["关注度高","录取案例"], note: "15万/年，2年制，年招120人" },
   { type: "合作办学", school: "西安交通大学", major: "创业与创新(大数据与人工智能管理)硕士", foreign: "法国SKEMA商学院", tags: ["关注度高","潜力项目"], note: "28.8万总价，8月7日有官方直播" },
-  { type: "管理类联考", school: "北京大学", major: "工商管理硕士(MBA)", foreign: "", tags: ["关注度高","录取案例"], note: "全日制/非全日制，竞争激烈" },
-  { type: "管理类联考", school: "清华大学", major: "工程管理硕士(MEM)", foreign: "", tags: ["关注度高","潜力项目"], note: "近年热度上升，适合工科背景" },
-  { type: "管理类联考", school: "复旦大学", major: "工商管理硕士(MBA)", foreign: "", tags: ["关注度高","录取案例"], note: "提前面试制，国际班选项多" },
-  { type: "管理类联考", school: "上海财经大学", major: "工商管理硕士(MBA)", foreign: "", tags: ["潜力项目"], note: "财经类强校，性价比高" },
+  { type: "联考", school: "北京大学", major: "工商管理硕士(MBA)", foreign: "", tags: ["关注度高","录取案例"], note: "全日制/非全日制，竞争激烈" },
+  { type: "联考", school: "清华大学", major: "工程管理硕士(MEM)", foreign: "", tags: ["关注度高","潜力项目"], note: "近年热度上升，适合工科背景" },
+  { type: "联考", school: "复旦大学", major: "工商管理硕士(MBA)", foreign: "", tags: ["关注度高","录取案例"], note: "提前面试制，国际班选项多" },
+  { type: "联考", school: "上海财经大学", major: "工商管理硕士(MBA)", foreign: "", tags: ["潜力项目"], note: "财经类强校，性价比高" },
 ];
 // ====== 数据区结束 ======
 
@@ -968,9 +968,7 @@ function render() {
       ? `<span class="foreign-cell">${p.foreign}</span>`
       : '<span class="foreign-cell" style="color:#bbb">—</span>';
     const isCustom = p._custom === true;
-    const schoolHtml = isCustom
-      ? `${p.school}<span class="custom-badge">自建</span>`
-      : p.school;
+    const schoolHtml = p.school;
 
     // 海报缩略图
     const posters = p.posters || [];
@@ -1941,7 +1939,7 @@ function updateModalForType(type) {
     addMajorSelect.value = "";
     addForeign.placeholder = "合作办学填写外方院校";
   } else {
-    // 管理类联考
+    // 联考
     foreignRow.style.display = "none";
     majorInputWrap.style.display = "none";
     addMajor.value = "";
@@ -1973,7 +1971,7 @@ function initAddModal() {
     }
   });
 
-  // 类型切换：合作办学/管理类联考 表单联动
+  // 类型切换：合作办学/联考 表单联动
   document.querySelectorAll('input[name="addType"]').forEach(radio => {
     radio.addEventListener("change", () => {
       updateModalForType(radio.value);
@@ -2201,7 +2199,7 @@ function openEditModal(key, isCustom) {
   document.querySelector('input[name="editType"][value="' + proj.type + '"]').checked = true;
   document.getElementById("editForeign").value = proj.foreign || "";
   document.getElementById("editMajor").value = proj.major || "";
-  document.getElementById("editMajorSelect").value = (proj.type === "管理类联考") ? (proj.major || "") : "";
+  document.getElementById("editMajorSelect").value = (proj.type === "联考") ? (proj.major || "") : "";
   document.getElementById("editNote").value = proj.note || "";
 
   document.querySelectorAll("#editTagChecks input").forEach(c => {
