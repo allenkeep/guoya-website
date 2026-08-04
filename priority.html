@@ -599,6 +599,7 @@ tr:hover td { background: #fafbff; }
     <button class="chip" data-tag="潜力项目">潜力项目</button>
     <span class="clear-link" id="clearTags">清除</span>
   </div>
+  <button class="btn" id="reportMissingBtn" style="border-color:#D85A30;color:#D85A30;font-size:12px;padding:4px 12px;border-radius:14px;">📢 报漏遗漏项目</button>
   <input type="search" class="search-box" id="searchInput" placeholder="搜索学校 / 专业 / 外方院校...">
   <button class="btn" id="exportBtn">导出 CSV</button>
   <button class="btn" id="exportDataBtn">导出数据</button>
@@ -768,6 +769,45 @@ tr:hover td { background: #fafbff; }
         <button class="btn" id="importCancelBtn">取消</button>
         <button class="btn-primary" id="importConfirmBtn">导入</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- 报漏弹窗 -->
+<div class="add-modal" id="reportModal">
+  <div class="form-card" style="width:480px;">
+    <div class="form-title">📢 报漏遗漏项目</div>
+    <p style="font-size:12px;color:#888;margin-bottom:14px;line-height:1.6;">发现 radar 页面上缺少某个项目？填写下方信息提交，管理员会核实后补充到 <a href="https://guoya.net.cn/radar" target="_blank" style="color:#378ADD;">radar 页面</a>。</p>
+    <div class="form-row">
+      <span class="form-label">学校名称 <span class="required">*</span></span>
+      <input type="text" class="form-input" id="reportSchool" placeholder="如：北京理工大学" autocomplete="off">
+    </div>
+    <div class="form-row">
+      <span class="form-label">项目 / 专业名称 <span class="required">*</span></span>
+      <input type="text" class="form-input" id="reportMajor" placeholder="如：与英国瑞丁大学合作会计学硕士" autocomplete="off">
+    </div>
+    <div class="form-row">
+      <span class="form-label">合作外方院校</span>
+      <input type="text" class="form-input" id="reportForeign" placeholder="如：英国瑞丁大学（不确定可留空）" autocomplete="off">
+    </div>
+    <div class="form-row">
+      <span class="form-label">项目类型</span>
+      <select class="form-select" id="reportType" style="width:100%;padding:7px 10px;font-size:13px;border:1px solid #d3d1c7;border-radius:6px;">
+        <option value="合作办学">合作办学</option>
+        <option value="联考">联考</option>
+        <option value="不确定">不确定</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <span class="form-label">补充信息</span>
+      <textarea class="form-textarea" id="reportNote" placeholder="官网链接、学费、学制、录取要求等，方便快速核实..." style="min-height:80px;"></textarea>
+    </div>
+    <div class="form-row" style="font-size:11px;color:#888;">
+      提交人：<span id="reportSubmitter"></span>
+    </div>
+    <div class="form-actions">
+      <button class="btn" id="reportCancelBtn">取消</button>
+      <button class="btn-primary" id="reportSubmitBtn">提交报漏</button>
     </div>
   </div>
 </div>
@@ -2975,6 +3015,93 @@ document.getElementById("importConfirmBtn").addEventListener("click", async () =
     console.error("自动导入失败:", e);
   }
 })();
+
+// ====== 报漏遗漏项目 ======
+function getReporterName() {
+  if (isAdmin()) return "admin";
+  return getEditorName() || "unknown";
+}
+
+// 加载 OSS 上的报漏列表
+async function loadMissingReports() {
+  try {
+    const body = await ossGet("missing-reports.json");
+    const data = JSON.parse(body);
+    return data.reports || [];
+  } catch(e) {
+    return [];
+  }
+}
+
+// 保存报漏到 OSS
+async function saveMissingReport(report) {
+  let reports = [];
+  try {
+    const body = await ossGet("missing-reports.json");
+    const data = JSON.parse(body);
+    reports = data.reports || [];
+  } catch(e) {
+    // 文件不存在，首次创建
+  }
+  report.id = "rpt_" + Date.now();
+  report.submittedAt = new Date().toISOString();
+  report.submittedBy = getReporterName();
+  report.status = "pending";
+  reports.push(report);
+  const payload = JSON.stringify({ reports: reports, _syncedAt: new Date().toISOString() });
+  await ossPut("missing-reports.json", payload, "application/json; charset=utf-8");
+}
+
+// 打开报漏弹窗
+document.getElementById("reportMissingBtn").addEventListener("click", () => {
+  document.getElementById("reportSchool").value = "";
+  document.getElementById("reportMajor").value = "";
+  document.getElementById("reportForeign").value = "";
+  document.getElementById("reportType").value = "合作办学";
+  document.getElementById("reportNote").value = "";
+  document.getElementById("reportSubmitter").textContent = getReporterName();
+  document.getElementById("reportModal").classList.add("show");
+  document.getElementById("reportSchool").focus();
+});
+
+// 关闭弹窗
+document.getElementById("reportCancelBtn").addEventListener("click", () => {
+  document.getElementById("reportModal").classList.remove("show");
+});
+document.getElementById("reportModal").addEventListener("click", (e) => {
+  if (e.target.id === "reportModal") {
+    document.getElementById("reportModal").classList.remove("show");
+  }
+});
+
+// 提交报漏
+document.getElementById("reportSubmitBtn").addEventListener("click", async () => {
+  const school = document.getElementById("reportSchool").value.trim();
+  const major = document.getElementById("reportMajor").value.trim();
+  const foreign = document.getElementById("reportForeign").value.trim();
+  const type = document.getElementById("reportType").value;
+  const note = document.getElementById("reportNote").value.trim();
+
+  if (!school || !major) {
+    alert("请至少填写学校名称和项目名称");
+    return;
+  }
+
+  const btn = document.getElementById("reportSubmitBtn");
+  btn.textContent = "提交中...";
+  btn.disabled = true;
+
+  try {
+    await saveMissingReport({ school, major, foreign, type, note });
+    document.getElementById("reportModal").classList.remove("show");
+    alert("报漏已提交！\n管理员会核实后补充到 radar 页面。\n提交人：" + getReporterName());
+  } catch(e) {
+    alert("提交失败：" + e.message + "\n请稍后重试，或直接在群里告知管理员。");
+  } finally {
+    btn.textContent = "提交报漏";
+    btn.disabled = false;
+  }
+});
 </script>
 </body>
 </html>
