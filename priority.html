@@ -923,9 +923,11 @@ function getMergedProjects() {
   const projOverrides = loadProjOverrides();
   const custom = loadCustomProjects();
   const hidden = new Set(loadHidden());
-  const all = [...PROJECTS, ...custom.map(p => ({ ...p, _custom: true }))];
+  // hidden 只过滤内置项目，不影响自建项目
+  const baseProjects = PROJECTS.filter(p => !hidden.has(projKey(p)));
+  const customProjects = custom.map(p => ({ ...p, _custom: true }));
+  const all = [...baseProjects, ...customProjects];
   return all
-    .filter(p => !hidden.has(projKey(p)))
     .map(p => {
       const k = projKey(p);
       const ov = projOverrides[k];
@@ -2148,11 +2150,11 @@ function initAddModal() {
       return;
     }
 
-    // 检查重复（学校+专业）
+    // 检查重复（只检查自建项目内部，内置项目可覆盖）
     const k = school + "|" + major;
-    const all = getMergedProjects();
-    if (all.some(p => projKey(p) === k)) {
-      alert("已存在相同学校+专业的项目，请勿重复添加");
+    const customExisting = loadCustomProjects();
+    if (customExisting.some(p => projKey(p) === k)) {
+      alert("自建项目中已存在相同学校+专业的项目，请勿重复添加");
       return;
     }
 
