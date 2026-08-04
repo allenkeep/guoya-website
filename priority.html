@@ -777,30 +777,15 @@ tr:hover td { background: #fafbff; }
 <div class="add-modal" id="reportModal">
   <div class="form-card" style="width:480px;">
     <div class="form-title">📢 报漏遗漏项目</div>
-    <p style="font-size:12px;color:#888;margin-bottom:14px;line-height:1.6;">发现 radar 页面上缺少某个项目？填写下方信息提交，管理员会核实后补充到 <a href="https://guoya.net.cn/radar" target="_blank" style="color:#378ADD;">radar 页面</a>。</p>
+    <p style="font-size:12px;color:#888;margin-bottom:14px;line-height:1.6;">发现 radar 页面上缺少某个项目？只需贴一个链接，管理员会自行检索核实后补充到 <a href="https://guoya.net.cn/radar" target="_blank" style="color:#378ADD;">radar 页面</a>。</p>
     <div class="form-row">
-      <span class="form-label">学校名称 <span class="required">*</span></span>
-      <input type="text" class="form-input" id="reportSchool" placeholder="如：北京理工大学" autocomplete="off">
+      <span class="form-label">链接 <span class="required">*</span></span>
+      <input type="url" class="form-input" id="reportUrl" placeholder="粘贴学校官网 / 项目页面链接" autocomplete="off">
+      <div class="input-hint">如：https://sme.tsinghua.edu.cn / 教育部涉外监管信息网项目页</div>
     </div>
     <div class="form-row">
-      <span class="form-label">项目 / 专业名称 <span class="required">*</span></span>
-      <input type="text" class="form-input" id="reportMajor" placeholder="如：与英国瑞丁大学合作会计学硕士" autocomplete="off">
-    </div>
-    <div class="form-row">
-      <span class="form-label">合作外方院校</span>
-      <input type="text" class="form-input" id="reportForeign" placeholder="如：英国瑞丁大学（不确定可留空）" autocomplete="off">
-    </div>
-    <div class="form-row">
-      <span class="form-label">项目类型</span>
-      <select class="form-select" id="reportType" style="width:100%;padding:7px 10px;font-size:13px;border:1px solid #d3d1c7;border-radius:6px;">
-        <option value="合作办学">合作办学</option>
-        <option value="联考">联考</option>
-        <option value="不确定">不确定</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <span class="form-label">补充信息</span>
-      <textarea class="form-textarea" id="reportNote" placeholder="官网链接、学费、学制、录取要求等，方便快速核实..." style="min-height:80px;"></textarea>
+      <span class="form-label">补充说明</span>
+      <textarea class="form-textarea" id="reportNote" placeholder="可选：学校名、项目名、一句话描述等" style="min-height:60px;"></textarea>
     </div>
     <div class="form-row" style="font-size:11px;color:#888;">
       提交人：<span id="reportSubmitter"></span>
@@ -869,14 +854,11 @@ function onGatePassed() {
   }
   // 如果 URL hash 是 #report，自动打开报漏弹窗
   if (window.location.hash === "#report") {
-    document.getElementById("reportSchool").value = "";
-    document.getElementById("reportMajor").value = "";
-    document.getElementById("reportForeign").value = "";
-    document.getElementById("reportType").value = "合作办学";
+    document.getElementById("reportUrl").value = "";
     document.getElementById("reportNote").value = "";
     document.getElementById("reportSubmitter").textContent = getReporterName();
     document.getElementById("reportModal").classList.add("show");
-    document.getElementById("reportSchool").focus();
+    document.getElementById("reportUrl").focus();
     window.location.hash = "";
   }
 }
@@ -3066,14 +3048,11 @@ async function saveMissingReport(report) {
 
 // 打开报漏弹窗
 document.getElementById("reportMissingBtn").addEventListener("click", () => {
-  document.getElementById("reportSchool").value = "";
-  document.getElementById("reportMajor").value = "";
-  document.getElementById("reportForeign").value = "";
-  document.getElementById("reportType").value = "合作办学";
+  document.getElementById("reportUrl").value = "";
   document.getElementById("reportNote").value = "";
   document.getElementById("reportSubmitter").textContent = getReporterName();
   document.getElementById("reportModal").classList.add("show");
-  document.getElementById("reportSchool").focus();
+  document.getElementById("reportUrl").focus();
 });
 
 // 关闭弹窗
@@ -3088,14 +3067,11 @@ document.getElementById("reportModal").addEventListener("click", (e) => {
 
 // 提交报漏
 document.getElementById("reportSubmitBtn").addEventListener("click", async () => {
-  const school = document.getElementById("reportSchool").value.trim();
-  const major = document.getElementById("reportMajor").value.trim();
-  const foreign = document.getElementById("reportForeign").value.trim();
-  const type = document.getElementById("reportType").value;
+  const url = document.getElementById("reportUrl").value.trim();
   const note = document.getElementById("reportNote").value.trim();
 
-  if (!school || !major) {
-    alert("请至少填写学校名称和项目名称");
+  if (!url) {
+    alert("请粘贴一个链接");
     return;
   }
 
@@ -3104,9 +3080,9 @@ document.getElementById("reportSubmitBtn").addEventListener("click", async () =>
   btn.disabled = true;
 
   try {
-    await saveMissingReport({ school, major, foreign, type, note });
+    await saveMissingReport({ url, note });
     document.getElementById("reportModal").classList.remove("show");
-    alert("报漏已提交！\n管理员会核实后补充到 radar 页面。\n提交人：" + getReporterName());
+    alert("报漏已提交！\n管理员会检索核实后补充到 radar 页面。\n提交人：" + getReporterName());
   } catch(e) {
     alert("提交失败：" + e.message + "\n请稍后重试，或直接在群里告知管理员。");
   } finally {
