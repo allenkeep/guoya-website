@@ -867,6 +867,18 @@ function onGatePassed() {
       badge.className = "role-badge role-editor";
     }
   }
+  // 如果 URL hash 是 #report，自动打开报漏弹窗
+  if (window.location.hash === "#report") {
+    document.getElementById("reportSchool").value = "";
+    document.getElementById("reportMajor").value = "";
+    document.getElementById("reportForeign").value = "";
+    document.getElementById("reportType").value = "合作办学";
+    document.getElementById("reportNote").value = "";
+    document.getElementById("reportSubmitter").textContent = getReporterName();
+    document.getElementById("reportModal").classList.add("show");
+    document.getElementById("reportSchool").focus();
+    window.location.hash = "";
+  }
 }
 document.getElementById("gateInput").addEventListener("keydown", function(e) {
   if (e.key === "Enter") checkGate();
