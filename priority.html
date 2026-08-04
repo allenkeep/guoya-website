@@ -1087,9 +1087,12 @@ async function backupDataToOSS(dataBody) {
       String(now.getHours()).padStart(2,"0");
     const lastBackupHour = localStorage.getItem("_lastDataBackupHour");
     if (lastBackupHour !== hourKey) {
-      await ossPut("backups/priority-data-" + hourKey + ".json", dataBody, "application/json; charset=utf-8");
+      const snapshotKey = "backups/priority-data-" + hourKey + ".json";
+      await ossPut(snapshotKey, dataBody, "application/json; charset=utf-8");
       localStorage.setItem("_lastDataBackupHour", hourKey);
-      console.log("OSS: 数据小时快照已备份 -> backups/priority-data-" + hourKey + ".json");
+      // 更新索引
+      await updateBackupIndex(snapshotKey, dataBody.length);
+      console.log("OSS: 数据小时快照已备份 -> " + snapshotKey);
     }
   } catch(e) {
     console.warn("OSS: 数据备份失败（不影响主同步）:", e.message);
@@ -1098,7 +1101,6 @@ async function backupDataToOSS(dataBody) {
 
 async function backupPostersToOSS(posterBody) {
   try {
-    // 海报数据较大，只做每小时快照
     const now = new Date();
     const hourKey = now.getFullYear() + "-" +
       String(now.getMonth()+1).padStart(2,"0") + "-" +
@@ -1106,12 +1108,42 @@ async function backupPostersToOSS(posterBody) {
       String(now.getHours()).padStart(2,"0");
     const lastPosterBackupHour = localStorage.getItem("_lastPosterBackupHour");
     if (lastPosterBackupHour !== hourKey) {
-      await ossPut("backups/priority-posters-" + hourKey + ".json", posterBody, "application/json; charset=utf-8");
+      const snapshotKey = "backups/priority-posters-" + hourKey + ".json";
+      await ossPut(snapshotKey, posterBody, "application/json; charset=utf-8");
       localStorage.setItem("_lastPosterBackupHour", hourKey);
-      console.log("OSS: 海报小时快照已备份 -> backups/priority-posters-" + hourKey + ".json");
+      await updateBackupIndex(snapshotKey, posterBody.length);
+      console.log("OSS: 海报小时快照已备份 -> " + snapshotKey);
     }
   } catch(e) {
     console.warn("OSS: 海报备份失败:", e.message);
+  }
+}
+
+// 更新备份索引（best-effort，失败不影响主流程）
+async function updateBackupIndex(key, size) {
+  try {
+    let index = { entries: [] };
+    try {
+      const body = await ossGet("backups/index.json");
+      index = JSON.parse(body);
+      if (!index.entries) index.entries = [];
+    } catch(e) {}
+    // 去重：如果 key 已存在则更新
+    const existing = index.entries.findIndex(e => e.key === key);
+    const entry = { key, size, created: new Date().toISOString() };
+    if (existing >= 0) {
+      index.entries[existing] = entry;
+    } else {
+      index.entries.push(entry);
+      // 只保留最近500条
+      if (index.entries.length > 500) {
+        index.entries = index.entries.slice(-500);
+      }
+    }
+    index.updatedAt = new Date().toISOString();
+    await ossPut("backups/index.json", JSON.stringify(index), "application/json; charset=utf-8");
+  } catch(e) {
+    console.warn("OSS: 更新备份索引失败:", e.message);
   }
 }
 
