@@ -174,9 +174,9 @@ tr:hover td { background: #fafbff; }
 .note-cell {
   color: #5F5E5A;
   font-size: 13px;
-  width: 520px;
-  max-width: 520px;
-  min-width: 360px;
+  width: 360px;
+  max-width: 360px;
+  min-width: 260px;
 }
 .note-view {
   display: flex;
@@ -191,16 +191,6 @@ tr:hover td { background: #fafbff; }
   white-space: normal;
 }
 .note-text.empty { color: #bbb; font-style: italic; }
-.updated-at-cell {
-  color: #5F5E5A;
-  font-size: 12px;
-  white-space: nowrap;
-  text-align: center;
-  width: 90px;
-  min-width: 90px;
-}
-.updated-at { color: #5F5E5A; }
-.updated-at.empty { color: #bbb; }
 .note-edit-btn {
   font-size: 12px;
   color: #378ADD;
@@ -580,7 +570,7 @@ tr:hover td { background: #fafbff; }
 <div class="header">
   <h1>重点项目清单<span class="badge-internal">内部使用</span><span class="role-badge" id="roleBadge"></span></h1>
   <div class="sub">联考 & 合作办学硕士 · 手动维护 · 标签聚焦运营与销售资源</div>
-  <div class="stats">符合条件 <b id="resultCount">—</b> / 共 <span id="totalCount">—</span> 个项目 · 最后更新 <span id="lastUpdated">—</span></div>
+  <div class="stats">符合条件 <b id="resultCount">—</b> / 共 <span id="totalCount">—</span> 个项目</div>
 </div>
 
 <div class="toolbar">
@@ -603,6 +593,7 @@ tr:hover td { background: #fafbff; }
   <button class="btn" id="exportBtn">导出 CSV</button>
   <button class="btn" id="exportDataBtn">导出数据</button>
   <button class="btn" id="importDataBtn">导入数据</button>
+  <button class="btn admin-only" id="restoreBtn" style="display:none;">↩ 恢复已隐藏</button>
   <button class="btn-primary" id="addProjBtn">+ 新增项目</button>
 </div>
 
@@ -616,7 +607,6 @@ tr:hover td { background: #fafbff; }
         <th>专业</th>
         <th>标签</th>
         <th>备注</th>
-        <th>更新日期</th>
         <th>海报</th>
       </tr>
     </thead>
@@ -771,16 +761,11 @@ tr:hover td { background: #fafbff; }
 </div>
 
 <script>
-// ====== 密码门验证（管理员 + 多编辑者） ======
-const GATE_HASH_ADMIN = "c1a778c2ab5983060ae17c50e0cd9041c4e4fa872bbd8da01a6e79b23df09566"; // 管理员
-const GATE_HASH_EDITORS = {
-  "d6f7a5a7fe20208f90553f3d9cab297f7b564c623cdeeaed58aaca5f67aed3c4": "xingzhu",
-  "6744970e1db4da133f3c43c366fe60265b0aa24a22d1a71adb5bf31b24f9214b": "xiaonan",
-  "b9c5a058d4db85df2176c0e5a55f561a65e626178386a3dae7caa79618c864ce": "lixiang"
-};
+// ====== 密码门验证（双角色） ======
+const GATE_HASH_ADMIN  = "c1a778c2ab5983060ae17c50e0cd9041c4e4fa872bbd8da01a6e79b23df09566"; // 管理员
+const GATE_HASH_EDITOR = "a9d7d7b7171e93dad71ec6b5627d3448b0ac24812ee2451415d83ebdd7d4cea8"; // 编辑者
 function getRole() { return sessionStorage.getItem("priority_role") || ""; }
 function isAdmin() { return getRole() === "admin"; }
-function isEditor() { return !!GATE_HASH_EDITORS[getRole()]; }
 async function sha256(text) {
   const buf = new TextEncoder().encode(text);
   const hash = await crypto.subtle.digest("SHA-256", buf);
@@ -795,9 +780,9 @@ async function checkGate() {
     sessionStorage.setItem("priority_role", "admin");
     document.getElementById("gateOverlay").style.display = "none";
     onGatePassed();
-  } else if (GATE_HASH_EDITORS[hashed]) {
+  } else if (hashed === GATE_HASH_EDITOR) {
     sessionStorage.setItem("priority_authed", "1");
-    sessionStorage.setItem("priority_role", hashed);
+    sessionStorage.setItem("priority_role", "editor");
     document.getElementById("gateOverlay").style.display = "none";
     onGatePassed();
   } else {
@@ -813,16 +798,9 @@ function onGatePassed() {
   // 更新角色标识
   const badge = document.getElementById("roleBadge");
   if (badge) {
-    const roleName = isAdmin() ? "管理员" : (GATE_HASH_EDITORS[getRole()] || "编辑者");
-    badge.textContent = roleName;
+    badge.textContent = isAdmin() ? "管理员" : "编辑者";
     badge.className = "role-badge " + (isAdmin() ? "role-admin" : "role-editor");
   }
-  // 延迟渲染和导入到当前脚本执行完毕后，避免 const 变量 TDZ 报错
-  // （onGatePassed 可能在脚本早期被 gate 检查调用，此时 PROJECTS 等尚未初始化）
-  setTimeout(function() {
-    if (typeof render === 'function') render();
-    if (typeof processPendingImport === 'function') processPendingImport();
-  }, 0);
 }
 document.getElementById("gateInput").addEventListener("keydown", function(e) {
   if (e.key === "Enter") checkGate();
@@ -864,7 +842,6 @@ const STORAGE_POSTERS_KEY = "priority_posters";
 const STORAGE_CUSTOM_KEY = "priority_custom";
 const STORAGE_HIDDEN_KEY = "priority_hidden"; // 被隐藏的内置项目 key 列表
 const STORAGE_OVERRIDE_KEY = "priority_proj_overrides"; // 内置项目字段覆盖 { "school|major": { type, foreign, major, tags } }
-const STORAGE_UPDATED_KEY = "priority_updated_at"; // 每个项目的更新日期 { "school|major": "YYYY-MM-DD" }
 
 function projKey(p) {
   return (p.school || "") + "|" + (p.major || "");
@@ -890,23 +867,6 @@ function saveHidden(arr) {
   localStorage.setItem(STORAGE_HIDDEN_KEY, JSON.stringify(arr));
 }
 
-function loadUpdatedAt() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_UPDATED_KEY) || "{}");
-  } catch(e) { return {}; }
-}
-
-function saveUpdatedAt(key, date) {
-  const map = loadUpdatedAt();
-  map[key] = date;
-  localStorage.setItem(STORAGE_UPDATED_KEY, JSON.stringify(map));
-}
-
-function touchUpdatedAt(key) {
-  const today = new Date().toISOString().slice(0, 10);
-  saveUpdatedAt(key, today);
-}
-
 function loadProjOverrides() {
   try { return JSON.parse(localStorage.getItem(STORAGE_OVERRIDE_KEY) || "{}"); }
   catch(e) { return {}; }
@@ -915,7 +875,6 @@ function saveProjOverride(key, data) {
   const all = loadProjOverrides();
   all[key] = data;
   localStorage.setItem(STORAGE_OVERRIDE_KEY, JSON.stringify(all));
-  touchUpdatedAt(key);
 }
 function deleteProjOverride(key) {
   const all = loadProjOverrides();
@@ -943,14 +902,60 @@ function saveNote(key, text) {
   const overrides = loadOverrides();
   overrides.notes[key] = text;
   localStorage.setItem(STORAGE_NOTES_KEY, JSON.stringify(overrides.notes));
-  touchUpdatedAt(key);
 }
 
 function savePosters(key, arr) {
   const overrides = loadOverrides();
   overrides.posters[key] = arr;
-  localStorage.setItem(STORAGE_POSTERS_KEY, JSON.stringify(overrides.posters));
-  touchUpdatedAt(key);
+  try {
+    localStorage.setItem(STORAGE_POSTERS_KEY, JSON.stringify(overrides.posters));
+  } catch(e) {
+    if (e.name === 'QuotaExceededError' || e.code === 22) {
+      alert("存储空间已满！\n请先删除不需要的海报，或使用「导出数据」备份后清理。\n\n提示：海报图片已自动压缩，如仍不够请减少海报数量。");
+    } else {
+      alert("保存失败：" + e.message);
+    }
+    throw e;
+  }
+}
+
+// 图片压缩：将大图缩放至 maxWidth×maxHeight 以内，输出 JPEG base64
+function compressImage(file, maxWidth, maxHeight, quality) {
+  maxWidth = maxWidth || 1200;
+  maxHeight = maxHeight || 1200;
+  quality = quality || 0.72;
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      const img = new Image();
+      img.onload = function() {
+        let w = img.width, h = img.height;
+        // 缩放
+        if (w > maxWidth || h > maxHeight) {
+          const ratio = Math.min(maxWidth / w, maxHeight / h);
+          w = Math.round(w * ratio);
+          h = Math.round(h * ratio);
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext("2d");
+        // 白底（JPEG 不支持透明）
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(0, 0, w, h);
+        ctx.drawImage(img, 0, 0, w, h);
+        // PNG 优先（如果原图是 PNG 且文件小），否则 JPEG
+        const jpegBase64 = canvas.toDataURL("image/jpeg", quality);
+        // 如果压缩后比原图还大，用原图
+        const origBase64 = ev.target.result;
+        resolve(jpegBase64.length < origBase64.length ? jpegBase64 : origBase64);
+      };
+      img.onerror = () => reject(new Error("图片加载失败"));
+      img.src = ev.target.result;
+    };
+    reader.onerror = () => reject(new Error("文件读取失败"));
+    reader.readAsDataURL(file);
+  });
 }
 
 // 合并：内置 PROJECTS + 自建项目 + overrides/notes/posters 覆盖，排除已隐藏
@@ -959,12 +964,9 @@ function getMergedProjects() {
   const projOverrides = loadProjOverrides();
   const custom = loadCustomProjects();
   const hidden = new Set(loadHidden());
-  const updatedAt = loadUpdatedAt();
-  // hidden 只过滤内置项目，不影响自建项目
-  const baseProjects = PROJECTS.filter(p => !hidden.has(projKey(p)));
-  const customProjects = custom.map(p => ({ ...p, _custom: true }));
-  const all = [...baseProjects, ...customProjects];
+  const all = [...PROJECTS, ...custom.map(p => ({ ...p, _custom: true }))];
   return all
+    .filter(p => !hidden.has(projKey(p)))
     .map(p => {
       const k = projKey(p);
       const ov = projOverrides[k];
@@ -972,8 +974,7 @@ function getMergedProjects() {
         ...p,
         _origKey: k,
         note: notes[k] !== undefined ? notes[k] : (p.note || ""),
-        posters: posters[k] ? [...posters[k]] : [],
-        updatedAt: updatedAt[k] || ""
+        posters: posters[k] ? [...posters[k]] : []
       };
       if (ov) {
         merged._overridden = true;
@@ -1020,14 +1021,8 @@ function render() {
   document.getElementById("resultCount").textContent = list.length;
   document.getElementById("totalCount").textContent = allProjects.length;
 
-  // 计算最后更新日期
-  const updatedAtMap = loadUpdatedAt();
-  const dates = Object.values(updatedAtMap).filter(d => d);
-  const lastUpdated = dates.length > 0 ? dates.sort().reverse()[0] : "—";
-  document.getElementById("lastUpdated").textContent = lastUpdated;
-
   if (list.length === 0) {
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="8">没有符合条件的项目</td></tr>';
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="7">没有符合条件的项目</td></tr>';
     return;
   }
 
@@ -1068,10 +1063,6 @@ function render() {
       <button class="delete-proj-btn admin-only" data-key="${k}" data-custom="${isCustom ? "1" : "0"}" title="删除${isCustom ? "自建项目" : "内置项目（隐藏，可恢复）"}">删除</button>
     </div>`;
 
-    const updatedAtHtml = p.updatedAt
-      ? `<span class="updated-at">${p.updatedAt}</span>`
-      : '<span class="updated-at empty">—</span>';
-
     return `<tr>
       <td>${typeHtml}</td>
       <td class="school-cell">${schoolHtml}</td>
@@ -1079,12 +1070,22 @@ function render() {
       <td class="major-cell">${p.major}</td>
       <td><div class="tag-list">${tagHtml}</div></td>
       <td class="note-cell" data-key="${k}">${noteHtml}</td>
-      <td class="updated-at-cell">${updatedAtHtml}</td>
       <td class="poster-cell">${posterHtml}</td>
     </tr>`;
   }).join("");
 
   bindRowEvents();
+}
+
+function updateHiddenBtn() {
+  const hidden = loadHidden();
+  const btn = document.getElementById("restoreBtn");
+  if (hidden.length > 0 && isAdmin()) {
+    btn.style.display = "";
+    btn.textContent = "↩ 恢复已隐藏(" + hidden.length + ")";
+  } else {
+    btn.style.display = "none";
+  }
 }
 
 function bindRowEvents() {
@@ -1103,7 +1104,7 @@ function bindRowEvents() {
       const [school, major] = key.split("|");
       const msg = isCustom
         ? "确认删除「" + school + " - " + major + "」？\n该自建项目的备注和海报数据也会一并清除。"
-        : "确认删除内置项目「" + school + " - " + major + "」？\n删除后不再显示，无法恢复。";
+        : "确认隐藏内置项目「" + school + " - " + major + "」？\n隐藏后可通过工具栏「恢复」按钮找回。";
       if (!confirm(msg)) return;
 
       if (isCustom) {
@@ -1118,7 +1119,7 @@ function bindRowEvents() {
         localStorage.setItem(STORAGE_POSTERS_KEY, JSON.stringify(overrides.posters));
         deleteProjOverride(key);
       } else {
-        // 内置项目：加入隐藏列表，从视图中移除
+        // 内置项目：仅加入隐藏列表，保留 override/notes/posters 以便恢复
         const hidden = loadHidden();
         if (!hidden.includes(key)) {
           hidden.push(key);
@@ -1126,27 +1127,35 @@ function bindRowEvents() {
         }
       }
       render();
+      updateHiddenBtn();
     });
   });
 
   // 海报上传
   document.querySelectorAll(".poster-add input[type=file]").forEach(input => {
-    input.addEventListener("change", (e) => {
+    input.addEventListener("change", async (e) => {
       const file = e.target.files[0];
       if (!file) return;
       const key = input.dataset.key;
+      e.target.value = ""; // 重置，允许重复选同一文件
 
-      const reader = new FileReader();
-      reader.onload = function(ev) {
-        const base64 = ev.target.result;
+      try {
+        const base64 = await compressImage(file);
         const overrides = loadOverrides();
         const arr = overrides.posters[key] ? [...overrides.posters[key]] : [];
-        if (arr.length >= MAX_POSTERS) return;
+        if (arr.length >= MAX_POSTERS) {
+          alert("每个项目最多上传 " + MAX_POSTERS + " 张海报");
+          return;
+        }
         arr.push(base64);
         savePosters(key, arr);
         render();
-      };
-      reader.readAsDataURL(file);
+      } catch(err) {
+        // QuotaExceededError 已在 savePosters 中 alert
+        if (err.name !== 'QuotaExceededError' && err.code !== 22) {
+          alert("上传失败：" + err.message);
+        }
+      }
     });
   });
 
@@ -1251,6 +1260,16 @@ document.getElementById("exportBtn").addEventListener("click", () => {
   a.download = "重点项目清单_" + new Date().toISOString().slice(0,10) + ".csv";
   a.click();
   URL.revokeObjectURL(a.href);
+});
+
+// 恢复已隐藏的内置项目
+document.getElementById("restoreBtn").addEventListener("click", () => {
+  const hidden = loadHidden();
+  if (hidden.length === 0) return;
+  if (!confirm("确认恢复 " + hidden.length + " 个已隐藏项目？")) return;
+  saveHidden([]);
+  render();
+  updateHiddenBtn();
 });
 
 // ====== 合作办学数据自动补全 ======
@@ -2177,18 +2196,17 @@ function initAddModal() {
       return;
     }
 
-    // 检查重复（只检查自建项目内部，内置项目可覆盖）
+    // 检查重复（学校+专业）
     const k = school + "|" + major;
-    const customExisting = loadCustomProjects();
-    if (customExisting.some(p => projKey(p) === k)) {
-      alert("自建项目中已存在相同学校+专业的项目，请勿重复添加");
+    const all = getMergedProjects();
+    if (all.some(p => projKey(p) === k)) {
+      alert("已存在相同学校+专业的项目，请勿重复添加");
       return;
     }
 
     const custom = loadCustomProjects();
     custom.push({ type, school, major, foreign, tags, note });
     saveCustomProjects(custom);
-    touchUpdatedAt(k);
     closeAddModal();
     render();
   });
@@ -2359,16 +2377,6 @@ function initEditModal() {
         localStorage.setItem(STORAGE_NOTES_KEY, JSON.stringify(overrides.notes));
         localStorage.setItem(STORAGE_POSTERS_KEY, JSON.stringify(overrides.posters));
       }
-      // major 改了则迁移更新日期
-      if (newKey !== _editKey) {
-        const updatedAtMap = loadUpdatedAt();
-        if (updatedAtMap[_editKey]) {
-          updatedAtMap[newKey] = updatedAtMap[_editKey];
-          delete updatedAtMap[_editKey];
-          localStorage.setItem(STORAGE_UPDATED_KEY, JSON.stringify(updatedAtMap));
-        }
-      }
-      touchUpdatedAt(newKey);
     } else {
       saveProjOverride(_editKey, { type, foreign, major, tags });
       saveNote(_editKey, note);
@@ -2383,9 +2391,10 @@ initEditModal();
 
 initAddModal();
 render();
+updateHiddenBtn();
 
 // ====== 数据导入/导出 ======
-const DATA_KEYS = [STORAGE_NOTES_KEY, STORAGE_POSTERS_KEY, STORAGE_CUSTOM_KEY, STORAGE_HIDDEN_KEY, STORAGE_OVERRIDE_KEY, STORAGE_UPDATED_KEY];
+const DATA_KEYS = [STORAGE_NOTES_KEY, STORAGE_POSTERS_KEY, STORAGE_CUSTOM_KEY, STORAGE_HIDDEN_KEY, STORAGE_OVERRIDE_KEY];
 
 document.getElementById("exportDataBtn").addEventListener("click", () => {
   const data = {};
@@ -2447,32 +2456,20 @@ document.getElementById("importConfirmBtn").addEventListener("click", () => {
     document.getElementById("importModal").classList.remove("show");
     alert("导入成功！共恢复 " + count + " 项数据。");
     render();
+    updateHiddenBtn();
   } catch(e) {
     alert("数据格式错误，请检查后重试：" + e.message);
   }
 });
 
-// ====== URL Hash 自动导入（延迟到密码门通过后执行）======
-var PENDING_IMPORT = null;
-(function() {
+// ====== URL Hash 自动导入 ======
+(function autoImport() {
   const hash = window.location.hash;
   if (!hash || !hash.startsWith('#import=')) return;
-  // 页面加载时只提取数据，不执行导入；等密码门通过后在 onGatePassed 中处理
-  PENDING_IMPORT = hash.substring(8);
-  // 立即清除 hash，避免刷新重复
-  history.replaceState(null, '', window.location.pathname + (window.location.search || ''));
-})();
-
-function processPendingImport() {
-  if (!PENDING_IMPORT) return;
-  const b64 = PENDING_IMPORT;
-  PENDING_IMPORT = null; // 防止重复处理
+  const b64 = hash.substring(8);
   try {
     const json = atob(b64);
-    // 用 TextDecoder 解码 UTF-8（比 escape+decodeURIComponent 更可靠）
-    const bytes = new Uint8Array(json.length);
-    for (let i = 0; i < json.length; i++) bytes[i] = json.charCodeAt(i);
-    const text = new TextDecoder('utf-8').decode(bytes);
+    const text = decodeURIComponent(escape(json));
     const data = JSON.parse(text);
     let count = 0;
     DATA_KEYS.forEach(k => {
@@ -2499,13 +2496,15 @@ function processPendingImport() {
         count++;
       }
     });
+    // 清除hash，避免刷新时重复导入
+    window.location.hash = '';
     render();
-    setTimeout(() => alert("数据已自动恢复！共导入 " + count + " 项。"), 300);
+    updateHiddenBtn();
+    setTimeout(() => alert("数据已自动恢复！共导入 " + count + " 项。"), 500);
   } catch(e) {
     console.error("自动导入失败:", e);
-    setTimeout(() => alert("自动导入失败: " + e.message), 300);
   }
-}
+})();
 </script>
 </body>
 </html>
