@@ -2052,3 +2052,115 @@ ul { list-style: none; }
         display: none;
     }
 }
+
+/* ========== 招生动态文章页 ========== */
+.article-detail {
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+.article-back {
+    display: inline-block;
+    font-size: 14px;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 24px;
+    transition: color 0.2s;
+}
+.article-back:hover { color: var(--accent); }
+
+.article-header {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+}
+.article-cat {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 14px;
+}
+.article-cat.liankao { background: #e3f2fd; color: #1565c0; }
+.article-cat.sino { background: #fff3e0; color: #e65100; }
+.article-cat.urgent { background: #fce4ec; color: #c62828; }
+
+.article-header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--heading);
+    line-height: 1.5;
+    margin-bottom: 14px;
+}
+.article-meta {
+    font-size: 13.5px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+.article-meta time { font-weight: 500; }
+
+.article-body {
+    font-size: 16px;
+    line-height: 2;
+    color: var(--text);
+}
+.article-body p {
+    margin-bottom: 20px;
+}
+.article-body h2 {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--heading);
+    margin-top: 36px;
+    margin-bottom: 16px;
+}
+.article-body h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--heading);
+    margin-top: 28px;
+    margin-bottom: 12px;
+}
+.article-body strong {
+    color: var(--accent);
+    font-weight: 600;
+}
+.article-body ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+.article-body li {
+    padding-left: 18px;
+    position: relative;
+    margin-bottom: 8px;
+    line-height: 1.9;
+}
+.article-body li::before {
+    content: "·";
+    position: absolute;
+    left: 6px;
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.info-box {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 28px 0;
+}
+.info-box-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 12px;
+}
+.info-box ul { margin-bottom: 0; }
+.info-box li { font-size: 14.5px; }

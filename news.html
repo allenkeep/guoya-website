@@ -4,173 +4,163 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>招生动态 | 果芽MBA</title>
-<meta content="管理类联考与中外合作办学硕士招生动态监测，每日更新。" name="description"/>
+<meta content="管理类联考与中外合作办学硕士招生动态，每日更新。" name="description"/>
 <link href="style.css" rel="stylesheet"/>
 <script defer="" src="main.js"></script>
 <style>
-  /* ===== 招生动态页面专属样式 ===== */
-  .news-meta-bar {
+  /* ===== 招生动态列表页 ===== */
+  .news-toolbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 32px;
-    padding: 14px 20px;
+    gap: 12px;
+    margin-bottom: 28px;
+    padding: 12px 20px;
     background: var(--bg-alt);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 10px;
     font-size: 13px;
     color: var(--muted);
   }
-  .news-meta-bar .update-time {
+  .news-toolbar .update-time {
     font-weight: 600;
     color: var(--accent);
   }
-  .news-meta-bar .data-range {
-    color: var(--text);
-  }
-
-  .news-summary {
-    background: rgba(232, 90, 43, 0.04);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 24px;
-    margin-bottom: 36px;
-    font-size: 14px;
-    line-height: 1.8;
-    color: var(--text);
-  }
-  .news-summary strong { color: var(--accent); }
-
-  .news-columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
-  }
-  @media (max-width: 768px) {
-    .news-columns { grid-template-columns: 1fr; gap: 16px; }
-  }
-
-  .news-col-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--heading);
-    padding-bottom: 12px;
-    border-bottom: 2px solid var(--accent);
-    margin-bottom: 20px;
+  .news-filter {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    gap: 8px;
   }
-  .news-col-title .badge {
-    width: 28px; height: 28px;
+  .news-filter button {
+    padding: 4px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #fff;
+    color: var(--text);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .news-filter button.active {
     background: var(--accent);
     color: #fff;
-    border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700;
-    flex-shrink: 0;
+    border-color: var(--accent);
+  }
+  .news-filter button:hover:not(.active) {
+    border-color: var(--accent);
+    color: var(--accent);
   }
 
-  .news-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 22px;
-    margin-bottom: 14px;
-    box-shadow: 0 4px 16px rgba(160, 80, 40, 0.06);
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-  }
-  .news-card:hover {
-    border-color: rgba(255, 140, 66, 0.35);
-    box-shadow: 0 8px 24px rgba(160, 80, 40, 0.10);
-    transform: translateY(-2px);
-  }
-  .news-card.urgent {
-    border-left: 3px solid #d32f2f;
-    background: #fffbf7;
-  }
-  .news-card.alert-banner {
-    border-left: 3px solid #e65100;
-    background: #fffbf5;
-  }
-
-  .news-card-top {
+  .article-list {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
+    flex-direction: column;
+    gap: 0;
   }
-  .news-card-meta {
-    font-size: 12px;
-    color: var(--muted);
+  .article-item {
     display: flex;
-    align-items: center;
-    gap: 6px;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
   }
-  .news-card-meta .src { color: var(--text); font-weight: 500; }
+  .article-item:hover {
+    background: rgba(232, 90, 43, 0.02);
+  }
+  .article-item:last-child {
+    border-bottom: none;
+  }
 
-  .news-tag {
+  .article-item-left {
     flex-shrink: 0;
-    padding: 2px 10px;
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .article-cat {
+    display: inline-block;
+    padding: 3px 12px;
     border-radius: 4px;
     font-size: 12px;
     font-weight: 500;
-    background: var(--bg-alt);
-    color: var(--muted);
     white-space: nowrap;
+    width: fit-content;
   }
-  .news-tag.new { background: #e8f5e9; color: #2e7d32; }
-  .news-tag.urgent { background: #fce4ec; color: #c62828; }
-  .news-tag.deadline { background: #fff3e0; color: #e65100; }
-  .news-tag.critical { background: #d32f2f; color: #fff; }
+  .article-cat.liankao {
+    background: #e3f2fd;
+    color: #1565c0;
+  }
+  .article-cat.sino {
+    background: #fff3e0;
+    color: #e65100;
+  }
+  .article-cat.urgent {
+    background: #fce4ec;
+    color: #c62828;
+  }
+  .article-date {
+    font-size: 13px;
+    color: var(--muted);
+  }
 
-  .news-card-title {
-    font-size: 15px;
+  .article-item-main {
+    flex: 1;
+    min-width: 0;
+  }
+  .article-item-title {
+    font-size: 18px;
     font-weight: 600;
     color: var(--heading);
     line-height: 1.5;
     margin-bottom: 8px;
   }
-  .news-card-body {
-    font-size: 13.5px;
-    color: var(--text);
-    line-height: 1.8;
+  .article-item-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
   }
-  .news-card-body ul {
-    list-style: none;
-    padding: 0;
-  }
-  .news-card-body li {
-    padding-left: 14px;
-    position: relative;
-    margin-bottom: 3px;
-  }
-  .news-card-body li::before {
-    content: "·";
-    position: absolute;
-    left: 4px;
+  .article-item-title a:hover {
     color: var(--accent);
-    font-weight: bold;
   }
-  .news-source-link {
-    display: inline-block;
-    margin-top: 8px;
+  .article-item-excerpt {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .article-item-source {
     font-size: 12.5px;
+    color: var(--text-light);
+  }
+  .article-item-source .src-name {
+    color: var(--text);
+    font-weight: 500;
+  }
+  .read-more {
+    font-size: 13px;
     color: var(--accent);
     text-decoration: none;
-    border-bottom: 1px dashed var(--accent);
-    padding-bottom: 1px;
+    font-weight: 500;
   }
-  .news-source-link:hover { opacity: 0.7; }
+  .read-more:hover {
+    opacity: 0.7;
+  }
 
-  .news-empty {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--muted);
-    font-size: 14px;
+  @media (max-width: 768px) {
+    .article-item {
+      flex-direction: column;
+      gap: 10px;
+    }
+    .article-item-left {
+      width: auto;
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+    }
   }
 </style>
 </head>
@@ -200,319 +190,212 @@
 <section class="section" style="padding-top:48px;">
 <div class="section-inner">
 
-<div class="news-meta-bar">
-<span class="update-time">更新时间：2026-08-04 19:26</span>
-<span class="data-range">数据范围：8月3日 - 8月4日</span>
-<span>下次监测：今日20:00</span>
-</div>
-
-<div class="news-summary">
-<strong>本期摘要：</strong>管理类联考方面（仅2027级），清华大学MEM 2027级全国招生活动持续推进；中南大学、重庆理工大学2027 MBA招生简章持续传播；中南财经政法大学MBA/EMBA第五期招生宣讲举行。中外合作办学方面，<strong style="color:#d32f2f;">海南医科大学-西英格兰大学3个硕士方向明天（8月5日）截止报名</strong>，请紧急关注。
-</div>
-
-<div class="news-columns">
-
-<!-- 左栏：管理类联考 -->
-<div class="news-col">
-<div class="news-col-title">
-<span class="badge">联</span>
-管理类联考 · 招生动态
-</div>
-
-<div class="news-card">
-<div class="news-card-top">
-<div class="news-card-meta"><span class="src">鼎顺MBA（公众号）</span><span>·</span><span>2026-08-04</span></div>
-<span class="news-tag new">今日新动态</span>
-</div>
-<div class="news-card-title">清华大学 2027级MEM 招生活动计划（8-9月）</div>
-<div class="news-card-body">
-<ul>
-<li>清华大学工程管理硕士（MEM）2027级招生活动全面启动</li>
-<li>活动形式：招生开放日（主题报告+政策宣讲+面对面答疑）、课程开放日（体验真实课堂教学）</li>
-<li>覆盖城市：北京、珠三角（广州/深圳）、长三角（上海/杭州/苏州/义乌）、西南（成都）</li>
-<li>近期活动：8月9日北京招生开放日、8月22-23日北京课程开放日、8月29-30日珠三角招生开放日</li>
-<li>9月5日/27日北京招生开放日（含招生重点方向、培养院系特色）</li>
-</ul>
-<a href="https://weixin.sogou.com/weixin?type=2&query=2027+MEM+%E6%8B%9B%E7%94%9F%E7%AE%80%E7%AB%A0&ie=utf8" target="_blank" class="news-source-link">来源：鼎顺MBA 公众号 2026-08-04 ↗</a>
+<div class="news-toolbar">
+<span class="update-time">更新时间：2026-08-04 19:50</span>
+<div class="news-filter">
+<button class="active" onclick="filterNews('all')">全部</button>
+<button onclick="filterNews('liankao')">管理类联考</button>
+<button onclick="filterNews('sino')">中外合作办学</button>
 </div>
 </div>
 
-<div class="news-card">
-<div class="news-card-top">
-<div class="news-card-meta"><span class="src">坤泰MBA（公众号）</span><span>·</span><span>2026-08-03</span></div>
-<span class="news-tag new">新动态</span>
-</div>
-<div class="news-card-title">中南大学 2027年MBA招生简章</div>
-<div class="news-card-body">
-<ul>
-<li>中南大学是教育部直属全国重点大学、"211工程"首批重点建设高校、"985工程"高校</li>
-<li>2027年MBA招生简章正式发布</li>
-<li>初试：全国管理类联考（管理类综合能力+英语二），预计2026年12月</li>
-<li>报名：预计2026年10月登录研招网网上报名</li>
-</ul>
-<a href="https://weixin.sogou.com/weixin?type=2&query=2027%E5%B9%B4MBA%E6%8B%9B%E7%94%9F%E7%AE%80%E7%AB%A0&ie=utf8" target="_blank" class="news-source-link">来源：坤泰MBA 公众号 ↗</a>
-</div>
-</div>
+<div class="article-list" id="articleList">
 
-<div class="news-card">
-<div class="news-card-top">
-<div class="news-card-meta"><span class="src">MBA教育网（公众号）</span><span>·</span><span>2026-08-03</span></div>
-<span class="news-tag new">新动态</span>
+<!-- 1. 清华MEM -->
+<article class="article-item" data-cat="liankao">
+<div class="article-item-left">
+<span class="article-cat liankao">管理类联考</span>
+<time class="article-date">2026-08-04</time>
 </div>
-<div class="news-card-title">重庆理工大学 2027年MBA招生简章</div>
-<div class="news-card-body">
-<ul>
-<li>重庆理工大学诞生于1940年，前身是国民政府兵工署第11技工学校</li>
-<li>2027年工商管理硕士（MBA）专业学位研究生招生简章发布</li>
-<li>初试：全国管理类联考（管理类综合能力+英语二），预计2026年12月</li>
-<li>报名：预计2026年10月登录研招网网上报名</li>
-</ul>
-<a href="https://weixin.sogou.com/weixin?type=2&query=2027%E5%B9%B4MBA%E6%8B%9B%E7%94%9F%E7%AE%80%E7%AB%A0&ie=utf8" target="_blank" class="news-source-link">来源：MBA教育网 公众号 ↗</a>
+<div class="article-item-main">
+<h2 class="article-item-title"><a href="news/tsinghua-mem-2027.html">清华大学2027级MEM招生活动计划发布，8-9月多城巡回</a></h2>
+<p class="article-item-excerpt">清华大学工程管理硕士（MEM）2027级招生活动全面启动，覆盖北京、珠三角、长三角、西南四大区域，包含招生开放日和课程开放日两种形式，8月9日首场北京开放日即将开启。</p>
+<a href="news/tsinghua-mem-2027.html" class="read-more">阅读全文 →</a>
 </div>
-</div>
+</article>
 
-<div class="news-card">
-<div class="news-card-top">
-<div class="news-card-meta"><span class="src">中南财经政法大学MBA（公众号）</span><span>·</span><span>2026-08-03</span></div>
-<span class="news-tag new">新动态</span>
+<!-- 2. 天津理工-魁北克 -->
+<article class="article-item" data-cat="sino">
+<div class="article-item-left">
+<span class="article-cat sino">中外合作办学</span>
+<time class="article-date">2026-08-04</time>
 </div>
-<div class="news-card-title">中南财经政法大学 2027年MBA/EMBA 第五期招生宣讲圆满举行</div>
-<div class="news-card-body">
-<ul>
-<li>8月2日，中南财经政法大学工商管理学院2027 MBA/EMBA第五期招生宣讲活动顺利举行</li>
-<li>走向线下向武汉备考学员全方位展示项目培养体系、招生政策和备考流程</li>
-<li>涵盖MBA和EMBA两个项目，奖学金体系同步公布</li>
-<li>中南财经政法大学是"211工程"和"双一流"建设高校，MBA项目获AMBA认证</li>
-</ul>
-<a href="https://weixin.sogou.com/weixin?type=2&query=2027+MBA+%E4%B8%AD%E5%8D%97%E8%B4%A2%E7%BB%8F%E6%94%BF%E6%B3%95&ie=utf8" target="_blank" class="news-source-link">来源：中南财经政法大学MBA 公众号 ↗</a>
+<div class="article-item-main">
+<h2 class="article-item-title"><a href="news/tjut-quebec-mpm-2027.html">天津理工大学-加拿大魁北克大学项目管理硕士2027级开启报名</a></h2>
+<p class="article-item-excerpt">天津理工大学与加拿大魁北克大学合作举办的项目管理硕士（MPM）2027级招生启动，计划招收135人，学费16.8万元，第一期报名截至8月30日，本科以上学历且三年工作经验即可申请。</p>
+<a href="news/tjut-quebec-mpm-2027.html" class="read-more">阅读全文 →</a>
 </div>
-</div>
+</article>
 
-<div class="news-card">
-<div class="news-card-top">
-<div class="news-card-meta"><span class="src">考研主理人苏苏（公众号）</span><span>·</span><span>2026-08-03</span></div>
-<span class="news-tag">报考指南</span>
+<!-- 3. 青岛农业-皇家农业 -->
+<article class="article-item" data-cat="sino">
+<div class="article-item-left">
+<span class="article-cat sino">中外合作办学</span>
+<time class="article-date">2026-08-04</time>
 </div>
-<div class="news-card-title">中南大学MBA 最全报考指南（2027入学）</div>
-<div class="news-card-body">
-<ul>
-<li>中南大学商学院招收2027级MBA（工商管理硕士）项目全解析</li>
-<li>涵盖报考条件、培养方式、课程设置、学费等关键信息</li>
-<li>初试参加全国管理类联考，2026年10月网上报名</li>
-</ul>
-<a href="https://weixin.sogou.com/weixin?type=2&query=2027+MBA+%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6&ie=utf8" target="_blank" class="news-source-link">来源：考研主理人苏苏 公众号 ↗</a>
+<div class="article-item-main">
+<h2 class="article-item-title"><a href="news/qau-rau-4programs-2026.html">青岛农业大学-英国皇家农业大学硕士项目首届招生，4个方向可选</a></h2>
+<p class="article-item-excerpt">青岛农业大学与英国皇家农业大学合作推出4个硕士专业方向，2026年首届招生，8月30日截止报名。申请制入学，免全国统考，毕业获英方学位可留服认证。</p>
+<a href="news/qau-rau-4programs-2026.html" class="read-more">阅读全文 →</a>
 </div>
-</div>
+</article>
 
+<!-- 4. 中南大学MBA简章 -->
+<article class="article-item" data-cat="liankao">
+<div class="article-item-left">
+<span class="article-cat liankao">管理类联考</span>
+<time class="article-date">2026-08-03</time>
 </div>
+<div class="article-item-main">
+<h2 class="article-item-title"><a href="news/zhongnan-mba-2027.html">中南大学2027年MBA招生简章发布</a></h2>
+<p class="article-item-excerpt">中南大学2027年MBA招生简章正式发布。作为985/211高校，初试参加全国管理类联考，预计2026年12月考试，10月研招网报名。</p>
+<a href="news/zhongnan-mba-2027.html" class="read-more">阅读全文 →</a>
+</div>
+</article>
 
-<!-- 右栏：中外合作办学硕士 -->
-<div class="news-col">
-<div class="news-col-title">
-<span class="badge">合</span>
-中外合作办学硕士 · 招生动态
+<!-- 5. 重庆理工MBA -->
+<article class="article-item" data-cat="liankao">
+<div class="article-item-left">
+<span class="article-cat liankao">管理类联考</span>
+<time class="article-date">2026-08-03</time>
 </div>
+<div class="article-item-main">
+<h2 class="article-item-title"><a href="news/zhongqing-mba-2027.html">重庆理工大学2027年MBA招生简章发布</a></h2>
+<p class="article-item-excerpt">重庆理工大学2027年工商管理硕士（MBA）招生简章发布，初试参加全国管理类联考，预计2026年10月研招网报名、12月考试。</p>
+<a href="news/zhongqing-mba-2027.html" class="read-more">阅读全文 →</a>
+</div>
+</article>
 
-<div class="news-card">
-<div class="news-card-top">
-<div class="news-card-meta"><span class="src">天津理工大学管理学院</span><span>·</span><span>2026-08-04</span></div>
-<span class="news-tag new">新动态</span>
+<!-- 6. 中南财经政法MBA/EMBA宣讲 -->
+<article class="article-item" data-cat="liankao">
+<div class="article-item-left">
+<span class="article-cat liankao">管理类联考</span>
+<time class="article-date">2026-08-03</time>
 </div>
-<div class="news-card-title">天津理工大学-加拿大魁北克大学 项目管理硕士(MPM) 2027级</div>
-<div class="news-card-body">
-<ul>
-<li>第一期报名：2026年8月1日至8月30日</li>
-<li>招生计划：2027级共135人，分两期招生</li>
-<li>学费：16.8万元（分两次缴纳，每次8.4万元）</li>
-<li>学制：2年，在职学习，集中授课</li>
-<li>报名条件：本科及以上学历，三年以上工作经验</li>
-<li>第一期考试：2026年9月下旬；毕业获加拿大魁北克大学MPM学位</li>
-</ul>
-<a href="https://ms.tjut.edu.cn/info/1059/6288.htm" target="_blank" class="news-source-link">来源：天津理工大学管理学院官网 ↗</a>
+<div class="article-item-main">
+<h2 class="article-item-title"><a href="news/zhongnan-finance-mba-emba-2027.html">中南财经政法大学2027年MBA/EMBA第五期招生宣讲举行</a></h2>
+<p class="article-item-excerpt">8月2日，中南财经政法大学工商管理学院2027 MBA/EMBA第五期招生宣讲在武汉举行，全方位展示项目培养体系、招生政策和奖学金体系。</p>
+<a href="news/zhongnan-finance-mba-emba-2027.html" class="read-more">阅读全文 →</a>
 </div>
-</div>
+</article>
 
-<div class="news-card">
-<div class="news-card-top">
-<div class="news-card-meta"><span class="src">北京华大研修学院（官网转载）</span><span>·</span><span>2026-08-04</span></div>
-<span class="news-tag new">新收录</span>
+<!-- 7. 中南大学MBA报考指南 -->
+<article class="article-item" data-cat="liankao">
+<div class="article-item-left">
+<span class="article-cat liankao">管理类联考</span>
+<time class="article-date">2026-08-03</time>
 </div>
-<div class="news-card-title">青岛农业大学-英国皇家农业大学 4个专业方向硕士项目（2026年首届招生）</div>
-<div class="news-card-body">
-<ul>
-<li>报名截止：2026年8月30日（2026年9月开学，首批学员）</li>
-<li>4个专业方向：农艺与种业、农业管理、食品加工与安全、风景园林</li>
-<li>学制：2年，周末集中线下+线上混合教学</li>
-<li>报名条件：学士学位（应届生入学前取得），雅思6.5（单项5.5）或同等</li>
-<li>申请制入学，免全国统考，毕业获英国皇家农业大学硕士学位（可留服认证）</li>
-</ul>
-<a href="https://www.huada.cn/article/127" target="_blank" class="news-source-link">来源：北京华大研修学院官网 2026-08-04 ↗</a>
+<div class="article-item-main">
+<h2 class="article-item-title"><a href="news/zhongnan-mba-guide-2027.html">中南大学MBA最全报考指南（2027入学）</a></h2>
+<p class="article-item-excerpt">中南大学商学院2027级MBA项目全解析，涵盖报考条件、培养方式、课程设置、学费等关键信息，初试参加全国管理类联考。</p>
+<a href="news/zhongnan-mba-guide-2027.html" class="read-more">阅读全文 →</a>
 </div>
-</div>
+</article>
 
-<div class="news-card">
-<div class="news-card-top">
-<div class="news-card-meta"><span class="src">博士硕士通关秘笈（公众号）</span><span>·</span><span>2026-08-03</span></div>
-<span class="news-tag new">新动态</span>
+<!-- 8. 南昌大学-普瓦提埃 -->
+<article class="article-item" data-cat="sino">
+<div class="article-item-left">
+<span class="article-cat sino">中外合作办学</span>
+<time class="article-date">2026-08-03</time>
 </div>
-<div class="news-card-title">南昌大学-法国普瓦提埃大学 国际企业管理硕士 2026第三批招生中</div>
-<div class="news-card-body">
-<ul>
-<li>南昌大学与法国普瓦提埃大学合作举办国际企业管理硕士项目</li>
-<li>2026年第三批招生进行中，上海班同步开放</li>
-<li>无需全国统考，自主招生，申请审核制入学</li>
-<li>学制1.5-2年，毕业获法国普瓦提埃大学硕士学位（可留服认证）</li>
-<li>学费较低，是性价比突出的中外合作办学硕士项目</li>
-</ul>
-<a href="https://weixin.sogou.com/weixin?type=2&query=%E5%8D%97%E6%98%8C%E5%A4%A7%E5%AD%A6+%E4%B8%AD%E5%A4%96%E5%90%88%E4%BD%9C%E5%8A%9E%E5%AD%A6%E7%A1%95%E5%A3%AB&ie=utf8" target="_blank" class="news-source-link">来源：博士硕士通关秘笈 公众号 2026-08-03 ↗</a>
+<div class="article-item-main">
+<h2 class="article-item-title"><a href="news/ncu-poitiers-imba-2026.html">南昌大学-法国普瓦提埃大学国际企业管理硕士2026第三批招生中</a></h2>
+<p class="article-item-excerpt">南昌大学与法国普瓦提埃大学合作举办的国际企业管理硕士项目2026年第三批招生进行中，上海班同步开放。申请审核制入学，无需全国统考，学制1.5-2年。</p>
+<a href="news/ncu-poitiers-imba-2026.html" class="read-more">阅读全文 →</a>
 </div>
-</div>
+</article>
 
-<div class="news-card">
-<div class="news-card-top">
-<div class="news-card-meta"><span class="src">江西财经大学金融学院官网</span><span>·</span><span>2026-07-30</span></div>
-<span class="news-tag new">新收录</span>
+<!-- 9. 江西财经-埃塞克斯 -->
+<article class="article-item" data-cat="sino">
+<div class="article-item-left">
+<span class="article-cat sino">中外合作办学</span>
+<time class="article-date">2026-07-30</time>
 </div>
-<div class="news-card-title">江西财经大学-英国埃塞克斯大学 金融科技 / 经济学与数据科学硕士（2个方向）</div>
-<div class="news-card-body">
-<ul>
-<li>第一批次报名截止：2026年8月31日（按计划择优录取，额满即止）</li>
-<li>2个专业方向：金融科技、经济学与数据科学</li>
-<li>学制2年，"2+0"培养模式：全程在江西财经大学就读，无需赴英即可获英方学位</li>
-<li>学费：2年合计18万元/人（另缴1000元面试费）</li>
-<li>报名条件：国家承认本科及以上学历，具备基础英语能力</li>
-<li>毕业获英国埃塞克斯大学硕士学位（可留服认证）</li>
-</ul>
-<a href="https://finance.jxufe.edu.cn/news-show-5784.html" target="_blank" class="news-source-link">来源：江西财经大学金融学院官网 2026-07-30 ↗</a>
+<div class="article-item-main">
+<h2 class="article-item-title"><a href="news/jxufe-essex-fintech-2026.html">江西财经大学-英国埃塞克斯大学硕士项目，金融科技与数据科学两个方向</a></h2>
+<p class="article-item-excerpt">江西财经大学与英国埃塞克斯大学合作推出金融科技、经济学与数据科学两个硕士方向，"2+0"培养模式全程国内就读，学费2年合计18万元，第一批次8月31日截止。</p>
+<a href="news/jxufe-essex-fintech-2026.html" class="read-more">阅读全文 →</a>
 </div>
-</div>
+</article>
 
-<!-- 报名倒计时 -->
-<div class="news-card alert-banner">
-<div class="news-card-top">
-<div class="news-card-meta"><span class="src">报名倒计时</span><span>·</span><span>8月即将截止</span></div>
-<span class="news-tag urgent">重点关注</span>
+<!-- 10. 海南医科-西英格兰（紧急） -->
+<article class="article-item" data-cat="sino">
+<div class="article-item-left">
+<span class="article-cat urgent">报名紧急</span>
+<time class="article-date">2026-08-05截止</time>
 </div>
-<div class="news-card-title">以下6个中外合作办学硕士项目将在8月截止报名</div>
-<div class="news-card-body">
-<p>这些项目发布日期较早，但报名窗口仍在开放。按截止日期升序排列，最紧急的排最前。</p>
+<div class="article-item-main">
+<h2 class="article-item-title"><a href="news/hainan-medical-uwe-2026.html">海南医科大学-英国西英格兰大学3个硕士方向8月5日截止报名</a></h2>
+<p class="article-item-excerpt">海南医科大学与英国西英格兰大学合作举办国际护理实践、公共卫生、康复3个硕士项目，报名截止日期为8月5日，自主招生择优录取，1.5年学制，毕业可留服认证。</p>
+<a href="news/hainan-medical-uwe-2026.html" class="read-more">阅读全文 →</a>
 </div>
-</div>
+</article>
 
-<div class="news-card urgent">
-<div class="news-card-top">
-<div class="news-card-meta"><span class="src">海南医科大学西英格兰学院</span><span>·</span><span>2026-07</span></div>
-<span class="news-tag critical">明天截止！</span>
+<!-- 11. 北京中医药-史蒂文斯 -->
+<article class="article-item" data-cat="sino">
+<div class="article-item-left">
+<span class="article-cat sino">中外合作办学</span>
+<time class="article-date">2026-08-15截止</time>
 </div>
-<div class="news-card-title">海南医科大学-英国西英格兰大学 3个硕士方向（国际护理实践/公共卫生/康复）</div>
-<div class="news-card-body">
-<ul>
-<li><strong style="color:#d32f2f;">报名截止：2026年8月5日</strong></li>
-<li>3个硕士项目：国际护理实践理学硕士、公共卫生理学硕士、康复理学硕士</li>
-<li>学制：1.5年，最长可延长1年；入学时间：2026年8月底或9月初</li>
-<li>招生方式：自主招生，按申请时间先后择优录取，名额有限</li>
-<li>招生对象：本科学历（学信网可认证），或大专学历+3年医学相关工作经历</li>
-<li>教育部批准，毕业获英国西英格兰大学硕士学位（可留服认证）</li>
-</ul>
-<a href="https://www.muhn.edu.cn/hnmu_uwec/zsxx/sszs1/zzsjz.htm" target="_blank" class="news-source-link">来源：海南医科大学西英格兰学院官网 ↗</a>
+<div class="article-item-main">
+<h2 class="article-item-title"><a href="news/bucm-stevens-healthcare-2026.html">北京中医药大学-美国史蒂文斯理工学院医疗健康领导力与管理硕士</a></h2>
+<p class="article-item-excerpt">北京中医药大学与美国史蒂文斯理工学院合作举办医疗健康领导力与管理硕士项目，限招30人，学费25.5万元，8月15日截止报名，全英文授课，申请审核制入学。</p>
+<a href="news/bucm-stevens-healthcare-2026.html" class="read-more">阅读全文 →</a>
 </div>
-</div>
+</article>
 
-<div class="news-card">
-<div class="news-card-top">
-<div class="news-card-meta"><span class="src">北京中医药大学官网</span><span>·</span><span>2026-07-08</span></div>
-<span class="news-tag deadline">8月15日截止</span>
+<!-- 12. 湖南工商-西英格兰 -->
+<article class="article-item" data-cat="sino">
+<div class="article-item-left">
+<span class="article-cat sino">中外合作办学</span>
+<time class="article-date">2026-08-25截止</time>
 </div>
-<div class="news-card-title">北京中医药大学-美国史蒂文斯理工学院 医疗健康领导力与管理硕士</div>
-<div class="news-card-body">
-<ul>
-<li>报名截止：2026年8月15日</li>
-<li>招生名额：限招30人</li>
-<li>学费：25.5万元（分三期缴纳）</li>
-<li>学制：18个月，全英文授课，申请审核制入学</li>
-<li>报名条件：全日制本科双证，GPA 2.5以上，CET-6或雅思5.5/托福80</li>
-<li>毕业获美国史蒂文斯理工学院管理学理学硕士学位（可留服认证）</li>
-</ul>
-<a href="https://www.bucm.edu.cn/tzgg/976cb2e88b0c4a0a8486d203347d726a.htm" target="_blank" class="news-source-link">来源：北京中医药大学官网 2026-07-08 ↗</a>
+<div class="article-item-main">
+<h2 class="article-item-title"><a href="news/hutb-uwe-fintech-2026.html">湖南工商大学-英国西英格兰大学金融科技硕士招生中</a></h2>
+<p class="article-item-excerpt">湖南工商大学与英国西英格兰大学合作举办金融科技硕士项目，计划招生80人，学费6.5万元/年，8月25日截止报名，申请-审核-面试制入学。</p>
+<a href="news/hutb-uwe-fintech-2026.html" class="read-more">阅读全文 →</a>
 </div>
-</div>
+</article>
 
-<div class="news-card">
-<div class="news-card-top">
-<div class="news-card-meta"><span class="src">湖南工商大学国际学院</span><span>·</span><span>2026-06-10</span></div>
-<span class="news-tag deadline">8月25日截止</span>
+<!-- 13. 天津外国语-阿伯丁 -->
+<article class="article-item" data-cat="sino">
+<div class="article-item-left">
+<span class="article-cat sino">中外合作办学</span>
+<time class="article-date">2026-08-31截止</time>
 </div>
-<div class="news-card-title">湖南工商大学-英国西英格兰大学 金融科技硕士</div>
-<div class="news-card-body">
-<ul>
-<li>报名截止：2026年8月25日</li>
-<li>招生计划：80人，额满即止</li>
-<li>学费：6.5万元/年（含英方注册费），全日制2年</li>
-<li>招生方式：申请-审核-面试制，无需全国统考</li>
-<li>报名条件：本科学历，雅思5.5或同等英语水平</li>
-</ul>
-<a href="https://cis.hutb.edu.cn/ssxm/xmjs1/content_98010" target="_blank" class="news-source-link">来源：湖南工商大学国际学院官网 2026-06-10 ↗</a>
+<div class="article-item-main">
+<h2 class="article-item-title"><a href="news/tjfsu-aberdeen-translation-2026.html">天津外国语大学-英国阿伯丁大学高级翻译与智能语言技术硕士</a></h2>
+<p class="article-item-excerpt">天津外国语大学与英国阿伯丁大学合作举办高级翻译与智能语言技术硕士项目，招生60人，学费1.5年共15万元，8月31日截止申请，全日制学习。</p>
+<a href="news/tjfsu-aberdeen-translation-2026.html" class="read-more">阅读全文 →</a>
 </div>
-</div>
+</article>
 
-<div class="news-card">
-<div class="news-card-top">
-<div class="news-card-meta"><span class="src">天津外国语大学官网</span><span>·</span><span>2026-07-30</span></div>
-<span class="news-tag deadline">8月31日截止</span>
+<!-- 14. 北京外国语-基尔 -->
+<article class="article-item" data-cat="sino">
+<div class="article-item-left">
+<span class="article-cat sino">中外合作办学</span>
+<time class="article-date">2026-08-31截止</time>
 </div>
-<div class="news-card-title">天津外国语大学-英国阿伯丁大学 高级翻译与智能语言技术硕士</div>
-<div class="news-card-body">
-<ul>
-<li>申请截止：2026年8月31日</li>
-<li>招生人数：60人</li>
-<li>学费：10万元/年，1.5年共15万元</li>
-<li>学习方式：全日制，天津外国语大学马场道校区</li>
-<li>语言要求：雅思≥6.5 / 托福≥90 / PTE≥62等</li>
-<li>毕业获英国阿伯丁大学硕士学位</li>
-</ul>
-<a href="https://www.tjfsu.edu.cn/2026/0730/c18a11413/page.htm" target="_blank" class="news-source-link">来源：天津外国语大学官网 2026-07-30 ↗</a>
+<div class="article-item-main">
+<h2 class="article-item-title"><a href="news/bfsu-keele-edtech-ai-2026.html">北京外国语大学-英国基尔大学教育技术与人工智能硕士</a></h2>
+<p class="article-item-excerpt">北京外国语大学与英国基尔大学合作举办教育技术与人工智能硕士项目，学费15万元，学制1.5年，周末班或寒暑假班授课，8月31日截止报名，自主招生需通过全英文笔试和面试。</p>
+<a href="news/bfsu-keele-edtech-ai-2026.html" class="read-more">阅读全文 →</a>
 </div>
-</div>
+</article>
 
-<div class="news-card">
-<div class="news-card-top">
-<div class="news-card-meta"><span class="src">北京外国语大学网络教育学院</span><span>·</span><span>2026-07</span></div>
-<span class="news-tag deadline">8月31日截止</span>
+<!-- 15. 中国计量-奥克兰理工 -->
+<article class="article-item" data-cat="sino">
+<div class="article-item-left">
+<span class="article-cat sino">中外合作办学</span>
+<time class="article-date">2026-08-31截止</time>
 </div>
-<div class="news-card-title">北京外国语大学-英国基尔大学 教育技术与人工智能硕士</div>
-<div class="news-card-body">
-<ul>
-<li>报名截止：2026年8月31日</li>
-<li>学费：15万元（第一学年9.5万，第二学年5.5万）</li>
-<li>学制：1.5年（18个月），半脱产学习</li>
-<li>授课方式：周末班或寒暑假班，全程北外学习</li>
-<li>招生方式：自主招生，需通过全英文笔试和面试，无需全国统考</li>
-<li>毕业获英国基尔大学教育技术与人工智能硕士学位</li>
-</ul>
-<a href="https://bwol.bfsu.edu.cn/html/keele/enroll-guide.html" target="_blank" class="news-source-link">来源：北京外国语大学网络教育学院官网 ↗</a>
+<div class="article-item-main">
+<h2 class="article-item-title"><a href="news/cjlu-aut-data-analysis-2026.html">中国计量大学-新西兰奥克兰理工大学数据分析学硕士</a></h2>
+<p class="article-item-excerpt">中国计量大学与新西兰奥克兰理工大学合作举办数据分析学硕士项目，招生40人，学费18万元，学制1.5年，8月31日截止报名，毕业可留服认证。</p>
+<a href="news/cjlu-aut-data-analysis-2026.html" class="read-more">阅读全文 →</a>
 </div>
-</div>
+</article>
 
-<div class="news-card">
-<div class="news-card-top">
-<div class="news-card-meta"><span class="src">中国计量大学国际交流合作处</span><span>·</span><span>2026-03-06</span></div>
-<span class="news-tag deadline">8月31日截止</span>
-</div>
-<div class="news-card-title">中国计量大学-新西兰奥克兰理工大学 数据分析学硕士</div>
-<div class="news-card-body">
-<ul>
-<li>报名截止：2026年8月31日</li>
-<li>招生人数：40人</li>
-<li>学费：18万元（第一年12万），学制1.5年</li>
-<li>授课地点：中国计量大学西校区（杭州）</li>
-<li>报名条件：本科相关专业，GPA B/70分以上，雅思6.5（单项6.0）或同等</li>
-<li>毕业获新西兰奥克兰理工大学数据分析学硕士学位（可留服认证）</li>
-</ul>
-<a href="https://ino.cjlu.edu.cn/info/1086/6690.htm" target="_blank" class="news-source-link">来源：中国计量大学国际交流合作处官网 2026-03-06 ↗</a>
-</div>
-</div>
-
-</div>
 </div>
 
 </div>
@@ -547,5 +430,27 @@
 </div>
 </div>
 </footer>
+
+<script>
+function filterNews(cat) {
+  var items = document.querySelectorAll('.article-item');
+  var buttons = document.querySelectorAll('.news-filter button');
+  buttons.forEach(function(btn) {
+    btn.classList.remove('active');
+    if ((btn.textContent.includes('管理类') && cat === 'liankao') ||
+        (btn.textContent.includes('中外') && cat === 'sino') ||
+        (btn.textContent.includes('全部') && cat === 'all')) {
+      btn.classList.add('active');
+    }
+  });
+  items.forEach(function(item) {
+    if (cat === 'all' || item.getAttribute('data-cat') === cat) {
+      item.style.display = '';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+</script>
 </body>
 </html>
