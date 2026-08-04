@@ -131,7 +131,7 @@ td {
   padding: 8px 12px;
   font-size: 14px;
   border-top: 1px solid #eef0f3;
-  vertical-align: top;
+  vertical-align: middle;
 }
 tr:hover td { background: #fafbff; }
 .school-cell { font-weight: 600; white-space: nowrap; }
@@ -163,18 +163,21 @@ tr:hover td { background: #fafbff; }
 .note-cell {
   color: #5F5E5A;
   font-size: 13px;
-  max-width: 320px;
-  min-width: 180px;
+  width: 260px;
+  max-width: 260px;
+  min-width: 200px;
 }
 .note-view {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 8px;
 }
 .note-text {
   flex: 1;
   word-break: break-word;
+  overflow-wrap: break-word;
   line-height: 1.5;
+  white-space: normal;
 }
 .note-text.empty { color: #bbb; font-style: italic; }
 .note-edit-btn {
@@ -590,8 +593,8 @@ tr:hover td { background: #fafbff; }
         <th>外方院校</th>
         <th>专业</th>
         <th>标签</th>
-        <th>海报</th>
         <th>备注</th>
+        <th>海报</th>
       </tr>
     </thead>
     <tbody id="dataBody"></tbody>
@@ -967,8 +970,8 @@ function render() {
       <td>${foreignHtml}</td>
       <td class="major-cell">${p.major}</td>
       <td><div class="tag-list">${tagHtml}</div></td>
-      <td class="poster-cell">${posterHtml}</td>
       <td class="note-cell" data-key="${k}">${noteHtml}</td>
+      <td class="poster-cell">${posterHtml}</td>
     </tr>`;
   }).join("");
 
