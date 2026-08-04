@@ -657,12 +657,8 @@ tr:hover td { background: #fafbff; }
   <button class="btn" id="reportMissingBtn" style="border-color:#D85A30;color:#D85A30;font-size:12px;padding:4px 12px;border-radius:14px;">📢 报漏遗漏项目</button>
   <button class="btn" id="myReportsBtn" style="border-color:#378ADD;color:#378ADD;font-size:12px;padding:4px 12px;border-radius:14px;">📋 我的报漏</button>
   <input type="search" class="search-box" id="searchInput" placeholder="搜索学校 / 专业 / 外方院校...">
-  <button class="btn" id="exportBtn">导出 CSV</button>
-  <button class="btn" id="exportDataBtn">导出数据</button>
-  <button class="btn" id="importDataBtn">导入数据</button>
     <button class="btn" id="refreshFromOSSBtn" title="从云端拉取最新数据">↻ 刷新</button>
     <span id="syncStatus" style="font-size:12px;color:#888;margin-left:8px;">⟳ 连接中...</span>
-  <button class="btn admin-only" id="restoreBtn" style="display:none;">↩ 恢复已隐藏</button>
   <button class="btn-primary" id="addProjBtn">+ 新增项目</button>
 </div>
 
@@ -807,24 +803,6 @@ tr:hover td { background: #fafbff; }
     <div class="form-actions">
       <button class="btn" id="editCancelBtn">取消</button>
       <button class="btn-primary" id="editSaveBtn">保存</button>
-    </div>
-  </div>
-</div>
-
-<!-- 数据导入弹窗 -->
-<div class="add-modal" id="importModal">
-  <div class="add-modal-content" style="max-width: 560px;">
-    <div class="add-modal-header">
-      <span>导入数据</span>
-      <button class="add-close" id="importCloseBtn">&times;</button>
-    </div>
-    <div class="add-modal-body" style="padding: 20px;">
-      <p style="font-size: 13px; color: #888; margin-bottom: 12px;">将从其他版本导出的数据粘贴到下方文本框，点击导入即可恢复备注、海报、标签等数据。<br>导入会与当前数据合并，不会清除已有内容。</p>
-      <textarea id="importTextarea" style="width:100%; height: 240px; font-size: 12px; border: 1px solid #ddd; border-radius: 6px; padding: 10px; font-family: monospace;" placeholder='粘贴导出的数据 JSON...'></textarea>
-      <div style="margin-top: 12px; display: flex; gap: 10px; justify-content: flex-end;">
-        <button class="btn" id="importCancelBtn">取消</button>
-        <button class="btn-primary" id="importConfirmBtn">导入</button>
-      </div>
     </div>
   </div>
 </div>
@@ -1569,6 +1547,7 @@ function render() {
 function updateHiddenBtn() {
   const hidden = loadHidden();
   const btn = document.getElementById("restoreBtn");
+  if (!btn) return;
   if (hidden.length > 0 && isAdmin()) {
     btn.style.display = "";
     btn.textContent = "↩ 恢复已隐藏(" + hidden.length + ")";
@@ -1709,51 +1688,6 @@ document.getElementById("clearTags").addEventListener("click", () => {
 document.getElementById("searchInput").addEventListener("input", (e) => {
   state.search = e.target.value;
   render();
-});
-
-document.getElementById("exportBtn").addEventListener("click", () => {
-  const allProjects = getMergedProjects();
-  const headers = ["类型","学校","外方院校","专业","标签","备注"];
-  const rows = [headers.join(",")];
-  const visible = allProjects.filter(p => {
-    if (state.type !== "all" && p.type !== state.type) return false;
-    if (state.tags.size > 0) {
-      for (const t of state.tags) if (!p.tags.includes(t)) return false;
-    }
-    if (state.search) {
-      const q = state.search.toLowerCase();
-      if (!p.school.toLowerCase().includes(q) && !p.major.toLowerCase().includes(q) && !(p.foreign && p.foreign.toLowerCase().includes(q))) return false;
-    }
-    return true;
-  });
-  visible.forEach(p => {
-    const row = [
-      p.type,
-      p.school,
-      p.foreign || "",
-      p.major,
-      p.tags.join("/"),
-      (p.note || "").replace(/,/g, "，"),
-    ].map(v => `"${v}"`);
-    rows.push(row.join(","));
-  });
-  const csv = "\uFEFF" + rows.join("\n");
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "重点项目清单_" + new Date().toISOString().slice(0,10) + ".csv";
-  a.click();
-  URL.revokeObjectURL(a.href);
-});
-
-// 恢复已隐藏的内置项目
-document.getElementById("restoreBtn").addEventListener("click", () => {
-  const hidden = loadHidden();
-  if (hidden.length === 0) return;
-  if (!confirm("确认恢复 " + hidden.length + " 个已隐藏项目？")) return;
-  saveHidden([]);
-  render();
-  updateHiddenBtn();
 });
 
 // ====== 合作办学数据自动补全 ======
@@ -2934,154 +2868,6 @@ document.getElementById("refreshFromOSSBtn").addEventListener("click", async () 
   btn.textContent = "↻ 刷新";
   btn.disabled = false;
 });
-
-// ====== 数据导入/导出 ======
-const DATA_KEYS = [STORAGE_NOTES_KEY, STORAGE_CUSTOM_KEY, STORAGE_HIDDEN_KEY, STORAGE_OVERRIDE_KEY];
-
-document.getElementById("exportDataBtn").addEventListener("click", async () => {
-  const data = {};
-  DATA_KEYS.forEach(k => { data[k] = localStorage.getItem(k); });
-  // 从 IndexedDB 读取海报数据
-  data[STORAGE_POSTERS_KEY] = JSON.stringify(await getAllPostersForExport());
-  const json = JSON.stringify(data);
-  // 复制到剪贴板
-  navigator.clipboard.writeText(json).then(() => {
-    alert("数据已复制到剪贴板！\n请到另一个版本的页面点击「导入数据」粘贴。");
-  }).catch(() => {
-    // 降级：弹窗显示
-  prompt("请复制以下数据（Ctrl+A 全选 → Ctrl+C 复制）：", json);
-  });
-});
-
-document.getElementById("importDataBtn").addEventListener("click", () => {
-  document.getElementById("importTextarea").value = "";
-  document.getElementById("importModal").classList.add("show");
-});
-document.getElementById("importCloseBtn").addEventListener("click", () => {
-  document.getElementById("importModal").classList.remove("show");
-});
-document.getElementById("importCancelBtn").addEventListener("click", () => {
-  document.getElementById("importModal").classList.remove("show");
-});
-document.getElementById("importModal").addEventListener("click", (e) => {
-  if (e.target.id === "importModal") document.getElementById("importModal").classList.remove("show");
-});
-document.getElementById("importConfirmBtn").addEventListener("click", async () => {
-  const text = document.getElementById("importTextarea").value.trim();
-  if (!text) { alert("请粘贴数据"); return; }
-  try {
-    const data = JSON.parse(text);
-    let count = 0;
-    // 导入 localStorage 数据
-    DATA_KEYS.forEach(k => {
-      if (data[k] !== undefined && data[k] !== null) {
-        if (k === STORAGE_NOTES_KEY || k === STORAGE_OVERRIDE_KEY) {
-          try {
-            const existing = JSON.parse(localStorage.getItem(k) || "{}");
-            const incoming = JSON.parse(data[k]);
-            const merged = { ...existing, ...incoming };
-            if (k === STORAGE_NOTES_KEY) {
-              // 兼容旧格式：备注文本字符串转为对象
-              for (const mk in merged) {
-                if (typeof merged[mk] === "string") {
-                  merged[mk] = { text: merged[mk] };
-                }
-              }
-            }
-            localStorage.setItem(k, JSON.stringify(merged));
-          } catch(e) {
-            localStorage.setItem(k, data[k]);
-          }
-        } else if (k === STORAGE_CUSTOM_KEY || k === STORAGE_HIDDEN_KEY) {
-          try {
-            const existing = JSON.parse(localStorage.getItem(k) || "[]");
-            const incoming = JSON.parse(data[k]);
-            const merged = [...existing, ...incoming];
-            localStorage.setItem(k, JSON.stringify(merged));
-          } catch(e) {
-            localStorage.setItem(k, data[k]);
-          }
-        }
-        count++;
-      }
-    });
-    // 导入海报数据到 IndexedDB
-    if (data[STORAGE_POSTERS_KEY] !== undefined && data[STORAGE_POSTERS_KEY] !== null) {
-      try {
-        const posterData = JSON.parse(data[STORAGE_POSTERS_KEY]);
-        await importPosters(posterData);
-        count++;
-      } catch(e) { console.error("海报导入失败:", e); }
-    }
-    document.getElementById("importModal").classList.remove("show");
-    alert("导入成功！共恢复 " + count + " 项数据。");
-    render();
-    updateHiddenBtn();
-  } catch(e) {
-    alert("数据格式错误，请检查后重试：" + e.message);
-  }
-});
-
-// ====== URL Hash 自动导入 ======
-(async function autoImport() {
-  const hash = window.location.hash;
-  if (!hash || !hash.startsWith('#import=')) return;
-  const b64 = hash.substring(8);
-  try {
-    const json = atob(b64);
-    const text = decodeURIComponent(escape(json));
-    const data = JSON.parse(text);
-    let count = 0;
-    // 导入 localStorage 数据
-    DATA_KEYS.forEach(k => {
-      if (data[k] !== undefined && data[k] !== null) {
-        if (k === STORAGE_NOTES_KEY || k === STORAGE_OVERRIDE_KEY) {
-          try {
-            const existing = JSON.parse(localStorage.getItem(k) || "{}");
-            const incoming = JSON.parse(data[k]);
-            const merged = { ...existing, ...incoming };
-            if (k === STORAGE_NOTES_KEY) {
-              // 兼容旧格式：备注文本字符串转为对象
-              for (const mk in merged) {
-                if (typeof merged[mk] === "string") {
-                  merged[mk] = { text: merged[mk] };
-                }
-              }
-            }
-            localStorage.setItem(k, JSON.stringify(merged));
-          } catch(e) {
-            localStorage.setItem(k, data[k]);
-          }
-        } else if (k === STORAGE_CUSTOM_KEY || k === STORAGE_HIDDEN_KEY) {
-          try {
-            const existing = JSON.parse(localStorage.getItem(k) || "[]");
-            const incoming = JSON.parse(data[k]);
-            const merged = [...existing, ...incoming];
-            localStorage.setItem(k, JSON.stringify(merged));
-          } catch(e) {
-            localStorage.setItem(k, data[k]);
-          }
-        }
-        count++;
-      }
-    });
-    // 导入海报数据到 IndexedDB
-    if (data[STORAGE_POSTERS_KEY] !== undefined && data[STORAGE_POSTERS_KEY] !== null) {
-      try {
-        const posterData = JSON.parse(data[STORAGE_POSTERS_KEY]);
-        await importPosters(posterData);
-        count++;
-      } catch(e) { console.error("海报导入失败:", e); }
-    }
-    // 清除hash，避免刷新时重复导入
-    window.location.hash = '';
-    render();
-    updateHiddenBtn();
-    setTimeout(() => alert("数据已自动恢复！共导入 " + count + " 项。"), 500);
-  } catch(e) {
-    console.error("自动导入失败:", e);
-  }
-})();
 
 // ====== 报漏遗漏项目 ======
 function getReporterName() {
