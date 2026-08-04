@@ -2406,6 +2406,50 @@ document.getElementById("importConfirmBtn").addEventListener("click", () => {
     alert("数据格式错误，请检查后重试：" + e.message);
   }
 });
+
+// ====== URL Hash 自动导入 ======
+(function autoImport() {
+  const hash = window.location.hash;
+  if (!hash || !hash.startsWith('#import=')) return;
+  const b64 = hash.substring(8);
+  try {
+    const json = atob(b64);
+    const text = decodeURIComponent(escape(json));
+    const data = JSON.parse(text);
+    let count = 0;
+    DATA_KEYS.forEach(k => {
+      if (data[k] !== undefined && data[k] !== null) {
+        if (k === STORAGE_NOTES_KEY || k === STORAGE_POSTERS_KEY || k === STORAGE_OVERRIDE_KEY) {
+          try {
+            const existing = JSON.parse(localStorage.getItem(k) || "{}");
+            const incoming = JSON.parse(data[k]);
+            const merged = { ...existing, ...incoming };
+            localStorage.setItem(k, JSON.stringify(merged));
+          } catch(e) {
+            localStorage.setItem(k, data[k]);
+          }
+        } else if (k === STORAGE_CUSTOM_KEY || k === STORAGE_HIDDEN_KEY) {
+          try {
+            const existing = JSON.parse(localStorage.getItem(k) || "[]");
+            const incoming = JSON.parse(data[k]);
+            const merged = [...existing, ...incoming];
+            localStorage.setItem(k, JSON.stringify(merged));
+          } catch(e) {
+            localStorage.setItem(k, data[k]);
+          }
+        }
+        count++;
+      }
+    });
+    // 清除hash，避免刷新时重复导入
+    window.location.hash = '';
+    render();
+    updateHiddenBtn();
+    setTimeout(() => alert("数据已自动恢复！共导入 " + count + " 项。"), 500);
+  } catch(e) {
+    console.error("自动导入失败:", e);
+  }
+})();
 </script>
 </body>
 </html>
