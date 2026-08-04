@@ -1070,6 +1070,51 @@ function scheduleSyncPosters() {
   }, 2000);
 }
 
+// ====== 实时备份 ======
+// 每次同步到 OSS 时，同时写一份到 backups/ 目录
+// 1. LATEST.json：实时镜像，每次都覆盖写
+// 2. YYYY-MM-DD_HH.json：每小时快照，同一小时内覆盖，不同小时保留
+
+async function backupDataToOSS(dataBody) {
+  try {
+    // 实时镜像
+    await ossPut("backups/priority-data-LATEST.json", dataBody, "application/json; charset=utf-8");
+    // 每小时快照
+    const now = new Date();
+    const hourKey = now.getFullYear() + "-" +
+      String(now.getMonth()+1).padStart(2,"0") + "-" +
+      String(now.getDate()).padStart(2,"0") + "_" +
+      String(now.getHours()).padStart(2,"0");
+    const lastBackupHour = localStorage.getItem("_lastDataBackupHour");
+    if (lastBackupHour !== hourKey) {
+      await ossPut("backups/priority-data-" + hourKey + ".json", dataBody, "application/json; charset=utf-8");
+      localStorage.setItem("_lastDataBackupHour", hourKey);
+      console.log("OSS: 数据小时快照已备份 -> backups/priority-data-" + hourKey + ".json");
+    }
+  } catch(e) {
+    console.warn("OSS: 数据备份失败（不影响主同步）:", e.message);
+  }
+}
+
+async function backupPostersToOSS(posterBody) {
+  try {
+    // 海报数据较大，只做每小时快照
+    const now = new Date();
+    const hourKey = now.getFullYear() + "-" +
+      String(now.getMonth()+1).padStart(2,"0") + "-" +
+      String(now.getDate()).padStart(2,"0") + "_" +
+      String(now.getHours()).padStart(2,"0");
+    const lastPosterBackupHour = localStorage.getItem("_lastPosterBackupHour");
+    if (lastPosterBackupHour !== hourKey) {
+      await ossPut("backups/priority-posters-" + hourKey + ".json", posterBody, "application/json; charset=utf-8");
+      localStorage.setItem("_lastPosterBackupHour", hourKey);
+      console.log("OSS: 海报小时快照已备份 -> backups/priority-posters-" + hourKey + ".json");
+    }
+  } catch(e) {
+    console.warn("OSS: 海报备份失败:", e.message);
+  }
+}
+
 async function syncDataToOSS() {
   const data = {
     notes: localStorage.getItem(STORAGE_NOTES_KEY) || "{}",
@@ -1079,9 +1124,12 @@ async function syncDataToOSS() {
     syncedAt: new Date().toISOString(),
     syncedBy: getEditorName() || getRole() || "unknown"
   };
-  await ossPut("priority-data.json", JSON.stringify(data), "application/json; charset=utf-8");
+  const body = JSON.stringify(data);
+  await ossPut("priority-data.json", body, "application/json; charset=utf-8");
   _ossLastSyncedAt = data.syncedAt;
   updateSyncStatus("synced");
+  // 实时备份（非阻塞，不影响主流程）
+  backupDataToOSS(body);
 }
 
 async function syncPostersToOSS() {
@@ -1092,6 +1140,8 @@ async function syncPostersToOSS() {
   _ossPostersSyncedAt = posterData._syncedAt;
   updateSyncStatus("synced");
   console.log("OSS: 海报同步成功");
+  // 备份（非阻塞）
+  backupPostersToOSS(body);
 }
 
 // 同步状态指示器
