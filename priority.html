@@ -801,6 +801,9 @@ function onGatePassed() {
     badge.textContent = isAdmin() ? "管理员" : "编辑者";
     badge.className = "role-badge " + (isAdmin() ? "role-admin" : "role-editor");
   }
+  // 密码门通过后重新渲染，确保 autoImport 写入的数据可见
+  if (typeof render === 'function') render();
+  if (typeof updateHiddenBtn === 'function') updateHiddenBtn();
 }
 document.getElementById("gateInput").addEventListener("keydown", function(e) {
   if (e.key === "Enter") checkGate();
@@ -2442,12 +2445,13 @@ document.getElementById("importConfirmBtn").addEventListener("click", () => {
       }
     });
     // 清除hash，避免刷新时重复导入
-    window.location.hash = '';
+    history.replaceState(null, '', window.location.pathname);
     render();
     updateHiddenBtn();
     setTimeout(() => alert("数据已自动恢复！共导入 " + count + " 项。"), 500);
   } catch(e) {
     console.error("自动导入失败:", e);
+    setTimeout(() => alert("自动导入失败: " + e.message), 500);
   }
 })();
 </script>
