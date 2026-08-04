@@ -562,6 +562,61 @@ tr:hover td { background: #fafbff; }
 }
 .gate-box button:hover { opacity: 0.9; }
 .gate-error { color: #c62828; font-size: 13px; margin-top: 10px; display: none; }
+
+/* === 报漏状态列表 === */
+.report-status {
+  display: inline-block;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.report-status.pending { background: #f1efe8; color: #888780; }
+.report-status.resolved { background: #E1F5EE; color: #085041; }
+.report-status.rejected { background: #FAECE7; color: #c62828; }
+.report-list { display: flex; flex-direction: column; gap: 12px; }
+.report-item {
+  border: 1px solid #e8e8ec;
+  border-radius: 8px;
+  padding: 12px 16px;
+  background: #fafbff;
+}
+.report-item.resolved { border-color: #1D9E75; background: #f0faf5; }
+.report-item.rejected { border-color: #c62828; background: #fdf5f4; }
+.report-item-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.report-item-url {
+  font-size: 13px;
+  color: #378ADD;
+  text-decoration: none;
+  word-break: break-all;
+}
+.report-item-url:hover { text-decoration: underline; }
+.report-item-time { font-size: 11px; color: #999; }
+.report-item-note { font-size: 12px; color: #5F5E5A; margin-top: 4px; }
+.report-feedback {
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: #fff;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #1a1a2e;
+  line-height: 1.6;
+  border-left: 3px solid #378ADD;
+}
+.report-feedback .feedback-label {
+  font-size: 11px;
+  color: #888780;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.report-empty { text-align: center; color: #888780; padding: 30px; font-size: 13px; }
 </style>
 </head>
 <body>
@@ -600,6 +655,7 @@ tr:hover td { background: #fafbff; }
     <span class="clear-link" id="clearTags">清除</span>
   </div>
   <button class="btn" id="reportMissingBtn" style="border-color:#D85A30;color:#D85A30;font-size:12px;padding:4px 12px;border-radius:14px;">📢 报漏遗漏项目</button>
+  <button class="btn" id="myReportsBtn" style="border-color:#378ADD;color:#378ADD;font-size:12px;padding:4px 12px;border-radius:14px;">📋 我的报漏</button>
   <input type="search" class="search-box" id="searchInput" placeholder="搜索学校 / 专业 / 外方院校...">
   <button class="btn" id="exportBtn">导出 CSV</button>
   <button class="btn" id="exportDataBtn">导出数据</button>
@@ -777,7 +833,7 @@ tr:hover td { background: #fafbff; }
 <div class="add-modal" id="reportModal">
   <div class="form-card" style="width:480px;">
     <div class="form-title">📢 报漏遗漏项目</div>
-    <p style="font-size:12px;color:#888;margin-bottom:14px;line-height:1.6;">发现 radar 页面上缺少某个项目？只需贴一个链接，管理员会自行检索核实后补充到 <a href="https://guoya.net.cn/radar" target="_blank" style="color:#378ADD;">radar 页面</a>。</p>
+    <p style="font-size:12px;color:#888;margin-bottom:14px;line-height:1.6;">发现 radar 页面上缺少某个项目？只需贴一个链接，管理员会自行检索核实后补充到 <a href="https://guoya.net.cn/radar" target="_blank" style="color:#378ADD;">radar 页面</a>。提交后可在「我的报漏」中查看处理结果。</p>
     <div class="form-row">
       <span class="form-label">链接 <span class="required">*</span></span>
       <input type="url" class="form-input" id="reportUrl" placeholder="粘贴学校官网 / 项目页面链接" autocomplete="off">
@@ -793,6 +849,21 @@ tr:hover td { background: #fafbff; }
     <div class="form-actions">
       <button class="btn" id="reportCancelBtn">取消</button>
       <button class="btn-primary" id="reportSubmitBtn">提交报漏</button>
+    </div>
+  </div>
+</div>
+
+<!-- 我的报漏弹窗 -->
+<div class="add-modal" id="myReportsModal">
+  <div class="form-card" style="width:560px;">
+    <div class="form-title">📋 我的报漏</div>
+    <p style="font-size:12px;color:#888;margin-bottom:14px;line-height:1.6;">查看你提交的报漏处理状态。管理员会自动检索核实并更新到 <a href="https://guoya.net.cn/radar" target="_blank" style="color:#378ADD;">radar 页面</a>，处理结果会显示在下方。</p>
+    <div id="reportListContainer" style="max-height:400px;overflow-y:auto;">
+      <div class="report-empty">加载中...</div>
+    </div>
+    <div class="form-actions">
+      <button class="btn" id="myReportsCloseBtn">关闭</button>
+      <button class="btn" id="myReportsRefreshBtn" style="border-color:#378ADD;color:#378ADD;">↻ 刷新</button>
     </div>
   </div>
 </div>
@@ -1105,6 +1176,8 @@ function startAutoRefresh() {
       updateHiddenBtn();
       updateSyncStatus("synced");
     }
+    // 检查报漏状态变化
+    checkReportUpdates();
   }, 30000); // 30秒
 }
 
@@ -3082,7 +3155,7 @@ document.getElementById("reportSubmitBtn").addEventListener("click", async () =>
   try {
     await saveMissingReport({ url, note });
     document.getElementById("reportModal").classList.remove("show");
-    alert("报漏已提交！\n管理员会检索核实后补充到 radar 页面。\n提交人：" + getReporterName());
+    alert("报漏已提交！\n\n管理员会自动检索核实，处理结果会更新到 radar 页面。\n点击工具栏「我的报漏」可查看处理状态和反馈。\n\n提交人：" + getReporterName());
   } catch(e) {
     alert("提交失败：" + e.message + "\n请稍后重试，或直接在群里告知管理员。");
   } finally {
@@ -3090,6 +3163,142 @@ document.getElementById("reportSubmitBtn").addEventListener("click", async () =>
     btn.disabled = false;
   }
 });
+
+// ====== 我的报漏：查看报漏状态和反馈 ======
+let _lastReportSyncedAt = null;
+
+// 加载全部报漏列表（从 OSS）
+async function loadAllReports() {
+  try {
+    const body = await ossGet("missing-reports.json");
+    const data = JSON.parse(body);
+    _lastReportSyncedAt = data._syncedAt || null;
+    return data.reports || [];
+  } catch(e) {
+    return [];
+  }
+}
+
+// 渲染报漏列表
+function renderReportList(reports) {
+  const container = document.getElementById("reportListContainer");
+  if (!container) return;
+
+  // 按时间倒序
+  reports.sort((a, b) => new Date(b.submittedAt || 0) - new Date(a.submittedAt || 0));
+
+  if (reports.length === 0) {
+    container.innerHTML = '<div class="report-empty">暂无报漏记录</div>';
+    return;
+  }
+
+  const currentUser = getReporterName();
+  // 管理员看全部，编辑者只看自己的
+  const visibleReports = isAdmin() ? reports : reports.filter(r => r.submittedBy === currentUser);
+
+  if (visibleReports.length === 0) {
+    container.innerHTML = '<div class="report-empty">你还没有提交过报漏</div>';
+    return;
+  }
+
+  container.innerHTML = visibleReports.map(r => {
+    const status = r.status || "pending";
+    const statusText = status === "pending" ? "待处理" : status === "resolved" ? "已更新" : "未采纳";
+    const statusClass = status;
+    const time = formatDateTime(r.submittedAt);
+    const noteHtml = r.note ? `<div class="report-item-note">备注：${escapeHtml(r.note)}</div>` : "";
+    let feedbackHtml = "";
+    if (r.feedback) {
+      const addedProjectsHtml = r.addedProjects && r.addedProjects.length > 0
+        ? `<div style="margin-top:4px;font-size:11px;color:#085041;">已添加：${escapeHtml(r.addedProjects.join("、"))}</div>`
+        : "";
+      feedbackHtml = `<div class="report-feedback">
+        <div class="feedback-label">管理员反馈（${formatDateTime(r.resolvedAt)} · ${escapeHtml(r.resolvedBy || "admin")}）：</div>
+        ${escapeHtml(r.feedback)}
+        ${addedProjectsHtml}
+      </div>`;
+    }
+    return `<div class="report-item ${statusClass}">
+      <div class="report-item-head">
+        <span class="report-status ${statusClass}">${statusText}</span>
+        <a href="${escapeHtml(r.url)}" target="_blank" class="report-item-url">${escapeHtml(r.url)}</a>
+        <span class="report-item-time">${time}</span>
+        <span class="report-item-time">· ${escapeHtml(r.submittedBy || "unknown")}</span>
+      </div>
+      ${noteHtml}
+      ${feedbackHtml}
+    </div>`;
+  }).join("");
+}
+
+// 打开"我的报漏"弹窗
+document.getElementById("myReportsBtn").addEventListener("click", async () => {
+  document.getElementById("myReportsModal").classList.add("show");
+  document.getElementById("reportListContainer").innerHTML = '<div class="report-empty">加载中...</div>';
+  const reports = await loadAllReports();
+  renderReportList(reports);
+});
+
+// 关闭弹窗
+document.getElementById("myReportsCloseBtn").addEventListener("click", () => {
+  document.getElementById("myReportsModal").classList.remove("show");
+});
+document.getElementById("myReportsModal").addEventListener("click", (e) => {
+  if (e.target.id === "myReportsModal") {
+    document.getElementById("myReportsModal").classList.remove("show");
+  }
+});
+
+// 手动刷新报漏列表
+document.getElementById("myReportsRefreshBtn").addEventListener("click", async () => {
+  const btn = document.getElementById("myReportsRefreshBtn");
+  btn.textContent = "刷新中...";
+  btn.disabled = true;
+  const reports = await loadAllReports();
+  renderReportList(reports);
+  btn.textContent = "↻ 刷新";
+  btn.disabled = false;
+});
+
+// 自动刷新时检查报漏状态变化（附加到现有 auto-refresh）
+async function checkReportUpdates() {
+  try {
+    const body = await ossGet("missing-reports.json");
+    const data = JSON.parse(body);
+    const syncedAt = data._syncedAt;
+    if (syncedAt && syncedAt !== _lastReportSyncedAt) {
+      _lastReportSyncedAt = syncedAt;
+      // 如果弹窗打开，刷新列表
+      const modal = document.getElementById("myReportsModal");
+      if (modal && modal.classList.contains("show")) {
+        renderReportList(data.reports || []);
+      }
+      // 如果有新的已处理报告，显示提示
+      const reports = data.reports || [];
+      const myName = getReporterName();
+      const myResolved = reports.filter(r =>
+        r.submittedBy === myName && r.status !== "pending" && !r._notified
+      );
+      if (myResolved.length > 0 && modal && !modal.classList.contains("show")) {
+        // 标记已通知（仅在内存中，避免重复弹窗）
+        myResolved.forEach(r => r._notified = true);
+        const statusTexts = myResolved.map(r =>
+          r.status === "resolved" ? "已更新" : "未采纳"
+        ).join("、");
+        // 更新按钮样式提示
+        const btn = document.getElementById("myReportsBtn");
+        if (btn) {
+          btn.style.fontWeight = "700";
+          btn.style.boxShadow = "0 0 0 2px rgba(55,138,221,0.3)";
+          setTimeout(() => {
+            btn.style.fontWeight = "";
+            btn.style.boxShadow = "";
+          }, 10000);
+        }
+      }
+    }
+  } catch(e) {}
+}
 </script>
 </body>
 </html>
