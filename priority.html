@@ -927,14 +927,16 @@ async function loadFromOSS() {
     try {
       const body = await ossGet("priority-posters.json");
       const remotePosters = JSON.parse(body);
+      _ossPostersSyncedAt = remotePosters._syncedAt || null;
+      delete remotePosters._syncedAt;
       // 合并：远程数据优先，但保留本地新增的
       for (const k in remotePosters) {
+        if (k.startsWith("_")) continue;
         POSTER_CACHE[k] = remotePosters[k];
         if (POSTER_DB) {
           try { await idbPut(k, remotePosters[k]); } catch(e) {}
         }
       }
-      _ossPostersSyncedAt = remotePosters._syncedAt || null;
     } catch(e) {
       console.log("OSS: priority-posters.json 不存在或读取失败，使用本地海报", e);
     }
@@ -992,9 +994,11 @@ async function syncDataToOSS() {
 async function syncPostersToOSS() {
   const posterData = { ...POSTER_CACHE, _syncedAt: new Date().toISOString() };
   const body = JSON.stringify(posterData);
+  console.log("OSS: 同步海报到云端，数据大小", (body.length / 1024).toFixed(1) + "KB", "项目数", Object.keys(POSTER_CACHE).length);
   await ossPut("priority-posters.json", body, "application/json; charset=utf-8");
   _ossPostersSyncedAt = posterData._syncedAt;
   updateSyncStatus("synced");
+  console.log("OSS: 海报同步成功");
 }
 
 // 同步状态指示器
@@ -1019,39 +1023,43 @@ function startAutoRefresh() {
   if (_autoRefreshTimer) clearInterval(_autoRefreshTimer);
   _autoRefreshTimer = setInterval(async () => {
     if (_ossLoading) return;
+    let dataChanged = false;
+    let posterChanged = false;
     try {
       const body = await ossGet("priority-data.json");
       const data = JSON.parse(body);
       if (data.syncedAt && data.syncedAt !== _ossLastSyncedAt) {
         console.log("OSS: 检测到远程数据更新", data.syncedAt, "by", data.syncedBy);
-        // 远程有新数据，更新本地
         if (data.notes) localStorage.setItem(STORAGE_NOTES_KEY, data.notes);
         if (data.custom) localStorage.setItem(STORAGE_CUSTOM_KEY, data.custom);
         if (data.hidden) localStorage.setItem(STORAGE_HIDDEN_KEY, data.hidden);
         if (data.overrides) localStorage.setItem(STORAGE_OVERRIDE_KEY, data.overrides);
         _ossLastSyncedAt = data.syncedAt;
-        // 检查海报
-        try {
-          const pbody = await ossGet("priority-posters.json");
-          const remotePosters = JSON.parse(pbody);
-          const remoteSyncedAt = remotePosters._syncedAt;
-          if (remoteSyncedAt && remoteSyncedAt !== _ossPostersSyncedAt) {
-            delete remotePosters._syncedAt;
-            for (const k in remotePosters) {
-              POSTER_CACHE[k] = remotePosters[k];
-              if (POSTER_DB) {
-                try { await idbPut(k, remotePosters[k]); } catch(e) {}
-              }
-            }
-            _ossPostersSyncedAt = remoteSyncedAt;
-          }
-        } catch(e) {}
-        render();
-        updateHiddenBtn();
-        updateSyncStatus("synced");
+        dataChanged = true;
       }
-    } catch(e) {
-      // 静默失败，下次重试
+    } catch(e) {}
+    // 独立检查海报更新
+    try {
+      const pbody = await ossGet("priority-posters.json");
+      const remotePosters = JSON.parse(pbody);
+      const remoteSyncedAt = remotePosters._syncedAt;
+      if (remoteSyncedAt && remoteSyncedAt !== _ossPostersSyncedAt) {
+        delete remotePosters._syncedAt;
+        for (const k in remotePosters) {
+          if (k.startsWith("_")) continue;
+          POSTER_CACHE[k] = remotePosters[k];
+          if (POSTER_DB) {
+            try { await idbPut(k, remotePosters[k]); } catch(e) {}
+          }
+        }
+        _ossPostersSyncedAt = remoteSyncedAt;
+        posterChanged = true;
+      }
+    } catch(e) {}
+    if (dataChanged || posterChanged) {
+      render();
+      updateHiddenBtn();
+      updateSyncStatus("synced");
     }
   }, 30000); // 30秒
 }
@@ -2717,7 +2725,12 @@ initPosterDB().then(async () => {
   if (!_ossLastSyncedAt) {
     console.log("OSS: 首次同步，上传本地数据");
     syncDataToOSS().catch(e => console.error(e));
-    syncPostersToOSS().catch(e => console.error(e));
+  }
+  // 如果本地有海报但 OSS 上没有，同步海报到 OSS
+  const hasLocalPosters = Object.keys(POSTER_CACHE).some(k => POSTER_CACHE[k] && POSTER_CACHE[k].length > 0);
+  if (!_ossPostersSyncedAt && hasLocalPosters) {
+    console.log("OSS: 同步本地海报到云端");
+    syncPostersToOSS().catch(e => console.error("海报同步失败:", e));
   }
 });
 
@@ -2730,6 +2743,17 @@ document.getElementById("refreshFromOSSBtn").addEventListener("click", async () 
   await loadFromOSS();
   render();
   updateHiddenBtn();
+  // 如果本地有海报但 OSS 上没有，同步海报到 OSS
+  const hasLocalPosters = Object.keys(POSTER_CACHE).some(k => POSTER_CACHE[k] && POSTER_CACHE[k].length > 0);
+  if (!_ossPostersSyncedAt && hasLocalPosters) {
+    console.log("OSS: 手动刷新触发海报同步");
+    try {
+      await syncPostersToOSS();
+    } catch(e) {
+      console.error("海报同步失败:", e);
+      alert("海报同步失败: " + e.message);
+    }
+  }
   btn.textContent = "↻ 刷新";
   btn.disabled = false;
 });
