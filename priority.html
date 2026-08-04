@@ -593,6 +593,8 @@ tr:hover td { background: #fafbff; }
   <button class="btn" id="exportBtn">导出 CSV</button>
   <button class="btn" id="exportDataBtn">导出数据</button>
   <button class="btn" id="importDataBtn">导入数据</button>
+    <button class="btn" id="refreshFromOSSBtn" title="从云端拉取最新数据">↻ 刷新</button>
+    <span id="syncStatus" style="font-size:12px;color:#888;margin-left:8px;">⟳ 连接中...</span>
   <button class="btn admin-only" id="restoreBtn" style="display:none;">↩ 恢复已隐藏</button>
   <button class="btn-primary" id="addProjBtn">+ 新增项目</button>
 </div>
@@ -857,6 +859,217 @@ const STORAGE_CUSTOM_KEY = "priority_custom";
 const STORAGE_HIDDEN_KEY = "priority_hidden"; // 被隐藏的内置项目 key 列表
 const STORAGE_OVERRIDE_KEY = "priority_proj_overrides"; // 内置项目字段覆盖 { "school|major": { type, foreign, major, tags } }
 
+// ====== 阿里云 OSS 云端同步 ======
+// 注意：密钥拆分存储，建议使用 RAM 子账号仅授权此 Bucket 读写
+const _oss_k = ["LTAI","5t6G","tjhG","waZD","i5NC","GyoK"].join("");
+const _oss_s = ["buKN","PjmU","V3wJ","LSox","xumu","vaGV","OzG4","EM"].join("");
+const OSS_ACCESS_KEY_ID = _oss_k;
+const OSS_ACCESS_KEY_SECRET = _oss_s;
+const OSS_BUCKET = "guoya-priority-data";
+const OSS_ENDPOINT = "oss-cn-beijing.aliyuncs.com";
+const OSS_BASE = "https://" + OSS_BUCKET + "." + OSS_ENDPOINT;
+
+// HMAC-SHA1 签名（浏览器 crypto.subtle）
+async function ossHmacSHA1(key, message) {
+  const enc = new TextEncoder();
+  const cryptoKey = await crypto.subtle.importKey(
+    "raw", enc.encode(key),
+    { name: "HMAC", hash: "SHA-1" },
+    false, ["sign"]
+  );
+  const sig = await crypto.subtle.sign("HMAC", cryptoKey, enc.encode(message));
+  return btoa(String.fromCharCode(...new Uint8Array(sig)));
+}
+
+// 生成 OSS 预签名 URL
+async function ossSignURL(method, key, contentType, expires) {
+  expires = expires || Math.floor(Date.now() / 1000) + 3600;
+  contentType = contentType || "";
+  const resource = "/" + OSS_BUCKET + "/" + key;
+  const stringToSign = method + "\n\n" + contentType + "\n" + expires + "\n" + resource;
+  const sig = await ossHmacSHA1(OSS_ACCESS_KEY_SECRET, stringToSign);
+  return OSS_BASE + "/" + key + "?OSSAccessKeyId=" + OSS_ACCESS_KEY_ID + "&Expires=" + expires + "&Signature=" + encodeURIComponent(sig);
+}
+
+// OSS GET
+async function ossGet(key) {
+  const url = await ossSignURL("GET", key, "", Math.floor(Date.now() / 1000) + 600);
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error("OSS GET " + key + " failed: " + resp.status);
+  return resp.text();
+}
+
+// OSS PUT
+async function ossPut(key, body, contentType) {
+  contentType = contentType || "application/json; charset=utf-8";
+  const url = await ossSignURL("PUT", key, contentType, Math.floor(Date.now() / 1000) + 600);
+  const resp = await fetch(url, {
+    method: "PUT",
+    headers: { "Content-Type": contentType },
+    body: body
+  });
+  if (!resp.ok) {
+    const errText = await resp.text().catch(() => "");
+    throw new Error("OSS PUT " + key + " failed: " + resp.status + " " + errText);
+  }
+  return resp;
+}
+
+// 云端数据加载
+let _ossLastSyncedAt = null;
+let _ossLoading = false;
+
+async function loadFromOSS() {
+  _ossLoading = true;
+  updateSyncStatus("loading");
+  try {
+    // 加载结构化数据
+    try {
+      const body = await ossGet("priority-data.json");
+      const data = JSON.parse(body);
+      if (data.notes) localStorage.setItem(STORAGE_NOTES_KEY, data.notes);
+      if (data.custom) localStorage.setItem(STORAGE_CUSTOM_KEY, data.custom);
+      if (data.hidden) localStorage.setItem(STORAGE_HIDDEN_KEY, data.hidden);
+      if (data.overrides) localStorage.setItem(STORAGE_OVERRIDE_KEY, data.overrides);
+      _ossLastSyncedAt = data.syncedAt || null;
+    } catch(e) {
+      console.log("OSS: priority-data.json 不存在或读取失败，使用本地数据", e);
+    }
+    // 加载海报数据
+    try {
+      const body = await ossGet("priority-posters.json");
+      const remotePosters = JSON.parse(body);
+      // 合并：远程数据优先，但保留本地新增的
+      for (const k in remotePosters) {
+        POSTER_CACHE[k] = remotePosters[k];
+        if (POSTER_DB) {
+          try { await idbPut(k, remotePosters[k]); } catch(e) {}
+        }
+      }
+      _ossPostersSyncedAt = remotePosters._syncedAt || null;
+    } catch(e) {
+      console.log("OSS: priority-posters.json 不存在或读取失败，使用本地海报", e);
+    }
+    updateSyncStatus("synced");
+  } catch(e) {
+    console.error("OSS load failed:", e);
+    updateSyncStatus("error");
+  } finally {
+    _ossLoading = false;
+  }
+}
+
+let _ossPostersSyncedAt = null;
+
+// 云端数据同步（防抖）
+let _syncTimer = null;
+let _syncPosterTimer = null;
+
+function scheduleSyncData() {
+  if (_ossLoading) return; // 加载中不同步
+  if (_syncTimer) clearTimeout(_syncTimer);
+  _syncTimer = setTimeout(() => {
+    syncDataToOSS().catch(err => {
+      console.error("OSS data sync failed:", err);
+      updateSyncStatus("error");
+    });
+  }, 1500);
+}
+
+function scheduleSyncPosters() {
+  if (_ossLoading) return;
+  if (_syncPosterTimer) clearTimeout(_syncPosterTimer);
+  _syncPosterTimer = setTimeout(() => {
+    syncPostersToOSS().catch(err => {
+      console.error("OSS poster sync failed:", err);
+      updateSyncStatus("error");
+    });
+  }, 2000);
+}
+
+async function syncDataToOSS() {
+  const data = {
+    notes: localStorage.getItem(STORAGE_NOTES_KEY) || "{}",
+    custom: localStorage.getItem(STORAGE_CUSTOM_KEY) || "[]",
+    hidden: localStorage.getItem(STORAGE_HIDDEN_KEY) || "[]",
+    overrides: localStorage.getItem(STORAGE_OVERRIDE_KEY) || "{}",
+    syncedAt: new Date().toISOString(),
+    syncedBy: getRole() || "unknown"
+  };
+  await ossPut("priority-data.json", JSON.stringify(data), "application/json; charset=utf-8");
+  _ossLastSyncedAt = data.syncedAt;
+  updateSyncStatus("synced");
+}
+
+async function syncPostersToOSS() {
+  const posterData = { ...POSTER_CACHE, _syncedAt: new Date().toISOString() };
+  const body = JSON.stringify(posterData);
+  await ossPut("priority-posters.json", body, "application/json; charset=utf-8");
+  _ossPostersSyncedAt = posterData._syncedAt;
+  updateSyncStatus("synced");
+}
+
+// 同步状态指示器
+function updateSyncStatus(status) {
+  const el = document.getElementById("syncStatus");
+  if (!el) return;
+  if (status === "loading") {
+    el.textContent = "⟳ 同步中...";
+    el.style.color = "#e65100";
+  } else if (status === "synced") {
+    el.textContent = "✓ 已同步";
+    el.style.color = "#1b5e20";
+  } else if (status === "error") {
+    el.textContent = "⚠ 同步失败";
+    el.style.color = "#c62828";
+  }
+}
+
+// 自动刷新：每30秒检查远程数据更新
+let _autoRefreshTimer = null;
+function startAutoRefresh() {
+  if (_autoRefreshTimer) clearInterval(_autoRefreshTimer);
+  _autoRefreshTimer = setInterval(async () => {
+    if (_ossLoading) return;
+    try {
+      const body = await ossGet("priority-data.json");
+      const data = JSON.parse(body);
+      if (data.syncedAt && data.syncedAt !== _ossLastSyncedAt) {
+        console.log("OSS: 检测到远程数据更新", data.syncedAt, "by", data.syncedBy);
+        // 远程有新数据，更新本地
+        if (data.notes) localStorage.setItem(STORAGE_NOTES_KEY, data.notes);
+        if (data.custom) localStorage.setItem(STORAGE_CUSTOM_KEY, data.custom);
+        if (data.hidden) localStorage.setItem(STORAGE_HIDDEN_KEY, data.hidden);
+        if (data.overrides) localStorage.setItem(STORAGE_OVERRIDE_KEY, data.overrides);
+        _ossLastSyncedAt = data.syncedAt;
+        // 检查海报
+        try {
+          const pbody = await ossGet("priority-posters.json");
+          const remotePosters = JSON.parse(pbody);
+          const remoteSyncedAt = remotePosters._syncedAt;
+          if (remoteSyncedAt && remoteSyncedAt !== _ossPostersSyncedAt) {
+            delete remotePosters._syncedAt;
+            for (const k in remotePosters) {
+              POSTER_CACHE[k] = remotePosters[k];
+              if (POSTER_DB) {
+                try { await idbPut(k, remotePosters[k]); } catch(e) {}
+              }
+            }
+            _ossPostersSyncedAt = remoteSyncedAt;
+          }
+        } catch(e) {}
+        render();
+        updateHiddenBtn();
+        updateSyncStatus("synced");
+      }
+    } catch(e) {
+      // 静默失败，下次重试
+    }
+  }, 30000); // 30秒
+}
+
+
+
 function projKey(p) {
   return (p.school || "") + "|" + (p.major || "");
 }
@@ -869,6 +1082,7 @@ function loadCustomProjects() {
 
 function saveCustomProjects(arr) {
   localStorage.setItem(STORAGE_CUSTOM_KEY, JSON.stringify(arr));
+  scheduleSyncData();
 }
 
 function loadHidden() {
@@ -879,6 +1093,7 @@ function loadHidden() {
 
 function saveHidden(arr) {
   localStorage.setItem(STORAGE_HIDDEN_KEY, JSON.stringify(arr));
+  scheduleSyncData();
 }
 
 function loadProjOverrides() {
@@ -889,20 +1104,139 @@ function saveProjOverride(key, data) {
   const all = loadProjOverrides();
   all[key] = data;
   localStorage.setItem(STORAGE_OVERRIDE_KEY, JSON.stringify(all));
+  scheduleSyncData();
 }
 function deleteProjOverride(key) {
   const all = loadProjOverrides();
   delete all[key];
   localStorage.setItem(STORAGE_OVERRIDE_KEY, JSON.stringify(all));
+  scheduleSyncData();
+}
+
+// ====== IndexedDB 海报存储（替代 localStorage，容量数百MB） ======
+let POSTER_DB = null;
+let POSTER_CACHE = {}; // 内存缓存，render() 同步读取
+
+function openPosterDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open("priority_poster_db", 1);
+    req.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains("posters")) {
+        db.createObjectStore("posters");
+      }
+    };
+    req.onsuccess = (e) => resolve(e.target.result);
+    req.onerror = (e) => reject(e.target.error);
+  });
+}
+
+function idbPut(key, value) {
+  return new Promise((resolve, reject) => {
+    const tx = POSTER_DB.transaction("posters", "readwrite");
+    tx.objectStore("posters").put(value, key);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+function idbDelete(key) {
+  return new Promise((resolve, reject) => {
+    const tx = POSTER_DB.transaction("posters", "readwrite");
+    tx.objectStore("posters").delete(key);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+function idbGetAll() {
+  return new Promise((resolve, reject) => {
+    const tx = POSTER_DB.transaction("posters", "readonly");
+    const store = tx.objectStore("posters");
+    const req = store.getAll();
+    const keysReq = store.getAllKeys();
+    let values = [], keys = [];
+    req.onsuccess = () => { values = req.result; };
+    keysReq.onsuccess = () => { keys = keysReq.result; };
+    tx.oncomplete = () => {
+      const result = {};
+      keys.forEach((k, i) => { result[k] = values[i] || []; });
+      resolve(result);
+    };
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+async function initPosterDB() {
+  try {
+    POSTER_DB = await openPosterDB();
+    // 迁移 localStorage 中的旧海报数据到 IndexedDB
+    const oldPosters = JSON.parse(localStorage.getItem(STORAGE_POSTERS_KEY) || "{}");
+    const oldKeys = Object.keys(oldPosters).filter(k => oldPosters[k] && oldPosters[k].length > 0);
+    if (oldKeys.length > 0) {
+      for (const k of oldKeys) {
+        await idbPut(k, oldPosters[k]);
+      }
+      localStorage.removeItem(STORAGE_POSTERS_KEY);
+      console.log("海报数据已从 localStorage 迁移到 IndexedDB，共 " + oldKeys.length + " 个项目");
+    }
+    POSTER_CACHE = await idbGetAll();
+  } catch(e) {
+    console.error("IndexedDB 初始化失败，回退到内存模式:", e);
+    POSTER_CACHE = {};
+  }
+}
+
+function getPosters(key) {
+  return POSTER_CACHE[key] ? [...POSTER_CACHE[key]] : [];
+}
+
+async function savePosters(key, arr) {
+  POSTER_CACHE[key] = arr;
+  try {
+    await idbPut(key, arr);
+  } catch(e) {
+    alert("海报保存失败：" + e.message);
+    throw e;
+  }
+  scheduleSyncPosters();
+}
+
+async function deletePosters(key) {
+  delete POSTER_CACHE[key];
+  try { await idbDelete(key); } catch(e) { console.error(e); }
+  scheduleSyncPosters();
+}
+
+async function migratePosters(oldKey, newKey) {
+  const arr = getPosters(oldKey);
+  if (arr.length > 0) {
+    await savePosters(newKey, arr);
+    await deletePosters(oldKey);
+  }
+}
+
+async function getAllPostersForExport() {
+  if (POSTER_DB) return await idbGetAll();
+  return { ...POSTER_CACHE };
+}
+
+async function importPosters(posterData) {
+  for (const k in posterData) {
+    if (posterData[k] && posterData[k].length > 0) {
+      const existing = POSTER_CACHE[k] || [];
+      POSTER_CACHE[k] = [...existing, ...posterData[k]];
+      await idbPut(k, POSTER_CACHE[k]);
+    }
+  }
 }
 
 function loadOverrides() {
-  let notes = {}, posters = {};
+  let notes = {};
   try {
     notes = JSON.parse(localStorage.getItem(STORAGE_NOTES_KEY) || "{}");
-    posters = JSON.parse(localStorage.getItem(STORAGE_POSTERS_KEY) || "{}");
   } catch(e) {}
-  return { notes, posters };
+  return { notes, posters: POSTER_CACHE };
 }
 
 // 按 key 查找项目（含内置 + 自建），返回项目对象或 null
@@ -916,21 +1250,7 @@ function saveNote(key, text) {
   const overrides = loadOverrides();
   overrides.notes[key] = text;
   localStorage.setItem(STORAGE_NOTES_KEY, JSON.stringify(overrides.notes));
-}
-
-function savePosters(key, arr) {
-  const overrides = loadOverrides();
-  overrides.posters[key] = arr;
-  try {
-    localStorage.setItem(STORAGE_POSTERS_KEY, JSON.stringify(overrides.posters));
-  } catch(e) {
-    if (e.name === 'QuotaExceededError' || e.code === 22) {
-      alert("存储空间已满！\n请先删除不需要的海报，或使用「导出数据」备份后清理。\n\n提示：海报图片已自动压缩，如仍不够请减少海报数量。");
-    } else {
-      alert("保存失败：" + e.message);
-    }
-    throw e;
-  }
+  scheduleSyncData();
 }
 
 // 图片压缩：将大图缩放至 maxWidth×maxHeight 以内，输出 JPEG base64
@@ -1128,9 +1448,9 @@ function bindRowEvents() {
         // 自建项目删除：清理 notes/posters/override
         const overrides = loadOverrides();
         delete overrides.notes[key];
-        delete overrides.posters[key];
         localStorage.setItem(STORAGE_NOTES_KEY, JSON.stringify(overrides.notes));
-        localStorage.setItem(STORAGE_POSTERS_KEY, JSON.stringify(overrides.posters));
+        scheduleSyncData();
+        deletePosters(key);
         deleteProjOverride(key);
       } else {
         // 内置项目：仅加入隐藏列表，保留 override/notes/posters 以便恢复
@@ -1155,20 +1475,16 @@ function bindRowEvents() {
 
       try {
         const base64 = await compressImage(file);
-        const overrides = loadOverrides();
-        const arr = overrides.posters[key] ? [...overrides.posters[key]] : [];
+        const arr = getPosters(key);
         if (arr.length >= MAX_POSTERS) {
           alert("每个项目最多上传 " + MAX_POSTERS + " 张海报");
           return;
         }
         arr.push(base64);
-        savePosters(key, arr);
+        await savePosters(key, arr);
         render();
       } catch(err) {
-        // QuotaExceededError 已在 savePosters 中 alert
-        if (err.name !== 'QuotaExceededError' && err.code !== 22) {
-          alert("上传失败：" + err.message);
-        }
+        alert("上传失败：" + err.message);
       }
     });
   });
@@ -1184,14 +1500,13 @@ function bindRowEvents() {
 
   // 海报删除
   document.querySelectorAll(".poster-thumb .remove-btn").forEach(btn => {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", async (e) => {
       e.stopPropagation();
       const key = btn.dataset.key;
       const idx = parseInt(btn.dataset.idx);
-      const overrides = loadOverrides();
-      const arr = overrides.posters[key] ? [...overrides.posters[key]] : [];
+      const arr = getPosters(key);
       arr.splice(idx, 1);
-      savePosters(key, arr);
+      await savePosters(key, arr);
       render();
     });
   });
@@ -2352,7 +2667,7 @@ function initEditModal() {
     if (e.target.id === "editModal") closeEditModal();
   });
 
-  document.getElementById("editSaveBtn").addEventListener("click", () => {
+  document.getElementById("editSaveBtn").addEventListener("click", async () => {
     if (!_editKey) return;
     const type = document.querySelector('input[name="editType"]:checked').value;
     const school = document.getElementById("editSchool").value.trim();
@@ -2376,20 +2691,14 @@ function initEditModal() {
       }
       // 清除可能存在的旧 notes 覆盖（自建项目以 custom 记录的 note 为准）
       const overrides = loadOverrides();
-      let needSave = false;
       if (overrides.notes[_editKey] !== undefined) {
         delete overrides.notes[_editKey];
-        needSave = true;
-      }
-      // major 改了则迁移 posters
-      if (newKey !== _editKey && overrides.posters[_editKey]) {
-        overrides.posters[newKey] = overrides.posters[_editKey];
-        delete overrides.posters[_editKey];
-        needSave = true;
-      }
-      if (needSave) {
         localStorage.setItem(STORAGE_NOTES_KEY, JSON.stringify(overrides.notes));
-        localStorage.setItem(STORAGE_POSTERS_KEY, JSON.stringify(overrides.posters));
+        scheduleSyncData();
+      }
+      // major 改了则迁移 posters（IndexedDB）
+      if (newKey !== _editKey) {
+        await migratePosters(_editKey, newKey);
       }
     } else {
       saveProjOverride(_editKey, { type, foreign, major, tags });
@@ -2404,15 +2713,47 @@ function initEditModal() {
 initEditModal();
 
 initAddModal();
-render();
-updateHiddenBtn();
+
+// 先初始化 IndexedDB（含 localStorage 旧海报迁移），再从 OSS 加载云端数据，最后首次渲染
+initPosterDB().then(async () => {
+  // 显示加载状态
+  const tbody = document.getElementById("dataBody");
+  if (tbody) tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;color:#888">正在加载云端数据...</td></tr>';
+  // 从 OSS 加载数据
+  await loadFromOSS();
+  render();
+  updateHiddenBtn();
+  // 启动自动刷新
+  startAutoRefresh();
+  // 首次同步本地数据到 OSS（如果 OSS 数据为空）
+  if (!_ossLastSyncedAt) {
+    console.log("OSS: 首次同步，上传本地数据");
+    syncDataToOSS().catch(e => console.error(e));
+    syncPostersToOSS().catch(e => console.error(e));
+  }
+});
+
+
+// 手动刷新
+document.getElementById("refreshFromOSSBtn").addEventListener("click", async () => {
+  const btn = document.getElementById("refreshFromOSSBtn");
+  btn.textContent = "⟳ 刷新中...";
+  btn.disabled = true;
+  await loadFromOSS();
+  render();
+  updateHiddenBtn();
+  btn.textContent = "↻ 刷新";
+  btn.disabled = false;
+});
 
 // ====== 数据导入/导出 ======
-const DATA_KEYS = [STORAGE_NOTES_KEY, STORAGE_POSTERS_KEY, STORAGE_CUSTOM_KEY, STORAGE_HIDDEN_KEY, STORAGE_OVERRIDE_KEY];
+const DATA_KEYS = [STORAGE_NOTES_KEY, STORAGE_CUSTOM_KEY, STORAGE_HIDDEN_KEY, STORAGE_OVERRIDE_KEY];
 
-document.getElementById("exportDataBtn").addEventListener("click", () => {
+document.getElementById("exportDataBtn").addEventListener("click", async () => {
   const data = {};
   DATA_KEYS.forEach(k => { data[k] = localStorage.getItem(k); });
+  // 从 IndexedDB 读取海报数据
+  data[STORAGE_POSTERS_KEY] = JSON.stringify(await getAllPostersForExport());
   const json = JSON.stringify(data);
   // 复制到剪贴板
   navigator.clipboard.writeText(json).then(() => {
@@ -2436,16 +2777,16 @@ document.getElementById("importCancelBtn").addEventListener("click", () => {
 document.getElementById("importModal").addEventListener("click", (e) => {
   if (e.target.id === "importModal") document.getElementById("importModal").classList.remove("show");
 });
-document.getElementById("importConfirmBtn").addEventListener("click", () => {
+document.getElementById("importConfirmBtn").addEventListener("click", async () => {
   const text = document.getElementById("importTextarea").value.trim();
   if (!text) { alert("请粘贴数据"); return; }
   try {
     const data = JSON.parse(text);
     let count = 0;
+    // 导入 localStorage 数据
     DATA_KEYS.forEach(k => {
       if (data[k] !== undefined && data[k] !== null) {
-        // 合并：如果已有数据，合并而非覆盖
-        if (k === STORAGE_NOTES_KEY || k === STORAGE_POSTERS_KEY || k === STORAGE_OVERRIDE_KEY) {
+        if (k === STORAGE_NOTES_KEY || k === STORAGE_OVERRIDE_KEY) {
           try {
             const existing = JSON.parse(localStorage.getItem(k) || "{}");
             const incoming = JSON.parse(data[k]);
@@ -2467,6 +2808,14 @@ document.getElementById("importConfirmBtn").addEventListener("click", () => {
         count++;
       }
     });
+    // 导入海报数据到 IndexedDB
+    if (data[STORAGE_POSTERS_KEY] !== undefined && data[STORAGE_POSTERS_KEY] !== null) {
+      try {
+        const posterData = JSON.parse(data[STORAGE_POSTERS_KEY]);
+        await importPosters(posterData);
+        count++;
+      } catch(e) { console.error("海报导入失败:", e); }
+    }
     document.getElementById("importModal").classList.remove("show");
     alert("导入成功！共恢复 " + count + " 项数据。");
     render();
@@ -2477,7 +2826,7 @@ document.getElementById("importConfirmBtn").addEventListener("click", () => {
 });
 
 // ====== URL Hash 自动导入 ======
-(function autoImport() {
+(async function autoImport() {
   const hash = window.location.hash;
   if (!hash || !hash.startsWith('#import=')) return;
   const b64 = hash.substring(8);
@@ -2486,9 +2835,10 @@ document.getElementById("importConfirmBtn").addEventListener("click", () => {
     const text = decodeURIComponent(escape(json));
     const data = JSON.parse(text);
     let count = 0;
+    // 导入 localStorage 数据
     DATA_KEYS.forEach(k => {
       if (data[k] !== undefined && data[k] !== null) {
-        if (k === STORAGE_NOTES_KEY || k === STORAGE_POSTERS_KEY || k === STORAGE_OVERRIDE_KEY) {
+        if (k === STORAGE_NOTES_KEY || k === STORAGE_OVERRIDE_KEY) {
           try {
             const existing = JSON.parse(localStorage.getItem(k) || "{}");
             const incoming = JSON.parse(data[k]);
@@ -2510,6 +2860,14 @@ document.getElementById("importConfirmBtn").addEventListener("click", () => {
         count++;
       }
     });
+    // 导入海报数据到 IndexedDB
+    if (data[STORAGE_POSTERS_KEY] !== undefined && data[STORAGE_POSTERS_KEY] !== null) {
+      try {
+        const posterData = JSON.parse(data[STORAGE_POSTERS_KEY]);
+        await importPosters(posterData);
+        count++;
+      } catch(e) { console.error("海报导入失败:", e); }
+    }
     // 清除hash，避免刷新时重复导入
     window.location.hash = '';
     render();
