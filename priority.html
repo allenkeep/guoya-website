@@ -761,11 +761,17 @@ tr:hover td { background: #fafbff; }
 </div>
 
 <script>
-// ====== 密码门验证（双角色） ======
+// ====== 密码门验证（管理员 + 三编辑者） ======
 const GATE_HASH_ADMIN  = "c1a778c2ab5983060ae17c50e0cd9041c4e4fa872bbd8da01a6e79b23df09566"; // 管理员
-const GATE_HASH_EDITOR = "a9d7d7b7171e93dad71ec6b5627d3448b0ac24812ee2451415d83ebdd7d4cea8"; // 编辑者
+const GATE_HASH_EDITORS = {
+  "d6f7a5a7fe20208f90553f3d9cab297f7b564c623cdeeaed58aaca5f67aed3c4": "xingzhu",
+  "6744970e1db4da133f3c43c366fe60265b0aa24a22d1a71adb5bf31b24f9214b": "xiaonan",
+  "b9c5a058d4db85df2176c0e5a55f561a65e626178386a3dae7caa79618c864ce": "lixiang"
+};
 function getRole() { return sessionStorage.getItem("priority_role") || ""; }
+function getEditorName() { return sessionStorage.getItem("priority_editor") || ""; }
 function isAdmin() { return getRole() === "admin"; }
+function isEditor() { return getRole() === "editor"; }
 async function sha256(text) {
   const buf = new TextEncoder().encode(text);
   const hash = await crypto.subtle.digest("SHA-256", buf);
@@ -778,11 +784,14 @@ async function checkGate() {
   if (hashed === GATE_HASH_ADMIN) {
     sessionStorage.setItem("priority_authed", "1");
     sessionStorage.setItem("priority_role", "admin");
+    sessionStorage.removeItem("priority_editor");
     document.getElementById("gateOverlay").style.display = "none";
     onGatePassed();
-  } else if (hashed === GATE_HASH_EDITOR) {
+  } else if (GATE_HASH_EDITORS[hashed]) {
+    const editorName = GATE_HASH_EDITORS[hashed];
     sessionStorage.setItem("priority_authed", "1");
     sessionStorage.setItem("priority_role", "editor");
+    sessionStorage.setItem("priority_editor", editorName);
     document.getElementById("gateOverlay").style.display = "none";
     onGatePassed();
   } else {
@@ -798,8 +807,13 @@ function onGatePassed() {
   // 更新角色标识
   const badge = document.getElementById("roleBadge");
   if (badge) {
-    badge.textContent = isAdmin() ? "管理员" : "编辑者";
-    badge.className = "role-badge " + (isAdmin() ? "role-admin" : "role-editor");
+    if (isAdmin()) {
+      badge.textContent = "管理员";
+      badge.className = "role-badge role-admin";
+    } else {
+      badge.textContent = getEditorName() || "编辑者";
+      badge.className = "role-badge role-editor";
+    }
   }
 }
 document.getElementById("gateInput").addEventListener("keydown", function(e) {
