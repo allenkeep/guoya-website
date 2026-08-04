@@ -33,6 +33,17 @@ body {
   vertical-align: middle;
   font-weight: 600;
 }
+.role-badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
+  font-weight: 600;
+}
+.role-admin { background: #1b5e20; color: #fff; }
+.role-editor { background: #e65100; color: #fff; }
 .toolbar {
   background: #fff;
   border-bottom: 1px solid #e8e8ec;
@@ -557,7 +568,7 @@ tr:hover td { background: #fafbff; }
 </div>
 
 <div class="header">
-  <h1>重点项目清单<span class="badge-internal">内部使用</span></h1>
+  <h1>重点项目清单<span class="badge-internal">内部使用</span><span class="role-badge" id="roleBadge"></span></h1>
   <div class="sub">管理类联考 & 合作办学硕士 · 手动维护 · 标签聚焦运营与销售资源</div>
   <div class="stats">符合条件 <b id="resultCount">—</b> / 共 <span id="totalCount">—</span> 个项目</div>
 </div>
@@ -580,7 +591,7 @@ tr:hover td { background: #fafbff; }
   </div>
   <input type="search" class="search-box" id="searchInput" placeholder="搜索学校 / 专业 / 外方院校...">
   <button class="btn" id="exportBtn">导出 CSV</button>
-  <button class="btn" id="restoreBtn" style="display:none;">↩ 恢复已隐藏</button>
+  <button class="btn admin-only" id="restoreBtn" style="display:none;">↩ 恢复已隐藏</button>
   <button class="btn-primary" id="addProjBtn">+ 新增项目</button>
 </div>
 
@@ -730,8 +741,11 @@ tr:hover td { background: #fafbff; }
 </div>
 
 <script>
-// ====== 密码门验证 ======
-const GATE_HASH = "c1a778c2ab5983060ae17c50e0cd9041c4e4fa872bbd8da01a6e79b23df09566";
+// ====== 密码门验证（双角色） ======
+const GATE_HASH_ADMIN  = "c1a778c2ab5983060ae17c50e0cd9041c4e4fa872bbd8da01a6e79b23df09566"; // 管理员
+const GATE_HASH_EDITOR = "a9d7d7b7171e93dad71ec6b5627d3448b0ac24812ee2451415d83ebdd7d4cea8"; // 编辑者
+function getRole() { return sessionStorage.getItem("priority_role") || ""; }
+function isAdmin() { return getRole() === "admin"; }
 async function sha256(text) {
   const buf = new TextEncoder().encode(text);
   const hash = await crypto.subtle.digest("SHA-256", buf);
@@ -741,13 +755,31 @@ async function checkGate() {
   const input = document.getElementById("gateInput").value.trim();
   if (!input) return;
   const hashed = await sha256(input);
-  if (hashed === GATE_HASH) {
+  if (hashed === GATE_HASH_ADMIN) {
     sessionStorage.setItem("priority_authed", "1");
+    sessionStorage.setItem("priority_role", "admin");
     document.getElementById("gateOverlay").style.display = "none";
+    onGatePassed();
+  } else if (hashed === GATE_HASH_EDITOR) {
+    sessionStorage.setItem("priority_authed", "1");
+    sessionStorage.setItem("priority_role", "editor");
+    document.getElementById("gateOverlay").style.display = "none";
+    onGatePassed();
   } else {
     document.getElementById("gateError").style.display = "block";
     document.getElementById("gateInput").value = "";
     document.getElementById("gateInput").focus();
+  }
+}
+function onGatePassed() {
+  // 根据角色显示/隐藏管理员专属元素
+  const adminOnly = document.querySelectorAll(".admin-only");
+  adminOnly.forEach(el => { el.style.display = isAdmin() ? "" : "none"; });
+  // 更新角色标识
+  const badge = document.getElementById("roleBadge");
+  if (badge) {
+    badge.textContent = isAdmin() ? "管理员" : "编辑者";
+    badge.className = "role-badge " + (isAdmin() ? "role-admin" : "role-editor");
   }
 }
 document.getElementById("gateInput").addEventListener("keydown", function(e) {
@@ -756,6 +788,7 @@ document.getElementById("gateInput").addEventListener("keydown", function(e) {
 // 页面加载时检查是否已验证
 if (sessionStorage.getItem("priority_authed") === "1") {
   document.getElementById("gateOverlay").style.display = "none";
+  onGatePassed();
 }
 // ====== 数据区：手动维护，直接在此增删改 ======
 // type: "合作办学" | "管理类联考"
@@ -961,7 +994,7 @@ function render() {
     const noteHtml = `<div class="note-view">
       <span class="note-text${noteText ? "" : " empty"}">${noteText || "暂无备注"}</span>
       <button class="note-edit-btn edit-proj-btn" data-key="${k}" data-custom="${isCustom ? "1" : "0"}">编辑</button>
-      <button class="delete-proj-btn" data-key="${k}" data-custom="${isCustom ? "1" : "0"}" title="删除${isCustom ? "自建项目" : "内置项目（隐藏，可恢复）"}">删除</button>
+      <button class="delete-proj-btn admin-only" data-key="${k}" data-custom="${isCustom ? "1" : "0"}" title="删除${isCustom ? "自建项目" : "内置项目（隐藏，可恢复）"}">删除</button>
     </div>`;
 
     return `<tr>
@@ -981,7 +1014,7 @@ function render() {
 function updateHiddenBtn() {
   const hidden = loadHidden();
   const btn = document.getElementById("restoreBtn");
-  if (hidden.length > 0) {
+  if (hidden.length > 0 && isAdmin()) {
     btn.style.display = "";
     btn.textContent = "↩ 恢复已隐藏(" + hidden.length + ")";
   } else {
