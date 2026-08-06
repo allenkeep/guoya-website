@@ -1,0 +1,1448 @@
+[
+  {
+    "province": "北京",
+    "school": "北京大学",
+    "name": "工商管理硕士(MBA)",
+    "foreign": "比利时弗拉瑞克商学院 / 英国伦敦大学学院"
+  },
+  {
+    "province": "北京",
+    "school": "中国人民大学",
+    "name": "金融学硕士",
+    "foreign": "加拿大女王大学"
+  },
+  {
+    "province": "北京",
+    "school": "中国人民大学",
+    "name": "ESG与可持续金融理学硕士",
+    "foreign": "法国诺曼底经济管理学院"
+  },
+  {
+    "province": "北京",
+    "school": "对外经济贸易大学",
+    "name": "企业管理硕士",
+    "foreign": "法国巴黎第一大学"
+  },
+  {
+    "province": "北京",
+    "school": "对外经济贸易大学",
+    "name": "零售管理理学硕士",
+    "foreign": "法国诺欧商学院"
+  },
+  {
+    "province": "北京",
+    "school": "对外经济贸易大学",
+    "name": "保险(精算)硕士",
+    "foreign": "美国天普大学"
+  },
+  {
+    "province": "北京",
+    "school": "对外经济贸易大学",
+    "name": "工商管理硕士(MBA)",
+    "foreign": "美国西雅图城市大学"
+  },
+  {
+    "province": "北京",
+    "school": "北京理工大学",
+    "name": "职业教育与人力资源开发硕士",
+    "foreign": "德国德累斯顿工业大学"
+  },
+  {
+    "province": "北京",
+    "school": "北京理工大学",
+    "name": "信息科学硕士",
+    "foreign": "英国雷丁大学"
+  },
+  {
+    "province": "北京",
+    "school": "北京外国语大学",
+    "name": "应用数学与信息学硕士",
+    "foreign": "俄罗斯人民友谊大学"
+  },
+  {
+    "province": "北京",
+    "school": "北京外国语大学",
+    "name": "商业分析硕士(MBA)",
+    "foreign": "美国宾夕法尼亚州印第安纳大学"
+  },
+  {
+    "province": "北京",
+    "school": "北京外国语大学",
+    "name": "教育技术与人工智能硕士",
+    "foreign": "英国基尔大学"
+  },
+  {
+    "province": "北京",
+    "school": "北京邮电大学",
+    "name": "高级管理人员工商管理硕士(EMBA)",
+    "foreign": "法国里昂商学院"
+  },
+  {
+    "province": "北京",
+    "school": "北京邮电大学",
+    "name": "智能科技创新与创业硕士",
+    "foreign": "英国伦敦玛丽女王大学"
+  },
+  {
+    "province": "北京",
+    "school": "北京科技大学",
+    "name": "高级管理人员工商管理硕士(EMBA)",
+    "foreign": "美国德克萨斯大学阿灵顿分校"
+  },
+  {
+    "province": "北京",
+    "school": "中央财经大学",
+    "name": "经济学数据科学硕士",
+    "foreign": "新加坡管理大学"
+  },
+  {
+    "province": "北京",
+    "school": "中国政法大学",
+    "name": "法学硕士(欧洲-国际法学)",
+    "foreign": "德国汉堡大学(中欧法学院)"
+  },
+  {
+    "province": "北京",
+    "school": "中国社会科学院大学",
+    "name": "金融管理硕士",
+    "foreign": "美国杜兰大学"
+  },
+  {
+    "province": "北京",
+    "school": "中国社会科学院大学",
+    "name": "能源管理硕士",
+    "foreign": "美国杜兰大学"
+  },
+  {
+    "province": "北京",
+    "school": "北京国家会计学院",
+    "name": "IT审计与网络安全硕士",
+    "foreign": "美国天普大学"
+  },
+  {
+    "province": "北京",
+    "school": "北京国家会计学院",
+    "name": "智能会计与金融科技应用硕士",
+    "foreign": "香港城市大学"
+  },
+  {
+    "province": "北京",
+    "school": "北京城市学院",
+    "name": "项目管理硕士",
+    "foreign": "英国华威大学"
+  },
+  {
+    "province": "北京",
+    "school": "北京语言大学",
+    "name": "商业智能与分析理学硕士",
+    "foreign": "法国克莱蒙高等商学院"
+  },
+  {
+    "province": "北京",
+    "school": "北京中医药大学",
+    "name": "医疗健康领导力与管理硕士",
+    "foreign": "美国史蒂文斯理工学院"
+  },
+  {
+    "province": "北京",
+    "school": "首都师范大学",
+    "name": "教育硕士",
+    "foreign": "澳大利亚弗林德斯大学"
+  },
+  {
+    "province": "北京",
+    "school": "首都经济贸易大学",
+    "name": "人工智能与大数据工学硕士",
+    "foreign": "韩国首尔科学综合大学院大学"
+  },
+  {
+    "province": "北京",
+    "school": "中国传媒大学",
+    "name": "国际媒体商务硕士",
+    "foreign": "英国威斯敏斯特大学"
+  },
+  {
+    "province": "上海",
+    "school": "复旦大学",
+    "name": "高级管理人员工商管理硕士(EMBA)",
+    "foreign": "美国圣路易斯华盛顿大学"
+  },
+  {
+    "province": "上海",
+    "school": "复旦大学",
+    "name": "工商管理硕士(MBA)",
+    "foreign": "挪威商学院"
+  },
+  {
+    "province": "上海",
+    "school": "复旦大学",
+    "name": "工商管理硕士(MBA)",
+    "foreign": "香港大学"
+  },
+  {
+    "province": "上海",
+    "school": "上海交通大学",
+    "name": "国际工商管理硕士(IMBA)",
+    "foreign": "加拿大不列颠哥伦比亚大学(UBC)"
+  },
+  {
+    "province": "上海",
+    "school": "上海交通大学",
+    "name": "高级管理人员工商管理硕士(EMBA)",
+    "foreign": "新加坡南洋理工大学"
+  },
+  {
+    "province": "上海",
+    "school": "上海交通大学",
+    "name": "工商管理硕士(MBA)",
+    "foreign": "法国KEDGE商学院"
+  },
+  {
+    "province": "上海",
+    "school": "上海交通大学",
+    "name": "数量金融硕士",
+    "foreign": "新加坡国立大学"
+  },
+  {
+    "province": "上海",
+    "school": "同济大学",
+    "name": "高级管理人员工商管理硕士(EMBA)",
+    "foreign": "美国德克萨斯大学阿灵顿分校"
+  },
+  {
+    "province": "上海",
+    "school": "同济大学",
+    "name": "商业分析硕士",
+    "foreign": "加拿大阿尔伯塔大学"
+  },
+  {
+    "province": "上海",
+    "school": "华东理工大学",
+    "name": "工商管理硕士(MBA)",
+    "foreign": "澳大利亚堪培拉大学"
+  },
+  {
+    "province": "上海",
+    "school": "东华大学",
+    "name": "工商管理硕士(MBA)",
+    "foreign": "加拿大卡尔顿大学"
+  },
+  {
+    "province": "上海",
+    "school": "上海财经大学",
+    "name": "工商管理硕士(MBA)",
+    "foreign": "美国韦伯斯特大学"
+  },
+  {
+    "province": "上海",
+    "school": "华东政法大学",
+    "name": "法学硕士",
+    "foreign": "新加坡国立大学"
+  },
+  {
+    "province": "上海",
+    "school": "上海海事大学",
+    "name": "国际运输与物流硕士",
+    "foreign": "瑞典世界海事大学"
+  },
+  {
+    "province": "上海",
+    "school": "上海国家会计学院",
+    "name": "金融EMBA(金融财务方向)",
+    "foreign": "美国亚利桑那州立大学"
+  },
+  {
+    "province": "上海",
+    "school": "上海国家会计学院",
+    "name": "会计学硕士(高级财会)",
+    "foreign": "香港中文大学"
+  },
+  {
+    "province": "上海",
+    "school": "上海国家会计学院",
+    "name": "会计(数据分析)硕士",
+    "foreign": "美国亚利桑那州立大学"
+  },
+  {
+    "province": "上海",
+    "school": "上海大学",
+    "name": "社会学硕士",
+    "foreign": "法国让穆兰里昂第三大学"
+  },
+  {
+    "province": "上海",
+    "school": "上海大学",
+    "name": "工程管理硕士(MEM)",
+    "foreign": "澳大利亚悉尼科技大学(UTS)"
+  },
+  {
+    "province": "上海",
+    "school": "上海大学",
+    "name": "金融硕士(MF)",
+    "foreign": "澳大利亚悉尼科技大学(UTS)"
+  },
+  {
+    "province": "天津",
+    "school": "南开大学",
+    "name": "医院管理硕士",
+    "foreign": "澳大利亚弗林德斯大学"
+  },
+  {
+    "province": "天津",
+    "school": "南开大学",
+    "name": "国际经贸关系硕士",
+    "foreign": "澳大利亚弗林德斯大学"
+  },
+  {
+    "province": "天津",
+    "school": "南开大学",
+    "name": "教育领导与管理硕士",
+    "foreign": "澳大利亚弗林德斯大学"
+  },
+  {
+    "province": "天津",
+    "school": "南开大学",
+    "name": "国际商务和战略贸易控制硕士",
+    "foreign": "哈萨克斯坦欧亚国立大学"
+  },
+  {
+    "province": "天津",
+    "school": "南开大学",
+    "name": "经济学硕士",
+    "foreign": "哈萨克斯坦欧亚国立大学"
+  },
+  {
+    "province": "天津",
+    "school": "南开大学",
+    "name": "科技金融硕士",
+    "foreign": "澳大利亚弗林德斯大学"
+  },
+  {
+    "province": "天津",
+    "school": "南开大学",
+    "name": "智慧城市管理硕士",
+    "foreign": "澳大利亚弗林德斯大学"
+  },
+  {
+    "province": "天津",
+    "school": "天津商业大学",
+    "name": "人力资源管理硕士",
+    "foreign": "美国东密西根大学"
+  },
+  {
+    "province": "天津",
+    "school": "天津商业大学",
+    "name": "可持续金融硕士",
+    "foreign": "法国Excelia商学院"
+  },
+  {
+    "province": "天津",
+    "school": "天津师范大学",
+    "name": "教育行政学硕士",
+    "foreign": "韩国世翰大学"
+  },
+  {
+    "province": "天津",
+    "school": "天津师范大学",
+    "name": "情报学硕士",
+    "foreign": "韩国世翰大学"
+  },
+  {
+    "province": "天津",
+    "school": "天津财经大学",
+    "name": "工商管理硕士(MBA)",
+    "foreign": "加拿大西三一大学"
+  },
+  {
+    "province": "天津",
+    "school": "天津财经大学",
+    "name": "工商管理硕士(MBA)",
+    "foreign": "法国诺曼底经济管理学院"
+  },
+  {
+    "province": "天津",
+    "school": "天津理工大学",
+    "name": "项目管理硕士",
+    "foreign": "加拿大魁北克大学席库提米分校"
+  },
+  {
+    "province": "天津",
+    "school": "中国民航大学",
+    "name": "航空安全管理硕士",
+    "foreign": "法国国立民航大学、法国航空航天大学"
+  },
+  {
+    "province": "天津",
+    "school": "天津外国语大学",
+    "name": "高级翻译与智能语言技术硕士",
+    "foreign": "英国阿伯丁大学"
+  },
+  {
+    "province": "重庆",
+    "school": "重庆工商大学",
+    "name": "商务分析与人工智能",
+    "foreign": "英国赫尔大学"
+  },
+  {
+    "province": "重庆",
+    "school": "重庆工商大学",
+    "name": "数字营销与分析",
+    "foreign": "英国赫尔大学"
+  },
+  {
+    "province": "重庆",
+    "school": "四川外国语大学",
+    "name": "英语为第二语言教育（英语教学）",
+    "foreign": "英国曼彻斯特城市大学"
+  },
+  {
+    "province": "重庆",
+    "school": "四川外国语大学",
+    "name": "电影制作",
+    "foreign": "英国曼彻斯特城市大学"
+  },
+  {
+    "province": "重庆",
+    "school": "长江师范学院",
+    "name": "化学",
+    "foreign": "俄罗斯库尔斯克国立大学"
+  },
+  {
+    "province": "河北",
+    "school": "河北工业大学",
+    "name": "信息科学硕士",
+    "foreign": "新西兰梅西大学"
+  },
+  {
+    "province": "山西",
+    "school": "太原理工大学",
+    "name": "电气工程硕士",
+    "foreign": "俄罗斯乌拉尔联邦大学"
+  },
+  {
+    "province": "辽宁",
+    "school": "大连海事大学",
+    "name": "海事管理硕士",
+    "foreign": "瑞典世界海事大学"
+  },
+  {
+    "province": "辽宁",
+    "school": "沈阳工业大学",
+    "name": "企业管理硕士",
+    "foreign": "美国班尼迪克大学"
+  },
+  {
+    "province": "辽宁",
+    "school": "沈阳建筑大学",
+    "name": "信息管理硕士",
+    "foreign": "美国班尼迪克大学"
+  },
+  {
+    "province": "辽宁",
+    "school": "大连医科大学",
+    "name": "公共卫生硕士",
+    "foreign": "美国班尼迪克大学"
+  },
+  {
+    "province": "辽宁",
+    "school": "沈阳农业大学",
+    "name": "农村发展硕士",
+    "foreign": "匈牙利塞格德大学"
+  },
+  {
+    "province": "辽宁",
+    "school": "沈阳大学",
+    "name": "电气电子工学",
+    "foreign": "韩国又石大学"
+  },
+  {
+    "province": "辽宁",
+    "school": "沈阳大学",
+    "name": "体育学",
+    "foreign": "韩国又石大学"
+  },
+  {
+    "province": "辽宁",
+    "school": "辽宁工程技术大学",
+    "name": "机械工程",
+    "foreign": "俄罗斯乌拉尔联邦大学"
+  },
+  {
+    "province": "辽宁",
+    "school": "辽宁工程技术大学",
+    "name": "应用经济学",
+    "foreign": "俄罗斯乌拉尔联邦大学"
+  },
+  {
+    "province": "辽宁",
+    "school": "辽宁工程技术大学",
+    "name": "电气工程",
+    "foreign": "俄罗斯乌拉尔联邦大学"
+  },
+  {
+    "province": "辽宁",
+    "school": "辽宁工程技术大学",
+    "name": "电子信息",
+    "foreign": "俄罗斯乌拉尔联邦大学"
+  },
+  {
+    "province": "辽宁",
+    "school": "大连外国语大学",
+    "name": "数据科学",
+    "foreign": "葡萄牙阿威罗大学"
+  },
+  {
+    "province": "辽宁",
+    "school": "大连外国语大学",
+    "name": "设计",
+    "foreign": "葡萄牙阿威罗大学"
+  },
+  {
+    "province": "吉林",
+    "school": "长春大学",
+    "name": "特殊教育",
+    "foreign": "美国东北州立大学"
+  },
+  {
+    "province": "吉林",
+    "school": "长春大学",
+    "name": "学科教学（音乐）",
+    "foreign": "美国东北州立大学"
+  },
+  {
+    "province": "吉林",
+    "school": "长春大学",
+    "name": "学科教学（美术）",
+    "foreign": "美国东北州立大学"
+  },
+  {
+    "province": "吉林",
+    "school": "长春工业大学",
+    "name": "机械工程",
+    "foreign": "澳大利亚南十字星大学"
+  },
+  {
+    "province": "吉林",
+    "school": "长春工业大学",
+    "name": "人工智能",
+    "foreign": "澳大利亚南十字星大学"
+  },
+  {
+    "province": "吉林",
+    "school": "长春师范大学",
+    "name": "生物学",
+    "foreign": "俄罗斯奥伦堡国立大学"
+  },
+  {
+    "province": "吉林",
+    "school": "长春师范大学",
+    "name": "物理学",
+    "foreign": "俄罗斯奥伦堡国立大学"
+  },
+  {
+    "province": "吉林",
+    "school": "长春师范大学",
+    "name": "化学",
+    "foreign": "俄罗斯奥伦堡国立大学"
+  },
+  {
+    "province": "黑龙江",
+    "school": "哈尔滨体育学院",
+    "name": "运动训练",
+    "foreign": "俄罗斯圣彼得堡国立体育、运动与健康大学"
+  },
+  {
+    "province": "黑龙江",
+    "school": "哈尔滨体育学院",
+    "name": "体育教学",
+    "foreign": "俄罗斯圣彼得堡国立体育、运动与健康大学"
+  },
+  {
+    "province": "黑龙江",
+    "school": "黑龙江科技大学",
+    "name": "电力工程与电气工程",
+    "foreign": "俄罗斯北高加索联邦大学"
+  },
+  {
+    "province": "黑龙江",
+    "school": "黑龙江科技大学",
+    "name": "数学与计算机科学",
+    "foreign": "俄罗斯北高加索联邦大学"
+  },
+  {
+    "province": "黑龙江",
+    "school": "黑龙江科技大学",
+    "name": "信息系统与技术",
+    "foreign": "俄罗斯北高加索联邦大学"
+  },
+  {
+    "province": "黑龙江",
+    "school": "佳木斯大学",
+    "name": "运输过程技术",
+    "foreign": "俄罗斯远东国立交通大学"
+  },
+  {
+    "province": "黑龙江",
+    "school": "佳木斯大学",
+    "name": "信息学与计算技术",
+    "foreign": "俄罗斯远东国立交通大学"
+  },
+  {
+    "province": "山东",
+    "school": "山东建筑大学",
+    "name": "管理科学",
+    "foreign": "马来西亚管理与科学大学"
+  },
+  {
+    "province": "山东",
+    "school": "山东建筑大学",
+    "name": "数据科学与人工智能工程",
+    "foreign": "西班牙萨拉曼卡大学"
+  },
+  {
+    "province": "山东",
+    "school": "济南大学",
+    "name": "环境管理",
+    "foreign": "英国格拉斯哥加利多尼亚大学"
+  },
+  {
+    "province": "山东",
+    "school": "济南大学",
+    "name": "金融科技",
+    "foreign": "英国格拉斯哥加利多尼亚大学"
+  },
+  {
+    "province": "山东",
+    "school": "曲阜师范大学",
+    "name": "环境管理与可持续发展",
+    "foreign": "澳大利亚纽卡斯尔大学"
+  },
+  {
+    "province": "山东",
+    "school": "曲阜师范大学",
+    "name": "工程学",
+    "foreign": "澳大利亚纽卡斯尔大学"
+  },
+  {
+    "province": "山东",
+    "school": "曲阜师范大学",
+    "name": "材料科学与工程",
+    "foreign": "澳大利亚纽卡斯尔大学"
+  },
+  {
+    "province": "山东",
+    "school": "山东科技大学",
+    "name": "管理工程",
+    "foreign": "意大利巴里理工大学"
+  },
+  {
+    "province": "山东",
+    "school": "山东科技大学",
+    "name": "电气工程",
+    "foreign": "意大利巴里理工大学"
+  },
+  {
+    "province": "山东",
+    "school": "中国石油大学（华东）",
+    "name": "工程管理",
+    "foreign": "英国布拉德福德大学"
+  },
+  {
+    "province": "山东",
+    "school": "青岛理工大学",
+    "name": "电气电子工学",
+    "foreign": "韩国又石大学"
+  },
+  {
+    "province": "山东",
+    "school": "山东师范大学",
+    "name": "通信与信息系统",
+    "foreign": "美国肯塔基大学"
+  },
+  {
+    "province": "山东",
+    "school": "青岛科技大学",
+    "name": "软件工程",
+    "foreign": "哈萨克国立技术大学"
+  },
+  {
+    "province": "湖北",
+    "school": "中南民族大学",
+    "name": "英语教育硕士",
+    "foreign": "美国威斯康星大学普拉特维尔分校"
+  },
+  {
+    "province": "湖北",
+    "school": "华中师范大学",
+    "name": "区域旅游与环境硕士",
+    "foreign": "美国科罗拉多州立大学"
+  },
+  {
+    "province": "湖北",
+    "school": "华中师范大学",
+    "name": "自然旅游与生态保护硕士",
+    "foreign": "美国科罗拉多州立大学"
+  },
+  {
+    "province": "湖北",
+    "school": "华中师范大学",
+    "name": "计算机科学",
+    "foreign": "澳大利亚伍伦贡大学"
+  },
+  {
+    "province": "湖北",
+    "school": "华中师范大学",
+    "name": "通信工程",
+    "foreign": "澳大利亚伍伦贡大学"
+  },
+  {
+    "province": "湖北",
+    "school": "华中师范大学",
+    "name": "软件工程",
+    "foreign": "澳大利亚伍伦贡大学"
+  },
+  {
+    "province": "湖北",
+    "school": "华中师范大学",
+    "name": "机器学习与大数据",
+    "foreign": "澳大利亚伍伦贡大学"
+  },
+  {
+    "province": "湖北",
+    "school": "武汉理工大学",
+    "name": "数据、人工智能和云硕士",
+    "foreign": "法国EFREI"
+  },
+  {
+    "province": "湖北",
+    "school": "武汉理工大学",
+    "name": "商业分析硕士",
+    "foreign": "澳大利亚伍伦贡大学"
+  },
+  {
+    "province": "湖北",
+    "school": "湖北大学",
+    "name": "人工智能",
+    "foreign": "英国曼彻斯特城市大学"
+  },
+  {
+    "province": "湖北",
+    "school": "湖北大学",
+    "name": "机器人与自动化",
+    "foreign": "英国曼彻斯特城市大学"
+  },
+  {
+    "province": "湖北",
+    "school": "中国地质大学（武汉）",
+    "name": "地质资源与地质工程",
+    "foreign": "德国安哈尔特应用技术大学"
+  },
+  {
+    "province": "湖北",
+    "school": "中国地质大学（武汉）",
+    "name": "资源与环境",
+    "foreign": "德国安哈尔特应用技术大学"
+  },
+  {
+    "province": "四川",
+    "school": "电子科技大学",
+    "name": "工商管理硕士(MBA)",
+    "foreign": "美国韦伯斯特大学"
+  },
+  {
+    "province": "四川",
+    "school": "电子科技大学",
+    "name": "电子嵌入式系统硕士",
+    "foreign": "法国鲁昂高等电子工程工程师学院"
+  },
+  {
+    "province": "四川",
+    "school": "电子科技大学",
+    "name": "软件工程与数字化转型硕士",
+    "foreign": "法国高等电子工程工程师学院"
+  },
+  {
+    "province": "四川",
+    "school": "电子科技大学",
+    "name": "数据与人工智能管理硕士",
+    "foreign": "法国格勒诺布尔经济管理学院"
+  },
+  {
+    "province": "四川",
+    "school": "电子科技大学",
+    "name": "材料科学与技术硕士",
+    "foreign": "俄罗斯国家研究型科技大学密西斯"
+  },
+  {
+    "province": "四川",
+    "school": "西南财经大学",
+    "name": "国际贸易学硕士",
+    "foreign": "岭南大学(香港)"
+  },
+  {
+    "province": "四川",
+    "school": "西南交通大学",
+    "name": "终身学习、可持续发展与工作硕士",
+    "foreign": "瑞典延雪平大学"
+  },
+  {
+    "province": "福建",
+    "school": "集美大学",
+    "name": "机械硕士",
+    "foreign": "波兰罗兹工业大学"
+  },
+  {
+    "province": "福建",
+    "school": "厦门国家会计学院",
+    "name": "大数据会计与金融硕士",
+    "foreign": "香港理工大学"
+  },
+  {
+    "province": "福建",
+    "school": "闽南师范大学",
+    "name": "应用心理硕士",
+    "foreign": "意大利圣心天主教大学"
+  },
+  {
+    "province": "福建",
+    "school": "闽南师范大学",
+    "name": "生物与医药",
+    "foreign": "英国阿斯顿大学"
+  },
+  {
+    "province": "福建",
+    "school": "闽南师范大学",
+    "name": "计算机技术",
+    "foreign": "英国阿斯顿大学"
+  },
+  {
+    "province": "福建",
+    "school": "华侨大学",
+    "name": "石油化学与高分子科学",
+    "foreign": "泰国朱拉隆功大学"
+  },
+  {
+    "province": "福建",
+    "school": "华侨大学",
+    "name": "工业科学",
+    "foreign": "泰国朱拉隆功大学"
+  },
+  {
+    "province": "湖南",
+    "school": "湖南工商大学",
+    "name": "金融科技",
+    "foreign": "英国西英格兰大学-布里斯托"
+  },
+  {
+    "province": "湖南",
+    "school": "长沙理工大学",
+    "name": "计算机科学工程",
+    "foreign": "匈牙利欧布达大学"
+  },
+  {
+    "province": "江西",
+    "school": "江西财经大学",
+    "name": "工商管理硕士(MBA)",
+    "foreign": "美国纽约理工学院"
+  },
+  {
+    "province": "江西",
+    "school": "江西财经大学",
+    "name": "经济学与数据科学硕士",
+    "foreign": "英国埃塞克斯大学"
+  },
+  {
+    "province": "江西",
+    "school": "江西财经大学",
+    "name": "金融科技硕士",
+    "foreign": "英国埃塞克斯大学"
+  },
+  {
+    "province": "江西",
+    "school": "南昌大学",
+    "name": "国际企业管理硕士",
+    "foreign": "法国普瓦提埃大学"
+  },
+  {
+    "province": "江西",
+    "school": "江西理工大学",
+    "name": "人工智能",
+    "foreign": "澳大利亚詹姆斯库克大学"
+  },
+  {
+    "province": "江西",
+    "school": "江西理工大学",
+    "name": "机械工程",
+    "foreign": "澳大利亚詹姆斯库克大学"
+  },
+  {
+    "province": "江西",
+    "school": "江西理工大学",
+    "name": "环境科学与工程",
+    "foreign": "澳大利亚詹姆斯库克大学"
+  },
+  {
+    "province": "江西",
+    "school": "江西理工大学",
+    "name": "材料科学与工程",
+    "foreign": "澳大利亚詹姆斯库克大学"
+  },
+  {
+    "province": "河南",
+    "school": "河南师范大学",
+    "name": "旅游管理硕士",
+    "foreign": "法国佩皮尼昂大学"
+  },
+  {
+    "province": "河南",
+    "school": "安阳师范学院",
+    "name": "体育指导硕士",
+    "foreign": "韩国庆一大学"
+  },
+  {
+    "province": "河南",
+    "school": "河南财经政法大学",
+    "name": "工商管理（数字与战略营销）",
+    "foreign": "美国西崖大学"
+  },
+  {
+    "province": "河南",
+    "school": "华北水利水电大学",
+    "name": "土木工程（城市和工业给排水处理方向）",
+    "foreign": "俄罗斯乌拉尔联邦大学"
+  },
+  {
+    "province": "河南",
+    "school": "华北水利水电大学",
+    "name": "电气工程（电力系统设计方向）",
+    "foreign": "俄罗斯乌拉尔联邦大学"
+  },
+  {
+    "province": "河南",
+    "school": "南阳师范学院",
+    "name": "计算机科学",
+    "foreign": "古巴东方大学"
+  },
+  {
+    "province": "海南",
+    "school": "中国传媒大学",
+    "name": "新媒体硕士",
+    "foreign": "美国密西根州立大学"
+  },
+  {
+    "province": "海南",
+    "school": "海南大学",
+    "name": "社区资源与管理",
+    "foreign": "美国亚利桑那州立大学"
+  },
+  {
+    "province": "海南",
+    "school": "海南大学",
+    "name": "公共管理",
+    "foreign": "美国亚利桑那州立大学"
+  },
+  {
+    "province": "海南",
+    "school": "海南大学",
+    "name": "信息技术",
+    "foreign": "新西兰怀卡托大学"
+  },
+  {
+    "province": "海南",
+    "school": "北京语言大学",
+    "name": "翻译（人工智能与语言服务）",
+    "foreign": "法国克莱蒙奥弗涅大学"
+  },
+  {
+    "province": "海南",
+    "school": "北京语言大学",
+    "name": "工商管理",
+    "foreign": "美国东北州立大学"
+  },
+  {
+    "province": "海南",
+    "school": "东北林业大学",
+    "name": "机械工程",
+    "foreign": "澳大利亚悉尼科技大学"
+  },
+  {
+    "province": "海南",
+    "school": "东北林业大学",
+    "name": "计算机技术",
+    "foreign": "澳大利亚悉尼科技大学"
+  },
+  {
+    "province": "海南",
+    "school": "东北林业大学",
+    "name": "风景园林",
+    "foreign": "新西兰奥克兰大学"
+  },
+  {
+    "province": "海南",
+    "school": "东北林业大学",
+    "name": "交通运输",
+    "foreign": "新西兰奥克兰大学"
+  },
+  {
+    "province": "海南",
+    "school": "东北林业大学",
+    "name": "生物与医药",
+    "foreign": "新西兰奥克兰大学"
+  },
+  {
+    "province": "海南",
+    "school": "东北林业大学",
+    "name": "生态学",
+    "foreign": "新西兰奥克兰大学"
+  },
+  {
+    "province": "广东",
+    "school": "广东外语外贸大学",
+    "name": "英语教育",
+    "foreign": "英国雷丁大学"
+  },
+  {
+    "province": "广东",
+    "school": "广东外语外贸大学",
+    "name": "英语教学",
+    "foreign": "英国利兹大学"
+  },
+  {
+    "province": "广东",
+    "school": "南方科技大学",
+    "name": "科技与创新工商管理",
+    "foreign": "香港中文大学"
+  },
+  {
+    "province": "广东",
+    "school": "华南师范大学",
+    "name": "金融数据智能",
+    "foreign": "法国雷恩商学院"
+  },
+  {
+    "province": "广东",
+    "school": "华南师范大学",
+    "name": "商务数据分析",
+    "foreign": "法国雷恩商学院"
+  },
+  {
+    "province": "广东",
+    "school": "暨南大学",
+    "name": "领导力(旅游管理)",
+    "foreign": "瑞士恺撒里兹学院"
+  },
+  {
+    "province": "广东",
+    "school": "广东财经大学",
+    "name": "大数据分析与信息技术",
+    "foreign": "美国中密苏里大学"
+  },
+  {
+    "province": "广东",
+    "school": "佛山大学",
+    "name": "人工智能商业应用",
+    "foreign": "爱尔兰香农理工大学"
+  },
+  {
+    "province": "广东",
+    "school": "北京理工大学",
+    "name": "材料科学",
+    "foreign": "匈牙利德布勒森大学"
+  },
+  {
+    "province": "广东",
+    "school": "东莞理工学院",
+    "name": "人工智能与数据科学",
+    "foreign": "英国龙比亚大学"
+  },
+  {
+    "province": "广东",
+    "school": "东莞理工学院",
+    "name": "商业信息技术",
+    "foreign": "英国龙比亚大学"
+  },
+  {
+    "province": "广西",
+    "school": "广西民族大学",
+    "name": "智能金融",
+    "foreign": "韩国首尔科学综合大学院大学"
+  },
+  {
+    "province": "广西",
+    "school": "广西民族大学",
+    "name": "文化艺术产业管理",
+    "foreign": "韩国首尔科学综合大学院大学"
+  },
+  {
+    "province": "广西",
+    "school": "广西民族大学",
+    "name": "人工智能应用工程",
+    "foreign": "韩国首尔科学综合大学院大学"
+  },
+  {
+    "province": "浙江",
+    "school": "浙江大学",
+    "name": "品质管理硕士",
+    "foreign": "香港理工大学"
+  },
+  {
+    "province": "浙江",
+    "school": "浙江大学",
+    "name": "酒店及旅游业管理硕士",
+    "foreign": "香港理工大学"
+  },
+  {
+    "province": "浙江",
+    "school": "浙江大学",
+    "name": "数字化转型与创业硕士",
+    "foreign": "澳大利亚国立大学"
+  },
+  {
+    "province": "浙江",
+    "school": "浙江工业大学",
+    "name": "国际贸易与金融",
+    "foreign": "英国利兹贝克特大学"
+  },
+  {
+    "province": "浙江",
+    "school": "浙江工业大学",
+    "name": "能源动力",
+    "foreign": "英国埃克塞特大学"
+  },
+  {
+    "province": "浙江",
+    "school": "浙江工业大学",
+    "name": "电子信息",
+    "foreign": "英国埃克塞特大学"
+  },
+  {
+    "province": "浙江",
+    "school": "浙江工商大学",
+    "name": "项目管理(MPM)",
+    "foreign": "加拿大魁北克大学席库提米分校"
+  },
+  {
+    "province": "浙江",
+    "school": "浙江财经大学",
+    "name": "应用金融学",
+    "foreign": "新西兰奥克兰理工大学"
+  },
+  {
+    "province": "浙江",
+    "school": "浙江财经大学",
+    "name": "数据科学",
+    "foreign": "马来西亚国立大学"
+  },
+  {
+    "province": "浙江",
+    "school": "浙江师范大学",
+    "name": "教育管理(教育领导学)",
+    "foreign": "澳大利亚伊迪斯科文大学"
+  },
+  {
+    "province": "浙江",
+    "school": "杭州师范大学",
+    "name": "教育领导与管理",
+    "foreign": "澳大利亚堪培拉大学"
+  },
+  {
+    "province": "浙江",
+    "school": "宁波大学",
+    "name": "工商管理(MBA)",
+    "foreign": "澳大利亚堪培拉大学"
+  },
+  {
+    "province": "浙江",
+    "school": "中国计量大学",
+    "name": "数据分析学",
+    "foreign": "新西兰奥克兰理工大学"
+  },
+  {
+    "province": "浙江",
+    "school": "中国计量大学",
+    "name": "人工智能",
+    "foreign": "英国安格利亚鲁斯金大学"
+  },
+  {
+    "province": "浙江",
+    "school": "温州医科大学",
+    "name": "护理学",
+    "foreign": "泰国东方大学"
+  },
+  {
+    "province": "浙江",
+    "school": "丽水学院",
+    "name": "护理",
+    "foreign": "瑞典耶夫勒大学学院"
+  },
+  {
+    "province": "浙江",
+    "school": "浙江传媒学院",
+    "name": "视觉传媒",
+    "foreign": "英国大曼彻斯特大学"
+  },
+  {
+    "province": "浙江",
+    "school": "浙江科技大学",
+    "name": "土木工程",
+    "foreign": "法国塞吉巴黎大学"
+  },
+  {
+    "province": "浙江",
+    "school": "浙江科技大学",
+    "name": "应用统计",
+    "foreign": "法国塞吉巴黎大学"
+  },
+  {
+    "province": "浙江",
+    "school": "温州大学",
+    "name": "轻工业产品工艺",
+    "foreign": "俄罗斯圣彼得堡国立工业技术与设计大学"
+  },
+  {
+    "province": "浙江",
+    "school": "温州大学",
+    "name": "化学技术",
+    "foreign": "俄罗斯圣彼得堡国立工业技术与设计大学"
+  },
+  {
+    "province": "浙江",
+    "school": "温州大学",
+    "name": "应用信息",
+    "foreign": "俄罗斯圣彼得堡国立工业技术与设计大学"
+  },
+  {
+    "province": "浙江",
+    "school": "浙江外国语学院",
+    "name": "教育领导力与管理",
+    "foreign": "加拿大皇家路大学"
+  },
+  {
+    "province": "陕西",
+    "school": "西安交通大学",
+    "name": "创业与创新(大数据与AI管理)",
+    "foreign": "法国SKEMA商学院"
+  },
+  {
+    "province": "陕西",
+    "school": "西安交通大学",
+    "name": "金融财务管理(MFM)",
+    "foreign": "加拿大阿尔伯塔大学"
+  },
+  {
+    "province": "陕西",
+    "school": "西安交通大学",
+    "name": "高级管理人员工商管理硕士(EMBA)",
+    "foreign": "美国德克萨斯大学阿灵顿分校"
+  },
+  {
+    "province": "陕西",
+    "school": "西安交通大学",
+    "name": "工商管理硕士(MBA)",
+    "foreign": "香港理工大学"
+  },
+  {
+    "province": "陕西",
+    "school": "西安交通大学",
+    "name": "信息管理(MIS)硕士",
+    "foreign": "香港理工大学"
+  },
+  {
+    "province": "陕西",
+    "school": "西安电子科技大学",
+    "name": "数理金融",
+    "foreign": "英国赫瑞-瓦特大学"
+  },
+  {
+    "province": "陕西",
+    "school": "西北工业大学",
+    "name": "工业设计",
+    "foreign": "德国品牌应用科学大学"
+  },
+  {
+    "province": "陕西",
+    "school": "西安石油大学",
+    "name": "信息技术",
+    "foreign": "新西兰国立联合学院"
+  },
+  {
+    "province": "陕西",
+    "school": "西安邮电大学",
+    "name": "商业信息技术",
+    "foreign": "英国伦敦城市大学"
+  },
+  {
+    "province": "陕西",
+    "school": "陕西师范大学",
+    "name": "计算机科学",
+    "foreign": "匈牙利塞格德大学"
+  },
+  {
+    "province": "陕西",
+    "school": "陕西师范大学",
+    "name": "计算机科学工程",
+    "foreign": "匈牙利塞格德大学"
+  },
+  {
+    "province": "陕西",
+    "school": "西安医学院",
+    "name": "肿瘤免疫治疗",
+    "foreign": "英国伦敦城市大学"
+  },
+  {
+    "province": "江苏",
+    "school": "南京大学",
+    "name": "国际EMBA(商业创新/医疗健康管理)",
+    "foreign": "荷兰马斯特里赫特大学"
+  },
+  {
+    "province": "江苏",
+    "school": "中国矿业大学",
+    "name": "国际MBA",
+    "foreign": "加拿大魁北克大学蒙特利尔校区"
+  },
+  {
+    "province": "江苏",
+    "school": "南京信息工程大学",
+    "name": "数据与决策分析",
+    "foreign": "英国雷丁大学"
+  },
+  {
+    "province": "江苏",
+    "school": "南京审计大学",
+    "name": "计算机科学与技术",
+    "foreign": "法国SKEMA商学院"
+  },
+  {
+    "province": "江苏",
+    "school": "南京审计大学",
+    "name": "审计",
+    "foreign": "法国SKEMA商学院"
+  },
+  {
+    "province": "江苏",
+    "school": "南京审计大学",
+    "name": "金融",
+    "foreign": "法国SKEMA商学院"
+  },
+  {
+    "province": "江苏",
+    "school": "南京师范大学",
+    "name": "信息技术(信息系统)",
+    "foreign": "澳大利亚麦考瑞大学"
+  },
+  {
+    "province": "江苏",
+    "school": "南京师范大学",
+    "name": "教育学",
+    "foreign": "澳大利亚麦考瑞大学"
+  },
+  {
+    "province": "江苏",
+    "school": "南京航空航天大学",
+    "name": "管理科学与工程",
+    "foreign": "英国伦敦大学伯贝克学院"
+  },
+  {
+    "province": "江苏",
+    "school": "南京航空航天大学",
+    "name": "计算机科学与技术",
+    "foreign": "英国伦敦大学伯贝克学院"
+  },
+  {
+    "province": "江苏",
+    "school": "南京航空航天大学",
+    "name": "法学(网络与人工智能法)",
+    "foreign": "英国伦敦大学伯贝克学院"
+  },
+  {
+    "province": "江苏",
+    "school": "南京邮电大学",
+    "name": "电子信息(机器人)",
+    "foreign": "俄罗斯ITMO大学"
+  },
+  {
+    "province": "江苏",
+    "school": "南京中医药大学",
+    "name": "公共管理学",
+    "foreign": "新西兰奥塔哥大学"
+  },
+  {
+    "province": "江苏",
+    "school": "南京中医药大学",
+    "name": "智能科学与技术",
+    "foreign": "新西兰奥塔哥大学"
+  },
+  {
+    "province": "江苏",
+    "school": "江苏师范大学",
+    "name": "国际贸易学",
+    "foreign": "俄罗斯普列汉诺夫经济大学"
+  },
+  {
+    "province": "江苏",
+    "school": "江苏师范大学",
+    "name": "机械工程",
+    "foreign": "俄罗斯圣彼得堡彼得大帝理工大学"
+  },
+  {
+    "province": "江苏",
+    "school": "江苏师范大学",
+    "name": "信息与通信工程",
+    "foreign": "俄罗斯圣彼得堡彼得大帝理工大学"
+  },
+  {
+    "province": "江苏",
+    "school": "苏州科技大学",
+    "name": "建筑学",
+    "foreign": "意大利那不勒斯费德里克二世大学"
+  },
+  {
+    "province": "江苏",
+    "school": "淮阴工学院",
+    "name": "应用化学",
+    "foreign": "美国特拉华州立大学"
+  },
+  {
+    "province": "云南",
+    "school": "云南财经大学",
+    "name": "房地产硕士",
+    "foreign": "英国格林威治大学"
+  },
+  {
+    "province": "云南",
+    "school": "云南财经大学",
+    "name": "项目管理硕士",
+    "foreign": "英国格林威治大学"
+  },
+  {
+    "province": "云南",
+    "school": "云南财经大学",
+    "name": "信息科学硕士",
+    "foreign": "英国爱丁堡龙比亚大学"
+  },
+  {
+    "province": "云南",
+    "school": "云南财经大学",
+    "name": "金融科技",
+    "foreign": "英国格林威治大学"
+  },
+  {
+    "province": "云南",
+    "school": "云南农业大学",
+    "name": "项目管理",
+    "foreign": "英国伍尔弗汉普顿大学"
+  },
+  {
+    "province": "云南",
+    "school": "云南农业大学",
+    "name": "人工智能",
+    "foreign": "英国伍尔弗汉普顿大学"
+  },
+  {
+    "province": "贵州",
+    "school": "贵州大学",
+    "name": "项目管理硕士",
+    "foreign": "加拿大魁北克大学席库提米分校"
+  }
+]
